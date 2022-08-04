@@ -1,0 +1,1486 @@
+# [노션(Notion) 라이트/다크 테마 변경](https://zoosso.tistory.com/987)
+
+by 까망 하르방  2021. 7. 30.
+
+노션에서도 다른 노트 App과 마찬가지로 다크(Dark) 테마를 지원한다.
+
+① 좌측에서 [설정과 멤버] 선택
+
+![](https://blog.kakaocdn.net/dn/c4YZbr/btraJzfmAF6/RZtXCsQpbBJMDYkr2DcR90/img.png)
+
+② 좌측 [테마]에서 "라이트 모드" 혹은 "다크 모드" 선택
+
+![](https://blog.kakaocdn.net/dn/la0wr/btraSYxmFRP/f4vVh0PKSZdq9Gwg8PDTNK/img.png)
+
+**라이트 모드 (Light Mode)**
+
+![](https://blog.kakaocdn.net/dn/b6tfJZ/btraKFlZxJy/Ocfd7wnT87YyDXEoshlo3K/img.png)
+
+**다크 모드 (Dark Mode)**
+
+![](https://blog.kakaocdn.net/dn/dgMPWa/btraRxUkgwZ/VTmKi1ohYkhueYLPbF9wZK/img.png)
+
+----------
+
+Coding 작업자체는 다크테마가 눈의 피로도를 낮출 수 있어서 좋은데
+
+블로그 포스팅 작업과 같이 이미지를 포함한 편집작업까지 하는 경우
+
+다크 테마가 마냥 편하지는 않은 것 같다.
+
+
+---
+
+# [노션 Notion 창 여러개 띄워보기](https://zoosso.tistory.com/1057)
+
+by 까망 하르방  2021. 11. 19.
+
+노션을 실행하는 방법은 크게 웹과 앱(프로그램)이 있다.
+
+웹(Web)을 이용해 쉽게 여러창을 띄울 수도 있지만
+
+앱은 실행해도 한 개의 창만 사용하는 듯(?)하다.
+
+하지만 앱(App) 역시 두 개 이상의 창을 띄워서 작업할 수 있다.
+
+▶ **Ctrl + Shift  + N**
+
+![](https://blog.kakaocdn.net/dn/c9BAYm/btrlxfC2uE9/TWatv8lqXNZWGezkG2gXRK/img.png)
+
+----------
+
+특정 페이지를 선택해서 띄울 수도 있다.
+
+▶ Ctrl + 원하는 페이지 클릭
+
+![](https://blog.kakaocdn.net/dn/tcRgY/btroRLfoHKY/vCAb94XEiborhZVOLBo4Uk/img.png)
+
+여러 노트를 띄운다면 보다 수월한 문서작업을 할 수 있습니다.
+
+---
+
+# [노션(Notion)에서 워크스페이스 삭제하기](https://zoosso.tistory.com/1061)
+
+by 까망 하르방  2021. 11. 21.
+
+노션의 장점 중 하나는 여러 워크스페이스를 생성할 수 있다는 점이다.
+
+이를 통해 워크스페이스별로 프로젝트를 구분하던가
+
+노트하는 주제를 구분할 수가 있다.
+
+또한, 공유받은 워크스페이스도 목록에 표시되는데,
+
+워크스페이스가 개수도 관리할 필요가 있다.
+
+----------
+
+좌측 상단에 보면 [워크스페이스 목록]을 확인할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/bT9tBa/btrlDfjxW7y/h3Tf059KUUacNnbiLCfi4K/img.png)
+
+삭제 및 변경하고자 하는 워크스페이스로 접속해서 [설정] 클릭
+
+![](https://blog.kakaocdn.net/dn/bFiLTh/btrlFmaHV12/mEO0Qw6CHK2UHK29DKUnBk/img.png)
+
+좌측 [설정] 탭에서 [워크스페이스 나가기]
+
+공유 받은 워크스페이스 여부에 따라 보이는 화면 차이가 있을 수 있습니다.
+
+![](https://blog.kakaocdn.net/dn/RfBeQ/btrlC6mRjZi/qrltJsEpKcfEbKuu7Gz6L0/img.png)
+
+다음과 같이 4개에서 2개로 줄어든 것을 확인할 수 있습니다.
+
+![](https://blog.kakaocdn.net/dn/B8qL9/btrlDv7RdEj/l2LZ9mL0twt5MhtkoH4MTk/img.png)
+
+---
+
+# [업무 생산성을 늘려주는 앱 <노션 Notion>](https://zoosso.tistory.com/1071)
+
+by 까망 하르방  2021. 12. 21.
+
+노션(Notion)은 현재 여러 사람들이 사용하는 도구 중 하나이다.
+
+• Google Drive, DropBox / Git / Slack / Trello / OneNote
+
+여러 도구들과 연동이 좋은 편이다.
+
+• 활용정도에 따라 일상 기록 부터  업무 효율성을 높여준다.
+
+----------
+
+**Notion 주요 특징**
+
+• 다른 노트 어플리케이션과 달리 레고와 같은  「블록」  형태로 작성된다.
+
+![](https://blog.kakaocdn.net/dn/duahZx/btrotjXCF6r/OpinPlccUksY6vP72nMFU0/img.png)
+
+• 이러한 블록 형태는 레이아웃 구성을 편하게 해주며,
+
+그 밖에 인용문, 비디오, 오디오, 코드 등 다양한 형식을 지원해준다.
+
+• Embed 기능으로 PDF 파일같은 것도 다운없이 확인 가능하다.
+
+Notion 작업공간은 섹션(Section) / 페이지(Page) / 블록(Block) 으로 구성된다.
+
+![](https://blog.kakaocdn.net/dn/bIIGGU/btroxiXYcqM/hcfzWRqwZukytTFhjNtYs0/img.png)
+
+섹션은 FAVORITES / WORKSPACE / PRIVATE / SHARED 로 구분된다.
+
+즐겨찾기 / 공유 여부로 섹션 유무가 결정되기 때문에
+
+"개인 페이지"만 있을 수 있다.
+
+페이지 계층 구조를 통해 카테고리가 세분화 가능하다.
+
+![](https://blog.kakaocdn.net/dn/bkvvIF/btrorPJh69X/qWom24bh9K0sKfqOOkoen1/img.png)
+
+워크스테이션(Workstation) 구분이 가능하며
+
+단축키로 전환도 쉽게 할 수 있다.
+
+다만, 데이터에 따라 로딩 시간이 어느정도 존재한다.
+
+![](https://blog.kakaocdn.net/dn/b0RMkg/btrosxhxeLS/MpHzSE9eZcy13UWvpSa1E0/img.png)
+
+노션의 강점은  「블록의 여러 형태」 인 것 같다.
+
+다양한 템플릿 부터 글의 요소를 표현할 수 있다.
+
+「/」로 여러 종류를 쉽게 선택할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/Ezt4L/btrow2OmQjW/7kUO9mgt3qqSkdEPpvzsKK/img.png)
+
+이러한 강점이 입문 장벽을 높일 수도 있지만
+
+나만의 UX / UI 를 만드는 점에서 획기적인 App이라고 생각한다.
+
+노션은 반응형 웹 기반으로 여러 디바이스에서도 지원된다.
+
+URL을 통한 공유 및 권한을 통한 동시작업 등
+
+실생활에 필요한 기능들이 존재한다.
+
+![](https://blog.kakaocdn.net/dn/Kp9Mq/btroua0f5gC/NCPG2OlZsjX4X4ltIZfL60/img.png)![](https://blog.kakaocdn.net/dn/bFy3su/btroyHJun0a/6mCRcVcvkkc5vODehOFmhK/img.png)
+
+「@」로 사용자 / 페이지 / 날짜를 지정할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/VnePu/btrorPP4dio/fLQ081dcTSB6RN7KcmdB4k/img.png)
+
+----------
+
+노션이 여러 강점이 있지만 아쉬운 점도 존재한다.
+
+• 글자 크기 조절이 쉽지 않다.
+
+현재는 직접적인 수치보는 "작은 텍스트"로 조절 가능하다.
+
+![](https://blog.kakaocdn.net/dn/buGH4i/btroAzRJINI/EbDTia0vI6pT95yzKCEJsk/img.png)
+
+• Page를 카리고리화 되지만 Page 수 자체가 많아지면
+
+Page 검색이 용이하지 않은 것 같다.
+
+노션 활용
+
+많은 기업에서도 노션을 사용하고 있거나
+
+기존 Tool에서 노션으로 전환을 시도하고 있다.
+
+• 프로젝트 시작부터 배포까지 일련의 과정을 문서화하기 좋다.
+
+• 회의에서 필요한 템플릿 + 공동 작업 + 코멘트(피드백)
+
+• 큰 어려움 없이 본인 스타일에 맞게 화면 구성
+
+• 손쉬운 URL 페이지 공유 및 Histroy 이력
+
+ex) 프로젝트 전략 방향, 일지, 기획 문서, To Do List
+
+기록하고 공유하는 것에 어떤 도구를 선택하는가 보다
+
+꾸준히 실천하는 것이 중요하다고 생각하다.
+
+동시에 문서는 쓰이는 것만큼 활용되어야 한다.
+
+📌 [유용한 Notion 단축키](https://zoosso.tistory.com/1092)
+
+📌 [[노션] 관계형(Relation) 데이터베이스 사용해보기](https://zoosso.tistory.com/1083)
+
+📌  [[노션] 데이터베이스 요약 기능](https://zoosso.tistory.com/1081)
+
+📌  [[노션] 데이터베이스 수식(formula) 속성 활용](https://zoosso.tistory.com/1080)
+
+--- 
+
+# [노션 단 구분하기](https://zoosso.tistory.com/1076)
+
+by 까망 하르방  2021. 12. 26.
+
+노션에서는 블록을 드래그해서 단을 구분할 수 있다.
+
+방법은 아래 그림과 같이 블록 메뉴르르 선택한 다음
+
+특정 블록의 "오른쪽 끝"으로 드래그 하는 것이다.
+
+![](https://blog.kakaocdn.net/dn/k57tU/btroVjPADoH/qNIIoakz9yeiTbAeGqWi3k/img.png)
+
+단을 구분하면 아래와 같다.
+
+![](https://blog.kakaocdn.net/dn/buZVYq/btroRdC6mTr/OEKADmZnKQl0qxOvj1QnHK/img.png)
+
+이러한 단은 동일한 방법으로 여러개로 구분할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/FYZQ6/btroRcYvniA/P5zLZKYIXqE7NPEp5NMzHK/img.png)
+
+---
+
+# [데이터베이스 Full Page ↔ Inline 변경](https://zoosso.tistory.com/1077)
+
+by 까망 하르방  2021. 12. 27.
+
+노션 블록 형태 中 하나인 데이터 베이스는
+
+Full Page와 Inline 방식으로 작성될 수 있다.
+
+![](https://blog.kakaocdn.net/dn/bsOm6G/btroRMS1iR8/Klcs9VdDhH529Xr9h7KzmK/img.png)
+
+데이터베이스 형태
+
+![](https://blog.kakaocdn.net/dn/dGjofQ/btroWnEpBSQ/jdsVefkeaq5HdHjfL58fRk/img.png)
+
+----------
+
+#### **Inline → Full Page**
+
+우측 상단에 […] 선택 후 [페이지로 전환] 클릭
+
+![](https://blog.kakaocdn.net/dn/3UnLk/btro380uVSy/tuaN5DjewOeYKuD5Ncddk0/img.png)
+
+#### **Full Page → Inline**
+
+인라인으로 전환할 때는 특정 페이지의 하위 페이지여야 한다.
+
+![](https://blog.kakaocdn.net/dn/TLR54/btroTdPPmhi/YsC337LlEtfg5Ky0CqVIW0/img.png)
+
+해당 Page 블록의 메뉴 아이콘을 선택한 후
+
+[인라인으로 전환] 클릭
+
+![](https://blog.kakaocdn.net/dn/d5u1TE/btroTUvKsHQ/Vi5sDKha6BebJQdxtAyL3K/img.png)
+
+인라인으로 전환하면 아래와 같이
+
+페이지에서 하나의 블록으로 된 것을 확인할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/dosn15/btroSL0mYTf/5IespZwBaaBcKAYvks3v10/img.png)
+
+----------
+
+만약에 아래와 같이 데이터베이스가 가장 상위 페이지라면
+
+특정 페이지의 하위 페이지가 아니라면
+
+![](https://blog.kakaocdn.net/dn/cCxKRB/btroYkNWN5t/KnrJH3YY1QEu3LZNjMmDHk/img.png)
+
+특정 페이지의 하위 페이지로 옮긴 후에
+
+위에서 언급한 과정을 수행해야 한다.
+
+![](https://blog.kakaocdn.net/dn/ESvwa/btro120zG0R/NwvE3D8yvei9HzUMAn0BJ1/img.png)
+
+---
+
+# [데이터 베이스(DataBase) 블록을 단으로 구분하기](https://zoosso.tistory.com/1079)
+
+by 까망 하르방  2021. 12. 28.
+
+노션의 유용한 기능 中 하나는 블록을 N 단으로 구분할 수 있다는 것이다.
+
+📌 [[노션] 단 구분하기](https://zoosso.tistory.com/1076)
+
+[](https://zoosso.tistory.com/1076)
+
+[노션] 단 구분하기
+
+노션에서는 블록을 드래그해서 단을 구분할 수 있다. 방법은 아래 그림과 같이 블록 메뉴르르 선택한 다음 특정 블록의 "오른쪽 끝"으로 드래그 하는 것이다. 단을 구분하면 아래와 같다. 이러한
+
+zoosso.tistory.com
+
+하지만 노션에서 유용한 기능인 데이터베이스는 일반적으로 단을 나눌 수 없다.
+
+대부분 Inline / Full Page 형태를 사용할 것이다.
+
+📌 [데이터베이스 Full Page ↔ Inline 변경](https://zoosso.tistory.com/1077)
+
+[](https://zoosso.tistory.com/1077)
+
+데이터베이스 Full Page ↔ Inline 변경
+
+노션 블록 형태 中 하나인 데이터 베이스는 Full Page와 Inline 방식으로 작성될 수 있다. 데이터베이스 형태 Inline → Full Page 우측 상단에 […] 선택 후 [페이지로 전환] 클릭 Full Page → Inline 인라..
+
+zoosso.tistory.com
+
+----------
+
+**데이터베이스도 (세로로) 단을 구분**할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/eByTqb/btro31OHovb/k2P7m7WjtDlkDboguQaDUK/img.png)
+
+**① 먼저, 데이터베이스 블록이 아닌** **일반 블록으로 단을 구분한다.**
+
+![](https://blog.kakaocdn.net/dn/k7T2S/btroT5dX3fc/ereZHc51vUMuzG6ttl1fp1/img.png)![](https://blog.kakaocdn.net/dn/B2dXr/btro8wHaRR0/G75mqDyZp1bKtyNGeknqy0/img.png)
+
+**② 옮기고 싶은 DataBase 블록을** **구분된 단 아래로 옮겨준다.**
+
+![](https://blog.kakaocdn.net/dn/siEeD/btro8xe0mQB/6qikftgkjhskz1AX2hthA1/img.png)
+
+---
+
+# [데이터베이스 수식(formula) 속성 활용](https://zoosso.tistory.com/1080)
+
+by 까망 하르방  2021. 12. 30.
+
+노션의 데이터베이스에서는 수식(formula) 속성을 활용해서
+
+엑셀과 유사한 기능 보여준다.
+
+엑셀만큼 복잡하면서 다양한 산출은 못하더라도
+
+용도나 접근성 측면에서는 노션의 유연함이 더 좋은 것 같기도 하다. 🤔
+
+----------
+
+**if(조건, 참, 거짓)**
+
+![](https://blog.kakaocdn.net/dn/uQXZj/btrpdnEu238/F1ORvpb8TWOz6UYlr94gMk/img.png)
+
+"수식"을 작성하고 오른쪽의 [완료] 버튼을 누르면 된다.
+
+true / false 라서 체크박스 형태로 결과가 나왔는데,
+
+별도의 텍스트 메시지를 출력하고자 한다면 아래 형태로 작성하면 된다.
+
+```
+if(prop("연차") < prop("경력"), "O", " ")
+```
+
+**결과 예시**
+
+![](https://blog.kakaocdn.net/dn/qKmhS/btrpmfLJ22c/OeUrKpeH2LVAg2WNaTtZRK/img.png)
+
+해당 되면 "O" 표시를 하고, 그렇지 않으면 공백으로 표시하였다.
+
+그 밖에 사칙연산과 같은 기본적인 연산과 논리 산축이 가능하다.
+
+연산
+
+• add(A, B); 두 열을 더한다. (A + B 형태 가능, text 이면 두 문자열을 이어준다.)
+
+• subtract(A, B); 두 열을 빼준다. (A - B 형태 가능)
+
+• multiply(A, B); 두 열을 곱한다. (A * B 형태 가능)
+
+• divide(A, B); 두 열을 나눈다. (A / B 형태 가능)
+
+• pow(A, B); A를 B 횟수 만큼 곱한 결과 (A ^ B 형태로 사용 가능)
+
+• mod(A, B); A값을 B로 나눈 나머지 (A % B 형태 가능)
+
+• unaryMinus(X); 결과에 -를 붙이는 함수 (-A 형태로 사용 가능)
+
+• unaryPlus(boolean); true/false 값을 1/0으로 표현
+
+• abs(number); 절댓값
+
+• ceil(number); 올림 값
+
+• floor(number); 내림 값
+
+• round(number); 반올림 값
+
+• max(v1, v2, ...); 가장 큰 값
+
+• min(v1, v2, ...); 가장 작은 값
+
+• sign(number); 양수일 때 1, 음수일 때 -1, 0일 때 0
+
+논리
+
+• not(boolean); 논리값을 반대로 출력 true ↔ false
+
+• and(boolean, boolean); 두 개의 인수 값이 모두 true 이며 true 하나라도 false이면 false
+
+• or(boolean, boolean); 두 개의 인수 값이 하나라도 true 이며 true 모두 false이면 false
+
+• equal(A, B); 두 값이 서로 같을 때 true (A == B 형태도 가능)
+
+• unequal(A, B); 두 값이 서로 다를 때 true (A != B 형태도 가능)
+
+* 그 밖에 비교 함수로 >, ≥, ≤, < 가능 (larger, largerEq,  smallerEq, smaller)
+
+문자열
+
+• length(text); 텍스트 길이
+
+• slice(text, num); text의 num 위치부터 마지막 문자까지 가져온다.
+
+• slice(text, num1, num2); text의 num1 에서 num2 위치 앞까지 문자를 가져온다.
+
+• format(value); 텍스트로 변환
+
+• toNumber(value); 인수를 숫자로 변환
+
+• contains(text1, text2); text2가 text1에 포함되면 true, 포함되지 않으면 false
+
+• replace(text1, text2, text3); text1에서 처음 나오는 text2를 찾아 text3로 교체
+
+• replaceAll(text1, text2, text3); text1에서 text2를 모두 찾아 text3로 교체
+
+• empty(value); 지정한 열에서 빈 행을 찾아 결과 출력
+
+• test(target, text); target열에서 text를 찾아 있으면 true 없으면 false
+
+• concat(text...); 쉼표(,)로 구분되어 입력한 텍스트 인수를 합친다.
+
+• join(text...); 맨 앞에 있는 인수를 나머지 인수 사이에 합친다.
+
+join("+", 까", "망", "하", "르", "방") vs concat("까", "+", "망", "+", "하", "+", "르", "+", "방")
+
+연결할 인수가 여러개로 사이사이에 동일한 텍스트를 입력하고자 한다면
+
+concat 보다는 join이 편하다.
+
+날씨•시간
+
+• start(date); 기간의 시작 날짜
+
+• end(date); 기간의 종료 날짜
+
+• now(); 현재 날짜와 시간
+
+• timestamp(date); 날짜를 밀리초로 환산하여 출력
+
+• fromTimestamp(number); 숫자를 날짜로 환산하여 출력
+
+• formatDate(date, text); text 인수에서 지정한 형식의 날짜
+
+Y(년), M(월), D(일), H(시), m(분), s(초), A(12시간제 여부)
+
+ex) formatDate(now(), "HH:mm A") → 13:00 PM
+
+• dateBetween(d1, d2, unit); 날짜와 날짜 사이의 unit 단위의 기간 차이
+
+• dataAdd(date, number, unit); date에서 number 기간만큼 더한 날짜
+
+• dateSubtract(date, number, unit); date에서 number 기간만큼 뺀 날짜
+
+unit 은 연산되는 기간 단위로 years(년), quarters(분기), months(월)
+
+weeks(주), days(일), minutes(분), seconds(초), milliseconds(밀리초)
+
+ex) dateAdd(pop("기간"), 3, "year") → 1년 후의 날짜
+
+• minute(date); 지정 날짜의 「분」
+
+• hour(date); 지정 날짜의 「시」
+
+• day(date); 지정 날짜의 「요일」
+
+ex) 일요일(0), 월요일(1), 화요일(2), …
+
+• date(date); 지정 날짜의 「일」
+
+• month(date); 지정 날짜의 「월」
+
+ex) 1월(0), 2월(1), 3월(2), 4월(3), …
+
+• year(date); 지정 날짜의 「연도」
+
+
+---
+
+# [데이터베이스 요약 기능](https://zoosso.tistory.com/1081)
+
+by 까망 하르방  2021. 12. 30.
+
+노션의 데이터베이스 하단에는 요약(계산) 기능이 있다.
+
+![](https://blog.kakaocdn.net/dn/cUaMmG/btro9GxshXC/lKNQKff0FPPC0RX7TUIEQ1/img.png)
+
+기본(?) 속성에서는 아래와 같은 항목을 [계산] 할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/byMVDD/btrpcPOYxFw/wF15KYoax2lCKR4cHa57Dk/img.png)
+
+[계산] 기능을 통해 [수식] 속성과는 다른 활용이 가능하다.
+
+📌 [[노션] 데이터베이스 수식(formula) 속성 활용](https://zoosso.tistory.com/1080)
+
+[](https://zoosso.tistory.com/1080)
+
+[노션] 데이터베이스 수식(formula) 속성 활용
+
+노션의 데이터베이스에서는 수식(formula) 속성을 활용해서 엑셀과 유사한 기능 보여준다. 엑셀만큼 복잡하면서 다양한 산출은 못하더라도 용도나 접근성 측면에서는 노션의 유연함이 더 좋은 것
+
+zoosso.tistory.com
+
+----------
+
+또한 [계산] 항목은 텍스트 / 숫자 / 날짜 속성에 따라 차이가 있다.
+
+![](https://blog.kakaocdn.net/dn/XvSxR/btrpjyETHXj/hiukLjSGdD4pGpVts9Iksk/img.png)
+
+ex) 날짜 속성의 경우
+
+• [가장 이른 날짜]: 가장 이른 날짜가 오늘로부터  며칠 전인지.
+
+• [최근 날짜]: 가장 늦은 날짜가 오늘로부터  며칠 후인지.
+
+• [날짜 범위]: 가장 이른 날과 가장 늦은 날의  간격.
+
+----------
+
+📌  **함께 보면 좋은 포스팅**
+
+• [[노션] 데이터 베이스(DataBase) 블록을 단으로 구분하기](https://zoosso.tistory.com/1079)
+
+• [[노션] 데이터베이스 Full Page ↔ Inline 변경](https://zoosso.tistory.com/1077)
+
+• [[노션] 데이터베이스 수식(formula) 속성 활용](https://zoosso.tistory.com/1080)
+
+---
+
+# [관계형(Relation) 데이터베이스 사용해보기](https://zoosso.tistory.com/1083)
+
+by 까망 하르방  2021. 12. 31.
+
+노션에서는 서로 다른 데이터베이스끼리 연결하여
+
+각 데이터베이스에 있는 특정 행의 데이터를
+
+페이지 형태로 가져오는 기능이 있다.
+
+「관계형 데이터베이스」로 동일한 페이지에 없더라도
+
+각 데이터베이스의 데이터를 연결할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/3eljd/btrpgyTV0on/Pi2M1RBZnHLtXVOmUAPXnk/img.png)
+
+이미지는 같은 페이지에 데이터베이스가 보이도록 배치
+
+----------
+
+속성 유형으로 [관계형] 클릭
+
+![](https://blog.kakaocdn.net/dn/pa2XG/btrpjwnMoTe/zuu8KSMk0OdFJQ5WwADck1/img.png)
+
+데이터베이스를 검색해서 선택할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/DKXsu/btrpqzwK8bS/hnV1m0xKJk1zv0sIvU4hIk/img.png)
+
+연결된 데이터베이스에서 가져오고 싶은 정보(행) 선택
+
+![](https://blog.kakaocdn.net/dn/SMmMw/btrpiH374gb/psCb1ZDZnGl8QXQXTc33K0/img.png)
+
+서로 연결된 것을 확인할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/c1ul7z/btrplh4urvN/MlREbXuermFcPtr5rbKxf0/img.png)
+
+페이지가 서로 떨어져 있더라도
+
+서로 연관지어서 볼 수 있기에 유용한 기능인 것 같다. 🤷‍♂️
+
+![](https://blog.kakaocdn.net/dn/cindVq/btrpcNRdGb4/kNb9qcqv7O5wjfuVgKDg6k/img.png)
+
+관계형 데이터베이스에서는  롤업 기능을 함께 활용하는 것이 좋다.
+
+📌 [[노션] 관계형 데이터베이스에서 롤업(Rollup) 기능 활용](https://zoosso.tistory.com/1084)
+
+---
+
+# [관계형 데이터베이스에서 롤업(Rollup) 기능 활용](https://zoosso.tistory.com/1084)
+
+by 까망 하르방  2021. 12. 31.
+
+노션에서 관계형 데이터를 활용한다면 롤업 기능까지 활용하면 좋다.
+
+롤업 기능은 연결된 데이터베이스에서 열 정보를 구체적으로 표시해준다.
+
+📌 [[노션] 관계형(Relation) 데이터베이스 사용해보기](https://zoosso.tistory.com/1083)
+
+[](https://zoosso.tistory.com/1083)
+
+[노션] 관계형(Relation) 데이터베이스 사용해보기
+
+노션에서는 서로 다른 데이터베이스끼리 연결하여 각 데이터베이스에 있는 특정 행의 데이터를 페이지 형태로 가져오는 기능이 있다. 「관계형 데이터베이스」로 동일한 페이지에 없더라도
+
+zoosso.tistory.com
+
+----------
+
+아래와 같이 서로 연결되어 있는 데이터베이스가 있다.
+
+![](https://blog.kakaocdn.net/dn/H6iTZ/btrppAcGR5J/EKCS2ldTRzRawddGlNA6N0/img.png)
+
+[분기별 지출액] 속성으로 [롤업] 선택
+
+![](https://blog.kakaocdn.net/dn/9vdg4/btrpmfUoQyv/SY3Wkkv8pJ99SBnaxaPY61/img.png)
+
+① 월 별로 연결되어 있는 데이터베이스 선택
+
+② 해당 데이터베이스에서 열 선택
+
+③ 열 정보 표시 (ex. 원본 표시)
+
+![](https://blog.kakaocdn.net/dn/6THuD/btrpq7VBugn/dYNLmbk3qrNymv2DrGWnvK/img.png)
+
+"원본 표시" 뿐만 아니라 합계, 평균과 같은 계산도 가능하다.
+
+![](https://blog.kakaocdn.net/dn/bAJyA5/btrppyTp0f0/KQQMk4XIAUwzd3l6aOQ8pK/img.png)
+
+노션으로 가계부 작성할 때 유용한 기능이 아닐까 싶다.
+
+함수(Formula)와 함께 활용해서 나만의 템플릿을 만들면 더 좋을 것 같다.
+
+📌 [[노션] 데이터베이스 수식(formula) 속성 활용](https://zoosso.tistory.com/1080)　
+
+![](https://blog.kakaocdn.net/dn/dvM6kV/btrpvR5hKmE/OvpYkO3r3jD0Afd9Vct9Q1/img.png)
+
+①  롤업 기능을 이용한 분기별 지출액
+
+② 데이터베이스  요약 기능을 통한 분기별 지출액
+
+📌 [[노션] 데이터베이스 요약 기능](https://zoosso.tistory.com/1081)
+
+---
+
+# [유용한 Notion 단축키](https://zoosso.tistory.com/1092?category=1241511)
+
+by 까망 하르방  2022. 1. 7.
+
+[](https://zoosso.tistory.com/1071)
+
+업무 생산성을 늘려주는 앱 <노션 Notion>
+
+노션(Notion)은 현재 여러 사람들이 사용하는 도구 중 하나이다. • Google Drive, DropBox / Git / Slack / Trello / OneNote 여러 도구들과 연동이 좋은 편이다. • 활용정도에 따라 일상 기록 부터 업무..
+
+zoosso.tistory.com
+
+----------
+
+Ctrl +  N 새 페이지 생성
+
+Ctrl + Shift + N 새 창 열기
+
+📌  [노션 Notion 창 여러개 띄워보기](https://zoosso.tistory.com/1057)
+
+[](https://zoosso.tistory.com/1057)
+
+노션 Notion 창 여러개 띄워보기
+
+노션을 실행하는 방법은 크게 웹과 앱(프로그램)이 있다. 웹(Web)을 이용해 쉽게 여러창을 띄울 수도 있지만 앱은 실행해도 한 개의 창만 사용하는 듯(?)하다. 하지만 앱(App) 역시 두 개 이상의 창
+
+zoosso.tistory.com
+
+Ctrl + [ 뒤로가기
+
+Ctrl + ] 앞으로 가기
+
+Ctrl + \(백슬러시) 사이드바 숨기기/보이기
+
+Ctrl +  + 페이지 확대
+
+Ctrl +  - 페이지 축소
+
+Ctrl +  P 페이지 검색 (전체 페이지 기준)
+
+Ctrl + L  해당 페이지 링크 복사
+
+Ctrl + Shift + L 라이트/다크 모드 토글
+
+📌  [노션(Notion) 라이트/다크 테마 변경](https://zoosso.tistory.com/987)
+
+[](https://zoosso.tistory.com/987)
+
+노션(Notion) 라이트/다크 테마 변경
+
+노션에서도 다른 노트 App과 마찬가지로 다크(Dark) 테마를 지원한다. ① 좌측에서 [설정과 멤버] 선택 ② 좌측 [테마]에서 "라이트 모드" 혹은 "다크 모드" 선택 라이트 모드 (Light Mode) 다크 모드 (Dar
+
+zoosso.tistory.com
+
+--- 구분선 생성
+
+Ctrl + D  블록 복사
+
+Ctrl +  K 하이퍼링크 추가
+
+Ctrl + B  텍스트 굵게(Bold)
+
+Ctrl + U  텍스트 밑줄 표시
+
+Ctrl + Shift  + H 하이라이트(형광펜) 표시
+
+: + 단어  이모티콘 삽입 (한글/영어 가능)
+
+![](https://blog.kakaocdn.net/dn/brN4ix/btrp0Jfm9bI/KCdtiKDwb06zAzbcC7gOa1/img.png)
+
+> + Space 토글 블록 생성
+
+Ctrl + Alt + T 모든 토글 열기/닫기
+
+![](https://blog.kakaocdn.net/dn/bdwVrq/btrpYmZgCTM/QhW8NWEUh4oKopRJ4Dc1tK/img.png)
+
+/table-inline 페이지 내 Table 뷰 생성
+
+/table-full page 해당 페이지에서 Table 뷰 형태의 하위 페이지 생성
+
+📌  [[노션] 관계형(Relation) 데이터베이스 사용해보기](https://zoosso.tistory.com/1083)
+
+📌  [[노션] 데이터베이스 Full Page ↔ Inline 변경](https://zoosso.tistory.com/1077)
+
+/code 코드 블록 생성
+
+/callout 강조 단락(Callout) 생성 ex) 인용문 및 주의사항
+
+![](https://blog.kakaocdn.net/dn/BCNiU/btrpU0ik7FF/iKNM6wHvymdtQkLNwu1ZQK/img.png)
+
+---
+
+# [특정 블록/페이지 링크 복사해서 관리하기](https://zoosso.tistory.com/1093)
+
+by 까망 하르방  2022. 1. 7.
+
+노션은 에버노트와 마찬가지로 노트간 링크도 가능하다.
+
+하물며 블록(Block) 단위의 링크도 가능하다. → 앵커(Anchor) 기능
+
+블록 링크
+
+![](https://blog.kakaocdn.net/dn/PVtmD/btrp0Igvkcn/k3n5BCC7RlsbKx4hKyPdW1/img.png)
+
+복사된 링크는 ①과 같이 임의의 긴 URL 이다.
+
+보기 좋게 특정 테스트에 하이퍼링크 처리해두면 된다.
+
+![](https://blog.kakaocdn.net/dn/b33CQq/btrpU2gdtmG/pLs1HDMN8BUQSWVHhrz7n0/img.png)
+
+(링크 처리 단축키)  Ctrl  + K
+
+![](https://blog.kakaocdn.net/dn/lwNX6/btrp3Wx2HuA/Xqyczh67s9q1z7nQqFLLBk/img.png)
+
+텍스트에 링크 처리해두는 기능 외에 여러 단축키를 익혀두면 편하다.
+
+📌 [유용한 Notion 단축키](https://zoosso.tistory.com/1092)
+
+[](https://zoosso.tistory.com/1092)
+
+유용한 Notion 단축키
+
+" data-og-description="노션(Notion)은 현재 여러 사람들이 사용하는 도구 중 하나이다. • Google Drive, DropBox / Git / Slack / Trello / OneNote 여러 도구들과 연동이 좋은 편이다. • 활용정도에 따라..
+
+zoosso.tistory.com
+
+**페이지 링크**
+
+페이지 링크를 취하는 방법은 크게 두가지이다.
+
+① 원하는 페이지에서 링크 생성하기
+
+② 특정 페이지에서 원하는 페이지 검색해서 링크 걸기
+
+----------
+
+**① 해당 페이지 우측 상단에 위치한 […] 선택**
+
+[링크 복사] 클릭 (cf. 페이지 복제와 다르다.)
+
+![](https://blog.kakaocdn.net/dn/beC77E/btrp3U73ZB3/oqRHLCc3rpVaqE0oiJbrz1/img.png)
+
+블록 링크 복사와 마찬가지로 URL 링크가 생성된다.
+
+페이지 링크는 부모-하위 관계에 따라 자동으로 생성되기도 한다.
+
+![](https://blog.kakaocdn.net/dn/pphJG/btrp0H9GonC/kk2wl502vo6iVZIy5fVY31/img.png)
+
+**② 페이지를 직접 찾아 연결 해주기**
+
+▶ 「  / +  Link to page
+
+![](https://blog.kakaocdn.net/dn/mWvqg/btrp19j4FAh/kbrf9mroZ05Kwj3LkHapWK/img.png)
+
+아래와 같이 전체 페이지를 검색할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/bYFf9R/btrp08FHOwX/tPuWR342k24hZ2eaZps8Jk/img.png)
+
+페이지를 선택하면 아래와 같이 표시된다.
+
+![](https://blog.kakaocdn.net/dn/bEbe5i/btrpUMxoOX3/hyDfAspl2O0fZ8t9KVInVk/img.png)
+
+---
+
+# [데이터베이스 연동해서 효율적으로 View 관리하기](https://zoosso.tistory.com/1096)
+
+by 까망 하르방  2022. 1. 8.
+
+노션 고급 기능 中 하나인  「데이터베이스 DB」
+
+다양한 기능과 유연함을 제공하는 만큼 여러 내용으로 포스팅을 다루고 있다.
+
+📌 [[노션] 관계형(Relation) 데이터베이스 사용해보기](https://zoosso.tistory.com/1083)
+
+[](https://zoosso.tistory.com/1083)
+
+[노션] 관계형(Relation) 데이터베이스 사용해보기
+
+노션에서는 서로 다른 데이터베이스끼리 연결하여 각 데이터베이스에 있는 특정 행의 데이터를 페이지 형태로 가져오는 기능이 있다. 「관계형 데이터베이스」로 동일한 페이지에 없더라도
+
+zoosso.tistory.com
+
+노션 데이터베이스 블록은 하나의 내용을 다양한 형태로 표현할 수 있다.
+
+즉, 동일한 내용을 여러가지 뷰로 파악할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/cnPa31/btrp943QG6K/TWX9ubad403aWOahoOKA60/img.png)
+
+📌 [[Notion] 노션 데이터베이스 다양한 View 활용](https://zoosso.tistory.com/1105)
+
+[](https://zoosso.tistory.com/1105)
+
+[Notion] 노션 데이터베이스 다양한 View 활용
+
+노션 활용 중 하나로 데이터베이스에 대해 포스팅 한 적이 있다. 📌 [노션] 관계형(Relation) 데이터베이스 사용해보기 [노션] 관계형(Relation) 데이터베이스 사용해보기 노션에서는 서로 다른 데이
+
+zoosso.tistory.com
+
+단순히 복제하는 것이 아니라 데이터가 연동이 되어 추가/삭제할 때
+
+동시에 반영된다고 보면된다.
+
+뷰마다 필터(Filter)를 각각 적용할 수 있기 때문에 활용도는 처리하기 나름이다.
+
+----------
+
+아래와 같이 가계부 (일부) 목록이 있다고 가정해보자.
+
+![](https://blog.kakaocdn.net/dn/cvMkN4/btrp6Qr0GQj/8g5PSiJYhm3ZjGLz2nnZ2K/img.png)
+
+원하는 장소에 / + linked~ 라고 타이핑해서
+
+[링크된 데이터베이스 생성] 선택
+
+단순히 데이터베이스를 복제하는 것과 달리
+
+안에 내용물들이 실시간 연동된 데이터베이스를 만든다.
+
+![](https://blog.kakaocdn.net/dn/bV3vfX/btrp7iaIyeR/VkIj8miUiPRfEoYPy1ygy1/img.png)
+
+연동하고자 하는 데이터베이 검색 및 선택
+
+![](https://blog.kakaocdn.net/dn/mbK4P/btrp6dHYvBj/Ld9hUNwYHbaLEbSByYfA9K/img.png)
+
+아래와 같이 동일한 데이터베이가 보인다.
+
+![](https://blog.kakaocdn.net/dn/bLsWkV/btrp8rrux9C/RonvqhovjkujNvRQoiyxc0/img.png)
+
+연동되어 만들어진 DB 테이블을 복제(Duplicate) 한다면
+
+원본과 연동된 DB 테이블을 빠르게 생성할 수 있다.
+
+• 원본 자체를 복제하는 것은 연동된 테이블이 아니다.
+
+노션 단축키도 읽어보면 좋을 것 같다. 🙌
+
+📌  [유용한 Notion 단축키](https://zoosso.tistory.com/1092)
+
+[](https://zoosso.tistory.com/1092)
+
+유용한 Notion 단축키
+
+" data-og-description="노션(Notion)은 현재 여러 사람들이 사용하는 도구 중 하나이다. • Google Drive, DropBox / Git / Slack / Trello / OneNote 여러 도구들과 연동이 좋은 편이다. • 활용정도에 따라..
+
+zoosso.tistory.com
+
+----------
+
+데이터베이스 View 형태를 변경한다.
+
+![](https://blog.kakaocdn.net/dn/cMyNwu/btrp17Bq2t7/BJudcRrj65p3ZlrZo7uxTk/img.png)
+
+내용 자체는 연동되지만 필터나 정렬 등은 각 View 다르게 적용할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/bhDudf/btrp6x7e3Vf/NKMrtR8kkTSDuwwqY0xUv1/img.png)
+
+단을 나눠서 다른 형태의 View 가독성을 높일 수 있다.
+
+📌  [[노션] 데이터 베이스(DataBase) 블록을 단으로 구분하기](https://zoosso.tistory.com/1079)
+
+![](https://blog.kakaocdn.net/dn/8j1TT/btrp2DtS0G5/jhXM17U8ADlXZXchYKv7R1/img.png)
+
+----------
+
+📌  **함께 보면 좋은 포스팅 (노션 데이터베이스)**
+
+• [[노션] 관계형 데이터베이스에서 롤업(Rollup) 기능 활용](https://zoosso.tistory.com/1084)
+
+• [[노션] 관계형(Relation) 데이터베이스 사용해보기](https://zoosso.tistory.com/1083)
+
+• [[노션] 데이터베이스 Full Page ↔ Inline 변경](https://zoosso.tistory.com/1077)
+
+• [[노션] 데이터베이스 수식(formula) 속성 활용](https://zoosso.tistory.com/1080)
+
+• [[노션] 데이터베이스 요약 기능](https://zoosso.tistory.com/1081)
+
+---
+
+# [변경사항 알림 설정 및 참고사항](https://zoosso.tistory.com/1101)
+
+by 까망 하르방  2022. 1. 13.
+
+노션에서는 우측 [시계 모양] 아이콘을 클릭하면  업데이트 내역을 확인할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/bHOZHn/btrqAeloKOB/niMrxckW9LFwKEOTqBHF40/img.png)
+
+이와 함께 노션 협업 효율성을 높이는 기능 중 하나가  알림이다.
+
+![](https://blog.kakaocdn.net/dn/c08iWc/btrqAVlzuT2/Jy2rj9GKZbvOizUu7ktwRk/img.png)
+
+노션에서도 아래와 같이 수단별로 세부 설정이 가능하다.
+
+① 모바일 (Mobile)
+
+② 데스크탑 (Desktop)
+
+③ 이메일(E-Mail)
+
+![](https://blog.kakaocdn.net/dn/bDeG4R/btrqAnJnhbV/ZbkFDeNAxSaOLAPBtSQT0k/img.png)
+
+ㅇ
+
+주변에서 노션을 사용하는 사람을 보면 태블릿 PC를 이용하는 경우가 많다.
+
+이유는 대동소이 하겠지만 적당한 화면크기와 휴대성 때문일 것이다.
+
+노션 알람과 관련해서는 참고해두어야 할 사항이 있다.
+
+(노션 업데이트 내용에 따라 보시는 시점에 따라 다를 수 있다 )
+
+•  모바일 알림이 활성화 되어 있다면
+
+이메일 알림이 활성화 되어 있어도 이메일 알림이 오지 않는다.
+
+• 특정 페이지를 열려 있는 상태라면 업데이트되더라도
+
+해당 페이지에 대한 알림이 별도로 오지 않는다.
+
+• 데스크탑에서도 백그라운드로 실행되고에서는 별도 푸시 알림이 오지 않는다.
+
+즉, 데스크탑 알림을 활성화하고 사용하고 있는 상태여야 한다.
+
+----------
+
+📌  **함께 보면 좋은 포스팅**
+
+• [업무 생산성을 늘려주는 앱 <노션 Notion>](https://zoosso.tistory.com/1071)
+
+•  [유용한 Notion 단축키](https://zoosso.tistory.com/1092)
+
+• [[노션] 관계형(Relation) 데이터베이스 사용해보기](https://zoosso.tistory.com/1083)
+
+---
+
+# [노션 공유 및 협업해보기 (with. 권한 설정)](https://zoosso.tistory.com/1103)
+
+by 까망 하르방  2022. 1. 14.
+
+노션을 사용해야 하는 가장 큰 이유는
+
+협업하거나  공유가 아닐까 싶다.
+
+📌 [업무 생산성을 늘려주는 앱 <노션 Notion>](https://zoosso.tistory.com/1071)
+
+[](https://zoosso.tistory.com/1071)
+
+업무 생산성을 늘려주는 앱 <노션 Notion>
+
+노션(Notion)은 현재 여러 사람들이 사용하는 도구 중 하나이다. • Google Drive, DropBox / Git / Slack / Trello / OneNote 여러 도구들과 연동이 좋은 편이다. • 활용정도에 따라 일상 기록 부터 업무..
+
+zoosso.tistory.com
+
+노션에서는 특정 페이지만 공유할 수 있으며
+
+쓰기/읽기 권한을 구분할 수도 있다.
+
+* 보시는 시점에 따라 설정이나 권한에 따른 접근정도가 다를 수 있으니
+
+보안과 사생활 관련된 내용일수록 사전 확인을 권장합니다.
+
+----------
+
+** 기본적으로 Notion에서  **편집(쓰기) 권한을 위해서는**
+
+권한 받은 사용자도 Notion을 사용 중이어야 한다.
+
+① 우측 상단에 [공유] 버튼을 클릭
+
+![](https://blog.kakaocdn.net/dn/VlD1J/btrqI6zXUoe/soDMBubUficmotFYmRMcw0/img.png)
+
+② 노션 ID를 입력하면 되는데, 우측에서 [허용] 수준을 정할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/Hya7U/btrqGsqohrd/Kdo772jX5bveFhZpt3Hnt1/img.png)
+
+[허용 정도]는 기본적으로 하위 페이지는 상위 페이지의 권한 설정을 따른다.
+
+ex) 상위 페이지가 "편집 허용" → 하위 페이지도 "편집 허용"
+
+물론, 각 페이지별로 설정을 다르게 할 수도 있다.
+
+ex) 상위 페이지가 "댓글 허용" + 하위 페이지도 "편집 허용"
+
+③ 공유받은 사용자에게는 알림이 표시되며, 작업공간에서 목록을 확인할 수 있다.
+
+URL을 통한 문서 공유
+
+노션에서는 사용자를 지정해서 공유하는 것 외에도
+
+특정 URL을 생성해서 불특정 다수에게 공유할 수도 있다.
+
+우측 상단 [공유]에서 [웹에서 공유] 활성화
+
+![](https://blog.kakaocdn.net/dn/lt0Pk/btrqAyyt3Vc/1mJixf4gtkVOZz5pGHo65K/img.png)
+
+난수방식으로 생성된 URL이 생성되는 해당 링크를 공유해주면 된다.
+
+• 접근 정도를 구분할 수 있다.
+
+• 사용하는 요금제에 따라 검색 엔진 노출도 가능하다.
+
+• 공유 여부를 비활성화 하면 다시 내용이 보이지 않는다.
+
+![](https://blog.kakaocdn.net/dn/UYCsX/btrqAdg6s4c/eAdFu5c6qKpGP6KnwxSKL0/img.png)
+
+이렇게 URL 링크 공유 받은 것은 Notion 계정 여부와 관계없이
+
+해당 페이지를 웹사이트에서 확인할 수 있다.
+
+하지만 편집을 위해서는 노션 계정과 권한이 필요하기 때문에
+
+편집이 필요한 부분은 Google 설문지 링크만 별첨해서 공유할 수도 있다.
+
+[템플릿 복제 허용]은 말그대로 공유한 페이지 템플릿을 복제가능 하게 해주는데,
+
+가계부와 같이 자주 사용하는 템플릿을 판매하거나 공유할 때 사용되기도 한다.
+
+![](https://blog.kakaocdn.net/dn/bMzpLt/btrqHekXOQr/0i3lrVEZV4hygFtbO4KxL0/img.png)
+
+----------
+
+📌  **함께 보면 좋은 포스팅**
+
+•  [유용한 Notion 단축키](https://zoosso.tistory.com/1092)
+
+•  [업무 생산성을 늘려주는 앱 <노션 Notion>](https://zoosso.tistory.com/1071)
+
+• [[노션] 관계형 데이터베이스에서 롤업(Rollup) 기능 활용](https://zoosso.tistory.com/1084)
+
+• [[노션] 관계형(Relation) 데이터베이스 사용해보기](https://zoosso.tistory.com/1083)
+
+---
+
+# [노션 데이터베이스 다양한 View 활용](https://zoosso.tistory.com/1105)
+
+by 까망 하르방  2022. 1. 14.
+
+노션 활용 중 하나로 데이터베이스에 대해 포스팅 한 적이 있다.
+
+📌  [[노션] 관계형(Relation) 데이터베이스 사용해보기](https://zoosso.tistory.com/1083)
+
+[](https://zoosso.tistory.com/1083)
+
+[노션] 관계형(Relation) 데이터베이스 사용해보기
+
+노션에서는 서로 다른 데이터베이스끼리 연결하여 각 데이터베이스에 있는 특정 행의 데이터를 페이지 형태로 가져오는 기능이 있다. 「관계형 데이터베이스」로 동일한 페이지에 없더라도
+
+zoosso.tistory.com
+
+하나의 DB가 여러가지 뷰를 생성할 수 있다.
+
+현재는 5가지 View 형태가 더 있다.
+
+* 보시는 시점에 따라 더 많은 형태가 있을 수 있다.
+
+![](https://blog.kakaocdn.net/dn/cM5RtX/btrqM3KyHU3/r28ZwBkhwaPxijvEkTHkX1/img.png)
+
+----------
+
+**표 (Table)**
+
+![](https://blog.kakaocdn.net/dn/cD5FpC/btrqLvg8jMw/XVLexOFZOsPKlYW8Ef6RA0/img.png)
+
+데이터베이스를 생성하면 처음 나타나는 Default View로
+
+여러 속성을 편집하기 좋은 형태이다.
+
+**보드 (Board)**
+
+![](https://blog.kakaocdn.net/dn/GmMrF/btrqME5i7oP/4DyvnooRDF6UCxmZXjP4m1/img.png)
+
+칸반 보드라고도 불리는데 프로젝트 관리에 자주 사용되는 형태이다.
+
+각 항목이 카드 형태로 표시되는데, 이리저리 상태를 옮기기 유용하다.
+
+**타임라인 (Timeline)**
+
+![](https://blog.kakaocdn.net/dn/yPPRx/btrqLwG9lNM/ugwPnkBGXvTK9ZktSq41S0/img.png)
+
+날짜 기한을 효율적으로 보여주는 View 형태이다. (from ~ to)
+
+**캘린더 (Calendar)**
+
+![](https://blog.kakaocdn.net/dn/dmkyXh/btrqMEqH6m1/rOgGy2XQ0rjMdTDHKR34Pk/img.png)
+
+날짜 속성인 Date를 사용할 때 유용한 형태 중 하나이다.
+
+요일별로 일목요연하게 활용할 수 있다.
+
+**리스트 (List)**
+
+![](https://blog.kakaocdn.net/dn/ma1We/btrqMk0lIxc/9Ki3rJ6r9DrqajW4FDNCZ0/img.png)
+
+Page 제목이 길 때, 유용한 형태이다.
+
+**갤러리 (Gallery)**
+
+![](https://blog.kakaocdn.net/dn/c4HBPD/btrqOgWSmxY/XKIA8h0E8TqBMMLkOG54l0/img.png)
+
+썸네일로 이미지를 강조한 형태이다.
+
+포스터나 음식, 책 이미지를 표시하면 가독성을 높일 수 있다.
+
+현재 운영하고 있는 일상 블로그에서 활용하고 있기도 하다. 🙌
+
+![](https://blog.kakaocdn.net/dn/dLM7Nk/btrqJ5XjG34/HYPZ5WLktW8bdYwXWoonRK/img.png)
+
+----------
+
+이러한 여러 형태만으로도 좋지만
+
+각각의 View 이름을 따로 설정할 수 있으며 보이는 세부 속성도 설정할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/dfmwHM/btrqLwf18Qj/KJKpfnuQioWQpCVTi9ueS0/img.png)
+
+각 View 형태마다 공통 속성도 있지만 맞춤 속성도 따로 있다.
+
+![](https://blog.kakaocdn.net/dn/ba1tGj/btrqMEqH9AR/CXyNf5LzE0i94aleMCxdKK/img.png)![](https://blog.kakaocdn.net/dn/bYFT7K/btrqMcnQuGk/Fp6HAjA2n6gRHcb9vjRYYk/img.png)![](https://blog.kakaocdn.net/dn/n5GLK/btrqMk0lKJf/O2nydOj4x1K2NrA13nPWH1/img.png)
+
+**셀 래핑**
+
+Table 뷰에서만 보이는 속성으로 데이터 값이 많을 때,
+
+열의 너비에 맞춰 줄 간격을 맞춰준다.
+
+**캘린더 기준**
+
+Calendar 뷰에서 보이는 속성으로 달력에 표시할 속성을 선택할 수 있다.
+
+**그룹화**
+
+Board 뷰에서만 표시되는 것으로 속성별로 그룹을 묶을 수 있다.
+
+데이터가 연동되는 동일한 DB를 생성할 수도 있다.
+
+연결된 DB 역시 View를 다르게 설정할 수 있다.
+
+📌 [[노션Notion] 데이터베이스 연동해서 효율적으로 View 관리하기](https://zoosso.tistory.com/1096)
+
+[](https://zoosso.tistory.com/1096)
+
+[노션Notion] 데이터베이스 연동해서 효율적으로 View 관리하기
+
+노션 고급 기능 中 하나인 「데이터베이스 DB」 다양한 기능과 유연함을 제공하는 만큼 여러 내용으로 포스팅을 다루고 있다. 📌 [노션] 관계형(Relation) 데이터베이스 사용해보기 [노션] 관계
+
+zoosso.tistory.com
+
+----------
+
+📌  **함께 보면 좋은 포스팅**
+
+•  [업무 생산성을 늘려주는 앱 <노션 Notion>](https://zoosso.tistory.com/1071)
+
+•  [유용한 Notion 단축키](https://zoosso.tistory.com/1092)
+
+• [[Notion] 노션 공유 및 협업해보기 (with. 권한 설정)](https://zoosso.tistory.com/1103)
+
+---
+
+# [Notion 이미지 좌/우 정렬 효과 가져보기](https://zoosso.tistory.com/1110)
+
+by 까망 하르방  2022. 1. 20.
+
+노션에서도 에버노트와 같이 이미지를 첨부할 수 있다.
+
+안타깝게도  이미지 좌우 정렬 기능을 현재까지 지원하지 않는다.
+
+![](https://blog.kakaocdn.net/dn/LATLk/btrrcNtS84u/dQEOmSwBkjEe9SkFclHID1/img.png)
+
+가독성을 위해서라도 해당 기능이 지원되었으면 한다.
+
+이미지 자체(?)를 좌우 정렬하지 못하더라도
+
+블록 배치를 통해서 비슷한 효과를 가질 수 있다.
+
+**다단 구성 활용**
+
+블록을 2단 구성과 같이 다단으로 구성하는 것이다.
+
+📌 [[노션] 단 구분하기](https://zoosso.tistory.com/1076)
+
+![](https://blog.kakaocdn.net/dn/bpsfqT/btrrcg4robs/h33qVnVjG4mKHMDSFLI4ek/img.png)
+
+이렇게 배치하는 경우 오른쪽 블록도 활용이 가능하며
+
+블록(단)의 크기를 조절해 이미지 크기도 조절해볼 수 있다.
+
+![](https://blog.kakaocdn.net/dn/QxaOT/btrq8Igocgh/you8TS5w3zporO5RcmosyK/img.png)
+
+**들여쓰기 활용**
+
+다른 방법으로는 블록을 한번 들여쓰고 이미지 삽입하는 것이다.
+
+[Tab]을 누르면 들여쓰기가 아래처럼 되어지는데
+
+![](https://blog.kakaocdn.net/dn/bB26By/btrq7UnLbPq/HpsYd2ezfHN6upRuDkva01/img.png)
+
+들여쓰진 블록에 이미지를 삽입하면 아래와 같이 이미지가 배치된다.
+
+단을 나누는 것은 아니며, 들여쓴만큼 왼쪽에 공간이 있긴하다.
+
+![](https://blog.kakaocdn.net/dn/zqvsf/btrq8JGflYD/q9yKlXXfkY2YIbr972dju0/img.png)
+
+----------
+
+📌  **함께 보면 좋은 포스팅**
+
+• [업무 생산성을 늘려주는 앱 <노션 Notion>](https://zoosso.tistory.com/1071)
+
+•  [유용한 Notion 단축키](https://zoosso.tistory.com/1092)
+
+• [[노션] 관계형(Relation) 데이터베이스 사용해보기](https://zoosso.tistory.com/1083)
+
+---
+
+# [데이터베이스 표 「복제」와 「링크 복사」 차이점](https://zoosso.tistory.com/1131)
+
+by 까망 하르방  2022. 3. 1.
+
+▼ [[데이터베이스 연동해서 관리하기](https://zoosso.tistory.com/1096)]에서 DB 값이 연동되어
+
+다른 표에서 변경시 연동된 모든 DB가 함께 변경되는 것을 보여주었다.
+
+[](https://zoosso.tistory.com/1096)
+
+[노션Notion] 데이터베이스 연동해서 효율적으로 View 관리하기
+
+노션 고급 기능 中 하나인 「데이터베이스 DB」 다양한 기능과 유연함을 제공하는 만큼 여러 내용으로 포스팅을 다루고 있다. 📌 [노션] 관계형(Relation) 데이터베이스 사용해보기 [노션] 관계
+
+zoosso.tistory.com
+
+해당 포스팅에서는 데이터 베이스
+
+[복제 vs 링크 복사]의 차이에 집중적으로 다뤄보고자 한다.
+
+![](https://blog.kakaocdn.net/dn/crcuQS/btruIUjzBEG/N79j7B6S579LO2Iq8rXfo1/img.png)
+
+「복제」 나  「복사」 기본적으로 현재 작성된 데이터베이스(DB)를
+
+있는 그대로 "Copy" 한다는 것에는 동일하다.
+
+하지만 Copy한 데이터베이스 값을 수정했을 때
+
+"Original"에 동일하게 반영되는지에 차이가 있다.
+
+----------
+
+**복제**
+
+• "Original"에 영향을 주지 않는다.
+
+• 원본값을 그대로 복제하되 "독립된 DB"로 활용하기 위함
+
+**(링크) 복사**
+
+•  데이터 변경시 "Original"에 동일하게 영향을 준다.
+
+• 원본값을 그대로 복사한 것으로 "연동된 DB"로 볼 수 있다.
+
+**Q) 「복사」한 DB를 「복제」한다면?**
+
+A) 이미 복사한 DB를 복제하는 것이기에
+
+"Orginal DB를 복사한 것"으로 Origianl에 영향을 주게 된다.
+
+----------
+
+**Tips**
+
+•  DB 복사를 빠르게 하고 싶다면 "링크 복사"된 DB를
+
+계속해서 "복제" 하면 된다.
+
+• 독립된 DB를 만들고자 할 때는
+
+정확히 "Original 테이블"을 복제할 것.
+
+**Q) 원본 DB와 복사된 DB는 어떻게 구분하나요?**
+
+A) 데이터베이스 [제목] 앞에 대각선 화살표 유무
+
+![](https://blog.kakaocdn.net/dn/buNVGD/btruLudAN8T/Fmt7J6J551A1ZJ7sqKPs3k/img.png)
+
+----------
+
+[참고] 링크 복사한 DB를 표 형태로 전환할 수 있다.
+
+![](https://blog.kakaocdn.net/dn/DyRZv/btruLtyZs3L/LfOCGTs8MU5i4i5MQdCoY1/img.png)
+
+또한, 링크를 굳이 생성하지 않고
+
+바로 연동되는 테이블(= 표)을 만들 수 있다.
+
+![](https://blog.kakaocdn.net/dn/bI9A0L/btruNVohtAB/xbz2FLz0Uxijbqycju4wb0/img.png)
+
+---
+
+# [노션으로 D-Day 계산해보기](https://zoosso.tistory.com/1148)
+
+by 까망 하르방  2022. 3. 29.
+
+노션에서는 수식 속성을 활용하여
+
+마감일(= 남은 일자, D-Day)을 계산할 수 있다.
+
+📌 [[노션] 데이터베이스 수식(formula) 속성 활용](https://zoosso.tistory.com/1080)
+
+[](https://zoosso.tistory.com/1080)
+
+[노션] 데이터베이스 수식(formula) 속성 활용
+
+노션의 데이터베이스에서는 수식(formula) 속성을 활용해서 엑셀과 유사한 기능 보여준다. 엑셀만큼 복잡하면서 다양한 산출은 못하더라도 용도나 접근성 측면에서는 노션의 유연함이 더 좋은 것
+
+zoosso.tistory.com
+
+D-Day 계산을 위해
+
+[날짜 속성] 항목도 필요하다.
+
+![수식 속성](https://blog.kakaocdn.net/dn/clNN9J/btrxHWTzxMg/fdDqKXBvB4YQ6kZOu8SKlk/img.png)
+
+----------
+
+간단하게 구현한다면 아래 2가지 함수로도 가능한다.
+
+• dateBetween(): 두 날짜 사이 시간을 구하는 함수 (Time 단위 설정 가능)
+
+![dateBetwwen 수식](https://blog.kakaocdn.net/dn/bcYoaD/btrxTP6iZnL/1OXYbXQboOoh7eGumRmqY1/img.png)
+
+• now(): 현재 날짜와 시간을 가져오는 함수
+
+![now 수식](https://blog.kakaocdn.net/dn/dOpxoX/btrxU0mdNmO/xTCddQNxkbPvMJv0ZtWgv0/img.png)
+
+----------
+
+해당 포스팅 제작은 [3월 29일 (= 오늘)] 이다.
+
+```
+dateBetween(prop("날짜"), now(), "days")
+```
+
+![예시](https://blog.kakaocdn.net/dn/pznkJ/btrxNZBEoGY/2eaj0WprE8lYX7peguDpxK/img.png)
+
+위와 같은 방식에는 2가지 아쉬운 점이 있다.
+
+• 예상값보다 평균적으로  「-1」  되어 있다.
+
+• now()로 생성되는 시간에 따라 하루 정도 오차 발생 ↑
+
+* 하루 이틀 오차가 상관 없다면 그대로 사용해도 된다.
+
+----------
+
+추정하는 오차 원인으로,,,
+
+[날짜] 속성의 보이지 않는 시간대인 것 같다. 🤔
+
+![시간 포함 옵션](https://blog.kakaocdn.net/dn/6uqcx/btrxIMiK5Z7/BPTnzc60sJmOYcL6KOvpW1/img.png)
+
+[날짜 속성] 세부 옵션에는 [시간 포함]이 있다.
+
+기본적으로 해당 날짜  「00:00」  이다.
+
+현재 날짜 + 시간까지 들고오는  now()와 계산될 때
+
+현재 시간과 분도 같이 계산되는지
+
+예상 결과값이 오차가 발생하는 것이다.
+
+![](https://t1.daumcdn.net/keditor/emoticon/friends1/large/016.gif)
+
+개인적으로 적용해본 해결 방법은
+
+now()로 추출한 현재시간에서 시간(hour)과 분(minutes)을 빼주는 것이다.
+
+(= [날짜 속성]과 동일한 시간과 분으로 맞추는 것)
+
+ex) 현재시간이 [2022/01/01  **14:38**] → [2022/01/01 **00:00**]
+
+```
+dateSubtract(dateSubtract(now(), hour(now()), "hours"), minute(now()), "minutes")
+```
+
+DB에 적용하면 아래와 같다.
+
+어제, 오늘, 내일이 알맞은 값으로 표시되었다.
+
+```
+dateBetween(prop("날짜"), dateSubtract(dateSubtract(now(), hour(now()), "hours"), minute(now()), "minutes"), "days")
+```
+
+![현재시간 날짜만 적용](https://blog.kakaocdn.net/dn/cAWfoN/btrxHuoKdM3/8ZlksOYN0vMajJvgtlwEU0/img.png)
+
+----------
+
+**D-Day 꾸며보기**
+
+D-Day를 단순히 숫자로 표시하지 않고 "D - {남은 일자}로 표시"
+
+ex) 하루 남았으면 "D - 1"
+
+```
+concat("D - ", format(dateBetween(prop("날짜"), dateSubtract(dateSubtract(now(), hour(now()), "hours"), minute(now()), "minutes"), "days")))
+```
+
+![D Day 문구 표시](https://blog.kakaocdn.net/dn/IbZO8/btrxVkY2TuA/MtF3f35OJMT9X6y6DSsXdK/img.png)
+
+• format을 통해 계산한  「D-Day」 수치를 문자열로 변경한다.
+
+•  concat으로 "D - " + "{계산된 날짜}" 문자열을 합친다.
+
+* [참고] 반환된 값도 문자열
+
+지난 일자에 대해서는 "D + {남은 일자}"로 표시하고 싶은 경우
+
+ex) 하루 지난 경우 "D + 1", 이틀 지난 경우 "D + 2"
+
+```
+if(dateBetween(prop("날짜"), dateSubtract(dateSubtract(now(), hour(now()), "hours"), minute(now()), "minutes"), "days") < 0, concat("D + ", format(dateBetween(prop("날짜"), dateSubtract(dateSubtract(now(), hour(now()), "hours"), minute(now()), "minutes"), "days") * -1)), concat("D - ", format(dateBetween(prop("날짜"), dateSubtract(dateSubtract(now(), hour(now()), "hours"), minute(now()), "minutes"), "days"))))
+```
+
+![D Day 지난 일자 표시](https://blog.kakaocdn.net/dn/c28J8a/btrxURiywDM/iSWGLrmOyCh6k8mub5stJ1/img.png)
+
+•  if 를 활용해서 {남은 일자}가 음수이며  「-1」  곱해서 양수로 변경한다.
+
+→ if (결과 < 0, 결과 * -1,결과)
+
+* 처리하는 방식에 따라 다르게 구현할 수도 있다.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTEyNzg0NzM5Miw3MzA5OTgxMTZdfQ==
+-->

@@ -1,0 +1,196 @@
+
+### remove
+
+```
+which go  // go 실행파일 경로 찾기
+
+sudo rm -rvf /usr/bin/go
+sudo rm -rvf /usr/local/go
+```
+
+### install
+
+sudo wget https://dl.google.com/go/go1.18.2.linux-amd64.tar.gz
+
+sudo tar -xvf go1.18.2.linux-amd64.tar.gz
+
+sudo mv go /usr/local
+
+### profile 변경
+> ~/.profile
+
+```
+export GOROOT=/usr/local/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+// export GOPATH=$HOME/dev/inGo
+```
+
+----
+
+# [How to update the Go version](https://khongwooilee.medium.com/how-to-update-the-go-version-6065f5c8c3ec)
+
+The following steps have been tested on Ubuntu. Technically, it shall work similarly in other system (Note: Some systems might require changes in directory path or to use similar command)
+
+# Step 1: Removal of existing go package
+
+## Remove the golang-go package
+
+_sudo apt-get remove golang-go_
+
+## Remove the golang-go dependencies
+
+_sudo apt-get remove --auto-remove golang-go_
+
+## Uninstall the existing Go package
+
+```
+which go  // go 실행파일 경로 찾기
+
+sudo rm -rvf /usr/bin/go
+sudo rm -rvf /usr/local/go
+```
+
+# Step 2: Install the new Go version
+
+## Download specific binary release for your system
+
+> [최신 버전 참조](https://go.dev/doc/install)
+- [go1.18.2.linux-amd64.tar.gz](https://go.dev/dl/go1.18.2.linux-amd64.tar.gz)
+
+wget [https://dl.google.com/go/**go1.14.linux-amd64.tar.gz**](https://dl.google.com/go/go1.14.linux-amd64.tar.gz)
+
+Note: Replace the go release in  **bold**  above to the version for your system. List of version can be found  [here](https://golang.org/dl/).
+
+## Extract the archive file
+
+sudo tar -xvf **go1.14.linux-amd64.tar.gz**
+
+Note: Replace the go release in  **bold**  above to the downloaded one.
+
+## Place the extracted file to desired location on the system
+
+sudo mv go /usr/local
+
+Tips: Above location is recommended on Linux.
+
+# Step 3: Setup Go Environment (Linux)
+
+## Setup Go environment variable
+
+Open .profile file located at home directory (~/.profile) and add the following lines:
+
+export GOROOT=/usr/local/go  
+export GOPATH=$HOME/go  
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+**GOROOT**  is the location where the Go package is installed on your system.  
+**GOPATH**  is the work directory of your go project.
+
+Next, reload environment variables for the change to take effect.  _(Thanks Luis V. for suggestion in the comment)_
+
+This can be done by either running the following command in terminal or doing a re-login of current shell.
+
+source ~/.profile
+
+# Step 4: Verify Go Version and Environment
+
+## Verify the go version
+
+go version
+
+## Verify the configured environment variables
+
+go env
+
+----
+
+# [How To Install Go 1.17 on Ubuntu 20.04](https://tecadmin.net/how-to-install-go-on-ubuntu-20-04/)
+
+![Rahul](https://tecadmin.net/wp-content/uploads/2017/04/tecrahul.png)By  [Rahul](https://tecadmin.net/author/myadmin/ "Posts by Rahul")May 29, 20213 Mins ReadUpdated:February 14, 2022
+
+Golang is an open-source programming language developed the Google. It provides easy to build simple, reliable, and efficient software. This language is designed for writing servers, that’s why it is using widely these days. Go has released the latest version 1.17.
+
+In this tutorial you will get instructions to install Go 1.17 on your Ubuntu 21.10 and Ubuntu 20.04 LTS Linux systems. Choose one the below methods for the installation of Go on your system.
+
+## Method 1 – Installing Go with Debian Repository
+
+The official repositories contains some older version of Golang packages. During the writing of this tutorial, Ubuntu 20.04 repositories contains Golan 1.13.8 version.
+
+Open a terminal and execute the following commands to install this version of Go on a Ubuntu system.
+
+ADVERTISEMENT
+
+```
+sudo apt update  
+```
+
+Once the installation finished, use below command to check installed Go version on Ubuntu.
+
+```
+go version 
+```
+
+The application required latest version of Go programing language. Follow below method.
+
+ADVERTISEMENT
+
+## Method 2 – Install Latest Go with Source code
+
+Login to your Ubuntu system using ssh and upgrade to apply latest security updates there.
+
+```
+sudo apt-get update  
+```
+
+Now download the Go language binary archive file using following link. To find and download latest version available version go to official  [download page](https://golang.org/dl/).
+
+```
+wget https://dl.google.com/go/go1.17.7.linux-amd64.tar.gz 
+```
+
+Now extract the downloaded archive and install it to the desired location on the system. For this tutorial, I am installing it under /usr/local directory. You can also put this under the home directory (for shared hosting) or other location.
+
+ADVERTISEMENT
+
+```
+sudo tar -xvf go1.17.7.linux-amd64.tar.gz   
+```
+
+Now you need to setup Go language environment variables for your project. Commonly you need to set 3 environment variables as  **GOROOT**,  **GOPATH**  and  **PATH**.
+
+-   **GOROOT**  is the location where Go package is installed on your system.
+    
+    ```
+    export GOROOT=/usr/local/go 
+    ```
+    
+-   **GOPATH**  is the location of your work directory. For example my project directory is  **~/Projects/Proj1**  .
+    
+    ```
+    export GOPATH=$HOME/Projects/Proj1 
+    ```
+    
+-   Now set the  **PATH**  variable to access go binary system wide.
+    
+    ```
+    export PATH=$GOPATH/bin:$GOROOT/bin:$PATH 
+    ```
+    
+
+All the above environment will be set for your current session only. To make it permanent add above commands in  **~/.profile**  file.
+
+At this step, you have successfully installed and configured go language on your system. First, use the following command to check the Go version.
+
+```
+go version 
+```
+
+## Conclusion
+
+In this tutorial, we have discussed two methods to install Golang on Ubuntu 20.04 LTS Linux systems.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjc5MjY0NjI4LC0xMTAzMzA2MjM0LDkzNT
+IzOTgzNiwtMjA4ODc0NjYxMiw2NjM5NDI0NjMsNzMwOTk4MTE2
+XX0=
+-->

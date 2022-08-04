@@ -1,0 +1,42 @@
+
+[우분투(Ubuntu)에 Neovim + Copilot 설치](https://euriion.com/?p=413088)
+
+> copilot plugin 삭제
+```bash
+cd ~/.config
+rm -rf github-copilot
+rm -rf nvim
+```
+
+[VIM을 IDE로 사용하기 (1) - Mac OS에 NeoVIM 설치하기](https://gilee.kr/vim1/)
+
+[vim을 강력하게 만들어줄 8가지 플러그인.](https://www.youtube.com/watch?v=oLvFt-UJ7UI)
+
+[vim 맛있습니까? 그거 독약입니다.](https://letyarch.blogspot.com/2021/01/vim.html)
+
+
+드라이브의 vimrc파일의 내용을 사용하는 시스템의 .vimrc 파일의 적절한 위치에 카피하시면 됩니다.
+처음해보시는분들은 구글에서 vimrc 파일의 동작같은걸 숙지하신다음에 적용해보시는게 좋을것같아요
+
+* vimrc 파일 링크 -  https://drive.google.com/file/d/12VcK...
+
+각플러그인의 설치 방법이나 세팅은 OS에 따라 다를수도 있으니 트러블슈팅은 아래 플러그인 링크를 참조하시면 좋을것같습니다.
+
+* 플러그인 링크
+'nanotech/jellybeans.vim' - https://github.com/nanotech/jellybean...
+'majutsushi/tagbar' - https://github.com/majutsushi/tagbar
+'scrooloose/nerdtree' - https://github.com/scrooloose/nerdtre...
+'nathanaelkane/vim-indent-guides' - https://github.com/nathanaelkane/vim-...
+'airblade/vim-gitgutter' - https://github.com/airblade/vim-gitgu...
+'tpope/vim-fugitive' - https://github.com/tpope/vim-fugitive
+'vim-airline/vim-airline' - https://github.com/vim-airline/vim-ai...
+'vim-airline/vim-airline-themes' - https://github.com/vim-airline/vim-ai...
+'blueyed/vim-diminactive' - https://github.com/blueyed/vim-dimina...
+
+Kevin MacLeod의 Awesome Call - Rollin at 5은(는) Creative Commons Attribution 라이선스(https://creativecommons.org/licenses/... 따라 라이선스가 부여됩니다.
+출처: http://incompetech.com/music/royalty-...
+아티스트: http://incompetech.com/
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjA1OTM0MTgwNSwyMDgxMzI3ODgsNzMwOT
+k4MTE2XX0=
+-->

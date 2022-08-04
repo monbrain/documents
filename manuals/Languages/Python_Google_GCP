@@ -1,0 +1,471 @@
+
+
+
+## [GCP API 사용 (Python)](https://ikcoo.tistory.com/39)
+
+이쿠우우  2020. 9. 1. 19:32
+
+
+### **1. GCP SDK, API라이브러리 download 방법**
+
+준비 : python2 or 3 설정 완료
+
+#### **1.1. Google SDK 설치**
+
+**1.1.1. Google SDK download**
+
+dowload 링크 : [https://cloud.google.com/sdk/docs/quickstart-windows](https://cloud.google.com/sdk/docs/quickstart-windows)
+
+결국 이 상위링크가 하라는데로 하면 됨
+
+![](https://blog.kakaocdn.net/dn/HKONG/btqHJh0YUBa/E2fhe8BhoeiSdKqs8OB5Jk/img.png)
+
+![](https://blog.kakaocdn.net/dn/bpXWuU/btqHBSAL5Hi/LVAsvDDvomBkLOeWWUhww0/img.png)
+
+설치 완료
+
+**1.1.2. cmd 관리자 권한 실행**
+
+**1.1.3. gcloud init 명령 실행**
+
+y 입력
+
+![](https://blog.kakaocdn.net/dn/ErAGC/btqHGVqcD0O/dgvLvtZIWhdkGwkWoY4sSK/img.png)
+
+**1.1.4. 계정 선택 후 인증과정 진행**
+
+완료 상태
+
+![](https://blog.kakaocdn.net/dn/rPT7Y/btqHGT6WcK4/8bMGKeN3lw4fAMLSug8aU0/img.png)
+
+**1.1.5. 사용할 프로젝트 선택**
+
+![](https://blog.kakaocdn.net/dn/u6xOL/btqHA3vKbd5/r3yvOXqQt1aOLdVKsjTU3K/img.png)
+
+**1.1.6. 인증 확인**
+
+gcloud config list project
+
+gcloud auth list
+
+상위 2가지 명령 수행해서 아래와 같이 나와야지 인증 성공
+
+![](https://blog.kakaocdn.net/dn/6rq6I/btqHQGFcaFZ/eKhkQIorkLkbJ5hTu9hf9k/img.png)
+
+### **2. 서비스 계정 키 발급**
+
+#### **2.1. GCP에서 IAM 및 관리자 > 서비스 계정으로 이동**
+
+![](https://blog.kakaocdn.net/dn/cEj5jO/btqHMuZzJri/Pw2jKXMXwb42apydocW8rK/img.png)
+
+**2.1.1. 이동 후 확인해 보면 기본적으로 Engine 관련한 서비스 계정이 기본적으로 생성되어있음**
+
+**2.1.2. api 를 사용하기 위해 별도의 계정을 생성해줘야함**
+
+![](https://blog.kakaocdn.net/dn/dlOI1k/btqHEfoMTj3/g5YATkCpK6kbca7Sp357P1/img.png)
+
+#### **2-2. 계정 생성**
+
+**2.2.1. 상단의 +서비스 계정 만들기 클릭**
+
+![](https://blog.kakaocdn.net/dn/y5alv/btqHA3bhd2F/cHrJxtiQFkIjyPMPJYVrpK/img.png)
+
+![](https://blog.kakaocdn.net/dn/CN09I/btqHJpqVQHY/fGdtkIS6P3jH2mo6Vkmm81/img.png)
+
+**2.2.2. 서비스 계정 이름, 계정 ID 를 넣어주고 만들기 클릭**
+
+![](https://blog.kakaocdn.net/dn/uE2AJ/btqHO0RsHti/VIetPzn5RjYCYmIcUYb4u1/img.png)
+
+**2.2.3. admin 으로 생성하기 위해 소유자 (Owner) 설정**
+
+모든 권한이 있기 때문에 털리면 망함.
+
+![](https://blog.kakaocdn.net/dn/DIGRk/btqHLX1ZMt4/juq1nSzCeYapsiOGJXgXqK/img.png)
+
+서비스 계정 사용자 역할 : 이 계정 사용가능한 유저
+
+서비스 계정 관리자 역할 : 이 계정 관리 할 유저
+
+입력 안해도 됨
+
+**2.2.4. 설정 후 완료 클릭**
+
+![](https://blog.kakaocdn.net/dn/N7t3D/btqHQGrDdbb/y3kB6a3pbAB4AMKzrJefG0/img.png)
+
+정상적으로 서비스 계정이 생성되면 위와같이 확인 가능
+
+#### **2-3. 키 생성**
+
+**2.3.1. 상위에서 생성한 계정을 클릭**
+
+**2.3.2.  키 추가 클릭**
+
+![](https://blog.kakaocdn.net/dn/bnHCA4/btqHAnuoiNo/18rJIIaq3Uk6o47a4jf7mk/img.png)
+
+2.3.3. 새 키 만들기 클릭
+
+![](https://blog.kakaocdn.net/dn/EvSAC/btqHAlwwJiS/sG9DEbaQT7itPTz44IYBV1/img.png)
+
+**2.3.4.  JSON 선택 후 만들기**
+
+![](https://blog.kakaocdn.net/dn/x7ZNW/btqHLfaBOaB/3CX3eYrPkKzfPGMKs224k1/img.png)
+
+**2.3.5. key 가 download 됨. 닫기 클릭**
+
+![](https://blog.kakaocdn.net/dn/o0q3U/btqHO1ixFk4/Jx9JwTlTnCsQ4sCiGh0pxk/img.png)
+
+**2.3.6.  권한 확인. 정보 패널 표시 클릭**
+
+![](https://blog.kakaocdn.net/dn/1D18Y/btqHLfaBObv/yNbTbkBP95x4OxgnQhlcOk/img.png)
+
+**2.3.7. 상속된 권한 표시 후 소유자에 상위에서 설정한 계정이 정상적으로 들어가 있는지 확인**
+
+![](https://blog.kakaocdn.net/dn/rLjcn/btqHQGFcaG5/SPFox2ovU3zHCNbJLxxvP0/img.png)
+
+**완료.**
+
+----------
+
+### **3. 서비스 계정 키 연결**
+
+#### **3.1. 환경 변수 설정**
+
+환경 변수 이름 : GOOGLE_APPLICATION_CREDENTIALS
+
+경로 : 상위 2-3.5) 과정에서 download 한 key의 경로를 넣어줌
+
+키 파일 이름까지 넣어줌
+
+![](https://blog.kakaocdn.net/dn/NjWbA/btqHLeJoGro/kMnPd0h2Ih091pLlfvyeKk/img.png)
+
+#### **3.2. cmd에서 gcloud auth application-default login 명령 수행**
+
+명령여 : gcloud auth application-default login
+
+2번째 : y
+
+![](https://blog.kakaocdn.net/dn/MM9cJ/btqHQGypgGp/StD7Nwb0jkhTeNXT82IX61/img.png)
+
+#### **3.3. 웹페이지가 뜨면 login**
+
+loin 후 인증 성공 시
+
+![](https://blog.kakaocdn.net/dn/cCc8ar/btqHMuFeIfB/aGZvebo4KQokN9yKk0rykK/img.png)
+
+#### **3.4. 인증 완료 후 토큰 조회**
+
+명령어 :  gcloud auth application-default print-access-token
+
+토큰이 조회되면 키 사용준비 완료
+
+![](https://blog.kakaocdn.net/dn/ekuCC6/btqHQHYofCa/rROn7pv0KELyzplyWAY49K/img.png)
+
+**완료.**
+
+----------
+
+### **4. GCP API 라이브러리 download**
+
+준비 : python2 or 3 설정 완료
+
+#### **4.1. (pip 설치) 사이트에서 get-pip.py 다운**
+
+site : [https://bootstrap.pypa.io/](https://bootstrap.pypa.io/)
+
+#### **4.2. cmd 창에서 명령어 실행**
+
+python get-pip.py
+
+설치 완료 되면
+
+%python_home%\Scipts 폴더에 pip 확인가능
+
+![](https://blog.kakaocdn.net/dn/cMFTN1/btqHA3Jhdr2/wk1eKaCEXRHhDdyowI4PS1/img.png)
+
+#### **4.3. cmd 창에서 명령어 실행**
+
+**pip install google-api-python-client**
+
+**pip install oauth2client**
+
+설치 완료 되면
+
+%python_home%\Lib\site-packages 폴더에서 확인가능
+
+#### **4.4. 라이브러리 설치 확인**
+
+pip show google-api-python-client
+
+pip show oauth2client
+
+### **5. GCP python APi**
+
+**project = '프로젝트 ID' 값을 알아야함**
+
+**zone = '지역 (리전)' 값을 알아야함**
+
+#### **5.1. project id**
+
+![](https://blog.kakaocdn.net/dn/KGFFk/btqHBRV6XtB/M67xNaiG6kkfQuOTjjKsH1/img.png)
+
+**5.1.1. GCP HOME 에서 상단의 첫번째 빨간 박스를 클릭**
+
+상위 1-5. 사용할 프로젝트 선택
+
+단계에서 정했던 project 를 선택
+
+**5.1.2. 프로젝트 정보에서 프로젝트 ID 확인**
+
+### **5.2. zone**
+
+**5.2.1. GCP HOME > Compute Engine > VM 인스턴스**
+
+**5.2.2. 생성되어져 있는 VM 의 영역에 해당하는 값.**
+
+![](https://blog.kakaocdn.net/dn/48wxb/btqHGVwXNQp/uC5SuYzWz6d9GNkskKFGWk/img.png)
+
+----------
+
+### **파이썬 예제코드**
+
+from googleapiclient import discovery
+
+from oauth2client.client import GoogleCredentials
+
+# Project ID for this request.
+
+projectID = 'ikcoo-kid-project'
+
+# The name of the zone for this request.
+
+zoneID = 'us-central1-a'
+
+def get_zones_in_project(compute, max_results=None):
+
+# GCP 의 경우 list 조회 시 zone 을 명시해야해서 모든 zone 에 있는 instance 를 조회하기 위해
+
+# 모든 zone list 를 조회 함
+
+req = compute.zones().list(project=projectID, maxResults=max_results)
+
+res = req.execute()
+
+return res['items']
+
+def GCP_VM(num):
+
+credentials = GoogleCredentials.get_application_default()
+
+compute = discovery.build('compute', 'v1', credentials=credentials)
+
+zones = get_zones_in_project(compute)
+
+## GCP VM Instances List ##
+
+if num == 0:
+
+print('[Azure VM Instances List]')
+
+VmCount= 0
+
+for zone in zones:
+
+request = compute.instances().list(project=projectID, zone=zone['name'])
+
+#print(zone['name'])
+
+while request is not None:
+
+response = request.execute()
+
+if 'items' in response:
+
+for instance in response['items']:
+
+VmCount+=1
+
+print("[{0}] id=({1}), name=({2}), state=({3}), zone=({4})".format(str(VmCount), instance['id'], instance['name'], instance['status'], zone['name']))
+
+#end for
+
+request = compute.instances().list_next(previous_request=request, previous_response=response)
+
+#end if
+
+#end while
+
+#end for
+
+#end if
+
+## GCP VM Instances List Target Zone##
+
+if num == 1:
+
+print('[Azure VM Instances List (Target Zone={0})]'.format(zoneID))
+
+VmCount= 0
+
+request = compute.instances().list(project=projectID, zone=zoneID)
+
+while request is not None:
+
+response = request.execute()
+
+if 'items' in response:
+
+for instance in response['items']:
+
+VmCount+=1
+
+print("[{0}] id=({1}), name=({2}), state=({3}), zone=({4})".format(str(VmCount), instance['id'], instance['name'], instance['status'], zoneID))
+
+#end for
+
+request = compute.instances().list_next(previous_request=request, previous_response=response)
+
+#end if
+
+#end while
+
+#end if
+
+## GCP VM Instances List Target Zone Start##
+
+if num == 2:
+
+print('[Azure VM Instances List Start(Target Zone={0})]'.format(zoneID))
+
+request = compute.instances().list(project=projectID, zone=zoneID)
+
+while request is not None:
+
+response = request.execute()
+
+if 'items' in response:
+
+for instance in response['items']:
+
+if 'TERMINATED'== instance['status']:
+
+startRequest = compute.instances().start(project=projectID, zone=zoneID, instance=instance['id'])
+
+startRequest.execute()
+
+print("id=({0}), name=({1}), zone=({2}) START".format(instance['id'], instance['name'], zoneID))
+
+#end for
+
+request = compute.instances().list_next(previous_request=request, previous_response=response)
+
+#end if
+
+#end while
+
+#end if
+
+## GCP VM Instances List Target Zone Stop##
+
+if num == 3:
+
+print('[Azure VM Instances List STOP(Target Zone={0})]'.format(zoneID))
+
+request = compute.instances().list(project=projectID, zone=zoneID)
+
+while request is not None:
+
+response = request.execute()
+
+if 'items' in response:
+
+for instance in response['items']:
+
+if 'RUNNING'== instance['status']:
+
+stopRequest = compute.instances().stop(project=projectID, zone=zoneID, instance=instance['id'])
+
+stopRequest.execute()
+
+print("id=({0}), name=({1}), zone=({2}) STOP".format(instance['id'], instance['name'], zoneID))
+
+#end for
+
+request = compute.instances().list_next(previous_request=request, previous_response=response)
+
+#end if
+
+#end while
+
+#end if
+
+#end def GCP_VM
+
+if __name__=="__main__" :
+
+while True:
+
+InputGet = input('cli> ')
+
+if 'q' == InputGet :
+
+break
+
+if '0' == InputGet :
+
+GCP_VM(0)
+
+if '1' == InputGet :
+
+GCP_VM(1)
+
+if '2' == InputGet :
+
+GCP_VM(2)
+
+if '3' == InputGet :
+
+GCP_VM(3)
+
+----------
+
+제 글을 복사할 시 출처를 명시해주세요.  
+글에 오타, 오류가 있다면 댓글로 알려주세요! 바로 수정하겠습니다!
+
+----------
+
+> 참고
+
+[GCP 라이브러리]
+
+SDK : [https://cloud.google.com/sdk/docs/](https://cloud.google.com/sdk/docs/)
+
+[https://cloud.google.com/python/docs/reference?hl=ko](https://cloud.google.com/python/docs/reference?hl=ko)
+
+[http://googleapis.github.io/google-api-python-client/docs/epy/index.html](http://googleapis.github.io/google-api-python-client/docs/epy/index.html)
+
+[https://cloud.google.com/sdk/gcloud/reference/compute/instances/list](https://cloud.google.com/sdk/gcloud/reference/compute/instances/list)
+
+[https://gist.github.com/pydevops/cffbd3c694d599c6ca18342d3625af97](https://gist.github.com/pydevops/cffbd3c694d599c6ca18342d3625af97)
+
+[개발 참고]
+
+[https://turtle1000.tistory.com/77?category=896267](https://turtle1000.tistory.com/77?category=896267)
+
+[https://cloud.google.com/compute/docs/reference/rest/v1/instances/list](https://cloud.google.com/compute/docs/reference/rest/v1/instances/list)
+
+[https://github.com/lyft/cartography/blob/master/cartography/intel/gcp/compute.py](https://github.com/lyft/cartography/blob/master/cartography/intel/gcp/compute.py)
+
+[SDK 설치]
+
+[https://cloud.google.com/sdk/docs/quickstart-windows](https://cloud.google.com/sdk/docs/quickstart-windows)
+
+[인증 참고
+
+[https://cloud.google.com/docs/authentication/production#auth-cloud-compute-engine-python](https://cloud.google.com/docs/authentication/production#auth-cloud-compute-engine-python)
+
+  
+  
+출처: [https://ikcoo.tistory.com/39](https://ikcoo.tistory.com/39) [이쿠의 슬기로운 개발생활]
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNDY1NDE4MDMwLDczMDk5ODExNl19
+-->

@@ -1,0 +1,426 @@
+# [Dash is React for Python, R, and Julia](https://medium.com/plotly/dash-is-react-for-python-r-and-julia-c75822d1cc24)
+
+![](https://miro.medium.com/max/1400/1*nANCp53k-xLP5HmUcsLebQ.png)
+
+# **Dash Primordial Soup**
+
+When Plotly released Dash ([almost 3 years ago](https://medium.com/plotly/introducing-dash-5ecf7191b503)), we were not certain that it would become the open-source phenomenon that Dash is today. Having 5 years of prior experience with  [plotly.js](https://github.com/plotly/plotly.js),  [plotly.R](https://github.com/ropensci/plotly), and  [plotly.py](https://github.com/plotly/plotly.py)  — the world’s most downloaded, Web-based scientific graphing libraries for JavaScript, R, and Python (respectively) — there was reason for optimism, but early-stage open-source software (OSS) is notoriously fickle to launch.
+
+For the 1st year of even the most promising OSS project, there be dragons ahead: Licensing, API changes, community support, getting to v1, and most importantly — long-term, sustainable project funding — are just a few of the challenges to navigate. On top of this, for an OSS project to reach a world-changing level of distribution ([10’s of millions of downloads per year](https://pypistats.org/packages/plotly)), you, your co-founders, and funders have to be committed for at least a decade. So while the (GitHub) stars seemed to align for Dash’s launch 3 years ago, Plotly approached the mercurial OSS gods with an appropriate level of foreboding and caution.
+
+If we learned one thing while stewarding the Web’s scientific graphing libraries, it was that Plotly’s story wouldn’t end with interactive charts. Through Plotly, scientists, engineers, data scientists, and analysts had their first taste for interactive, Web-based charts and their imaginations went soaring. Plotly’s users wanted more…much more: sliders, dropdowns, search boxes, tables, and every “widget” imaginable was requested daily  _for years_. Plotly had given scientists and engineers the ability to create D3 & WebGL charts in their  _lingua franca_  (Python, R, MATLAB, or Julia) — the Web was now open for business as a medium for scientific communication.
+
+![If you give a mouse a cookie with graphs.](https://miro.medium.com/max/1400/0*-y5jOcYBVKZ7qq3b)
+
+_If you give a mouse a D3 graph, she’ll ask for a slider, a dial, a search box, radio buttons, live data…._
+
+# **The React Connection**
+
+In the Unix spirit of “Do one thing, and do it well,” we knew Dash had to be a “user interface library” — separate and distinct from Plotly’s graphing libraries. Dash builds upon Plotly’s 8 years of scientific graphing library development but does not require them and works  [equally well with other graphing libraries](https://github.com/plotly/dash-alternative-viz).
+
+To build the user interface layer of Python, R and Julia †, we teamed up with friends at  [Formidable](https://formidable.com/). Formidable is known for world-class React application development and tooling. If a F500 company wants to rebuild their platform on React or retool a frontend engineering team, they call Formidable. In particular, through the  [builder](https://github.com/FormidableLabs/builder)  task runner, Formidable helped us build Dash’s pipeline for converting React components to Dash components. With this toolchain, any React UI component could be automagically packaged as a Python, R, or Julia library.
+
+This is a subtle yet foundational idea for Dash:  _1000’s_  of React user interface (UI) components  [live on npm](https://www.npmjs.com/search?q=react). With Dash, any open-source React UI component can be pulled from npm or GitHub,  [stirred with water](https://dash.plotly.com/react-for-python-developers), transmogrified into a Dash component, then imported into your Dash app as a Python, R, or Julia library.  _C’est magnifique!_ 👨‍🍳 Dash makes the richness and innovation of the React frontend ecosystem available to Python, R, and Julia engineers for the first time.
+
+> Dash makes the richness and innovation of the React frontend ecosystem available to Python, R, and Julia engineers for the first time.
+
+Behind the scenes, when a Python, R or Julia engineer creates a Dash app, they are actually creating a  [React Single Page Application (“SPA”)](https://reactjs.org/docs/glossary.html#single-page-application). React SPAs have become the default paradigm for shipping complicated Web applications (e.g. Facebook) because of React’s performance, code maintainability, serverless architecture, developer tools, enforced data flow, and vast ecosystem of open-source components. Despite React’s popularity, very few engineers or scientists outside Web development have the time to learn this framework. It takes 3–6 months to become a decent React frontend engineer (assuming prior programming experience) — a luxurious time investment that most engineers and scientists can’t afford. Even for data scientists who have frontend programming skills, it’s too time consuming to develop a full-stack application on top of the data science and AI models that the apps run. Enter Dash: the tool that enables Python, R, and Julia engineers to create uncompromising React SPAs — no JavaScript required.
+
+# **The Fatiguing Tedium of the Transport Layer**
+
+Even if you’re a full-stack developer and React expert, you still have to design an API that allows the frontend and backend(s) to communicate. In CRUD-style Web apps, this is facilitated through protocols like REST and GraphQL. Designing this API (or “transport layer”) for interactive apps and dashboards that require frequent, fast, and fine-grained updates can be challenging and tedious.
+
+For example, imagine that your React app needs to dynamically update the options within a dropdown. First, you import your favorite React dropdown library and add a dropdown to your React render method. Easy enough, but now you have to work backwards and wire this dropdown into the transport layer: write the async (fetch) calls in JavaScript, add the new routes on the backend, serialize the data for transport, display a loading state, etc…
+
+In Dash, this tedium is all done for you  _automagically_. You don’t even need to think about it. The transport layer as well as the frontend layer is abstracted through Dash’s intuitive callback registry. Even for an experienced Python data scientist, it takes 3–6 months to become a proficient back-end API programmer — another luxurious time investment that most engineers and scientists can’t afford.
+
+Still with us? We haven’t even mentioned  _deploying_  these tedious changes while ensuring nothing breaks… For this, we recommend taking a  [Dash Enterprise trial for a spin](https://plotly.com/get-demo/).
+
+# **Embracing React is a Dash Architectural Principle**
+
+Through all of Dash’s releases, we’ve been determined to set Dash app developers on a path of long-term success. We’ve baked every hard-earned software engineering lesson, from our team’s decades of cumulative experience, into Dash’s  [stateless](https://enterprisersproject.com/article/2020/3/kubernetes-best-practices-building-applications-containers?page=1)  architecture. This includes embracing React for robust and scalable frontend engineering.
+
+Dash applications are not computational notebooks or markdown files with data science code interspersed among widgets. Instead, Dash apps are regular Python, R and Julia files that cleanly separate UI code from application logic. This means that Dash apps can be easily modularized, checked into source-control, diffed, reviewed using best-practices like Pull Request Reviews, and unit-tested to ensure quality and minimize regressions.
+
+# **The Python-to-React Pipeline of your Dreams**
+
+How far can we take this? One dream for Dash is a full-scale React-to-[Python-R-Julia] pipeline. Why settle for “dashboarding,” when Dash could be the user interface standard for any ML, AI,  [pure science](https://plotly.com/resources/indelphi/), or engineering app? As this  [astute Dash community member](https://community.plotly.com/t/dash-1-5-0-released/30622/5)  observed:
+
+> It seems like there’s a lot of developer activity and momentum to grow the [Dash] framework into a general purpose Python-to-React transpiler for a wide variety of [server side rendering] applications. IMHO it is already very close, maybe 80% close, to being a better choice than Django for most SPA applications. I’m looking forward to telling my developer friends next year, “Heck, I’ve been using Dash since the early days — back when it was just a container for Plotly figures!”
+
+With [JavaScript lazy loading](https://github.com/plotly/dash/pull/899), [pattern-matching callbacks](https://github.com/plotly/dash/pull/1103), [optimized caching](https://github.com/plotly/dash/releases/tag/v1.5.1), [clientside updates](https://dash.plotly.com/clientside-callbacks), [multi-page apps](https://dash.plotly.com/urls), [loading states](https://dash.plotly.com/loading-states), [persisting user inputs](https://dash.plotly.com/persistence), and a series of [React-to-[Py, R, Jl] toolchain improvements](https://github.com/plotly/dash/pull/1125), we have our eyes to the stars: Dash will be the Python-to-React pipeline of our dreams in 2020.
+
+![](https://miro.medium.com/max/1400/1*bxXsfIauVcyv3I8XY7fm2A.png)
+
+Dash lets you transmogrify React UI components into Dash components.
+
+For developer velocity, Dash comes with more than 30 out-of-the-box React components, packaged as the  [Dash Core](https://github.com/plotly/dash-core-components)  and  [Dash DAQ](https://github.com/plotly/dash-daq)  libraries. For Dash DAQ, we teamed up with friends at  [Dawn Labs](https://dawnlabs.io/)  — another legendary React shop.
+
+We’ve also seen Dash users create their own components, either from preexisting React libraries or (most impressively) completely from scratch. Here are a few of our faves:
+
+-   🧬 Autodesk 3d molecule —  [React component](https://github.com/Autodesk/molecule-3d-for-react)  ➡️  [Dash component](https://dash.plotly.com/dash-bio/molecule3dviewer)
+-   📈 Highcharts —  [React components](https://github.com/highcharts/highcharts-react)  ➡️  [Dash components](https://github.com/plotly/dash-alternative-viz)
+-   🌈 Color scale picker —  [React component](https://github.com/plotly/react-colorscales)  ➡️  [Dash component](https://plotly.com/dash/design-kit/)
+-   🏋️ Large file upload — React component ➡️  [Dash component](https://community.plotly.com/t/show-and-tell-dash-resumable-upload/9519/3)
+-   🥾Bootstrap suite —  [React components](https://react-bootstrap.github.io/)  ➡️  [Dash components](https://github.com/facultyai/dash-bootstrap-components)
+-   📊 Pivot table —  [React component](https://github.com/plotly/react-pivottable)  ➡️  [Dash component](https://plotly.com/consulting-and-oem/)
+-   🎨 Chart editor —  [React component](https://github.com/plotly/react-chart-editor)  ➡️  [Dash component](https://plotly.com/consulting-and-oem/)
+
+Most people are surprised to learn that of Plotly’s 50 engineers, the vast majority are React developers. This is because Dash is primarily a frontend library — there are far more lines of JavaScript (Typescript) than Python, R, or Julia code. Plotly only has 3 full-time Python developers, 2 full-time R developers, and 0 full-time Julia developers. This is because the heavy lifting for a library like Dash is in JavaScript. To make Dash language agnostic, we needed to pack the logic into the frontend with a small API surface area. This keeps the Python, R, and Julia bindings to the Dash frontend thin, uniform, testable, and manageable. Plotly engineers are expert React developers so that Dash Python, R, and Julia users don’t have to be.
+
+The next largest engineering team at Plotly is devops, because once you’ve made your first killer Dash app, you need scalable infrastructure to host it. For this, Plotly’s devops team develops  [Dash Enterprise](https://plotly.com/dash/), a Kubernetes platform that enables automatic horizontal scaling and world-class hosting performance for Dash applications.
+
+![](https://miro.medium.com/max/1400/0*ywc4d_UmlUBLXqrn)
+
+_Example Dash Enterprise Kubernetes architecture on AWS. Dash Enterprise is also available for GCP, Azure, and on-premises installation._
+
+Have a React component or React component library that you want published as a Dash component? Want to improve Dash’s React-to-Python pipeline?  [Give us a shout to discuss your ideas and vision](https://plotly.com/consulting-and-oem/).
+
+†  [Julia Computing](https://juliacomputing.com/)  and Plotly have quietly taken first steps to  [support Julia](https://github.com/plotly/dash.jl)  as a first-class Dash backend. Be on the lookout for an announcement next month, or get in touch to ⚡[accelerate the development](https://plotly.com/consulting-and-oem/)  ⚡
+
+
+----
+
+# [Live Updating Components](https://dash.plotly.com/live-updates)
+
+## The  `dcc.Interval`  component
+
+Components in Dash usually update through user interaction: selecting a dropdown, dragging a slider, hovering over points.
+
+If you're building an application for monitoring, you may want to update components in your application every few seconds or minutes.
+
+The  `dcc.Interval`  element allows you to update components on a predefined interval. The  `n_intervals`  property is an integer that is automatically incremented every time  `interval`  milliseconds pass. You can listen to this variable inside your app's  `callback`  to fire the callback on a predefined interval.
+
+This example pulls data from live satellite feeds and updates the graph and the text every second.
+
+```python
+import datetime
+
+import dash
+from dash import dcc, html
+import plotly
+from dash.dependencies import Input, Output
+
+# pip install pyorbital
+from pyorbital.orbital import Orbital
+satellite = Orbital('TERRA')
+
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app.layout = html.Div(
+    html.Div([
+        html.H4('TERRA Satellite Live Feed'),
+        html.Div(id='live-update-text'),
+        dcc.Graph(id='live-update-graph'),
+        dcc.Interval(
+            id='interval-component',
+            interval=1*1000, # in milliseconds
+            n_intervals=0
+        )
+    ])
+)
+
+
+@app.callback(Output('live-update-text', 'children'),
+              Input('interval-component', 'n_intervals'))
+def update_metrics(n):
+    lon, lat, alt = satellite.get_lonlatalt(datetime.datetime.now())
+    style = {'padding': '5px', 'fontSize': '16px'}
+    return [
+        html.Span('Longitude: {0:.2f}'.format(lon), style=style),
+        html.Span('Latitude: {0:.2f}'.format(lat), style=style),
+        html.Span('Altitude: {0:0.2f}'.format(alt), style=style)
+    ]
+
+
+# Multiple components can update everytime interval gets fired.
+@app.callback(Output('live-update-graph', 'figure'),
+              Input('interval-component', 'n_intervals'))
+def update_graph_live(n):
+    satellite = Orbital('TERRA')
+    data = {
+        'time': [],
+        'Latitude': [],
+        'Longitude': [],
+        'Altitude': []
+    }
+
+    # Collect some data
+    for i in range(180):
+        time = datetime.datetime.now() - datetime.timedelta(seconds=i*20)
+        lon, lat, alt = satellite.get_lonlatalt(
+            time
+        )
+        data['Longitude'].append(lon)
+        data['Latitude'].append(lat)
+        data['Altitude'].append(alt)
+        data['time'].append(time)
+
+    # Create the graph with subplots
+    fig = plotly.tools.make_subplots(rows=2, cols=1, vertical_spacing=0.2)
+    fig['layout']['margin'] = {
+        'l': 30, 'r': 10, 'b': 30, 't': 10
+    }
+    fig['layout']['legend'] = {'x': 0, 'y': 1, 'xanchor': 'left'}
+
+    fig.append_trace({
+        'x': data['time'],
+        'y': data['Altitude'],
+        'name': 'Altitude',
+        'mode': 'lines+markers',
+        'type': 'scatter'
+    }, 1, 1)
+    fig.append_trace({
+        'x': data['Longitude'],
+        'y': data['Latitude'],
+        'text': data['time'],
+        'name': 'Longitude vs Latitude',
+        'mode': 'lines+markers',
+        'type': 'scatter'
+    }, 2, 1)
+
+    return fig
+
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
+```
+
+----------
+
+## Updates on Page Load
+
+By default, Dash apps store the  `app.layout`  in memory. This ensures that the  `layout`  is only computed once, when the app starts.
+
+If you set  `app.layout`  to a function, then you can serve a dynamic layout on every page load.
+
+For example, if your  `app.layout`  looked like this:
+
+```py
+import datetime
+
+import dash
+from dash import html
+
+app.layout = html.H1('The time is: ' + str(datetime.datetime.now()))
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
+```
+
+then your app would display the time when the app was started.
+
+If you change this to a function, then a new  `datetime`  will get computed everytime you refresh the page. Give it a try:
+
+```py
+import datetime
+
+import dash
+from dash import html
+
+def serve_layout():
+    return html.H1('The time is: ' + str(datetime.datetime.now()))
+
+app.layout = serve_layout
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
+```
+
+> **Heads up! You need to write**  `app.layout = serve_layout`  **_not_**  `app.layout = serve_layout()`.  **That is, define**  `app.layout`  **to the actual function instance.**
+
+You can combine this with  [time-expiring caching](https://dash.plotly.com/performance)  and serve a unique  `layout`  every hour or every day and serve the computed  `layout`  from memory in between.
+
+[Dash Python](https://dash.plotly.com/) > Live Updates
+
+---
+
+# [LATEX IN DASH APPLICATIONS: A GUIDE TO GORGEOUS TYPESETTING](https://chrisvoncsefalvay.com/2020/07/25/dash-latex/)
+
+Beautiful maths in Dash apps
+
+![Chris von Csefalvay](https://secure.gravatar.com/avatar/b9d7924ebe4873a98d0bb4b30f87fc12?s=34&d=mm&r=g)By  [CHRIS VON CSEFALVAY](https://chrisvoncsefalvay.com/author/chris/ "Posts by Chris von Csefalvay") July 25, 2020[2](https://chrisvoncsefalvay.com/2020/07/25/dash-latex/ "2 Comments")8329 views
+
+Share:
+
+![](https://i0.wp.com/chrisvoncsefalvay.com/wp-content/uploads/2020/07/iron-letters-and-numbers-PH2QDFU.jpg?resize=800%2C391&ssl=1)
+
+[CODING](https://chrisvoncsefalvay.com/category/coding/)
+
+Like many who come from the scientific community, LaTeX is like a second language to me – in fact, I generally eschew text editors that do not have built-in LaTeX rendering, as so much of my work is wrapped up in mathematical reasoning. Matplotlib, the golden oldie of visualisation solutions, pays begrudging respect to LaTeX, allowing you to render LaTeX on plots or even axis labels out of the box. Dash can also render LaTeX, but it takes some coaxing. Below is the solution that worked for me when working on the  [socially distanced SIR simulator](https://github.com/chrisvoncsefalvay/dash-sir-interactive-model), which required me to embed quite a bit of complex maths in the narrative that details the differential equations that run the model.
+
+![](https://i0.wp.com/chrisvoncsefalvay.com/wp-content/uploads/2020/07/Screenshot-2020-07-24-at-1.15.05-PM.png?fit=1024%2C480&ssl=1&is-pending-load=1)
+
+## What works (and what doesn’t)
+
+Before you embark on making changes to your code, it’s important to know what you can and can’t do at the state of the code.
+
+### What definitely works
+
+Once correctly configured, most single-line mathematical typesetting, whether inline or as a separate paragraph, works fine. More complex environments, such as the  `align`  environments imported by the  `amsmath`  package, will  _not_  work. However, as far as ‘vanilla’ LaTeX maths goes, you can render some exquisitely complex stuff with relative ease.
+
+**Note:** if you write your text in Markdown and import it using  `dcc.Markdown()`, all your code will be parsed through the Markdown renderer – including your LaTeX code. This means that some operators, which may have meaning in LaTeX and Markdown alike, will break LaTeX rendering. There are largely two to look out for: the  `*`  operator (replace it with  `\ast`  or  `\star`), and closed square bracket operators  `[0...1]`, which you might have to get creative to find a workaround for.
+
+You can use valid LaTeX pretty much everywhere. This includes inside plots/axes (on which see later), on buttons, slides &c.
+
+### What definitely doesn’t work
+
+There are some things that do not work, at the present state of Plotly Dash. In particular, you cannot dynamically render LaTeX, and LaTeX axis labels need to be refreshed (see below).
+
+## Making it work
+
+The overall structure of what we’re going to be doing consists of four principal steps:
+
+1.  Import  `dash_defer_js_import`  to defer loading of external Javascript scripts after the Dash React components have loaded, and deferred import the MathJax renderer script.
+2.  Integrate the MathJax renderer script by reframing the index template using the  `app.index_string`  variable.
+3.  Integrate the deferred script import into the layout object.
+4.  For LaTeX rendering in dynamic axis labels, deferred import a custom script that regularly re-renders figures (optional).
+
+You may find it useful to refer to a worked example – a recent Dash app I have built to display epidemic dynamics as a function of social distancing implements part of this approach in order to beautifully render the maths underlying the model. [You can find the code for this on Github](https://github.com/chrisvoncsefalvay/dash-sir-interactive-model/blob/master/app.py), and you’re welcome to adapt it to your needs.
+
+![](https://i0.wp.com/chrisvoncsefalvay.com/wp-content/uploads/2020/07/Screenshot-2020-07-25-at-9.37.23-AM.png?fit=1024%2C580&ssl=1&is-pending-load=1)
+
+### Importing  `dash_defer_js_import`  and importing the MathJax renderer script
+
+First, we add  `dash_defer_js_import`  to our dependencies, so that we can implement deferred loading:
+
+import dash_defer_js_import as dji
+
+Then, once the application (`app`  object) has been declared, we import the MathJax renderer script using deferred importing:
+
+mathjax_script = dji.Import(src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_SVG")
+
+### Integrating MathJax into the template
+
+Since Dash 0.22.0, Dash  `app`  object allows the page template to be customised, which is most easily accomplished by setting the variable  `app.index_string`.  [The details of this functionality are described in the Dash manual](https://dash.plotly.com/external-resources), but in essence, this option takes a Jinja formatted template.
+
+We are going to use this to our advantage by inserting the MathJax configuration to the footer of the template:
+
+app.index_string = """
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+{%metas%}
+
+<title>{%title%}</title>
+
+{%favicon%}
+
+{%css%}
+
+</head>
+
+<body>
+
+{%app_entry%}
+
+<footer>
+
+{%config%}
+
+{%scripts%}
+
+<script type="text/x-mathjax-config">
+
+MathJax.Hub.Config({
+
+tex2jax: {
+
+inlineMath: [ ['$','$'],],
+
+processEscapes: true
+
+}
+
+});
+
+</script>
+
+{%renderer%}
+
+</footer>
+
+</body>
+
+</html>
+
+"""
+
+### Integrate the deferred script import into the layout object
+
+Finally, we’ll integrate the  `mathjax_script`  object we declared above into our template layout:
+
+app.layout = html.Div([
+
+dbc.Container(children=[
+
+# your application content goes here
+
+]),
+
+mathjax_script
+
+])
+
+### Rendering and refreshing axis labels
+
+Axis labels are a little more complex as they can change, and therefore need to be constantly refreshed. We accomplish this by using a script that refreshes plot objects regularly (in this case, every second – you can adjust this according to your needs by setting the value in the  `setTimeout()`  function).
+
+function  redraw(){
+
+var figs = document.getElementsByClassName("js-plotly-plot")
+
+for  (var i = 0; i  < figs.length; i++)  {
+
+Plotly.redraw(figs[i])
+
+}
+
+}
+
+setTimeout(function(){
+
+redraw();
+
+}, 1000);
+
+I have uploaded this to  [Codepen](https://codepen.io/chrisvoncsefalvay/pen/ExPJjWP.js), and you’re welcome to use it. Start by creating a deferred import object, just as we did for the MathJax renderer:
+
+refresh_plots = dji.Import("https://codepen.io/chrisvoncsefalvay/pen/ExPJjWP.js")
+
+**Update**  **(10NOV2021)**: Codepen’s external linking has become pretty much useless. The workaround is to take the Javascript code, save it locally and reference it in the import command.
+
+Then, add the deferred import object to your layout:
+
+app.layout = html.Div([
+
+dbc.Container(children=[
+
+# your application content goes here
+
+]),
+
+refresh_plots,
+
+mathjax_script
+
+])
+
+This will gradually refresh and re-render MathJax LateX entries in your axis labels.
+
+## Conclusion
+
+Until Dash natively implements LaTeX rendering, this workaround is a fairly quick and convenient way of beautifully typesetting maths in your Dash applications. As always, since this leverages the entire functionality of MathJax, there’s a lot more you can do with MathJax than simple maths (the documentation is definitely worth a read!). Currently, this works best with MathJax 2.7.7 (using  `latest.js`  from CDNs does  _not_  upgrade MathJax 2 to MathJax 3!), but can be easily adapted to work with MathJax 3.x as well.
+
+Was this post useful for you? Did it work? Did it  _not_  work? Any tips, suggestions, tricks, hacks?  [Let me know](https://chrisvoncsefalvay.com/talkback/).
+
+_Credits: The axis rendering refresh function is based on  [this Codepen](https://codepen.io/yueyericardo/pen/pojyvgZ.js)  by  [Richard Xue](https://github.com/yueyericardo)._
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTIwOTIyMDA4MTUsLTQ0MjIwMjYyNSw3Mz
+A5OTgxMTZdfQ==
+-->

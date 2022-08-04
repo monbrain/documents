@@ -1,0 +1,3286 @@
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #1](https://modu-print.tistory.com/641)
+
+by 피로곰  2021. 12. 8.
+
+앞서 크롤러 관련된 강좌를 하다 만게 있는데요.. 요청이 가장 많았어서 시작을 하긴 했는데 아무래도 크롤러가 개발자 입장으론 윤리문제가 좀 있는 영역이고 법적으로도 문제소지가 발생할 가능성이 매우 큰 영역이라 그걸 대놓고 강좌랍시고 하는건 좀 ;; 아닌것 같다는 피드백도 꽤 됫던 지라.. 크롤러 관련된 강좌는 하지 않겠습니다.
+
+저는 Go개발에 MS의 Visual Studio Code를 사용합니다. 관련 사항은 이전 111GO 글을 참고바랍니다.
+
+이번엔 Go언어로 마이크로소프트 윈도에서 동작하는 네이티브 GUI 프로그램을 만드는 법을 다뤄보려 합니다. 강좌라느니 그런 거창한건 아니구요. 그냥 피로곰이란 놈은 이런식으로 쓰고 있구나? 그정도.. 그리 잘 짜여진 코드도 아니고 배울만한 뭐 그런.. 그런거 아닙니다 ㅋㅋ 그냥 저도 모두의 프린터, 모두의 PDF만들면서 대충 막 짠 코드를 기반으로 설명만 하고 말 것이라..
+
+그럼 네이티브(Native) GUI(Graphic User Interface)가 뭐냐?
+
+최근에는 웹서비스 관련 개발자들의 비중도 굉장히 높아지면서 일렉트론이나 기타 여러 방법으로 웹 프론트엔드 개발기술을 가지고 일반 어플리케이션 스러운 무언가를 개발할 수 있는 방법이 여럿 존재하는데요.. 멀티플렛폼 인데다 웹브라우저를 기반으로 하기 때문에 기존에 가지고 있던 개발지식만 가지고 개발이 가능하단 장점이 있어서 네이티브 개발과 경계가 점점 옅어지는 것은 사실입니다.
+
+이러한 웹기반 프레임워크들은 HTML, Javascript 에 대한 개발지식만 가졌다면 아주 멋진 프로그램을 손 쉽게 만들 수 있다는 장점이 있지만 가장큰 단점으론 .. CEF(Chrome Embed Framework:크로미움기반)기반의 일렉트론 같이 어찌됫던 웹브라우저를 틀로 사용하고 있음으로 기본적으로 프로그램의 크기가 100메가 이상이 넘어가고 내가 단순히 버튼하나 에디트박스 하나만 존재하는 프로그램을 만든다 하여도 이놈은 이미지, 동영상등 웹세상에서 존재하는 수많은 기능들을 다 내장한 상태로 돌아감으로 상대적으로 메모리 사용량이 높을 수 밖에 없습니다. 또한 경우에 따라서는 사양이 낮은 구형 컴퓨터나 구버전 윈도에선 제대로 실행조차 못할 수도 있습니다.
+
+이러한 이유로 MS에서 제공하는 보편적으로 윈도에서 사용되는 사용자 인터페이스(UI)요소들을 사용하는게 큰 이점이 될수도 있는것이지요. 보통 네이티브 스피커를 원어민 이라고 하듯이 네이티브 GUI 라고 하자면 그 OS의 제조사에서 제공하는 GUI구성 요소를 사용하는 개발방법? 그정도로 이해하시면 되겠습니다.
+
+장점으로는 UI 구성에 필요한 무언가들은 이미 OS가 가지고 있음으로 실행파일이 매우 작습니다. 몇 메가면 충분하고 메모리 사용량 자체도 몇십메가 수준이면 충분하지요.
+
+네이티브 GUI에 대한 이야긴 여기까지 하구요.
+
+Go는 C언어 코드를 바로 사용가능한 cgo 라는 체계도 가지고 있고 윈도 DLL들을 다룰수 있는 다양한 방법 또한 제공하는 언어라서.. DLL기반으로 동작하는 윈도 GUI 관련 API 들도 사용이 가능합니다만. 그걸 직접 다 한땀 한땀 ;; define 이나 각종 상수들을 다 포팅해서 뭔가를 하기엔 귀찮죠.. 그리하야 그러한 짓을 미리 해주신 능력자 분들의 패키지를 끌어다 씁니다.
+
+[](https://github.com/lxn/win)
+
+GitHub - lxn/win: A Windows API wrapper package for the Go Programming Language
+
+A Windows API wrapper package for the Go Programming Language - GitHub - lxn/win: A Windows API wrapper package for the Go Programming Language
+
+github.com
+
+[](https://github.com/lxn/walk)
+
+GitHub - lxn/walk: A Windows GUI toolkit for the Go Programming Language
+
+A Windows GUI toolkit for the Go Programming Language - GitHub - lxn/walk: A Windows GUI toolkit for the Go Programming Language
+
+github.com
+
+lxn 의 win 과 walk 이 2가지를 가지고 뭔가를 할 건데요 .. 일단 두 패키지다 go get 해두시기 바랍니다.
+
+win 패키지는 윈도 API의 각종 함수와 상수, define 들을 go로 바인딩 시켜둔 패키지이고 walk 패키지는 이 win 패키지를 랩핑(?).... 이라고 하긴 좀 그렇고.. 기본적으로 윈도 API는 코드 작성 효율이 그리 좋은 방법은 아닙니다. 창하나 버튼하나 에디트박스 하나하나 전부다 하나의 윈도로 쳐서 CreateWindow함수로 객체 생성을 다 하고 그에 따른 메시지 프로시저를 다 따로 붙이고 하는 말도안되는 미친짓을 해야 하는게 윈도API로 윈도GUI어플리케이션을 개발한다 하는 것이거든요..
+
+기껏 코드 작성의 고생을 좀 덜해보겠다고 쓰는게 Go같은 Managed 언어일진데.. C/C++에서 윈도API 가지고 하던 개삽질을 Go가지고 할꺼 같으면 .. 그냥 일렉트론 나부랭이들 가지고 웹기반으로 그냥 가라고 하고 말겠죠..
+
+각설하고 ..
+
+여튼간에 lxn/win만 가지고 윈도 GUI 프로그래밍을 하는게 말도안되는 노가다인지라 이걸 좀더 편하게 쓰게 나온게 walk라는 패키지 입니다. 단순 Wrapper라고 하기엔 좀 애매하긴 하지만 여튼.. 저는 이 Walk 라는 놈을 가지고 제 기준으로 좀 더 편하게 Gui 프로그램을 만들 수 있는 몇가지 함수등을 만들어서 사용중이구요. 그리하야 이 lxn의 win, walk 그리고 피로곰이 쓰는 WalkWrap.go 파일을 가지고 피로곰이 모두의 프린터, PDF의 윈도 GUI를 어케 만들었는가에 대해서 써보도록 하겠습니다.
+
+다시 말씀드리지만 이건 강좌가 아닙니다. 그냥 .. 참고할람 하고 말람 마요.. 이게 최선이라 생각 해본적 없으니까 ㅎㅎ
+
+GUI관련을 시작하기 전에 앞서 111GO의 다른 프로젝트에서도 다룬적 있지만 윈도용 프로그램을 만들기 위해서는 다른 콘솔용 Go프로그램 개발과는 몇가지 다른 과정이 필요합니다.
+
+우선 콘솔용 프로그램과 윈도GUI 프로그램은 바이너리의 구성 자체가 다르기 때문에 메니페스트 정보를 포함한 시스템 오브젝트(syso) 파일이 필요하고 컴파일을 위한 빌드 옵션도 몇가지 추가 되어야 합니다.
+
+우선 syso 파일을 위해선
+
+[](https://github.com/akavel/rsrc)
+
+GitHub - akavel/rsrc: Tool for embedding .ico & manifest resources in Go programs for Windows.
+
+Tool for embedding .ico & manifest resources in Go programs for Windows. - GitHub - akavel/rsrc: Tool for embedding .ico & manifest resources in Go programs for Windows.
+
+github.com
+
+rsrc 패키지를 설치 하셔야 겠구요.
+
+```
+go get github.com/akavel/rsrc
+```
+
+두번째로 메니페스트(Manifest) 파일이 필요합니다.
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+    <assemblyIdentity version="1.0.0.0" processorArchitecture="*" name="프로그램이름" type="win32"/>
+    <dependency>
+        <dependentAssembly>
+            <assemblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version="6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" language="*"/>
+        </dependentAssembly>
+    </dependency>
+    <application xmlns="urn:schemas-microsoft-com:asm.v3">
+        <windowsSettings>
+            <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2, PerMonitor</dpiAwareness>
+            <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">True</dpiAware>
+        </windowsSettings>
+    </application>
+</assembly>
+```
+
+위의 내용을 복사해서 적당한 이름으로 저장하세요. 저는 보통 프로젝트명.manifest 라고 저장합니다.
+
+설명을 위해서 프로젝트명은 DEMO라고 하겠습니다. rsrc 명령어 사용법은 아래와 같습니다.
+
+> rsrc -manifest 메니페이스파일명 -ico 아이콘파일명 -o 저장할syso파일명
+
+프로그램의 아이콘을 지정하고 싶으시면 아이콘 파일도 포함해서 syso를 만들수 있는데요.
+
+```
+rsrc -manifest DEMO.manifest -ico DEMO.ico -o DEMO.syso
+```
+
+이렇게 하면 DEMO.manifest 파일과 DEMO.ico 파일을 가지고 DEMO.syso 파일을 만들겠다! 라는 겁니다. 아이콘이 필요 없으시다면 ..
+
+```
+rsrc -manifest DEMO.manifest -o DEMO.syso
+```
+
+이렇게 -ico 구문만 제외시키시면 되겠습니다.
+
+아이콘 파일 만들거나 찾기 귀찮으실 분들을 위해서 모두의 PDF의 아이콘을 올려둡니다.
+
+[](https://blog.kakaocdn.net/dn/24coO/btrnjDBOc8P/ZTxwgabfkvKrHHKIECPfH1/DEMO.ico?attach=1&knm=tfile.ico)
+
+DEMO.ico
+
+0.31MB
+
+이 syso 파일은 go 컴파일러가 빌드시에 파일명 상관없이 syso파일을 뒤져서 알아서 실행파일에 합쳐주는데요 그런 이유로 한 폴더에 syso 파일은 한개 이상이 존재하면 안됩니다. 다수가 존재할 경우 오류가 날겁니다. 꼭 syso 파일은 폴더당 하나만 존재할 수 있다는거 .. 만약 빌드 옵션에 따라서 다른 아이콘이나 다른 메니페스트를 적용하고 싶으시면 Makefile이나 BAT파일로 자동화를 시키셔야 겠지요. 이건 각자의 몫이니까 패스..
+
+syso 파일을 만들었으면 윈도 어플리케이션을 빌드하기 위한 빌드옵션에 대해서 알려드리겠습니다. 보통은 go 프로그램을 컴파일 할때는
+
+```
+go build
+```
+
+거나 .. 출력 파일명을 지정하고 싶으면
+
+```
+go build -o DEMO.exe
+```
+
+이런식으로 파일명을 지정해서 빌드하실 텐데요.. 이렇게 빌드하면 흔히 말하는 콘솔 어플리케이션이 되버립니다.
+
+![](https://blog.kakaocdn.net/dn/ol8FP/btrnkxuHG9N/V6lwWAbKQKqwMMnhnatZS0/img.png)
+
+이런식으로 PE32+ excutable (console) 이라고 콘.솔.용! 이라고 딱 표시됩니다. ( file 명령어는 리눅스 명령어라 일반 윈도에선 존재하지 않습니다. 저같이 msys2 같은걸 설치한 경우에나 사용가능합니다. file 명령어가 없어요~~ 라고 묻지좀 마요!)
+
+![](https://blog.kakaocdn.net/dn/cQEV2s/btrnhCcFQYO/PgVB4ZH8DAP3ckuZJHX2sK/img.png)
+
+반면 GUI를 가지는 윈도용 어플리케이션은 위와 같이 PE32+ excutable (GUI)라고 표시 되지요. 이렇게 컴파일을 하기 위해선 빌드시에 옵션을 추가로 지정하셔야 합니다.
+
+```
+go build -ldflags '-H windowsgui' -o DEMO.exe
+```
+
+이런식으로 -ldflags '-H windowsgui' 옵션을 추가 하셔야 GUI용 바이너리로 컴파일 됩니다. 디버깅 심볼이 stripped 된 상태로 빌드하고 싶으신거면
+
+```
+go build -ldflags '-s -w -H windowsgui' -o DEMO.exe
+```
+
+이렇게 -s 와 -w 를 추가 하시면 되겠습니다.
+
+시작하는데 필요한 기본적인 부분은 여기까지 설명 하겠구요.
+
+다음 글에서 이어가도록 하겠습니다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #2](https://modu-print.tistory.com/642?category=863372)
+
+by 피로곰  2021. 12. 8.
+
+Go로 윈도 네이티브 GUI 프로그램만들기 2번째 입니다.
+
+앞서 lxn/win, walk 2개 패키지는 go get 하셨을 테구요.. 보통 윈도 API 프로그래밍은 C/C++ 에서도 노가다의 최 정점에 놓여진 그런 놈입니다 ㅋㅋ 그게 싫어서 쓰는게 go 같은 언어들인거고 ..
+
+그런 이유로 이 lxn/walk 의 경우에도 좀더 편하게 GUI를 만들수 있는 방법을 제공하는데요.
+
+그게 lxn/walk 패키지에 포함된 declarative 라는 패키지 입니다.
+
+```
+package main
+
+import (
+	"github.com/lxn/walk"
+	. "github.com/lxn/walk/declarative"
+	"strings"
+)
+
+func main() {
+	var inTE, outTE *walk.TextEdit
+
+	MainWindow{
+		Title:   "SCREAMO",
+		MinSize: Size{600, 400},
+		Layout:  VBox{},
+		Children: []Widget{
+			HSplitter{
+				Children: []Widget{
+					TextEdit{AssignTo: &inTE},
+					TextEdit{AssignTo: &outTE, ReadOnly: true},
+				},
+			},
+			PushButton{
+				Text: "SCREAM",
+				OnClicked: func() {
+					outTE.SetText(strings.ToUpper(inTE.Text()))
+				},
+			},
+		},
+	}.Run()
+}
+```
+
+이런식으로 생성하고자 하는 창의 정보를 나열하고 실행하면.
+
+![](https://blog.kakaocdn.net/dn/b8Ranc/btrnfAMX2Oi/UCCKLZKMORi5dxjWxjKMA1/img.png)
+
+이런 윈도 창을 띄워 줍니다.
+
+이것도 나름 괜찮은 방법 일수도 있긴 합니다만. 실제로 파이썬이나 다른 Managed 언어들의 GUI관련 패키지들을 보면 이와 비슷한 형태로 레이아웃 구성을 하고 이벤트 처리를 담당할 메소드 지정을 하는 등의 비슷한 구성을 쉽게 찾아 볼 수 있습니다만.
+
+이게 문제가 ;; 가독성이 좋아 보이는것 같으며서도 좋지 않다는 것이지요. 예를들어..
+
+![](https://blog.kakaocdn.net/dn/tew9r/btrnfBd4IR7/qatrP69rnDEqn3k17k6mK1/img.png)
+
+모두의 프린터 환경설정과 같이 다양한 UI 요소가 매우 많이 존재하는 경우에는 저러한 레이아웃 관련 코드의 나열이 오히려 가독성도 해치고 구조의 Depth 가 깊어져 가면서 가독성이 매우 안좋아 집니다. 물론 제 개인적인 생각이지만요. 그런 이유로 저는 저 declarative 라는 패키지를 사용하지 않고.
+
+따로 walk_wrap.go 라는 파일에 declarative 의 역할을 대신 직접적으로 함수들을 호출해가며 동작해주는 놈을 만들어서 모두의 프린터, 모두의 PDF에서 사용중입니다.
+
+제가 쓰는 코드는
+
+```
+	mgr, _ := NewWindowMgr("기본 레이아웃", 1025, 768, GetIcon())
+
+	// HSplitter
+	mgr.HSplit()
+	mgr.Label("HSplitter")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.PushButton("버튼4", func() {})
+	mgr.EndSplit() // HSplit, VSplit 사용후엔 EndSplit!!
+
+	// VSplitter
+	mgr.VSplit()
+	mgr.Label("VSplitter")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.PushButton("버튼4", func() {})
+	mgr.EndSplit()
+
+	// HSplitter + VSplitter
+	mgr.HSplit()
+
+	mgr.VSplit()
+	mgr.Label("HSplit 안에 VSplit")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.EndSplit() // End of VSplit
+
+	mgr.HSplit()
+	mgr.Label("HSplit 안에 HSplit")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.EndSplit()
+
+	mgr.VSplit()
+	mgr.Label("HSplit 안에 VSplit2")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndSplit()
+
+	mgr.EndSplit() // End of HSplit
+
+	// 그룹박스 Vertical
+	mgr.GroupBox("그룹박스(V)", true)
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndGroupBox()
+
+	// 그룹박스 Horizen..
+	mgr.GroupBox("그룹박스(H)", false)
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndGroupBox()
+
+	mgr.HSplit()
+
+	mgr.GroupBox("HSplit으로 분리한 그룹박스1", true)
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndGroupBox()
+
+	mgr.GroupBox("HSplit으로 분리한 그룹박스2", true)
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndGroupBox()
+
+	mgr.EndSplit()
+
+	mgr.StartForeground()
+```
+
+이런 코드로
+
+![](https://blog.kakaocdn.net/dn/bFxNFp/btrniUjP1G2/Gh9fm0cVcEWmMwQDB9hZD0/img.png)
+
+이런 짓이 가능합니다. 원하는 부분부분을 함수 호출을 하는 코드단위로 분리가 가능하기 때문에 특정 함수단위로 쪼개서 기능을 처리도 가능 하겠지요. 동적으로 UI요소를 추가도 가능하구요.
+
+따로 패키지로 뺄 정도의 내용은 아니라서 저는 go파일 하나에 때려 넣고 쓰는 중이라 ..
+
+여튼간에 다음 글 부터 이놈을 가지고 GUI를 떄려 잡아보도록 합시다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #3](https://modu-print.tistory.com/643?category=863372)
+
+by 피로곰  2021. 12. 9.
+
+Go언어로 윈도GUI .. 3번째 글입니다.  
+우선 관련 글들을 작성하면서 계속 사용하게될 소스파일 하나 먼저 던져 놓고 시작하겠습니다.
+
+[](https://blog.kakaocdn.net/dn/ltCgk/btrnrkV8TuI/5lE9yD3wEQPYU617ISr980/walk_wrap.go?attach=1&knm=tfile.go)
+
+walk_wrap.go
+
+0.01MB
+
+walk_wrap.go 라고 매번 치기 귀찮으니 이놈, 저놈, 랩퍼 등등으로 쓸수 있으니 알아서 잘 보시기 바랍니다. 이놈에 대해 이래저래 쓰기 앞서서..  
+웹 프로그래밍을 할때도 그렇고 GUI 프로그래밍을 할때도 그렇고 콘솔 프로그램과 달리 프로그램을 만들다 보면 메시지 박스를 띄워서 뭔가를 하거나 확인 창을 띄워야 하거나 하는 경우가 있습니다.
+
+![](https://blog.kakaocdn.net/dn/bTqr4x/btrnqkosbMO/OuxCAo5l4V5K5gGODtoSg1/img.png)
+
+![](https://blog.kakaocdn.net/dn/l0xEm/btrnpfgSlKo/0btMGK9ElVuCACCn602OC1/img.png)
+
+이런 놈들이죠.. 앞에 놈은 자바스크립트의 alert 같은 놈이고 뒤엣놈은 confirm 같은 놈입니다. 이렇게 메시지 박스나 확인창을 생성해주는 두 함수에 대해서 먼저 설명을 하고 넘어 가겠습니다.
+
+```
+func MsgBox(msg string, window ...*walk.MainWindow) 
+func Confirm(msg string, window ...*walk.MainWindow) bool
+```
+
+이렇게 2개 함수가 존재하는데 둘다 window ...*walk.MainWindow 라는 파라메터가 존재합니다만.. 이놈은 흔히 윈도 API에서 생성시키는 대화상자의 부모(Parent)를 지정해서 뜨는 창이 부모창에 종속되어 동작하게 할지 아니면 별개로 따로 떨어진 형태로 동작하게 할지를 원하는 바에 따라 쓰도록 한 부분입니다만.. 만약 대화상자를 띄우는 윈도 창이 존재하고 그 창의 Child로 대화상자를 붙이려면 두번째 인자에 walk 윈도 객체를 넘기면 되는 건데 .. 이게 개념이 좀 설명히 복잡하긴 합니다만.. 이게 뭔 소리인지는 나중에 심심하면 한번 따로 해보시구요.  
+... 로 가변인자로 지정된 놈이라 실 사용시엔 이 두 함수다 msg string 값만 전달해도 오류 없이 동작 합니다. 저도 실제로 그리 쓰고 있구요. 일단 지금은 msg string 인자만 입력해 쓴다 생각 합시다.
+
+```
+MsgBox("메시지 박스임 ㅋㅋㅋ") 
+if Confirm("그래서 할껴 말껴? 할껴?") { 
+	MsgBox("할껴") 
+} else {
+	MsgBox("말껴") 
+}
+```
+
+이런식의 사용이 되겠네요. Confirm 함수는 리턴값이 true 이면 "예" 버튼을 false 이면 "아니오" 버튼을 클릭한 경우입니다.  
+자 그럼 이제 기본적으로 제가 만든 랩퍼를 어케 쓰는지 기본 창을 띄우는 방법을 설명하면서 진행해보도록 하겠습니다.
+
+```
+// 리사이즈 가능, 최대/최소 가능 
+func NewWindowMgr(title string, width int, height int, icon *walk.Icon) (*WinResMgr, *walk.MainWindow) 
+// 리사이즈 불가, 최대/최소 가능 
+func NewWindowMgrNoResize(title string, width int, height int, icon *walk.Icon) (*WinResMgr, *walk.MainWindow) 
+// 리사이즈 불가, 최대/최소 불가 
+func NewWindowMgrNoResizeNoMinMax(title string, width int, height int, icon *walk.Icon) (*WinResMgr, *walk.MainWindow) 
+// 광고 팝업용 
+func NewWindowMgrAds(title string, width int, height int) (*WinResMgr, *walk.MainWindow)
+```
+
+창을 생성하는 함수는 총 4개가 존재합니다. NewWindowMgrAds 를 제외한 나머지 함수들은 형태는 기본적으로 비슷(?)합니다만. 리사이즈가 가능하다는 것은 전체 창의 크기를 자유롭게 변경이 가능하다는 것이구요.  
+최대/최소 가능은
+
+![](https://blog.kakaocdn.net/dn/cXIlsb/btrnpn68Dvx/K05YjeJI8v15mXHllT5aCk/img.png)
+
+![](https://blog.kakaocdn.net/dn/caZepd/btrns30VqmL/gqpMH1kkMiGyb9aikmLO20/img.png)
+
+이렇게 최소, 최대 버튼이 타이틀바에 존재 하느냐 안하느냐의 차이를 가져옵니다.  
+NewWindowMgrAds 함수는 모두의 프린터에서 팝업 광고를 위해서 만들어둔 함수인데요.
+
+![](https://blog.kakaocdn.net/dn/P2jNm/btrnpPh49xC/Oex0KNSRvRGzjfoNnOVdYK/img.png)
+
+이렇게 좌측 하단 시계 위에 뜨는 타이틀바 없는 창을 띄워줍니다. 이미지나 기타 요소를 배치하면 위와 같은 팝업 윈도를 얻을수 있겠지...만;;; 보통 많이 쓰는 기능은 아니니까요.  
+이 함수들의 리턴값은 동일하게 *WinResMgr, *walk.MainWindow 로 같습니다. 실제로 WinResMgr 구조체 내부의 각종 메소드들이 *walk.MainWindow 구조체에 이런저런 짓을 해주는 랩퍼이긴 한데 랩퍼 외부에서도 walk.MainWindow를 다뤄야 하는 경우도 많이 있기 때문에 두개를 전부 리턴합니다.
+
+```
+/** * WinResMgr **/ 
+type WinResMgr struct {
+	window *walk.MainWindow 
+    parentList *list.List
+}
+```
+
+물론 WinResMgr 구조체 내의 window *walk.MainWindow 이놈과 윈도 생성 함수들에서 리턴되는 *walk.MainWindow 객체는 같은 놈입니다.  
+창 생성은 보통
+
+```
+// 창 생성 
+mgr, window := NewWindowMgr("테스트 윈도/리사이즈/최대최소 가능", 1024, 768, GetIcon())
+
+// mgr, window 를 통해 gui 관련 객체 생성 
+// 관런처리 
+
+// 창 표시 ( 이 함수에서 Block 됩니다. ) 
+mgr.StartForeground()
+```
+
+위와 같이 NewWindowMgr..... 류 함수들로 랩퍼와 walk 의 MainWindow 객체를 만든후에 실체 창이 표시되고 윈도 관련 프로시저들이 동작하는 mgr.StartForeground() 같은 함수 사이에 UI에 필요한 요소들의 배치코드들을 작성합니다. 윈도 창과 관련된 프로시저가 시작되는 함수들의 종류는 다음과 같습니다.
+
+```
+func (m *WinResMgr) StartWindow() 
+func (m *WinResMgr) StartForeground()
+func (m *WinResMgr) HideStart()
+```
+
+보통 제가 가장 많이 쓰는건 StartForeground()입니다. 창을 띄우면서 최 당단으로 보내라는거구요 StartWindow()의 경우 창의 위치는 조정하지 않기 때문에 경우에 따라선 실행되고 창이 뜨는 사이에 다른 프로그램이 상단으로 포커싱 될 경우 그 프로그램의 뒤에 창이 뜰수 있습니다. 어찌됫건 창이 표시되는 순간엔 최상단에서 보여지길 바라는 경우가 많기 때문에 저는 StartForground() 함수를 보통 사용합니다.  
+HideStart()의 경우 윈도 프로시저를 시작은 하는데 창은 일단 감춘 상태로 실행되는 겁니다. 필요에 따라 ShowForeground() 같은 함수를 써서 창을 보여주도록 해야지 창을 볼수 있습니다. 결론은 .. 그냥 닥치고 StartForeground() ㅋㅋ 이 StartWindow 나 StartForeground 함수는 창이 닫혀서 프로시저가 종료되기 전까진 리턴되지 않고 Block됩니다. 한마디로 이놈들 호출 전에 창과 관련된 초기 설정등은 모두 끝내야 한다는 말입니다.  
+NewWindowMgr.. 시리즈 함수들의 파라메터에 대해서 설명을 잠시 하자면 NewWindowMgrAds 함수를 제외하고는 전부
+
+```
+title string, width int, height int, icon *walk.Icon 
+// 타이틀, 창 넓이, 창 높이, 아이콘
+```
+
+  
+이렇게 4개의 파라메터를 공통적으로 사용합니다. 말그대로 윈도 타이틀은
+
+![](https://blog.kakaocdn.net/dn/dSsN3o/btrno3OCqUG/pZOcz5BguZovvikadWym6K/img.png)
+
+이런 창의 타이틀 메시지를 뜻하구요. width, height 는 창의 크기를 정하는 겁니다. 마지막으로 icon의 경우에
+
+```
+
+/**
+*	LoadIcon
+**/
+func LoadIcon(icoBuf []byte, icoName string) {
+	icoFile := filepath.Join(os.TempDir(), icoName)
+
+	var err error
+
+	if _, err = os.Stat(icoName); os.IsNotExist(err) {
+		if err = ioutil.WriteFile(icoFile, icoBuf, 0644); err != nil {
+			return
+		}
+	}
+
+	iconMutex.Lock()
+	gIcon, _ = walk.NewIconFromFile(icoFile)
+	iconMutex.Unlock()
+}
+
+/**
+*	LoadIconFromFile
+**/
+func LoadIconFromFile(icoPath string) {
+	iconMutex.Lock()
+	defer iconMutex.Unlock()
+	gIcon, _ = walk.NewIconFromFile(icoPath)
+}
+```
+
+walk_wrap.go 파일 내의 이 두함수 참고해서 직접 매번 ico 파일을 읽어다가 *walk.Icon 객체를 전달 하셔도 됩니다만 제 경우에는 전역으로 하나 읽어둔 아이콘을 이곳저곳 사용하도록 GetIcon과 gIcon 이라는 전역변수를 지정해서 쓰고 있습니다.  
+그리하야 go embed를 이용해서 바이너리에 아이콘 파일 자체의 바이너리를 저장해두신 경우에는 LoadIcon 함수로 윈도임시폴더에 아이콘을 저장해놓고 그놈을 읽어다 쓰실수도 있고 아에 특정 위치의 ico 파일을 읽어 들이고 싶으신거면 LoadIconFromFile 함수에 ico 파일 경로를 지정하셔도 되겠습니다.  
+main 함수의 시작부에 LoadIcon 이나 LoadIconFromFile로 아이콘을 로딩해 두었으면 창 생성을 할때는 GetIcon함수를 사용하면 아이콘 적용이 되어 창이 뜨게 됩니다.  
+그래서 이전글에서 잠깐 나온 코드긴 한데 ..
+
+```
+	mgr, _ := NewWindowMgr("기본 레이아웃", 1025, 768, GetIcon())
+
+	// HSplitter
+	mgr.HSplit()
+	mgr.Label("HSplitter")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.PushButton("버튼4", func() {})
+	mgr.EndSplit() // HSplit, VSplit 사용후엔 EndSplit!!
+
+	// VSplitter
+	mgr.VSplit()
+	mgr.Label("VSplitter")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.PushButton("버튼4", func() {})
+	mgr.EndSplit()
+
+	// HSplitter + VSplitter
+	mgr.HSplit()
+
+	mgr.VSplit()
+	mgr.Label("HSplit 안에 VSplit")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.EndSplit() // End of VSplit
+
+	mgr.HSplit()
+	mgr.Label("HSplit 안에 HSplit")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.EndSplit()
+
+	mgr.VSplit()
+	mgr.Label("HSplit 안에 VSplit2")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndSplit()
+
+	mgr.EndSplit() // End of HSplit
+
+	// 그룹박스 Vertical
+	mgr.GroupBox("그룹박스(V)", true)
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndGroupBox()
+
+	// 그룹박스 Horizen..
+	mgr.GroupBox("그룹박스(H)", false)
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndGroupBox()
+
+	mgr.HSplit()
+
+	mgr.GroupBox("HSplit으로 분리한 그룹박스1", true)
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndGroupBox()
+
+	mgr.GroupBox("HSplit으로 분리한 그룹박스2", true)
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndGroupBox()
+
+	mgr.EndSplit()
+
+	mgr.StartForeground()
+```
+
+![](https://blog.kakaocdn.net/dn/9Yyfl/btrnqxnU0p9/zb0PUGEkKRi5RfKeLkzKNK/img.png)
+
+이런 경우에
+
+```
+ mgr, _ := NewWindowMgr("기본 레이아웃", 1025, 768, GetIcon())
+```
+
+와
+
+```
+ mgr.StartForeground()
+```
+
+사이에
+
+```
+	// HSplitter
+	mgr.HSplit()
+	mgr.Label("HSplitter")
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.PushButton("버튼4", func() {})
+	mgr.EndSplit() // HSplit, VSplit 사용후엔 EndSplit!!
+    
+    .....
+    .....
+    .....
+    
+    mgr.GroupBox("HSplit으로 분리한 그룹박스2", true)
+	mgr.PushButton("버튼1", func() {})
+	mgr.PushButton("버튼2", func() {})
+	mgr.PushButton("버튼3", func() {})
+	mgr.CheckBox("체크1", false, func() {})
+	mgr.EndGroupBox()
+
+	mgr.EndSplit()
+```
+
+이렇게 버튼이니 라벨이니 이러한 것들이 주루륵 들어가게 된것입니다.  
+일단 창을 띄우는 것은 여기까지 하구요. 다음 글에서 하나씩 더 진행해 보도록 하겠습니다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #4](https://modu-print.tistory.com/644?category=863372)
+
+by 피로곰  2021. 12. 10.
+
+Go로 윈도 네이티브 GUI 줘 패기... 4번째 입니다.
+
+이번엔 레이아웃에 대한 부분을 다뤄보도록 합니다.
+
+앞서 C/C++에서 윈도 API를 가지고 GUI 어플리케이션을 만드는게 매우 비효율적인 노가다 개삽질이라는 식의 표현을 한적이 있는데요. 그 이유는 ..
+
+API에서 모든 UI객체는 전부다 윈도입니다. 창도 윈도 버튼도 윈도 에디트 박스도 체크박스도 스크롤바도 스크롤바 안의 상하단 버튼도 죄~~다 윈도입니다. 그 말은 그 하나하나를 다 CreateWindow 를 하고 그 각 객체별로 WndProc 같은 메시지 프로시저를 한땀 한땀 다 등록을 시켜야 한단 소리죠 그래야 키보드 입력이던 마우스 클릭이던 내용을 그리고 지우고 지지고 볶고 .. 가 가능합니다.
+
+그렇게 수 없이 많은 반복적인 코드를 생성해야 한다는 점도 문제지만 윈도 API로 GUI를 만든다는게 지랄같은 가장 큰 이유는 실제 그 프로그램이 어떤 형태로 눈에 보여질지를 직관적으로 알 수 없다는 겁니다. 각 객체를 생성하고 해당 객체들이 어느 위치에 놓일지 x, y 좌표 값을 가지고 배치를 해대야 하는데 .. 그게 어찌 보일진 실행을 해 봐야 아는것이죠.
+
+그런이유로 과거에 API로 GUI만들때는 포토샵이든 그림판이든 뭐든간에 레이아웃 디자인을 잡고 좌표값을 뽑아 놓고 그 값을 보고 코딩을 하시던 분들도 계셨습니다. 이런식으로 SetWindowPos 같은 함수로 일일이 x,y 좌표값으로 버튼 하나 에디트박스 하나 체크박스 하나 라벨하나 하나하나 한땀 한땀 위치를 잡아 대는 짓이 매우 지랄 같고 그런 놈들의 수 많은 이벤트 처리를 비롯한 반복되는 코드들을 줄인답시고 나온게 MFC같은 놈이죠.
+
+MFC에 들어서는 그나마 .. 윈도 API에 비해선 나아진게
+
+![](https://blog.kakaocdn.net/dn/LMZDU/btrnv3tFhTm/ueh0Lke8ZEMkznJzwDONC1/img.png)
+
+이렇게 눈으로 직접 봐 가며 위치도 잡고 크기 조정도 가능한 에디터를 지원하고 이 에디터를 통해 코드 상의 변수나 함수와 직접적으로 연동시키는 등의 짓도 가능해 졌습니다. 그럼에도 불구하고 API든 MFC든 C/C++라는 언어를 기반으로 MS의 직원들이 지들 나름대론 그래도 좀 편해보고자 만든 체계여도 리눅스나 웹쪽 개발만 해오던 사람 입장으론 쉽게 개념이 이해가 되지 않기도 합죠..
+
+여튼 사설이 너무 길어지고 있긴 합니다만 .. 여튼간에 윈도 GUI 프로그래밍은 .. 어려워요 ..
+
+하지만 Go라는 Managed 언어를 쓰면서 너무 어렵기만 하고 노가다만 심하다면 .. 때려쳐야지 그걸 왜 합니까..
+
+여튼간에 Go뿐 아니라 파이썬이든 러스트든간에 MS에서 제공하는 저런 API, SDK, IDE의 혜택을 받지 못하는 경우 개발자에게 쥐어진건 오직 코드작성을 하는 방법뿐이 남지 않기 때문에 대부분의 Managed 언어에서 UI 프로그래밍을 할때 레이아웃은 툴킷이나 프레임워크 차원에서 알아서 잡아버립니다.
+
+알아서 잡아버린다는게 뭔 소리냐면 ..
+
+웹프론트에서 반응형 그리드를 생각 하면 이해가 빠르실텐데;; 웹프론트를 해보신 적 없는 분들은 반응형이니 그리드니 뭔 소린지 모르실테니 간단히 설명 해봅니다.
+
+1-1. 라벨
+
+1-2. 에디트 박스
+
+1-3. 버튼
+
+2-1.라벨
+
+2-2. 드롭다운박스
+
+2-3. 버튼
+
+코드를 작성하는 개발자는 그저 첫째줄에는 라벨, 에디트박스, 버튼 3개를 놓고 두번째 줄에는 라벨, 드롭다운박스, 버튼을 놓겠다고 코드만 작성하면 나머지는 전체 윈도의 크기를 기준하여 한줄에 3개의 요소가 있으니 넓이 / 3, 2줄이니 높이 / 2를 하여 알.아.서 레이아웃을 잡아 배치를 해버립니다.
+
+물론 이 배치 기준도 가로기준이니 세로기준이니 그런걸 세세하게 나누기도 합니다만.
+
+제가 만든 Walk 랩퍼의 경우 기본적으로 윈도 창은 세로(Vertical)을 기준으로 동작합니다.
+
+```
+func test1() {
+	mgr, _ := NewWindowMgrNoResize("레이아웃 테스트", 640, 480, GetIcon())
+
+	mgr.Label("라벨입니다.")
+	le := mgr.LineEdit(false)
+	le.SetText("라인 텍스트 입력")
+	mgr.CheckBox("체크박스입니다", false, func() {})
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/AfIpR/btrnwzeQClZ/G0rfLMCDLACw2cKhiCorMk/img.png)
+
+640*480의 윈도 창을 하나 만들고 라벨, 라인텍스트, 체크박스 3개의 UI객체를 윈도에 추가를 했습니다. 세로 기준으로 레이아웃 베치가 되기 때문에 위에서 아래로 한줄당 하나의 UI요소가 배치되고 이 놈들의 넓이는 창의 넓이와 같고 높이는 높이/3 으로 각각 배치된겁니다.
+
+그럼 앞서 표로 설명한거 같이 그리드 형식으로 이래저래 배치를 하려면 어찌 해야 하느냐 ..
+
+```
+func test1() {
+	mgr, _ := NewWindowMgrNoResize("레이아웃 테스트", 640, 480, GetIcon())
+
+	mgr.HSplit()
+	mgr.Label("1-1. 라벨")
+	le1 := mgr.LineEdit(false)
+	le1.SetText("1-2. 에디트 박스")
+	mgr.PushButton("1-3. 버튼", func() {})
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.Label("2-1. 라벨")
+	mgr.DropDownBox([]string{"1.하나", "2.둘", "3.셋"})
+	mgr.PushButton("2-3. 버튼", func() {})
+	mgr.EndSplit()
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/w96mb/btrnxkocXSv/NnXZjLtNdknJCCzOyrQPk1/img.png)
+
+이렇게 하시면 됩니다. 1줄에 3개의 요소가 총 2줄로 전체 창의 크기에 맞춰서 알아서 레이아웃이 잡혀서 균등배치가 되었지요. 근데 이렇게 놓고보면 보기가 그닥 좋지 않습니다. 그럼 창 크기를 적당히 조절 하시면 되겠구요.
+
+![](https://blog.kakaocdn.net/dn/6Poyp/btrns3n0jrT/nBFSOZ0Kykhk7c4TaX4r81/img.png)
+
+이렇게 조절 하셔도 되구요. 중요한건 창의 높이의 경우 모든 UI요소들은 최소 높이가 존재합니다. 폰트의 크기나 체크박스 같은 이미지나 여러 이유로 최소한의 높이라는게 있는데 창의 높이가 이 UI요소들의 최소 높이를 합한것보다 적은 값으로 지정된 경우에는 창의 크기를 UI 요소들의 합에 맞춰서 늘려버립니다.
+
+예를들어
+
+```
+func test1() {
+	mgr, _ := NewWindowMgrNoResize("레이아웃 테스트", 640, 1, GetIcon()) // 창 높이 1
+
+	mgr.HSplit()
+	mgr.Label("1-1. 라벨")
+	le1 := mgr.LineEdit(false)
+	le1.SetText("1-2. 에디트 박스")
+	mgr.PushButton("1-3. 버튼", func() {})
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.Label("2-1. 라벨")
+	mgr.DropDownBox([]string{"1.하나", "2.둘", "3.셋"})
+	mgr.PushButton("2-3. 버튼", func() {})
+	mgr.EndSplit()
+
+	mgr.StartForeground()
+}
+```
+
+이렇게 창 높이를 1로 생성한다 해도
+
+![](https://blog.kakaocdn.net/dn/cmOzMu/btrntebGvzI/UKvFaNPe5e5ykEdAY6SqxK/img.png)
+
+이렇게 라벨이나 에디트 박스 버튼들의 최소한의 높이와 Margin 값을 합한 최소값으로 창 크기를 늘려버립니다. 어찌됫건 막 짜도 창은 제대로 구성되서 보여집니다.
+
+위의 코드를 보시면 HSplit 이라는 놈이 등장 하는데요 ..
+
+창에 배치되는 요소들은 기본은 위에서 아래로 세로(Vertical)으로 쌓아가니까 쉽게보자면 위에서 아래로 쌓아가는거고 그 한줄 한줄에 여러 요소를 나눠서 넣고 싶으면 그 한줄을 나누는(Split) 것이지요.
+
+```
+func (m *WinResMgr) HSplit() *walk.Splitter 
+func (m *WinResMgr) VSplit() *walk.Splitter
+func (m *WinResMgr) EndSplit()
+```
+
+그래서 이 두 함수가 존재합니다. HSplit 는 가로로 분할 해주는거고 VSplit 은 세로로 분할 해주는 겁니다.
+
+HSplit 이던 VSplit 이던 분할을 끝마칠때는 EndSplit을 호출하시면 됩니다.
+
+HTML이나 XML에서 <tag></tag>와 같이 HSplit 이 호출되고 EndSplit 이 호출 되기 전까진 가로로 분할하여 UI 요소를 쌓는다는 소리고 VSplit 이 호출되고 EndSplit이 호출되는 사이에 작성된 UI요소의 코드들은 세로로 분할하여 쌓아간다는 소리입니다.
+
+이 Split 함수는 각각의 분할 상황 내에서 중복해서 사용 가능합니다.
+
+```
+func test2() {
+	mgr, _ := NewWindowMgrNoResize("레이아웃 테스트2", 640, 480, GetIcon())
+
+	mgr.HSplit()
+
+	mgr.VSplit()
+	mgr.Label("HSplit 안에 Vsplit1")
+	mgr.Label("HSplit 안에 Vsplit2")
+	mgr.Label("HSplit 안에 Vsplit3")
+	mgr.PushButton("버튼1", func() {})
+	mgr.EndSplit()
+
+	mgr.TextArea(false)
+
+	mgr.VSplit()
+	mgr.Label("HSplit 안에 Vsplit2-1")
+	mgr.Label("HSplit 안에 Vsplit2-2")
+	mgr.Label("HSplit 안에 Vsplit2-3")
+	mgr.Label("HSplit 안에 Vsplit2-4")
+	mgr.PushButton("버튼2", func() {})
+	mgr.EndSplit()
+
+	mgr.EndSplit()
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/bgClDk/btrnuX18lyy/PfQfStsEQ7Kz2xkKwKqfjK/img.png)
+
+이런식으로 말이죠 ..
+
+레이아웃에 대한 부분은 이정도 설명하면 된것 같으니 .. 다음 글에선 UI요소들에 대한 설명을 좀 해보도록 하겠습니다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #5](https://modu-print.tistory.com/646?category=863372)
+
+by 피로곰  2021. 12. 17.
+
+이번에는 각 UI구성 요소들에 대한 부분을 진행 해보도록 합시다.
+
+대충 일반적으로 말하는 라벨(Label, Static Text), 에디트박스, 체크박스, 리스트박스, 이미지컨트롤, 콤보박스 이딴 것들에 대해 논해보도록 합니다. 이러한 놈들은 얼찌 배치 할지는 이전 시간에 다뤘으니까 이전글들 참고 하시고요, 그런 부분들은 직접 해보시면 충분할 거구요.. 그정도 코드도 직접 안짜보고 이해할꺼면 개발자 때려 쳐야죠.. 어디 ㅋㅋ 그런 정신 머리로 개발자 나부랭이를 해보겠다고 크앙!
+
+우선 가장 많이 쓰이는 놈중 하나인 라벨을 먼저 갑시다.
+
+```
+/**
+*	MultiLineLabel
+**/
+func (m *WinResMgr) MultiLineLabel(text string) *walk.Label {
+	ne, _ := walk.NewLabelWithStyle(m.GetParent(), win.SS_EDITCONTROL) //|win.SS_CENTER)
+	ne.SetText(text)
+	ne.SetAlignment(walk.AlignHCenterVCenter)
+	ne.SetTextAlignment(walk.AlignCenter)
+
+	m.addObj(ne)
+	return ne
+}
+
+/**
+*	Label
+**/
+func (m *WinResMgr) Label(text string) *walk.Label {
+	ne, _ := walk.NewLabel(m.GetParent())
+	ne.SetText(text)
+	ne.SetTextAlignment(walk.AlignDefault)
+
+	m.addObj(ne)
+	return ne
+}
+
+/**
+* LabelCenter
+**/
+func (m *WinResMgr) LabelCenter(text string) *walk.Label {
+	ne, _ := walk.NewLabel(m.GetParent())
+	ne.SetText(text)
+	ne.SetTextAlignment(walk.AlignCenter)
+
+	m.addObj(ne)
+	return ne
+}
+
+/**
+* LabelRight
+**/
+func (m *WinResMgr) LabelRight(text string) *walk.Label {
+	ne, _ := walk.NewLabel(m.GetParent())
+	ne.SetText(text)
+	ne.SetTextAlignment(walk.AlignFar)
+
+	m.addObj(ne)
+	return ne
+}
+
+/**
+* LabelLeft
+**/
+func (m *WinResMgr) LabelLeft(text string) *walk.Label {
+	ne, _ := walk.NewLabel(m.GetParent())
+	ne.SetText(text)
+	ne.SetTextAlignment(walk.AlignNear)
+
+	m.addObj(ne)
+	return ne
+}
+```
+
+라벨은 Visual Studio 에서는 보통 Static Text 라는 명칭으로 불리는 놈인데 직접 수정은 안되는 고정된 내용을 보여주는 텍스트 표시용 UI객체 입니다. Walk를 비롯한 MS외의 개발리소스 들에서는 라벨(Label)이라는 명칭을 더 많이 쓰는것 같기는 합니다만.
+
+일단 함수가 몇가지 있는데요.
+
+함수 이름 보면 빡! 감이 오셔야 하는데 ㅋㅋ 모든 라벨관련 함수는 표시될 텍스트 내용을 인자로 넘기면 되고 리턴되는 값은 실질 walk.Label 객체입니다. 이 리턴된 객체로는 사용자의 입력이나 여러 이벤트 상황에 따라서 텍스트의 내용을 바꾼다거나 하는 여러 짓이 가능합니다.
+
+MultiLineLabel 은 라벨은 기본적으로 개행문자를 먹지 않아서 하나의 라벨에 개행을 포함한 문자열을 표시할때 사용합니다. Label 과 LabelLeft 는 좌측정렬, LabelCenter 는 가운데 정렬, LabelRight는 우측정렬입니다.
+
+```
+func LabelTest() {
+	mgr, _ := NewWindowMgrNoResize("라벨테스트", 640, 480, GetIcon())
+
+	mgr.Label("Label함수")
+	mgr.LabelLeft("LabelLeft함수")
+	mgr.LabelCenter("LabelCenter함수")
+	mgr.LabelRight("LabelRight함수")
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/6rGHW/btrn76C3nS3/8DYkuRZTETHXqgKk8gD2mK/img.png)
+
+자 이제 이 함수의 리턴값인 walk.Label 을 가지고 무엇을 할 수 있느냐!!
+
+```
+func LabelTest2() {
+	mgr, _ := NewWindowMgrNoResize("라벨테스트", 640, 480, GetIcon())
+
+	label1 := mgr.Label("Label함수")
+	mgr.PushButton("Label함수 라벨 변경", func() {
+		label1.SetText("버튼1 클릭!!")
+	})
+	label2 := mgr.LabelLeft("LabelLeft함수")
+	mgr.PushButton("LabelLeft함수 라벨 변경", func() {
+		label2.SetText("버튼2 클릭!!")
+	})
+	label3 := mgr.LabelCenter("LabelCenter함수")
+	mgr.PushButton("LabelCenter함수 라벨 변경", func() {
+		label3.SetText("버튼3 클릭!!")
+	})
+	label4 := mgr.LabelRight("LabelRight함수")
+	mgr.PushButton("LabelRight함수 라벨 변경", func() {
+		label4.SetText("버튼4 클릭!!")
+	})
+	mgr.StartForeground()
+}
+```
+
+이렇게 Label* 함수들의 리턴값인 walk.Label 객체를 가지고 SetText함수를 호출하면 라벨의 내용을 변경 가능합니다. Walk 에서 제공하는 객체들의 종류등은 lxn/walk 를 참고하셔도 되고요 ..
+
+Label 은 역할 자체가 텍스트 출력이 주 용도라 딱히 이벤트 핸들러니 그런건 신경쓸게 별로 없습니다.
+
+다음 편에서는 LineEdit 를 다뤄보겠습니다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #6](https://modu-print.tistory.com/648?category=863372)
+
+by 피로곰  2021. 12. 23.
+
+이번엔 EditText? EditBox? 여튼;; 텍스트고 숫자고 입력을 받는 놈을 다뤄보겠습니다.
+
+```
+func (m *WinResMgr) NumberEdit() *walk.NumberEdit 
+func (m *WinResMgr) LineEdit(ro bool) *walk.LineEdit
+func (m *WinResMgr) TextEdit(ro bool) *walk.TextEdit 
+func (m *WinResMgr) TextArea(ro bool) *walk.TextEdit
+```
+
+이정도 되겠습니다..
+
+ro bool 인자가 있는 놈들은 read only 에 대한 flag입니다. ro 값이 true 이면 수정이 불가능한 놈이 되겄지요.
+
+각 함수의 차이점을 말씀 드리자면 ..
+
+NumberEdit - 숫자만 입력 가능한 에디트 박스
+
+LineEdit - 한줄입력용 .. 개행(CRLF)이 필요 없는 경우에 사용합니다.
+
+TextEdit - 여러줄 입력가능한 텍스트 박스. 텍스트 박스의 크기를 넘어가는 입력은 불가합니다.
+
+TextArea - TextEdit와 근본적으로 같지만 이놈은 스크롤바가 존재합니다. 그런이유로 입력창을 넘어가는 입력도 가능합니다.
+
+```
+func EditTest() {
+	mgr, _ := NewWindowMgrNoResize("에디트박스 테스트", 640, 480, GetIcon())
+
+	mgr.HSplit()
+	mgr.Label("NumberEdit")
+	ne := mgr.NumberEdit()
+	ne.SetValue(100.0)
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.Label("LineEdit(read only)")
+	lero := mgr.LineEdit(true)
+	lero.SetText("읽기전용 LineEdit")
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.Label("LineEdit")
+	le := mgr.LineEdit(false)
+	le.SetText("수정가능 LineEdit")
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.Label("TextEdit(read only)")
+	tero := mgr.TextEdit(true)
+	tero.SetText("읽기전용 TextEdit")
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.Label("TextEdit")
+	te := mgr.TextEdit(false)
+	te.SetText("수정가능 TextEdit")
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.Label("TextArea(read only)")
+	taro := mgr.TextArea(true)
+	taro.SetText("읽기전용 TextArea")
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.Label("TextArea")
+	ta := mgr.TextArea(false)
+	ta.SetText("수정가능 TextArea")
+	mgr.EndSplit()
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/L10xe/btroDH5jD1o/1TNBKoLIxI1fACXP6wSUWk/img.png)
+
+기본적으로 각 함수의 차이점은 .. 위 코드를 참고하시면 되겠구요.
+
+NumberEdit 의 경우엔 SetValue 로 값을 설정하고 Value 함수로 현재 값을 얻습니다.
+
+그외 텍스트를 다루는 나머지 함수들은 SetText로 값 설정 Text함수로 현재 값을 얻습니다.
+
+```
+func EditTest2() {
+	mgr, _ := NewWindowMgrNoResize("에디트박스 테스트", 640, 100, GetIcon())
+
+	mgr.HSplit()
+	mgr.Label("NumberEdit")
+	ne := mgr.NumberEdit()
+	ne.SetValue(100.0)
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.PushButton("NumberEdit 변경", func() {
+		ne.SetValue(float64(time.Now().Unix()))
+	})
+	mgr.PushButton("NumberEdit 값", func() {
+		MsgBox(fmt.Sprintf("%d", int(ne.Value())))
+	})
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.Label("LineEdit")
+	le := mgr.LineEdit(false)
+	le.SetText("수정가능 LineEdit")
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	mgr.PushButton("LineEdit 변경", func() {
+		le.SetText(fmt.Sprintf("현재 유닉스 타임스탬프: %d", time.Now().Unix()))
+	})
+	mgr.PushButton("LineEdit 값", func() {
+		MsgBox(le.Text())
+	})
+	mgr.EndSplit()
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/br5T5a/btroJCBsQHZ/Z6DyFol9rIzkaF6tL9qaKk/img.png)
+
+![](https://blog.kakaocdn.net/dn/vqCdU/btroEpi7COa/Y8Ze42IfI4LEu0ohjkz89k/img.png)
+
+![](https://blog.kakaocdn.net/dn/nxrqM/btroE8BLgI7/YYlRUYUaHSHYfcS9jYgsyk/img.png)
+
+![](https://blog.kakaocdn.net/dn/bRBqTf/btroJ1gKvyj/WnOHHClRzFwpR5kiJgHy3K/img.png)
+
+![](https://blog.kakaocdn.net/dn/dGZ0yK/btroJjCeOau/lW8xmtkOE6MSvhlV8JAE3K/img.png)
+
+이런식이 가능하겠지요..
+
+Label와는 달리 에디트박스의 경우 몇가지 이벤트 핸들링이 가능합니다.
+
+```
+func EditTest3() {
+	mgr, _ := NewWindowMgrNoResize("에디트박스 테스트", 640, 100, GetIcon())
+
+	mgr.HSplit()
+	mgr.Label("NumberEdit")
+	ne := mgr.NumberEdit()
+	ne.SetValue(100.0)
+	mgr.EndSplit()
+
+	ne.ValueChanged().Attach(func() {
+		fmt.Printf("값 변경됨: %d\n", int(ne.Value()))
+	})
+
+	mgr.HSplit()
+	mgr.Label("LineEdit")
+	le := mgr.LineEdit(false)
+	le.SetText("LineEdit")
+	mgr.EndSplit()
+
+	le.TextChanged().Attach(func() {
+		fmt.Println("텍스트 변경됨:", le.Text())
+	})
+
+	le.FocusedChanged().Attach(func() {
+		if le.Focused() {
+			fmt.Println("LineEdit 포커스 됨")
+		} else {
+			fmt.Println("LineEdit 포커스 해제됨")
+		}
+	})
+
+	mgr.StartForeground()
+}
+```
+
+Walk 에서 제공하는 이벤트 핸들링 방식은 대부분 Attach 라는 함수를 통해 함수 지정을 하여동작하는 구조구요 어떤 이벤트냐에 따라서 형태는 좀 달라질수 있습니다. 그래봐야 대부분은 포커스와 관련된거나 마우스, 키보드 입력 정도에 대한 이벤트들이라 .. 마우스, 키보드 관련된건 따로 글로 작성하겠습니다.
+
+ValueChanged , TextChanged 는 NumberEdit 다루는 값이 말그대로 숫자 값(Value)이라 SetValue, Value, ValueChanged 이런식이고.. LineEdit 는 텍스트 입력을 기반하니 SetText, Text, TextChanged 와 같이 메소드 명들이 존재합니다.
+
+ValueChanged는 NumberEdit에 값 변동이 생기면 발생하는 이벤트입니다.
+
+![](https://blog.kakaocdn.net/dn/U537w/btroFKAFhci/KSG7yVTqLBdGaUKeha0uk1/img.png)
+
+TextChanged 는 LineEdit, TextEdit, TextArea 등 SetText, Text 함수를 사용하는 놈들에 대해서 값 변경에 대한 이벤트를 처리해주는 핸들러입니다.
+
+![](https://blog.kakaocdn.net/dn/ealDTo/btroG97ZykV/8TMDDsT2E5vt3bBiKDPl20/img.png)
+
+FocusedChanged 함수는 해당 컨트롤에 포커스변동이 발생하면 처리되는 핸들러고 따로 포커스가 In인지 Out인지에 대한 구분은 찾을수 없는 관계로 제 경우에는.. Focused 함수의 리턴값으로 처리합니다. 이 함수의 리턴값이 true 이면 해당 컨트롤에 포커스가 있는 상태고 false 이면 포커스 되지 않은것이죠..
+
+```
+	le.FocusedChanged().Attach(func() {
+		if le.Focused() {
+			fmt.Println("LineEdit 포커스 됨")
+		} else {
+			fmt.Println("LineEdit 포커스 해제됨")
+		}
+	})
+```
+
+![](https://blog.kakaocdn.net/dn/cVHADq/btroIUbD94m/oPaiK9Y452UDVxrUDMbPhk/img.png)
+
+근데 Walk 에서 왜 그렇게 만든진 모르겠으나.. NumberEdit 와 나머지 텍스트 입력 컨트롤들은 기본 구조를 다른 놈으로 사용하는 관계로 NumberEdit의 경우 FocusedChanged 이벤트가 발생하지 않습니다.
+
+만약 포커싱 In/Out을 가지고 어떤 처리를 하셔야 한다면 NumberEdit을 쓰지 마시고.. LineEdit 을 사용하시기 바랍니다.
+
+숫자만 입력 가능하다던지 하는 처리는 직접 하셔야 겠지요. 아마 NumberEdit도 그런 연유로 다른 텍스트입력 컨트롤과는 다른구조를 가면서 그런 차이가 존재하는것 같습니다.
+
+다음시간엔 체크박스 관련 내용을 다루도록 하겠습니다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #7](https://modu-print.tistory.com/653?category=863372)
+
+by 피로곰  2022. 1. 3.
+
+이번엔 각종 설정창 등을 만드는데 어찌보면 가장 유용하게 사용하는 체크박스(Checkbox)에 대해서 다뤄보도록 하겠습니다.
+
+```
+func (m *WinResMgr) CheckBox(text string, checked bool, attachFunc func()) *walk.CheckBox
+```
+
+CheckBox 메소드를 사용하시면 되구요.
+
+text string 인자는 체크박스 옆의 라벨 텍스트를 지정하는거고
+
+checked bool 은 초기 기본 체크 상태입니다. true 면 생성시 체크가 된 상태로, false 이면 생성시 체크가 안된 상태로 생성됩니다.
+
+attachFunc func() 인자는 체크박스의 체크 상대가 변경될 시에 호출되는 이벤트 핸들러 함수를 지정하면 됩니다.
+
+```
+func checkBoxTest1() {
+	mgr, _ := NewWindowMgrNoResize("체크박스 테스트1", 640, 200, GetIcon())
+
+	mgr.CheckBox("checked false 체크박스", false, func() {})
+	mgr.CheckBox("checked true 체크박스", true, func() {})
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/bHiKrk/btrpBB9CDNO/UWsRfr2LWFMpUdKe3V5Mlk/img.png)
+
+위 코드를 보시면 첫번째 인자에 따라서 체크 박스 옆의 라벨 텍스트가 표시되고 두번째 인자 값이 true 냐 false 냐에 따라서 기본 체크 상태가 다르게 생성이 됩니다.
+
+```
+func checkBoxTest2() {
+	mgr, _ := NewWindowMgrNoResize("체크박스 테스트2", 640, 200, GetIcon())
+
+	var check1 *walk.CheckBox
+	check1 = mgr.CheckBox("체크박스 테스트", false, func() {
+
+		if check1.Checked() {
+			MsgBox("체크됨")
+		} else {
+			MsgBox("해제됨")
+		}
+	})
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/bMDCKu/btrpzLdBviI/lv8Jjtkkqa7K41vbjWBn6K/img.png)
+
+![](https://blog.kakaocdn.net/dn/BOcXW/btrpGAh2f1Z/ziplV4XcqKIr4W173H2U21/img.png)
+
+마지막 인자에 대한 처리를 해봤습니다. Walk Wrap 의 CheckBox메소드는 walk.CheckBox 를 리턴합니다 이를 받아서 내장된 여러 메소드를 통해 이짓 저짓이 가능합니다. 예를들어 Checked() 의 경우 해당 체크박스가 현재 체크된 상태인지 아닌지를 true, false 로 반환해주는 역할을 합니다.
+
+에디트 박스에서 SetText, Text 메소드로 값을 설정하고 가져오듯이 체크박스도 SetChecked 메소드로 체크 상태를 변경가능하고 Checked 메소드로 현재 상태를 얻을 수 있습니다. ( lxn walk의 대부분의 메소드들 명칭은 비슷한 구조를 가집니다.)
+
+한가지 주의점은 .. walk 의 이벤트 핸들링은 고루틴을 발생시키는 구조로 동작 합니다. 한마디로 위 예제 같이 확인 버튼을 누르기 전까지 Block 되는 함수를 사용하는 경우 이 메시지 창이 떠 있는것과 달리 중복해서 이벤트는 수신이 가능합니다.
+
+![](https://blog.kakaocdn.net/dn/cagEra/btrpu2mqMFq/J2zMz1TdgA64YxLSa7GQZ1/img.png)
+
+MsgBox 말고 fmt.Println 같은걸 쓰시거나 ..
+
+```
+func checkBoxTest3() {
+	mgr, window := NewWindowMgrNoResize("체크박스 테스트2", 640, 200, GetIcon())
+
+	var check1 *walk.CheckBox
+	check1 = mgr.CheckBox("체크박스 테스트", false, func() {
+
+		if check1.Checked() {
+			MsgBox("체크됨", window)
+		} else {
+			MsgBox("해제됨", window)
+		}
+	})
+
+	mgr.StartForeground()
+}
+```
+
+MsgBox의 두번째 인자에 NewWindowMgrNoResize 함수의 리턴값중 walk.MainWindow 객체를 넣어주시면 메시지 박스를 호출한 부모창에 종속되어 동작 함으로 부모창 까지 다 Block 된 상태가 됨으로 이벤트의 중복수신을 방지할 순 있습니다. 둘의 차이는 직접 해보시면 아실 수 있을거라 생각 되구요 ..
+
+아직 정확히 왜 그런지 이유를 알 수 없는;; ( 자세히 파보면 원인은 나오겠지만;; 그게 나온다 해도 ;; 직접 lxn/walk 수정해서 배포하는건 매우 귀찮은 관계로 ㅎㅎ )
+
+여튼 이 체크박스가 가진 문제가 하나 있는데요.
+
+```
+func checkBoxTest4() {
+	mgr, _ := NewWindowMgrNoResize("체크박스 테스트4", 640, 200, GetIcon())
+
+	mgr.HSplit()
+	mgr.CheckBox("checked false 체크박스", false, func() {})
+	mgr.CheckBox("checked true 체크박스", true, func() {})
+	mgr.EndSplit()
+
+	mgr.StartForeground()
+}
+```
+
+이렇게 코드가 작성된 경우에 한 줄에 2개의 체크박스가 표시되야 합니다만..
+
+![](https://blog.kakaocdn.net/dn/sqXTv/btrplgF6pcq/Q5xTbYfpNltL2mO0G932ik/img.png)
+
+이렇게 표시가 안됩니다 ;;;
+
+```
+func checkBoxTest4() {
+	mgr, _ := NewWindowMgrNoResize("체크박스 테스트4", 640, 200, GetIcon())
+
+	mgr.HSplit()
+	mgr.CheckBox("checked false 체크박스", false, func() {})
+	mgr.CheckBox("checked true 체크박스", true, func() {})
+	mgr.PushButton("테스트", func() {})
+	mgr.EndSplit()
+
+	mgr.StartForeground()
+}
+```
+
+이렇게 버튼이라도 하나 끼워 넣으면
+
+![](https://blog.kakaocdn.net/dn/YuM1a/btrpHGPRszC/jD1j169B9stDUHdnE2PuzK/img.png)
+
+표시가 됩니다만 ;; .. Splitter 의 버그인지 레이아웃 구조의 버그인진 모르겠으나;; 여튼 .. 이런 관계로 .. 한줄에 체크박스를 여러게 두고 싶으시면 ..
+
+```
+func checkBoxTest5() {
+	mgr, _ := NewWindowMgrNoResize("체크박스 테스트5", 640, 200, GetIcon())
+
+	mgr.GroupBox("체크박스", false)
+	mgr.CheckBox("checked false 체크박스", false, func() {})
+	mgr.CheckBox("checked true 체크박스", true, func() {})
+	mgr.EndGroupBox()
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/uDIOm/btrpu6iK3ME/rhhPmzo7iqxGMtC6TZzGpK/img.png)
+
+GroupBox 를 활용하시기 바랍니다.
+
+```
+func checkBoxTest5() {
+	mgr, _ := NewWindowMgrNoResize("체크박스 테스트5", 640, 200, GetIcon())
+
+	mgr.HSplit()
+	mgr.Label("GroupBox 안의 VSplit")
+	mgr.PushButton("VSpilit 버튼", func() {})
+
+	mgr.GroupBox("체크박스", false)
+	mgr.CheckBox("checked false 체크박스", false, func() {})
+	mgr.CheckBox("checked true 체크박스", true, func() {})
+	mgr.EndGroupBox()
+
+	mgr.EndSplit()
+
+	mgr.StartForeground()
+}
+```
+
+GroupBox 와 VSplit, HSplit 는 위와 같이 중첩해서 사용도 가능합니다.
+
+![](https://blog.kakaocdn.net/dn/BQ1SN/btrputFiOwb/p9KoT3McRiEKaxYUaPKA11/img.png)
+
+이상입니다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #8](https://modu-print.tistory.com/658?category=863372)
+
+by 피로곰  2022. 1. 10.
+
+이번에는 .. 드롭다운박스를 다뤄보도록 하겠습니다.
+
+```
+func comboTest1() {
+	mgr, _ := NewWindowMgrNoResize("콤보박스 테스트", 640, 200, GetIcon())
+
+	dd1 := mgr.DropDownBox([]string{"1.하하", "2.호호", "3.ㅋㅋ", "4.ㅎㅎ"})
+
+	dd1.CurrentIndexChanged().Attach(func() {
+		fmt.Printf("선택된 인덱스 : %d, 선택된 값 : %s\n", dd1.CurrentIndex(), dd1.Text())
+	})
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/Uz8IU/btrp6RevfNv/Yn7PzKFv7cchdeUF3syZr0/img.png)
+
+요래 DropDownBox 메소드를 사용하시면 되구요 인자는 []string 배열로 지정 됩니다.
+
+보통 드롭다운박스는 보여지는 텍스트 값 또는 현재 선택된 인덱스 값을 가지고 다루는 경우가 많구요 현재 선택된 인덱스는 CurrentIndex() 함수로 현재 선택된 인덱스에 해당하는 텍스트 값은 Text()함수로 얻을 수 있습니다.
+
+![](https://blog.kakaocdn.net/dn/He8hv/btrp7HV6pmw/EGjPkkXdNK6DN68Ryoe7x1/img.png)
+
+생성시에 전달한 인자의 배열 인덱스 값을 기준으로 생각하시면 되겠지요. []string{ "1.하하" 였으니 0번 인덱스가 "1.하하"가 되겠습니다.
+
+기본적으로 초기에 선택된 인덱스는 0인데요 만약 다른 인덱스 번호를 초기 값으로 생성하고 싶은경우
+
+```
+func comboTest1() {
+	mgr, _ := NewWindowMgrNoResize("콤보박스 테스트", 640, 200, GetIcon())
+
+	dd1 := mgr.DropDownBox([]string{"1.하하", "2.호호", "3.ㅋㅋ", "4.ㅎㅎ"})
+
+	dd1.SetCurrentIndex(3)
+
+	dd1.CurrentIndexChanged().Attach(func() {
+		fmt.Printf("선택된 인덱스 : %d, 선택된 값 : %s\n", dd1.CurrentIndex(), dd1.Text())
+	})
+
+	mgr.StartForeground()
+}
+```
+
+이렇게 SetCurrentIndex 함수로 인덱스를 지정하시면
+
+![](https://blog.kakaocdn.net/dn/bra6ku/btrp95ivWjd/KFkUvgBv6drkK0O4g4GAr0/img.png)
+
+3번 인덱스가 초기 선택된 값으로 표시됩니다.
+
+예제코드에 CurrentIndexChanged 이벤트에 대해서 함수를 Attach 한걸 보실 수 있을겁니다. 값 변경시에 처리하셔도 되고. 특정 버튼이 눌리거나 창이 닫히거나 원하시는 상황에서 CurrentIndex 함수를 통해 얻은 인덱스로 초기 지정한 배열의 값을 얻어 오시던지 그냥 Text()함수로 선택된 값을 직접 받아서 처리하시던지 하시면 되겠습니다.
+
+이상입니다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #9](https://modu-print.tistory.com/659?category=863372)
+
+by 피로곰  2022. 1. 11.
+
+이번엔 가장 활용도가 높은 편인 테이블뷰에 대해서 알려드리겠습니다.
+
+우선;; interface{}를 사용해서 조금 고급지게 리스트박스를 위한 모델구조를 잡고 하면 보긴 좋긴 하겠으나 애초에 그냥 막 짜서 적용해서 쓰기 바쁜 와중에 만들어 쓴 코드고..
+
+lxn/walk 의 샘플 코드에 존재하는 것들을 크게 건드리지 않고 사용하다보니 그닥 맘에 드는 구조는 아니라는 점은 미리 말씀드립니다.
+
+우선 테이블을 구성하기 위해서는 2개의 구조체와 몇가지 메소드를 미리 작성하셔야 합니다.
+
+```
+/**
+*	TestListItem
+**/
+type TestListItem struct {
+	Name    string
+	Level   int
+	Sex     int
+	Class   string
+	checked bool
+}
+
+/**
+*	TestListModel
+**/
+type TestListModel struct {
+	walk.TableModelBase
+	items []TestListItem
+}
+
+/**
+*	RowCount
+**/
+func (m *TestListModel) RowCount() int {
+	return len(m.items)
+}
+
+/**
+*	Value
+**/
+func (m *TestListModel) Value(row, col int) interface{} {
+	item := m.items[row]
+
+	switch col {
+	case 0:
+		return item.Name
+	case 1:
+		return item.Level
+	case 2:
+		if item.Sex == 0 {
+			return "중성"
+		} else if item.Sex == 1 {
+			return "남성"
+		} else if item.Sex == 2 {
+			return "여성"
+		} else {
+			return "알수없음"
+		}
+	case 3:
+		return item.Class
+	}
+	panic("unexpected col")
+}
+
+/**
+*	Checked
+**/
+func (m *TestListModel) Checked(row int) bool {
+	return m.items[row].checked
+}
+
+/**
+*
+**/
+func (m *TestListModel) CheckedCount() int {
+	var cnt int
+	for _, item := range m.items {
+		if item.checked {
+			cnt++
+		}
+	}
+
+	return cnt
+}
+
+/**
+*	SetChecked
+**/
+func (m *TestListModel) SetChecked(row int, checked bool) error {
+	m.items[row].checked = checked
+
+	return nil
+}
+
+/**
+*	ResetRows
+**/
+func (m *TestListModel) ResetRows() {
+	m.items = nil
+	m.PublishRowsReset()
+}
+```
+
+TestListItem 은 테이블 데이터 리스트의 한줄 한줄의.. 그러니까 sql db 다룰때 기준으로 치면 row의 정보를 담은 구조체 입니다. 이 row 데이터를 담은 구조체는 테이블뷰 모델에 해당하는 TestListModel 구조체에서 items 배열로 선언되어 사용됩니다.
+
+이 모델 구조는 lxn/walk 의 샘플코드에서 사용되는 구조를 그대로 차용하고 있는 관계로 .. 원하시면 좀더 좋은 방향으로 맘껏 고쳐 쓰시기 바랍니다.
+
+만들고자 하는 테이블뷰가 있으면 row 정보를 담을 구조체를 만들고 실제 테이블뷰에서 사용될 walk.TableModelBase를 포함한 모델 구조체 2개를 만드시면 됩니다. 위 코드는 예제삼아 TestListItem, TestListModel 이라 했는데요 ..
+
+개발하는 프로그램에 추가되는 목적에 따라서 PlayerListItem, PlayerListModel 이라던가 UserListItem, UserListModel 등으로 이름은 변경하여 사용하시면 되겠습니다.
+
+row 정보를 담는 item 구조체에는 테이블에서 다뤄질 데이터들을 원하는대로 작성하시면 되는데요 주의하실점은 맨 마지막에 존재하는 checked bool 맴버 변수는 그냥 늘 맨 마지막에 추가해 두신다 생각 하십시요. 체크박스를 포함하는 테이블을 다룰때에 사용되는 변수인데 체크박스를 쓰던 안쓰던 저놈은 그냥 냅두시던지 체크박스를 전혀 사용 하지 않으실거면 이 변수와 아래 설명하는 체크박스 관련된 메소드들을 다 제거하고 쓰시던지 하시면 됩니다.
+
+테이블뷰 모델에 대한 메소드가 몇가지 존재하는데요 ..
+
+RowCount 는 테이블에 존재하는 row 데이터 갯수입니다. 몇줄이 존재하냐?를 얻고 싶을때 쓰시면 됩니다.
+
+Checked, CheckedCount, SetChecked 함수는 테이블이 체크박스를 포함해서 만들어지는 경우에는 row 의 맨 좌측에 체크박스가 활성화되서 데이터가 표시되는데 특정 row의 체크박스의 체크여부를 확인하는게 Checked 함수이고 CheckedCount 는 체크된 row 의 갯수를, SetChecked 함수는 특정 row 를 체크하거나 풀거나 하는 역할을 해주는 함수입니다. 이것들은 뒤에 나올 예제들을 보시면 아실꺼구요, 코드 자체도 워낙 단순하다보니 뭐라 설명할 이유도 ;;; ㅋㅋ
+
+테이블뷰의 메소드중 가장 중요한건
+
+```
+/**
+*	Value
+**/
+func (m *TestListModel) Value(row, col int) interface{} {
+	item := m.items[row]
+
+	switch col {
+	case 0:
+		return item.Name
+	case 1:
+		return item.Level
+	case 2:
+		if item.Sex == 0 {
+			return "중성"
+		} else if item.Sex == 1 {
+			return "남성"
+		} else if item.Sex == 2 {
+			return "여성"
+		} else {
+			return "알수없음"
+		}
+	case 3:
+		return item.Class
+	}
+	panic("unexpected col")
+}
+```
+
+이놈 입니다..
+
+특정 행과 열의 값을 얻을때 사용되고 실제 테이블에 데이터가 표시될때 호출이 되는 메소드 입니다. 실제 데이터는 앞서 설명한 item 에 대한 구조체에 담기지만 실제 테이블은 대체로 사람이 보는 용도로 사용되기 떄문에 데이터를 원하는 형태로 가공하여 표시하기 마련입니다. 그런 이유로 이 함수에서 원하는 형태로 return 된 형태로 테이블에 표시되게 됩니다.
+
+예제를 봐 가며 설명하는게 더 빠를것 같네요..
+
+```
+/**
+*	listTest1
+**/
+func listTest1() {
+	mgr, window := NewWindowMgrNoResize("리스트1", 640, 500, GetIcon())
+
+	cbModel := new(TestListModel)
+
+	testTv := mgr.TableView(cbModel, []tableViewHeader{
+		{Title: "이름", Width: 100},
+		{Title: "레벨", Width: 100},
+		{Title: "성별", Width: 100},
+		{Title: "직업", Width: 100},
+	}, false, false)
+
+	testTv.ItemActivated().Attach(func() {
+		currIdx := testTv.CurrentIndex()
+
+		if currIdx < 0 {
+			return
+		}
+
+		fmt.Println("= 더블클릭 ========================")
+		fmt.Println("선택된 아이템:", currIdx)
+		fmt.Println("이름:", cbModel.items[currIdx].Name)
+		fmt.Println("레벨:", cbModel.items[currIdx].Level)
+		fmt.Println("성별:", cbModel.items[currIdx].Sex)
+		fmt.Println("직업:", cbModel.items[currIdx].Class)
+	})
+
+	window.Starting().Attach(func() {
+		for i := 0; i < 10; i++ {
+			od := TestListItem{}
+			od.Name = fmt.Sprintf("사용자%02d", i)
+			od.Level = i + 1
+			od.Sex = (i % 2)
+			od.Class = fmt.Sprintf("직업%d", i+1)
+			cbModel.items = append(cbModel.items, od)
+		}
+		cbModel.PublishRowsReset()
+	})
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/dkzHuF/btrqwthQdzn/GpkP0DZ5tSIh1WdGDJ8501/img.png)
+
+아주 기본적인 형태의 테이블을 하나 생성 하였습니다.
+
+```
+	cbModel := new(TestListModel)
+```
+
+우선 앞서 설명한 item 데이터를 포함한 테이블 모델을 하나 생성하구요 이놈은 테이블뷰를 생성할때 인자로 전달되고 이런저런 짓을 하는데 사용되게 됩니다.
+
+```
+	testTv := mgr.TableView(cbModel, []tableViewHeader{
+		{Title: "이름", Width: 100},
+		{Title: "레벨", Width: 100},
+		{Title: "성별", Width: 100},
+		{Title: "직업", Width: 100},
+	}, false, false)
+```
+
+이렇게 테이블뷰을 생성하게 되는데요 첫번째 인자는 앞서 만든 테이블 모델 구조체를 넣으시면 됩니다.
+
+두번째 인자는 테이블의 헤더를 설정하기 위한 구조체 배열을 전달하는데요. 앞서 제공한 walk_wrap.go 파일내에 보면
+
+```
+/**
+*	tableViewHeader
+**/
+type tableViewHeader struct {
+	Title string
+	Width int
+	Align string
+}
+```
+
+이렇게 tableViewHeader 라는 구조체가 정의되어 있습니다.
+
+![](https://blog.kakaocdn.net/dn/bmrf0F/btrqwuuitaJ/eBa1pzkGMJUxDAPQoBEDwK/img.png)
+
+첫번째 Title 은 테이블뷰의 헤더에 각 컬럼의 타이틀입니다.
+
+![](https://blog.kakaocdn.net/dn/daaFj9/btrqujAedaT/bmcShCGihzKekdr15P58aK/img.png)
+
+Width 는 각 컬럼의 넓이를 입력하시면 됩니다. 값은 Pixel 값입니다.
+
+마지막 Align 은 각 컬럼의 정렬 방식인데요 left, right, center 로 지정가능합니다. 단 맨 좌측 첫 컬럼의 경우 정렬 기준을 변경하려면 좀더 많은짓이 가능한데 현재는 지원하고 있지 않습니다. ( 윈도 핸들 가지고 윈도 API로 사부작 사부작 하면 방법이 있긴 합니다만 .. ) Align 값은 기본적으로 좌측정렬입니다.
+
+세번째 인자는 테이블뷰의 각 row 를 한번에 단 하나만 선택 가능한지 아니면 여러개를 선택 가능한지를 true, false 로 전달하면 됩니다.
+
+마지막 인자는 체크박스를 사용할지 말지를 true, false 로 전달하면 됩니다.
+
+기본 테이블 뷰에 대한 예제를 먼저 설명하고 각 케이스를 다시 설명하겠습니다.
+
+우선 위에 날린 첫번째 예제는 다중 선택이 안되고 체크박스도 없는 기본적인 테이블을 생성하였습니다.
+
+![](https://blog.kakaocdn.net/dn/BnGIK/btrqwthQE4J/Ce9OLQpeUhEI58ty3gy2k0/img.png)
+
+이놈은 이렇게 한번에 하나씩만 선택이 가능합니다.
+
+데이터의 입력은 윈도가 생성이 완료되고 화면에 보여지기 시작하는 Stating() 이벤트에 Attach 하여
+
+```
+	window.Starting().Attach(func() {
+		for i := 0; i < 10; i++ {
+			od := TestListItem{}
+			od.Name = fmt.Sprintf("사용자%02d", i)
+			od.Level = i + 1
+			od.Sex = (i % 2)
+			od.Class = fmt.Sprintf("직업%d", i+1)
+			cbModel.items = append(cbModel.items, od)
+		}
+		cbModel.PublishRowsReset()
+	})
+```
+
+이렇게 10개의 데이터를 추가 했습니다. 앞서 테이블뷰에는 item 구조체와 모델 구조체를 만들어 쓰면 된다고 했는데요.
+
+예로 작성한 TestListeItem 데이터를 생성하고 멤버들에 값을 정한다음 모델 구조체인 cbModel.items 배열에 추가해 넣었습니다.
+
+이후 cbModel상의 데이터를 실질 화면에 보여지는 테이블에 내보내면(Publish) 실제 테이블뷰에 적용이됩니다. 이때 쓰는게 cbModel.PublishRowsReset() 메소드 입니다. 뒤에 비스무리한 메소드명이 몇몇 나오는데 이놈들은 walk.TableModelBase 라는 walk 에 내장된 놈입니다.
+
+예제를 만드느라 창이 뜰때를 기준해서 아무데이터나 막 만들어 넣었지만 .. 필요에 따라 파일을 읽어서 라던지.. 특정 버튼을 눌렀을때 라던지.. 어떤 데이터를 수신 했을때 라던지.. 그런식으로 활용할수 있겠지요..
+
+앞서 모델 구조체의 Value 라는 메소드에 대해서 설명 했는데요.
+
+성별값은 (i % 2) 의 int 값이 들어가지만 리스트에는 중성이니 남성이니 표시가 되고 있습니다.
+
+```
+	case 2:
+		if item.Sex == 0 {
+			return "중성"
+		} else if item.Sex == 1 {
+			return "남성"
+		} else if item.Sex == 2 {
+			return "여성"
+		} else {
+			return "알수없음"
+		}
+```
+
+그 이유가 Value 메소드 내부에서 컬럼 인덱스가 2인경우에 .. 그러니까 이름(0), 레벨(1), 성별(2) 순서니까 컬럼인덱스가 2이면 성별에 해당하는 컬럼인 것이지요 성별에 해당하는 컬럼은 item 구조체의 값을 그대로 리턴한게 아닌 값에 따라서 중성, 남성, 여성 등으로 return 하고 있습니다. 이 Value 메소드에서 지정한대로 표시가 된다는 거죠.
+
+이 Value 메소드가 중요한건.. 테이블뷰를 생성할때
+
+```
+	testTv := mgr.TableView(cbModel, []tableViewHeader{
+		{Title: "레벨", Width: 100},
+		{Title: "이름", Width: 100},
+		{Title: "성별", Width: 100},
+		{Title: "직업", Width: 100},
+	}, false, false)
+```
+
+이렇게 생성 해놓고는
+
+```
+/**
+*	Value
+**/
+func (m *TestListModel) Value(row, col int) interface{} {
+	item := m.items[row]
+
+	switch col {
+	case 0:
+		return item.Name
+	case 1:
+		return item.Level
+	case 2:
+		if item.Sex == 0 {
+			return "중성"
+		} else if item.Sex == 1 {
+			return "남성"
+		} else if item.Sex == 2 {
+			return "여성"
+		} else {
+			return "알수없음"
+		}
+	case 3:
+		return item.Class
+	}
+	panic("unexpected col")
+}
+```
+
+Value 메소드를 이렇게 만들어두면 0번 인덱스의 컬럼은 '레벨' 값이 출력 되어야 함에도 Value 메소드에서 0번 컬럼에 대해서 이름에 해당하는 값을 리턴하고 있음으로 테이블뷰의 헤더에 표시된 타이틀과 실제 표시되는 데이터가 다르게 출력될수 있습니다. 한마디로 원하는 형태에 맞춰서 잘~~ 작성 하시라 이말입니다.
+
+테이블 뷰에서 가장 빈번히 사용하는 기능은 특정 row 를 더블클릭 했을때.. 그 선택한 row 의 값을 가지고 무언가를 하는 경우 인데요.
+
+```
+	testTv.ItemActivated().Attach(func() {
+		currIdx := testTv.CurrentIndex()
+
+		if currIdx < 0 {
+			return
+		}
+
+		fmt.Println("= 더블클릭 ========================")
+		fmt.Println("선택된 아이템:", currIdx)
+		fmt.Println("이름:", cbModel.items[currIdx].Name)
+		fmt.Println("레벨:", cbModel.items[currIdx].Level)
+		fmt.Println("성별:", cbModel.items[currIdx].Sex)
+		fmt.Println("직업:", cbModel.items[currIdx].Class)
+	})
+```
+
+그런때 사용 가능한게 ItemActivated() 이벤트 입니다. 이 이벤트에 Attach 를 하고 테이블뷰 생성시 리턴받은 walk.TableView 변수의 CurrentIndex() 메소드를 통해 현재 선택된 row 의 인덱스 값을 얻을 수 있습니다. 이 값이 -1 인 경우에는 현재 선택된 row 가 없다는 소리니 예외처리 빼먹지 마시구요.
+
+예제를 만들기 위해 선택된 row 의 실질 값을 출력하도록 만들어 봤습니다.
+
+![](https://blog.kakaocdn.net/dn/YvTaj/btrqvyDIORo/ZshoIN0HcWV7asaBgVkKLK/img.png)
+
+두번째 예제를 가봅시다.. 두번째는 체크박스를 포함한 경우입니다.
+
+```
+/**
+*	listTest2
+**/
+func listTest2() {
+	mgr, window := NewWindowMgrNoResize("리스트2(CheckBox)", 640, 500, GetIcon())
+
+	cbModel := new(TestListModel)
+
+	testTv := mgr.TableView(cbModel, []tableViewHeader{
+		{Title: "이름", Width: 100},
+		{Title: "레벨", Width: 100},
+		{Title: "성별", Width: 100},
+		{Title: "직업", Width: 100},
+	}, true, false)
+
+	mgr.PushButton("체크된 아이템", func() {
+		for i := 0; i < len(cbModel.items); i++ {
+			if cbModel.Checked(i) {
+				fmt.Println(i, "체크됨", cbModel.items[i].Name)
+			}
+		}
+	})
+
+	mgr.PushButton("체크된 아이템 이름변경", func() {
+		for i := 0; i < len(cbModel.items); i++ {
+			if cbModel.Checked(i) {
+				cbModel.items[i].Name = fmt.Sprintf("변경된이름%d", i)
+				cbModel.PublishRowChanged(i)
+			}
+		}
+	})
+
+	testTv.ItemActivated().Attach(func() {
+		currIdx := testTv.CurrentIndex()
+
+		if currIdx < 0 {
+			return
+		}
+
+		if cbModel.Checked(currIdx) {
+			cbModel.SetChecked(currIdx, false)
+		} else {
+			cbModel.SetChecked(currIdx, true)
+		}
+		cbModel.PublishRowChanged(currIdx)
+	})
+
+	window.Starting().Attach(func() {
+		for i := 0; i < 10; i++ {
+			od := TestListItem{}
+			od.Name = fmt.Sprintf("사용자%02d", i)
+			od.Level = i + 1
+			od.Sex = (i % 2)
+			od.Class = fmt.Sprintf("직업%d", i+1)
+			cbModel.items = append(cbModel.items, od)
+		}
+		cbModel.PublishRowsReset()
+	})
+
+	mgr.StartForeground()
+}
+```
+
+기본적으로 달라진것은 TableView 로 테이블을 생성할때 3번째 인자를 True 로 주었습니다.
+
+![](https://blog.kakaocdn.net/dn/dvQCW7/btrqsGJxMg5/mHENMrB5Nh3kp7ERJRlH01/img.png)
+
+그러면 이와 같이 리스트의 각 줄 앞에 체크박스가 생깁니다.
+
+체크박스가 유용한 경우는 특정 데이터를 선택해서 삭제하거나 변경을 하거나 하는등을 기능을 여러 줄에 동시에 적용을 하려고 할때라던지 .. 여러 용도로 테이블뷰에서 체크박스는 유용하게 사용 가능합니다.
+
+단 기본 상태의 체크박스는 정확히 체크박스 사각형을 클릭해야만 체크상태 변경이 가능합니다만 .. 이런 식이면 제 경우에는 좀 불편하다고 느껴저서 앞서 설명한 특정 row 를 더블클릭 했을 경우에 발생하는 ItemActivated 이벤트에 체크박스를 제어하는 코드를 추가해서 쓰는 편입니다.
+
+```
+	testTv.ItemActivated().Attach(func() {
+		currIdx := testTv.CurrentIndex()
+
+		if currIdx < 0 {
+			return
+		}
+
+		if cbModel.Checked(currIdx) {
+			cbModel.SetChecked(currIdx, false)
+		} else {
+			cbModel.SetChecked(currIdx, true)
+		}
+		cbModel.PublishRowChanged(currIdx)
+	})
+```
+
+이렇게 말이죠.. 테이블뷰의 데이터 영역에서 더블클릭이 발생됫고 선택된 row 가 존재하면 해당 인덱스의 체크 상태에 따라서 체크를 하거나 풀거나 합니다. SetChecked 함수가 하는 짓이라 해봐야 cbModel.items[인덱스].checked 의 값을 true, false 로 변경해주는 것이지만 해당 코드 작성시엔 무슨 바람이 불어서인지 Set으로 시작하는 메소드들을 만들어 뒀네요 ㅎㅎ
+
+데이터를 추가할때는 cbModel.PublishRowsReset()으로 전체 데이터를 리스트에 적용하도록 하였는데요 위 코드는 선택된 특정 row 의 체크 상태만 변경이 되기 때문에 cbModel의 PublishRowChanged 메소드로 선택된 특정 줄만을 다시 그리도록 호출하였습니다. 이 함수를 출력 안하면 제때 보여지는 정보가 업데이트 되지 않아서 체크가 됫는데 안되있거나 실제로 체크가 풀렸는데 여전히 체크가 된체로 보일수 있으니 데이터 변동이 올경우 이 Publish 로 시작하는 놈들은 잊지말고 호출해주셔야 합니다.
+
+위 코드를 적용하면 원래는
+
+![](https://blog.kakaocdn.net/dn/2GpRD/btrqujfXiJX/3EiYf3UV1gtZrNFjVF6t01/img.png)
+
+이 체크박스를 직접 클릭 해야지만 체크 상태를 변경 가능하지만..
+
+![](https://blog.kakaocdn.net/dn/b4qJNh/btrqtT9EXuH/MTYdkEvmY0cnhbYQuCVwvK/img.png)
+
+이 영역 어디를 더블클릭 해도 체크상태를 변경 가능하게 됩니다.
+
+![](https://blog.kakaocdn.net/dn/bLkvUc/btrqpt4LhzI/vWL5LZALbNc8lamFPnsL2k/img.png)
+
+하단에 2가지 버튼이 존재하는데요.
+
+"체크된 아이템" 버튼은 체크되어 있는 row 의 인덱스와 Name 값을 출력해 줍니다.
+
+```
+	mgr.PushButton("체크된 아이템", func() {
+		for i := 0; i < len(cbModel.items); i++ {
+			if cbModel.Checked(i) {
+				fmt.Println(i, "체크됨", cbModel.items[i].Name)
+			}
+		}
+	})
+```
+
+![](https://blog.kakaocdn.net/dn/bQbJDN/btrqoaYGGI7/FlH4NKhlscsTWO6JXU1udK/img.png)
+
+0,2,4,6,8 번째 인덱스에 해당하는 놈들을 체크한 상태로 버튼을 누른 결과구요
+
+"체크된 아이템 이름변경" 은 체크된 아이템의 이름 값을 "변경된이름[인덱스값]" 으로 변경해줍니다.
+
+```
+	mgr.PushButton("체크된 아이템 이름변경", func() {
+		for i := 0; i < len(cbModel.items); i++ {
+			if cbModel.Checked(i) {
+				cbModel.items[i].Name = fmt.Sprintf("변경된이름%d", i)
+				cbModel.PublishRowChanged(i)
+			}
+		}
+	})
+```
+
+![](https://blog.kakaocdn.net/dn/cPRcDH/btrqwtvoIcz/nceu3ry3EjHVvuEd8oU5O0/img.png)
+
+앞서 선택해둔 상태에서 이 번튼을 누르니 이름 값이 전부 변경되었습니다.
+
+마지막으로 다중선택에 대한 예를 다뤄 보겠습니다.
+
+```
+/**
+*	listTest3
+**/
+func listTest3() {
+	mgr, window := NewWindowMgrNoResize("리스트2(다중선택)", 640, 500, GetIcon())
+
+	cbModel := new(TestListModel)
+
+	testTv := mgr.TableView(cbModel, []tableViewHeader{
+		{Title: "이름", Width: 100},
+		{Title: "레벨", Width: 100},
+		{Title: "성별", Width: 100},
+		{Title: "직업", Width: 100},
+	}, false, true)
+
+	mgr.PushButton("선택된 아이템", func() {
+		idxs := testTv.SelectedIndexes()
+
+		if len(idxs) == 0 {
+			return
+		}
+
+		for _, i := range idxs {
+			fmt.Println(i, "선택된", cbModel.items[i].Name)
+		}
+
+	})
+
+	mgr.PushButton("선택된 아이템 이름변경", func() {
+
+		idxs := testTv.SelectedIndexes()
+
+		if len(idxs) == 0 {
+			return
+		}
+
+		for _, i := range idxs {
+			cbModel.items[i].Name = fmt.Sprintf("변경된이름%d", i)
+			cbModel.PublishRowChanged(i)
+		}
+	})
+
+	window.Starting().Attach(func() {
+		for i := 0; i < 10; i++ {
+			od := TestListItem{}
+			od.Name = fmt.Sprintf("사용자%02d", i)
+			od.Level = i + 1
+			od.Sex = (i % 2)
+			od.Class = fmt.Sprintf("직업%d", i+1)
+			cbModel.items = append(cbModel.items, od)
+		}
+		cbModel.PublishRowsReset()
+	})
+
+	mgr.StartForeground()
+}
+```
+
+기본적인 코드의 구조는 체크박스와 비슷합니다만 mgr.TableView 의 3번째 인자는 체크박스와 관련이니 false 로 마지막 다중선태에 대한 값을 true 로 변경하였습니다.
+
+이렇게 하면
+
+![](https://blog.kakaocdn.net/dn/bKVM77/btrqvAatdBD/zEVBQ2ulWtAE34rPuhKMs0/img.png)
+
+드래그해서 전체를 다 선택하거나
+
+![](https://blog.kakaocdn.net/dn/u6umn/btrqobcfNDD/8LBKldCgezTNEuBdzeJyJ0/img.png)
+
+일부만 선택 하거나
+
+![](https://blog.kakaocdn.net/dn/oEgLx/btrqotKlfOE/mMYMn66gkA8qxW8IhCIKIK/img.png)
+
+Ctrl 키를 누른채로 특정한 놈들만 골라서 선택하거나
+
+![](https://blog.kakaocdn.net/dn/ZcC9q/btrqnk8hwtO/urtVucZtyS1bL5var9kiAk/img.png)
+
+이렇게 하나를 선택해둔 후
+
+![](https://blog.kakaocdn.net/dn/Hduk7/btrqtTV7RJr/BeBkpnPY1OD7mC2UWnmt1k/img.png)
+
+쉬프트를 누른채로 선택한 놈까지 여러놈을 선택이 가능합니다. 일반적인 리스트컨트롤이나 탐색기등에서 파일 선택하는 방식과 흡사하다 보시면 되겠습니다.
+
+이놈도 체크박스 예제와 같이 선택된 아이템의 정보를 출력하거나 선택된 아이템의 이름을 변경하는 버튼이 존재하는데요.
+
+```
+	mgr.PushButton("선택된 아이템", func() {
+		idxs := testTv.SelectedIndexes()
+
+		if len(idxs) == 0 {
+			return
+		}
+
+		for _, i := range idxs {
+			fmt.Println(i, "선택된", cbModel.items[i].Name)
+		}
+
+	})
+
+	mgr.PushButton("선택된 아이템 이름변경", func() {
+
+		idxs := testTv.SelectedIndexes()
+
+		if len(idxs) == 0 {
+			return
+		}
+
+		for _, i := range idxs {
+			cbModel.items[i].Name = fmt.Sprintf("변경된이름%d", i)
+			cbModel.PublishRowChanged(i)
+		}
+	})
+```
+
+핵심은 walk.TableView 의 SelectedIndexes() 메소드입니다. 이놈은 int 형 배열을 리턴하고 이 배열에는 선택된 item의 인덱스가 들어가 있습니다.
+
+그리하야 이 SelectedIndexes() 로 얻은 배열에 저장된 값을 가지고 선택된 놈들의 특정 값을 출력하거나
+
+![](https://blog.kakaocdn.net/dn/HL0C0/btrqsGCKoKB/rFY2C9qhSgygUI3soxKTTk/img.png)
+
+![](https://blog.kakaocdn.net/dn/NKlQ1/btrqum4HD5R/2kNSHh3KzQTwq0oKNgrhL1/img.png)
+
+선택된 놈들의 이름을 변경 할수도 있습니다.
+
+![](https://blog.kakaocdn.net/dn/baF39d/btrqnj9mByH/1OWFReBqrPuBtdzvE2M381/img.png)
+
+테이블 뷰에 대한건 좀;; 복잡하고 맘에 안드는 구조긴 한데 -_-;; ...
+
+언젠가 좀 다듬어서 다시 walk 관련 무언가를 할일 있으면 그때 손대보도록 하겠구요.
+
+나머지는 lxn/walk 의 TableView 예제를 참고하시면 더 다양한 활용 방법을 얻을 수 있습니다.
+
+[https://github.com/lxn/walk](https://github.com/lxn/walk)
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #10](https://modu-print.tistory.com/681?category=863372)
+
+by 피로곰  2022. 2. 4.
+
+오랜만입니다.. 이래저래 벌린일이 많다보니 ..
+
+이번에는 PushButton 과 ImageView 를 다뤄 보겠습니다.. 푸쉬 버튼의 경우에는 워낙 오만 예제에서 이미 다 등장을 햇던 놈이라 굳이 설명을 하지 않더라도 대충;; 뭔지 아실테지만 .. 간단하게나마 설명하고 넘어가겠습니다.
+
+```
+/**
+*	PushButton
+**/
+func (m *WinResMgr) PushButton(text string, clickFunc func()) *walk.PushButton {
+	btn, _ := walk.NewPushButton(m.GetParent())
+	btn.SetText(text)
+	btn.Clicked().Attach(clickFunc)
+
+	m.addObj(btn)
+	return btn
+}
+```
+
+이렇게 생겨 먹은 놈이구요 ..
+
+```
+	mgr.PushButton("LineEdit 변경", func() {
+		le.SetText(fmt.Sprintf("현재 유닉스 타임스탬프: %d", time.Now().Unix()))
+	})
+	mgr.PushButton("LineEdit 값", func() {
+		MsgBox(le.Text())
+	})
+```
+
+이런식으로 씁니다..
+
+첫번째 파라메터인 text string은 버튼의 텍스트를 지정합니다. 버튼의 텍스트랄게 뭐 있나요..
+
+![](https://blog.kakaocdn.net/dn/kw2xJ/btrsi9YkzNf/ohWEKUpV8TnTFsspWgR6v0/img.png)
+
+이렇게 버튼에 쓰여진 문자.. 어떤 버튼이 무슨짓을 하는 버튼인진 알아야 누를테니까 ..
+
+두번째 파라메터인 clickFunc 은 버튼이 눌렸을때 호출될 함수를 지정하시면 됩니다. 익명함수로 바로 때려 넣으셔도 되고 미리 만들어둔 함수를 넘기셔도 되구요..
+
+라벨에서도 그렇고 EditText 에서도 그랬지만 .. 이 PushButton 함수는 walk.PushButton 이라는 놈을 리턴합니다 이 리턴된 놈을 가지고 Text(), SetText() 같은 함수로 현재 버튼의 텍스트를 가져오거나 바꾸거나 할 수 있습니다.
+
+쉽게 말해서 토글식으로 버튼이 눌릴때마다 다른 상태값에 따라서 버튼의 텍스트를 변경하는 등의 짓도 가능하다는 말이겠지요.
+
+단지 주의 하질점은 ..
+
+```
+	mgr.PushButton("LineEdit 값", func() {
+		MsgBox(le.Text())
+	})
+```
+
+이런식으로 MsgBox 함수 같이 사용자가 대화창을 닫기전까지 블럭(Block)되는 형태의 함수를 clickFunc 내에서 사용하는 경우에 버튼의 클릭 이벤트는 각각 개별적으로 발생 함으로 만약 사용자가 버튼을 계속 누르게 되면 clickFunc이 계속 쌓입니다? ㅋㅋ
+
+이건 콜백형태로 동작하는 무언가들에서 흔히 일어나는 일이니 알아서들 주의 하셔야 합니다.
+
+----------
+
+ImaveView 를 가봅시다.
+
+ImageView는 말그대로 윈도 창에 png나 jpg같은 이미지 파일을 읽어서 표시 해주는 겁니다.
+
+![](https://blog.kakaocdn.net/dn/cbpPf4/btrsveC5UyN/gezXD2oL8gi6i8E6TzzV7k/img.png)
+
+이런 짓이나 ..
+
+![](https://blog.kakaocdn.net/dn/Rfum7/btrskF27QeS/RaVeGhemRnAypOVdwXPOHk/img.png)
+
+이런짓에 저는 사용하고 있습니다.
+
+```
+/**
+*	ImageViewWin
+**/
+func ImageViewWin() {
+	var currImage *walk.Image
+
+	defer func() {
+		// 새 이미지 로드전에 기존 이미지 해제 않하면
+		// 메모리릭 발생 !! 주의
+		if currImage != nil {
+			(*currImage).Dispose()
+		}
+	}()
+
+	mgr, window := NewWindowMgrNoResizeNoMinMax("TableView 예제", 1920, 1040, GetIcon())
+
+	mgr.HSplit()
+
+	idealIV := mgr.ImageView()
+	idealIV.SetMode(walk.ImageViewModeIdeal)
+
+	cornerIV := mgr.ImageView()
+	cornerIV.SetMode(walk.ImageViewModeCorner)
+
+	centerIV := mgr.ImageView()
+	centerIV.SetMode(walk.ImageViewModeCenter)
+
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	shrinkIV := mgr.ImageView()
+	shrinkIV.SetMode(walk.ImageViewModeShrink)
+
+	zoomIV := mgr.ImageView()
+	zoomIV.SetMode(walk.ImageViewModeZoom)
+
+	stretchIV := mgr.ImageView()
+	stretchIV.SetMode(walk.ImageViewModeStretch)
+	mgr.EndSplit()
+
+	updateImg := func(fname string) {
+		// 새 이미지 로드전에 기존 이미지 해제 않하면
+		// 메모리릭 발생 !! 주의
+		if currImage != nil {
+			(*currImage).Dispose()
+		}
+		currImage = LoadImage(fname)
+		if currImage != nil {
+			idealIV.SetImage(*currImage)
+			cornerIV.SetImage(*currImage)
+			centerIV.SetImage(*currImage)
+			shrinkIV.SetImage(*currImage)
+			zoomIV.SetImage(*currImage)
+			stretchIV.SetImage(*currImage)
+		}
+	}
+
+	mgr.PushButton("피로곰", func() {
+		updateImg("img0.png")
+	})
+	mgr.PushButton("환자1", func() {
+		updateImg("img2.png")
+	})
+	mgr.PushButton("환자2", func() {
+		updateImg("img1.png")
+	})
+
+	//
+	window.Starting().Attach(func() {
+	})
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/RWm7y/btrspJYCWbo/Go5oStpYHn4WtNxsAGzSnk/img.png)
+
+![](https://blog.kakaocdn.net/dn/4WSPz/btrsrRuTgt9/JUcBYkP2yAwWGZGwUf29g1/img.png)
+
+![](https://blog.kakaocdn.net/dn/cCVjmE/btrsrQbGAAE/IIQSjZDrefFamygFaKRn00/img.png)
+
+하단의 피로곰, 환자1, 환자2 버튼에 따라서 이미지를 읽어서 지원하는 정렬형태에 맞춰서 출력하는 예제입니다.
+
+```
+/**
+*	ImageViewFromFile
+**/
+func (m *WinResMgr) ImageViewFromFile(imgFile string) *walk.ImageView {
+	iv, _ := walk.NewImageView(m.GetParent())
+	img, imgErr := walk.NewImageFromFile(imgFile)
+
+	if imgErr == nil {
+		iv.SetImage(img)
+	}
+	m.addObj(iv)
+	return iv
+}
+
+/**
+*	ImageViewFromFile2
+**/
+func (m *WinResMgr) ImageViewFromFile2(imgFile string, im walk.ImageViewMode) *walk.ImageView {
+	iv, _ := walk.NewImageView(m.GetParent())
+	img, imgErr := walk.NewImageFromFile(imgFile)
+
+	if imgErr == nil {
+		iv.SetMode(im)
+		iv.SetImage(img)
+	}
+	m.addObj(iv)
+	return iv
+}
+
+/**
+*	ImageView
+**/
+func (m *WinResMgr) ImageView() *walk.ImageView {
+	iv, _ := walk.NewImageView(m.GetParent())
+	m.addObj(iv)
+	return iv
+}
+
+/**
+*	LoadImage
+**/
+func LoadImage(fileName string) *walk.Image {
+	retImage, retImageErr := walk.NewImageFromFile(fileName)
+
+	if retImageErr != nil {
+		return nil
+	}
+	return &retImage
+}
+```
+
+우선 ImageViewFromFile 함수는 ImageView를 생성함과 동시에 바로 이미지 파일을 읽어서 출력해주는 용도의 함수입니다. 인자는 파일경로만 입력하시면 됩니다.
+
+ImageViewFromFile2의 경우 ImageView를 생성함과 동시에 바로 파일을 읽는데 이미지를 어떤식으로 표시할지 확대를 할지 ImageView의 크기에 맞출지 원본크기 그대로 보여줄지 같은 옵션을 walk.ImageViewMode로 지정가능합니다.
+
+ImageViewFromFile이나 ImageViewFromFile2 함수는 ImageVIew를 생성과 동시에 이미지 파일을 지정하고 그 뒤엔 프로그램이나 윈도창이 소멸할때까지 이미지를 변경할일 없는 경우에 사용하시면 됩니다. 만약 이미지를 상황에따라 변경해야 하는 경우에는 이 두 함수 말고 LoadImage 함수와 SetImage를 통해 제어하시면 됩니다.( 뒤에 설명합니다.. 어짜피 이 함수들은 image 객체를 리턴하지 않기 때문에;; 따로 변경이 불가하긴 합니다만.. )
+
+ImageView 함수는 walk.ImageView 객체를 생성해 줍니다. 파라메터는 없으니 그냥 사용만 하면되고 walk.ImageView객체를 이용해서 이미지를 설정하는 등의 짓을 해야하니 리턴되는 객체는 꼭 변수로 받아두소서 ..
+
+LoadImage 함수는 ImageView 에서 이미지를 출력하는데 사용되는 walk.Image 객체를 이미지 파일을 읽어서 만들어주는 함수입니다. 이 함수로 만든 walk.Image 로 ImageView에 이미지를 출력시키고, 변경시키는 등의 짓이 가능합니다.
+
+우선 ImageViewFromFile 함수는 생성하면서 이미지 파일까지 읽어다 지정을 해버리니 호출한 순간 필요한 처리는 끝나는 샘이 되겠구요.
+
+그런이유로 예제는 ImageView->LoadImage->SetImage 과정을 통해 동적으로 파일을 읽어서 이미지를 설정, 변경하는 과정에 대한 예를 다뤘습니다.
+
+```
+	mgr.HSplit()
+
+	idealIV := mgr.ImageView()
+	idealIV.SetMode(walk.ImageViewModeIdeal)
+
+	cornerIV := mgr.ImageView()
+	cornerIV.SetMode(walk.ImageViewModeCorner)
+
+	centerIV := mgr.ImageView()
+	centerIV.SetMode(walk.ImageViewModeCenter)
+
+	mgr.EndSplit()
+
+	mgr.HSplit()
+	shrinkIV := mgr.ImageView()
+	shrinkIV.SetMode(walk.ImageViewModeShrink)
+
+	zoomIV := mgr.ImageView()
+	zoomIV.SetMode(walk.ImageViewModeZoom)
+
+	stretchIV := mgr.ImageView()
+	stretchIV.SetMode(walk.ImageViewModeStretch)
+	mgr.EndSplit()
+```
+
+우선 ImageView() 함수로 각 위치에 ImageView를 생성해두고 각 이미지뷰의 출력 모드를 다르게 하여 생성하였습니다.
+
+ImageView를 생성 뒤에 SetMode 라는 메소드를 사용하는데요.. 이게 이미지의 출력모드를 지정하는 겁니다.
+
+```
+const (
+	ImageViewModeIdeal ImageViewMode = iota 
+	ImageViewModeCorner						
+	ImageViewModeCenter						
+	ImageViewModeShrink						
+	ImageViewModeZoom						
+	ImageViewModeStretch					
+)
+```
+
+지정가능한 값은 walk코드와 예제의 이미지 출력을 보시면 되겠습니다. 직접 원하는 이미지로 모드를 바꿔가며 출력해보시면 이해가 빠릅니다. ImageView보다 이미지가 크거나 이미지보다 ImageView가 큰 경우에 어떤식으로 이미지를 표시 할지를 모드변경을 통해 처리하시면 됩니다.
+
+![](https://blog.kakaocdn.net/dn/uMmtF/btrsqCdIIBe/4PmK9i8KKMeX2rzXQ73JP0/img.png)
+
+```
+	updateImg := func(fname string) {
+		// 새 이미지 로드전에 기존 이미지 해제 않하면
+		// 메모리릭 발생 !! 주의
+		if currImage != nil {
+			(*currImage).Dispose()
+		}
+		currImage = LoadImage(fname)
+		if currImage != nil {
+			idealIV.SetImage(*currImage)
+			cornerIV.SetImage(*currImage)
+			centerIV.SetImage(*currImage)
+			shrinkIV.SetImage(*currImage)
+			zoomIV.SetImage(*currImage)
+			stretchIV.SetImage(*currImage)
+		}
+	}
+    
+   	mgr.PushButton("피로곰", func() {
+		updateImg("img0.png")
+	})
+	mgr.PushButton("환자1", func() {
+		updateImg("img2.png")
+	})
+	mgr.PushButton("환자2", func() {
+		updateImg("img1.png")
+	})
+```
+
+전체 ImageView의 이미지를 변경 해주는 함수를 하나 작성 하고 이 함수를 각 버튼에 따라 다른 이미지를 읽어서 전체 ImageView의 이미지를 교체해 줍니다.
+
+주석에도 써져 있듯이 .. 이 시점에서 walk.Image를 다루는데 가장 중요한 부분이 나옵니다.
+
+동적으로 프로그램이 동작하는 중간에 ImaveView의 이미지를 교체하는 경우에 기존 이미지의 메모리 해제가 제대로 되지 않아서 메모리 릭이 발생합니다.
+
+Go언어는 Managed언어이고 GC도 있고 메모리 관리는 알아서 해줄텐데 왜 메모리 릭이 발생하느냐? 라고 물으신다면 이 walk 라는 놈은 윈도 API의 랩퍼(Wrapper)입니다. 윈도API는 원래 Go언어를 위해 만들어진 API가 아닙니다. 그럼으로 윈도 API의 DLL들을 Go에서 사용가능하도록 동적으로 링크하여 사용하는 lxn/win 이라는 패키지를 walk 가 쓰고 있는거구요 그 walk를 제가 또 쓰고 있으니 ㅎㅎ
+
+결국 이 윈도API가 다뤄지는 내부에서는 흔히 윈도프로그래밍에서 말하는 DC니 HANDLE이니 HBITMAP이니 이런 것들을 walk 내부에서 다루고 있는겁니다. 한마디로 Go언어 단에서 다루는 walk.ImageView나 walk.Image객체들이야 Go에서 메모리 관리를 하면서 알아서 해제도 하고 GC에 넣네 마네 해주겠지만 이놈들이 내부에서 C로 작성된 DLL들의 것들을 가져와서 한 어떤 행위들은 알아서 정리되지 못합니다. 이는 Go의 영역을 벗어난 곳에서 일어난 일이기 때문이고 ..
+
+일단 동적으로 이미지를 변경해가며 쓰는 경우엔 그런 이유로 .. 직접 객체를 정리를 해줘야 합니다.
+
+그래서
+
+```
+	var currImage *walk.Image
+
+	defer func() {
+		// 새 이미지 로드전에 기존 이미지 해제 않하면
+		// 메모리릭 발생 !! 주의
+		if currImage != nil {
+			(*currImage).Dispose()
+		}
+	}()
+```
+
+상단에 currImage라고 변수하나를 선언 해두고 이놈으로 돌려 쓰고 해당 창이 종료될때에 Dispose()를 호출하여 이미지 객체가 내부에서 사용중인 윈도 리소스를 반환을 합니다.
+
+```
+	updateImg := func(fname string) {
+		// 새 이미지 로드전에 기존 이미지 해제 않하면
+		// 메모리릭 발생 !! 주의
+		if currImage != nil {
+			(*currImage).Dispose()
+		}
+```
+
+updateImg 함수에서도 같은 짓을 하고 있습니다. 새로운 이미지를 로드하기 전에 기존에 읽었던 이미지는 Dispose()를 호출해서 리소스를 반환해 줘야 메모리릭이 발생하지 않습니다.
+
+윈도API에서 이미지를 처리하는 방식은 일반적으로 순수비트맵으로 다루기 때문에 실제 이미지 파일의 크기에 비해서 메모리를 더 크게 차지할겁니다. 화면에 표시되는 픽셀을 압축해가면서 돌아갈 정도로 윈도API의 이미지 처리는 고도화 되지 못했거든요 ㅋㅋ..
+
+메모리릭이 어떤식으로 발생하는지 체험하고 싶으시면 Dispose부분을 빼고 테스트 해보시는것도 ㅎㅎ
+
+ImageView 는 사용이 복잡한건 아닌데 .. 메모리릭 가능성만 잘 체크해 쓰시면 됩니다.
+
+ImageView도 이벤트 처리도 가능합니다.
+
+```
+	imgView.MouseDown().Attach(func(x, y int, mouse walk.MouseButton) {
+		if mouse == walk.LeftButton {
+
+		} else if mouse == walk.RightButton {
+        
+        }
+	})
+	imgView.MouseMove().Attach(func(x, y int, button walk.MouseButton) {
+		win.SetCursor(win.LoadCursor(0, win.MAKEINTRESOURCE(win.IDC_HAND)))
+	})
+```
+
+이런식으로 MouseDown 이벤트에서 마우스 좌클릭이냐 우클릭이냐를 따지실 수 있고 MouseMove 이벤트에서 이미지 위에 마우스가 올라가는 경우에 커서를 손모양으로 변경하는 등의 짓도 가능합니다. 다른 아이콘으로도 가능하구요.. 단지 예제에서 쓰는 win.IDC_HAND의 경우 윈도 공용 리소스라 상관 없지만 직접 커스텀 아이콘 같은걸 사용하기 위해 icon 파일을 읽어서 뭔가 처리를 하는건 과정이 복잡하기도 하고 walk.Image 객체와 같이 Dispose 이슈도 생각 해야 해서 권장하진 않습니다.
+
+이렇게 ImageView에 대한 간단한 예도 마무리 하겠습니다.
+
+이상입니다.
+
+p.s ImageView 부터는 GDI+를 사용하기 때문에 윈도에 VC++ 재배포가능 패키지가 단 1개라도 설치되서 존재해야 합니다.
+
+[https://docs.microsoft.com/ko-KR/cpp/windows/latest-supported-vc-redist?view=msvc-170](https://docs.microsoft.com/ko-KR/cpp/windows/latest-supported-vc-redist?view=msvc-170)
+
+[](https://docs.microsoft.com/ko-KR/cpp/windows/latest-supported-vc-redist?view=msvc-170)
+
+지원되는 최신 Visual C++ 재배포 가능 패키지 다운로드
+
+이 문서에서는 최신 버전의 Visual C++ 재배포 가능 패키지 패키지에 대한 다운로드 링크를 나열합니다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #11](https://modu-print.tistory.com/697?category=863372)
+
+by 피로곰  2022. 2. 16.
+
+이번에는 .. 얼마전에 모두의 프린터 업데이트 하면서 추가시킨 웹뷰(WebView)를 다뤄보도록 하겠습니다.
+
+한가지 주의 하실점은 윈도 API에서 지원하는 WebView는 흔히 IWebBrowser2 라고 불리는 COM+로 오랜세월 윈도에 내장된 레거시 브라우져 컴포넌트를 이용하게 됩니다. 그말은 현재 우리가 많이쓰는 HTML5 기반의 크롬이나 엣지나 파이어폭스 같은 브라우저보다 몇세대 전 기술을 사용하는 ..
+
+그냥 쉽게 IE라고 보시면 됩니다. 그렇다 보니 너무 최신의 CSS나 HTML, Javascript 를 사용한 페이지 에서는 스크립트 오류나 기타 여러 증상이 나타날 순 있습니다.
+
+크로미움 엣지 기반의 WebView2를 MS에서 발표 했습니다만 아직 윈도10에서는 런타임을 추가로 설치하지 않으면 사용하지 못하는데다 그 용량도 100메가가 넘어가는지라 .. 우선 전통적인 웹뷰를 프로그램에 붙여 보도록 하겠습니다.
+
+우선 기존에 공개한 walk_wrap.go 파일에는 웹뷰에 대한 함수가 존재하지 않으니 ..
+
+```
+func (m *WinResMgr) WebView(url string) *walk.WebView {
+	wv, _ := walk.NewWebView(m.GetParent())
+	wv.SetURL(url)
+
+	m.addObj(wv)
+	return wv
+}
+```
+
+walk_wrap.go 파일 안에 대충 아무대나 위 함수 추가를 하시구요.
+
+```
+func webviewTest() {
+	mgr, _ := NewWindowMgr("웹뷰 테스트", 1024, 680, GetIcon())
+
+	mgr.WebView("https://modu-print.tistory.com/category/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C/%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%20%EB%82%B4%EC%97%AD%EC%95%88%EB%82%B4")
+
+	mgr.StartForeground()
+}
+```
+
+이렇게 윈도 창을 하나 만든다음 WebView 를 URL을 인자로 넘기면서 띄우시면 ..
+
+![](https://blog.kakaocdn.net/dn/F7gx7/btrtme4EADx/dIUFxNKdm1CZqwFiApZsC1/img.png)
+
+이런 놈을 보실 수 있습니다.
+
+```
+func webviewTest2() {
+	var wv *walk.WebView
+	mgr, _ := NewWindowMgr("웹뷰 테스트2", 1024, 680, GetIcon())
+
+	mgr.HSplit()
+	mgr.Label("URL:")
+	urlEdit := mgr.LineEdit(false)
+	mgr.PushButton("GO!", func() {
+		wv.SetURL(urlEdit.Text())
+	})
+	mgr.EndSplit()
+
+	wv = mgr.WebView("https://modu-print.tistory.com/category/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C/%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%20%EB%82%B4%EC%97%AD%EC%95%88%EB%82%B4")
+
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/bqOp22/btrtq9VRBCs/czvsdFMaGTmhJnXRmUCJSk/img.png)
+
+이렇게 URL을 입력 받아서 .. 웹브라우져 비수무리하게 가능도 하겠구요 ..
+
+```
+	wv = mgr.WebView("https://modu-print.tistory.com/category/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C/%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%20%EB%82%B4%EC%97%AD%EC%95%88%EB%82%B4")
+	wv.SetNativeContextMenuEnabled(true)
+```
+
+![](https://blog.kakaocdn.net/dn/c70cQx/btrtt5d9ynX/XWLsQ3NakluyUkbygFL7a1/img.png)
+
+이렇게 SetNativeContextMenuEnabled 에 true 로 설정을 하면 마우스 우클릭을 통한 일반적인 브라우져 메뉴를 보실수도 있습니다.
+
+웹뷰는 생각보다 단순해요 어짜피 MS에서 제공한 인터페이스를 그대로 사용을 하는거라 ..
+
+기타 IWebBrowser 에서 제공하는 몇가지 함수나 이벤트 콜백 메소드들은 walk 의 webview.go 를 참고하시면 됩니다. 몇가지 예를 보여드리자면 ..
+
+```
+// 현재 URL 가져옴 
+func (wv *WebView) URL() (url string, err error) {
+}
+
+// URL 변경
+func (wv *WebView) SetURL(url string) error {
+}
+
+// URL이 변경 이벤트 콜백
+func (wv *WebView) URLChanged() *Event {
+}
+
+// 우클릭 메뉴 활성화 여부 (true 켜짐 , false 꺼짐)
+func (wv *WebView) NativeContextMenuEnabled() bool {
+}
+
+// 우클릭 메뉴 활성화 설정 (true 켜짐, false 꺼짐)
+func (wv *WebView) SetNativeContextMenuEnabled(value bool) {
+}
+
+// 페이지 로딩 시작됨(로딩중) 이벤트 콜백
+func (wv *WebView) Navigating() *WebViewNavigatingEvent {
+}
+
+// 페이지 로딩 끝남 이벤트 콜백
+func (wv *WebView) Navigated() *StringEvent {
+}
+
+// 다운로딩 시작됨(다운로드중) 이벤트 콜백
+func (wv *WebView) Downloading() *Event {
+}
+
+// 다운로드 끝남 이벤트 콜백
+func (wv *WebView) Downloaded() *Event {
+}
+
+// 페이지 구성 완료 (렌더링 완료?) 콜백
+func (wv *WebView) DocumentCompleted() *StringEvent {
+}
+
+// 화면 갱신 (F5)
+func (wv *WebView) Refresh() error {
+}
+```
+
+이정도 입니다 자세한건 직접 walk 패키지의 webview.go 를 참고바랍니다.
+
+이 웹뷰 관련도 VC++ 재배포가능 패키지가 없으면 실행이 안됩니다. 만약 시스템에 VC++재배포 패키지가 전혀 없다면 추가로 설치하셔야 합니다. 보통은 다른 프로그램 때문에라도 단 하나라도 설치가 되는 편이지만 .. 그냥 바로 죽어버리기 때문에 원인을 못찾으실수도 있어서 .. 내용을 추가해 둡니다.
+
+[https://docs.microsoft.com/ko-KR/cpp/windows/latest-supported-vc-redist?view=msvc-170](https://docs.microsoft.com/ko-KR/cpp/windows/latest-supported-vc-redist?view=msvc-170)
+
+이상입니다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #12](https://modu-print.tistory.com/698?category=863372)
+
+by 피로곰  2022. 2. 16.
+
+아마 walk와 제가 대충 만든 walk_wrap.go 를 이용한 윈도 gui 프로그래밍에 대한 글은 이게 마지막? 이지 않을까 싶은데요 응용법이나 그런걸 좀더 세세하게 글을 더 쓸지는 모르겠지만.
+
+이번에 다룰 내용은 특정 GUI요소에 대한게 아니라 Go와 Walk를 가지고 윈도GUI를 함에 있어서 가장 주의해야할 사항을 말씀드리겠습니다.
+
+Go언어의 가장큰 장점은 동시성 프로그래밍이 매우 단순하다는 것이지요..
+
+![](https://blog.kakaocdn.net/dn/ndyWh/btrtqDJIumh/dmts8steKl8doUP7rfNO8k/img.png)
+
+흔히 윈도 프로그래밍을 할때 스레드(Thread)를 생성할때는 위의 CreateThread나 _beginthread 같은 함수를 사용하는데 인자도 많고 복잡해 보입니다..
+
+Go언어의 경우 그냥 앞에 go만 붙여서 쓰면 스레드로 동작을 하는 매우 단순한 구조를 가지고 있는데다 Managed 언어이니 익명함수로 스레드 함수를 남발도 가능한 놈이지요 ..
+
+윈도 GUI를 위한 API는 Go언어를 염두하고 만들어진게 아닙니다. 원래 C/C++ 나 C# 같은 언어들에서 사용되기 위해 개발된거지만 DLL(Dynamic Linked Library)형태로 대부분의 것들이 구성되는 윈도의 특성상 Go언어에서도 DLL을 끌어다가 Go 프로그래밍 하듯 그냥 가져다 쓰고 있지만 .. 엄격하게 따져보자면 walk 를 이용해서 Go에서 윈도 GUI 가 돌아간다는 것은 Go언어의 영역과 DLL내의 함수들에 의해 돌아가는 영역이 따로 분리되어 있다고 생각하시는게 편합니다.
+
+```
+/**
+*	WaitAndCloseWin
+**/
+func WaitAndCloseWin() {
+	mgr, window := NewWindowMgrNoResizeNoMinMax("wait and close", 150, 100, GetIcon())
+
+	label := mgr.Label("5초후 종료")
+
+	ticker := time.NewTicker(time.Second)
+
+	go func(tick *time.Ticker) {
+		var count int = 5
+
+		for {
+			select {
+			case <-tick.C:
+				count--
+				if count <= 0 {
+					tick.Stop()
+					mgr.HideAndClose()
+					return
+				} else {
+					window.Synchronize(func() {
+						label.SetText(fmt.Sprintf("%d초 남음", count))
+					})
+				}
+			default:
+				time.Sleep(time.Millisecond)
+			}
+		}
+	}(ticker)
+
+	mgr.DefClosing()
+	mgr.StartForeground()
+}
+```
+
+![](https://blog.kakaocdn.net/dn/bzc8n0/btrtsF7JAhG/ZqJsKfs7zj7yH1H3l0rdxk/img.png)
+
+위의 함수는 창을 하나 띄우고 창에 존재하는 Label에 1초마다 카운트를 감소 시켜서 Label 의 내용을 변경시키고 5초가 넘으면 창을 종료시키는 코드입니다.
+
+mgr.DefClosing() 메소드는 5초가 지나기 전에 창을 닫더라도 종료되지 않도록 막아주는 역할을 합니다.
+
+```
+/**
+*	DefClosing
+**/
+func (m *WinResMgr) DefClosing() {
+	m.window.Closing().Attach(func(canceled *bool, reason walk.CloseReason) {
+		if m.window.Visible() {
+			*canceled = true
+		}
+	})
+}
+```
+
+이 함수가 호출되면 창을 닫으려 하는 이벤트가 발생할때 창이 보여지고 있는 상태면 해당 이벤트를 취소해서 창이 닫히지 않도록 만들어 줍니다.
+
+그런 이유로 이 DefClosing() 함수를 사용한 경우에는 .. window.Close() 함수가 아닌
+
+```
+/**
+*	HideAndClose
+**/
+func (m *WinResMgr) HideAndClose() {
+	m.window.Synchronize(func() {
+		m.window.SetVisible(false)
+		m.window.Close()
+	})
+}
+```
+
+이놈을 써 줘야 합니다. 앞서 창이 표시되고 있으면 닫을수 없기 때문에 먼저 창을 보이지 않도록 SetVisible(false)를 호출한 뒤에 창을 닫습니다. 그러면 Closing 이벤트에서 이벤트를 취소하지 않게되고 창이 정상적으로 닫히게 되지요.
+
+문제는 ..
+
+![](https://blog.kakaocdn.net/dn/kHzZ6/btrtlUyZRmA/Nl3oKodlRwKLOK8FAUVri0/img.png)
+
+이 go 루틴과 StartForground()로 실행될 윈도창의 프로시저와 서로 다른 스레드라는 말이지요 윈도 창이 뜨고 창을 이동하든 버튼을 누르든 뭘 하든 발생하는 윈도와 관련된 이벤트 핸들링이나 기타 등등은 walk 에서 구성한 내부 스레드 내에서 동작을 하는 중이고 .. 그와 별개로 제가 5초를 카운팅 해가며 창의 타이틀을 변경시키는 고루틴을 따로 생성 하였지요..
+
+그러면
+
+![](https://blog.kakaocdn.net/dn/dllLdr/btrtuurlh2N/zyhCWjvFzskSWxkIq5VaL0/img.png)
+
+이 고루틴 내에서 walk 가 관리중인 윈도에 대해서 뭔가를 하면 어찌 될까요?
+
+충돌 납니다 ㅋㅋ .. 문제는 이게 cgo 나 dll 로 끌어들인 놈이라 윈도 메시지 핸들러등은 Go의 영향권이 아니라서 패닉이 난다거나 하는게 아닌 그냥 서버립니다 프로세스가.. 멈춰버려요.. 멈춰 버리는 이유를 간단히 설명하자면, 윈도API는 대부분 동기화의 테두리 안에서 동작합니다, 윈도 메시지는 순서없이 마구 발생이 가능하지요.. 마우스를 움직여 가며 버튼을 누를수도 있고 ㅎㅎ.. 그런이유로 PeekMessage 나 GetMessage 같은류의 윈도 API함수를 호출하면 내부적으로 동기화 처리를 거쳐서 동작을 합니다. 사용자가 동시에 이짓저짓을 하더라도 윈도 메시지 핸들러 입장으론 한번에 하나의 이벤트에 대한 처리만 동기화를 거쳐서 한다는 말이지요.. 그런데 윈도와 상관없이 동작하는 고루틴내에서 특정 윈도상의 UI객체의 값을 변경한다거나 창을 닫으려 한다거나 하면? 말그대로 동기화 없이 막 들이대는 꼴이 됩니다. 보통은 패닉이 나고 뻗어야할 상황이지만 위에 말했듯이 이놈은 Go런타임 영역 밖에서 관리되는 놈이니까요..
+
+그래서 walk 의 외부에서 윈도에 접근하여 무언가 하려거든
+
+```
+window.Synchronize(func() {
+    label.SetText(fmt.Sprintf("%d초 남음", count))
+})
+```
+
+이 Synchronize 메소드를 사용하시면 됩니다.
+
+이 함수의 역할은 인자로 전달받은 함수를 리스트에 넣어둔 후에 윈도API의 메시지가 발생해서 (WM_SIZE든 WM_PAINT든.. WM_... 뭐든간에.. ) 발생한 윈도 메시지를 처리하는 함수의 마지막 즈음에 함수 리스트에 들어 있는 함수들을 죄다 꺼내서 실행 시킵니다.
+
+그러면 윈도창의 동기화를 거쳐서 안전하게 윈도를 다룰수 있는 상황에서 일을 벌리게 되기 때문에.. 윈도 동기화 프로세스의 밖에서 윈도 동기화 프로세스 내에서 실행가능한 함수들을 밀어 넣을수 있다는게 됩니다.
+
+결론은 그냥 윈도GUI창에 뭐 할라 하면 그냥 쓰세요 이 함수 Synchronize ㅋㅋ PushButton 의 클릭 이벤트나 window.Starting 같은 walk 에서 제공하는 이벤트 콜백들은 윈도의 동기화 처리 내에 있는 경우라 그런 경우들은 굳이 안쓰셔도 됩니다.
+
+```
+// Synchronize enqueues func f to be called some time later by the main
+// goroutine from inside a message loop.
+func (wb *WindowBase) Synchronize(f func()) {
+	wb.group.Synchronize(f)
+
+	win.PostMessage(wb.hWnd, syncMsgId, 0, 0)
+}
+```
+
+이렇게 생겨 먹었습니다. 인자로 전달받은 함수를 큐에 넣어두고 .. 해당 윈도에 큐에 처리할 함수가 추가됫다는 메시지를 발생시킵니다. PostMessage로 윈도 메시지를 발생 시켰으니 윈도 메시지 핸들러가 메시지를 받을꺼고 그러면 동기화 처리 거쳐서 WndProc같은 윈도 메시지를 처리해줄 함수에서 동기화 문제 없이 처리가 가능해 진다는거죠 ..
+
+예제 코드를 간단히 설명 하자면 ..
+
+```
+// wait and close 라는 타이틀로 창을 생성함
+mgr, window := NewWindowMgrNoResizeNoMinMax("wait and close", 150, 100, GetIcon())
+
+
+label := mgr.Label("5초후 종료")
+
+// 고루틴에서 1초마다 이벤트를 발생시킬 티커 생성
+ticker := time.NewTicker(time.Second)
+
+// 백그라운드에서 지난 시간을 체크할 고루틴(스레드)
+go func(tick *time.Ticker) {
+    var count int = 5	// 5초 카운트
+
+	// 스레드 루프 
+    for {	
+        select {
+        case <-tick.C:	// ticker 이벤트 발생(1초 간격)
+            count--	// 5초 카운팅
+            
+            // 지정된 시간이 다 지나면
+            if count <= 0 { 
+                tick.Stop()				// 티커 정지
+                mgr.HideAndClose()		// 윈도 창 닫음 
+                return 		// 스레드 종료 
+            } else {
+            	// 동기화를 위해 Synchronize 사용 
+                window.Synchronize(func() {
+                	// 창이 닫히기 까지 남은 시간 라벨에 표시
+                    // label 은 walk 내에서 관리되는 객체이기 때문에
+                    // Synchronize 를 통해서 다루지 않으면 충돌발생
+                    label.SetText(fmt.Sprintf("%d초 남음", count))
+                })
+            }
+        default:
+        	// CPU 사용율은 소중하니까!
+            time.Sleep(time.Millisecond)
+        }
+    }
+}(ticker)
+
+mgr.DefClosing()
+mgr.StartForeground()
+```
+
+이쯤 되겠네요 ..
+
+이상입니다.
+
+----
+
+# [Go로 MS 윈도 네이티브 GUI 프로그램 만들기 #13](https://modu-print.tistory.com/699?category=863372)
+
+by 피로곰  2022. 2. 16.
+
+앞서 12개의 글을 쓰면서 작성한 예제 코드를 올립니다.
+
+[](https://blog.kakaocdn.net/dn/J4Z5i/btrtoA02UVd/HKIGPqGP4dA6asPGckZn3K/WALK_WRAP_TEST.zip?attach=1&knm=tfile.zip)
+
+WALK_WRAP_TEST.zip
+
+0.51MB
+
+![](https://blog.kakaocdn.net/dn/cqh1Mn/btrtsTSCfX6/aqKddppjicOnCglqqZawWK/img.png)
+
+포함된 파일들에 대해서 설명 드리자면
+
+DEMO.ico, test.ico
+
+아이콘 파일입니다.
+
+img0.png, img1.png, img3.png
+
+ImageView 예제에서 사용된 이미지 파일입니다.
+
+list_model.go, list_sample.go, test_table_cbmodel.go
+
+TableView 예제를 포함한 소스파일
+
+main.go
+
+main 함수가 존재하고 대부분의 예제에 사용된 함수들이 있습니다.
+
+Makefile
+
+make 명령을 위한 Makefile
+
+walk_wrap.go
+
+피로곰이 막 만든 walk 랩퍼
+
+WALK_WRAP.manifest
+
+syso 파일을 만들기 위한 메니페스트 파일
+
+WALK_WARP.syso
+
+rsrc 명령으로 만들어진 오브젝트 파일
+
+우선
+
+README.txt내용대로
+
+> 만든놈: 피로곰(mop.pirogom@gmail.com)  
+> 라이선스: 그냥쓰소.. 단, 내꺼인냥 하진 마소 ..  
+> https://github.com/akavel/rsrc 위 rsrc 패키지 go get 해야함 Makefile 참고 필수
+
+참고하시구요..
+
+rsrc와 manifest, syso 관련된건
+
+[https://github.com/akavel/rsrc](https://github.com/akavel/rsrc)
+
+[](https://github.com/akavel/rsrc)
+
+GitHub - akavel/rsrc: Tool for embedding .ico & manifest resources in Go programs for Windows.
+
+Tool for embedding .ico & manifest resources in Go programs for Windows. - GitHub - akavel/rsrc: Tool for embedding .ico & manifest resources in Go programs for Windows.
+
+github.com
+
+위 패키지를 참고바라구요.
+
+전 MSYS2를 설치해서 윈도에서도 Makefile 을 사용하고 있지만 설치 없이 빌드명령들만 참고하길 바라시는 경우엔 Makefile의 내용을 참고하시면 되겠습니다.
+
+```
+32:
+	GOARCH=386 go build -ldflags '-s -w -H windowsgui' -o WALK_WRAP32.exe
+64:
+	GOARCH=amd64 go build -ldflags '-s -w -H windowsgui' -o WALK_WRAP64.exe
+rsrc:
+	rsrc -manifest WALK_WRAP.manifest -ico test.ico -o WALK_WRAP.syso
+all:
+	make 32 64
+```
+
+만액 go.mod 어쩌구 애러가 뜨거나 하면 ..
+
+```
+32:
+	GO111MODULE=off GOARCH=386 go build -ldflags '-s -w -H windowsgui' -o WALK_WRAP32.exe
+64:
+	GO111MODULE=off GOARCH=amd64 go build -ldflags '-s -w -H windowsgui' -o WALK_WRAP64.exe
+rsrc:
+	rsrc -manifest WALK_WRAP.manifest -ico test.ico -o WALK_WRAP.syso
+all:
+	make 32 64
+```
+
+이게 편하실려나 몰겠네요 ;;
+
+```
+/**
+*	main
+**/
+func main() {
+
+	// embed 된 ico 파일을 쓰고 싶으면 LoadIcon 함수 사용
+	LoadIconFromFile("./test.ico")
+
+	//ImageViewWin()
+	//EditTest2()
+	//webviewTest2()
+	//	comboTest1()
+	//LabelTest2()
+	WaitAndCloseWin()
+	/*	MsgBox("메시지 박스임 ㅋㅋㅋ")
+
+
+		ImageViewWin()
+		TableViewWin()
+
+		FullWin()
+		NoResizeWin()
+		NoResizeNoMinMxWin()
+		DefaultLayoutWin()
+		CustomLayoutWin()
+		WaitAndCloseWin()*/
+}
+```
+
+main 함수를 참고하시고.. 각 함수들 보셔서 주석 풀고 넣어보고 하면서 .. 테스트 해보시기 바랍니다.
+
+----
+
+# [Go언어/GUI WebView이용시 자바스크립트 오류 문제](https://modu-print.tistory.com/705?category=863372)
+
+by 피로곰  2022. 2. 18.
+
+앞서 Go언어의 lxn/win, lxn/walk 그리고 제가 막 만든(강조합니다 막 만든겁니다) walk_wrap.go 를 이용해서 윈도 GUI 프로그래밍을 할때.. 웹뷰를 추가 가능한데요..
+
+이 웹뷰는 ..
+
+IE기반의 OLE 객체를 끌어다 동작을 하는지라 최신 웹 브라우저에 비해선 기능이 조금 ;; 제한적이긴 합니다. 그중 가장큰 문제는 .. 자바스크립트 오류가 발생시에는 ..
+
+![](https://blog.kakaocdn.net/dn/c9gP2O/btrtBURSjn2/4FARB4iobuFlKzdlFDIBr0/img.png)
+
+이런식으로 스크립트 오류창이 뜬다는 것이지요. 최신 브라우져들의 경우엔 개발자도구를 지원하기 때문에 이런식으로 자바스크립트 오류가 뜬다해서 메시지 창을 띄워가며 실행을 하네마네를 묻지 않습니다. 이게 상당히 거슬리는데 ..
+
+아마 인터넷에 뒤져보시면 ..
+
+iwebbrowser2 javascript error 대충 이런 검색을 해보면 ..
+
+[https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/general-info/ee330730(v=vs.85)?redirectedfrom=MSDN#browser_emulation](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/general-info/ee330730(v=vs.85)?redirectedfrom=MSDN#browser_emulation)
+
+[](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/general-info/ee330730(v=vs.85)?redirectedfrom=MSDN#browser_emulation)
+
+Internet Feature Controls (B..C) (Internet Explorer)
+
+Table of contents Internet Feature Controls (B..C) Article 10/13/2015 5 minutes to read In this article --> This article describes feature controls with names that begin with the letters B or C. For links to other feature controls, see Feature Controls. Bi
+
+docs.microsoft.com
+
+이렇게 에뮬레이션 모드 관련된 레지스트리 값을 변경해서 이 웹뷰컨트롤의 모드를 조정할수 있다고 하는 등의 몇가지 방법들이 일반적으로 찾아 질겁니다 ..
+
+그.러.나..
+
+css 처리나 기타 몇가지 케이스에선 차이가 나올진 모르겠지만 .. 이 윈도에 기본 내장된 웹뷰 컨트롤 자체도 업데이트가 전혀 없던 놈은 아닌지라 .. xp 시절같이 그렇게 극악스럽진 않습니다만 ..
+
+하여튼간에 ;; 여러 방법을 쓰더라도 .. 자바스크립트의 작은 오류 하나만 있어도 메시지 창을 통해서 리포트하는 저 구조는 변하질 않는다는게 문제입니다.
+
+그래서 가장 보편적으로 사용가능한 방법을 알려 드립니다.
+
+[https://docs.microsoft.com/en-us/previous-versions//aa768269(v=vs.85)?redirectedfrom=MSDN](https://docs.microsoft.com/en-us/previous-versions//aa768269(v=vs.85)?redirectedfrom=MSDN)
+
+[](https://docs.microsoft.com/en-us/previous-versions//aa768269(v=vs.85)?redirectedfrom=MSDN)
+
+Silent Property (IWebBrowser2)
+
+Table of contents IWebBrowser2::Silent Property Article 05/12/2014 2 minutes to read In this article --> Sets or gets a value that indicates whether the object can display dialog boxes. Syntax HRESULT IWebBrowser2::get_Silent(VARIANT_BOOL *pbSilent); HRE
+
+docs.microsoft.com
+
+간단히 말해서 이 IWebBrowser2 컨트롤의 내부에는 Silent mode 에 대한 flag 값이 존재 합니다.
+
+![](https://blog.kakaocdn.net/dn/tvByv/btrtzbtujKg/uj5vjNUnbGyu9DxlFHjxK0/img.png)
+
+이렇게 .. 두가지 메소드가 제공이되고 하나는 현재 상태를 얻는것 두번째는 해당 값을 변경하는 것인데 .. get, set 이 아니라 get, put?? 이네요 ㅋㅋ 하여튼 저시절 개발자들은 뭐하나라도 다르게 할라고 용을 아주 그냥 ㅋㅋ 환자들 에혀 ..
+
+여튼간에 put_Silent 를 통해서 silent 모드를 켜면 저 오류창을 보지 않을수 있습니다...............만!!
+
+여기서 주의하실점이 한가지 있습니다. 이 silent 모드는 저런 자바스크립트 오류창만 죽이는게 아닙니다. 저렇게 따로 다이얼로그 형태로 동작하는 모든 창을 무시합니다.
+
+예를들어 웹페이지에서 자바스크립트로 띄우는 alert() 함수라던지 .. 요즘은 잘 사용되지 않는 http 의 기본 basic auth 창 ..
+
+![](https://blog.kakaocdn.net/dn/MS4Mq/btrtCU5mPX4/kKJn1TBnuH5OWEBAKJ7fX1/img.png)
+
+대충 이런것들 ..
+
+싹.다 안뜹니다..
+
+그래서 .. 만약 특정 창.. 그러니까.. 이런식으로 뜨는 창들중에 자바스크립트 오류에 해당하는 창만 안띄우려 하면 좀더 고차원적인 방법으로.. 창을 스폰시키는 부분에서 분리하여 처리를 해주는 방법도 인터넷 찾으면 나오지만 .. 이걸 Go로 싹다 구현을 한다는것도 귀찮고 ..
+
+현재 저는 .. 그냥 제 블로그의 글들이나 좀 보여주면 되는데다 ..
+
+보통은 이 웹뷰를 내장시키는건 .. 광고 노출정도나 간단한 공지사항 노출정도를 보통 쓰기 때문에 ..
+
+이 silent 모드를 켜는 부분에 대한 것을 말씀드리겠습니다.
+
+이걸 하려면 lxn/win 이랑 lxn/walk에 메소드를 추가를 해야 합니다만.. 보통 요즘 트렌드로 치자면 이런 짓을 하려면 제가 저 두 패키지를 다 받아다가 추가를 해서 따로 repo를 파서 .. 패키지를 따로 .. pirogom/win, pirogom/walk 이딴 식으로 .. 새로 새끼쳐서 올리거나 해야겠지만 ..
+
+전 일단 깃헙 계정을 안만든 데다.. ( 언젠간 하것쥬 .. ) , SVN성애자 인대다 .. 결정적으로 귀찮은 관계로 ..
+
+어느 파일에다 뭘 추가해서 어케 쓰면 되는지를 알려드리겠습니다.
+
+우선 lxn/win/shdocvw.go 파일에서
+
+```
+func (wb2 *IWebBrowser2) Put_Silent(Flag int32) HRESULT {
+	ret, _, _ := syscall.Syscall(wb2.LpVtbl.Put_Silent, 2,
+		uintptr(unsafe.Pointer(wb2)),
+		uintptr(Flag),
+		0)
+
+	return HRESULT(ret)
+}
+```
+
+대충 적당한 위치에 위 메소드를 추가하시구요 .. 저는 Refresh 와 Put_Left 사이에 추가해 넣었습니다.
+
+![](https://blog.kakaocdn.net/dn/qZsk5/btrtGidl7FV/3wYmSgYELgztX4kpiocD00/img.png)
+
+이제 ..
+
+lxn/walk/webview.go 파일에서
+
+```
+func (wv *WebView) SetSilent() error {
+	return wv.withWebBrowser2(func(webBrowser2 *win.IWebBrowser2) error {
+		webBrowser2.Put_Silent(1)
+		return nil
+	})
+}
+```
+
+이렇게 앞서 lxn/win 에서 추가한 Put_Silent 메소드를 호출합니다. silent 값은 기본이 false 라 켜는 함수만 만들었습니다.
+
+이렇게 한뒤에 ..
+
+제가 앞서 강좌글에서 다룬 walk_wrap.go 파일 안의
+
+```
+func (m *WinResMgr) WebView(url string) *walk.WebView {
+	wv, _ := walk.NewWebView(m.GetParent())
+	wv.SetSilent()
+	wv.SetURL(url)
+
+	m.addObj(wv)
+	return wv
+}
+```
+
+WebView 생성 함수 안에다가 만든 메소드를 추가하셔도 되구요 .. 이 함수는 놔두고 선별적으로 저걸 끄고 싶으시면 ..
+
+리턴된 walk.WebView 객체에서 SetSilent 함수를 호출하시면 되겠습니다.
+
+이상입니다.
+
+----
+
+# [Go언어/GUI WebView 로딩 문제 ..](https://modu-print.tistory.com/711?category=863372)
+
+by 피로곰  2022. 2. 22.
+
+앞서 강좌?? 까진 아니어도 여튼간에.. Go언어에서 윈도 Gui를 구성하는 법에 대한 글들 중 웹뷰를 설명한 적 있는데요. 이 웹뷰를 사용함에 있어서 한 가지 눈에 거슬리는 부분이 생기실겁니다.
+
+![](https://blog.kakaocdn.net/dn/cnPo7e/btrt1J2Gpak/kdXgYFb5cmVBlMUvs3revK/img.gif)
+
+보시면.. 창이 뜨고 잠시후에 웹뷰가 표시되는 걸 보실 수 있는데요.. 이건 이 IWebBrowser2라는 놈이 OLE/COM 그러니까 흔히 말하는 OCX로 만들어진 놈이라..
+
+원래 MFC로 다이얼로그 베이스의 프로그램을 만들거나 할 경우에는 프로그램의 생성자 즈음에 이 OCX객체의 초기화 관련 코드도 진행을 하기 때문에 .. 창이 표시되기 전에 웹뷰 관련 초기화가 이미 진행이 된 상태라 창이 표시되는 시점과 웹뷰가 준비된 시점이 거의 비슷하지만..
+
+이 lxn/walk의 웹뷰는.. 기본적으로 lxn/win 패키지에서 동적으로 IWebBrowser2 객체를 끌어오는 형식을 취하고 있기 때문에 실제론 창이 생성돼서 보이는 시점보다 웹뷰가 초기화되고 사이트가 로딩돼서 뜨는 시점이 차이가 날 수 있습니다.
+
+이런 식으로 쓰면 문제점이.. 웹뷰를 통해서 무언가를 보여주기 위해서 웹뷰를 쓰는데.. 웹뷰의 내용을 보기도 전에 사용자가 창을 닫아버리면 아무 의미가 없어지죠..
+
+그리하여..
+
+우선 창을 보이지 않게 생성한 후 웹뷰의 초기화 및 준비가 끝나면 창을 보여주도록 해봅니다.
+
+```
+func webviewTest() {
+	mgr, win := NewWindowMgr("웹뷰 테스트", 1024, 680, GetIcon())
+
+	wv := mgr.WebView("https://modu-print.tistory.com/category/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C/%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%20%EB%82%B4%EC%97%AD%EC%95%88%EB%82%B4")
+
+	wv.Navigated().Attach(func(s string) {
+		if !win.Visible() {
+			win.Synchronize(func() {
+				win.Show()
+			})
+		}
+	})
+
+	mgr.HideStart()
+	//mgr.StartForeground()
+}
+```
+
+웹뷰의 Navigated 이벤트는 URL에 대한 브라우징이 끝났을 경우에 발생하는 이벤트입니다. 이 이벤트가 발생 시에 창이 보이는 상태가 아니면.. 그러니까 win.Visible()이 false를 리턴하는 경우엔 해당 윈도가 Hide 상태입니다. 그러니 보이도록 해야겠지요.
+
+웹뷰의 객체도 윈도 내에 있으니 상관없을 것 같긴 합니다만.. 그래도 혹시 몰라 win.Synchronize로 묶어 봤습니다.
+
+보통 다른 예제들에서는 mgr.StartForeground()라는 메서드를 사용했는데요.. 이건 창을 시작하면서 맨 상단으로 보여줘라 라는 의미로 쓰는 놈입니다만..
+
+페이지 로딩이 끝나기 전에는 창을 보여주지 않을 거니..
+
+mgr.HideStart() 메서드로.. 창을 시작은 하되 보이진 않도록 해서 시작합니다.
+
+![](https://blog.kakaocdn.net/dn/Mdmdf/btrt0NDZeUt/y1ivhzdDzpdX8G3KVcIG41/img.gif)
+
+차이가 느껴 지십뉘까?? ㅋㅋ
+
+이상입니다.
+
+----------
+
+2022.03.23일 추가 ..
+
+위에 언급한 lxn/win, walk 를 직접 수정해 쓰는게 좀 .. 좋은 방식은 아니기도 하고 .. 저것 말고도 손봐서 쓸 일이 좀 있을것 같아서 해당 패키지들을 클론해서 따로 팠습니다.
+
+[https://github.com/pirogom/walk](https://github.com/pirogom/walk)
+
+[](https://github.com/pirogom/walk)
+
+GitHub - pirogom/walk: Walk is a "Windows Application Library Kit" for the Go Programming Language. Clone from lxn/walk.
+
+Walk is a "Windows Application Library Kit" for the Go Programming Language. Clone from lxn/walk. - GitHub - pirogom/walk: Walk is a "Windows Application Library Kit" for the Go...
+
+github.com
+
+[https://github.com/pirogom/win](https://github.com/pirogom/walk)
+
+[](https://github.com/pirogom/walk)
+
+GitHub - pirogom/walk: Walk is a "Windows Application Library Kit" for the Go Programming Language. Clone from lxn/walk.
+
+Walk is a "Windows Application Library Kit" for the Go Programming Language. Clone from lxn/walk. - GitHub - pirogom/walk: Walk is a "Windows Application Library Kit" for the Go...
+
+github.com
+
+go get github.com/pirogom/win
+
+go get github.com/pirogom/walk
+
+하시고
+
+import 구문들도 lxn/win, walk 에서 pirogom/win, walk 로 변경하시면 .. 위에 언급한 수정사항은 이미 적용된 패키지를 사용 가능하십니다. 아마 앞으로 관련 글에서 다뤄지는건 lxn/win ,walk 가 아닌 제가 관리하는 win, walk 를 기반으로 할것 같습니다.
+
+----
+
+# [Go언어 윈도 GUI 개발관련 win/walk 패키지 분리](https://modu-print.tistory.com/731?category=863372)
+
+by 피로곰  2022. 3. 23.
+
+기존에 Go언어로 윈도 GUI 개발과 관련하여 lxn/win, lxn/walk 패키지를 이용한 개발 방법을 글로 작성 했었는데요.. 작성한 글중중에도 .. WebView 의 자바스크립트 오류와 관련해서 이 패키지들을 수정해서 쓰는 법등도 다루긴 했습니다. 이래저래 계속 써 가다보니 .. 저 패키지들을 직접 수정을 해야 하거나 윈도 API중 lxn/win 에 포함안된 함수들이 있거나 해서 추가를 해야하는 등의 일이 계속 일어날 것 같아서 ..
+
+귀찮아서 ;; 안만들고 버티던 .. 깃헙계정을 ;; 결국 만들고 쓰게 되네요 ..
+
+제가 예제에서 다루던
+
+github.com/lxn/win 패키지는 github.com/pirogom/win 으로 바꿔서 import 하시면 되겠구요
+
+[https://github.com/pirogom/win](https://github.com/pirogom/win)
+
+[](https://github.com/pirogom/win)
+
+GitHub - pirogom/win: win is a Windows API wrapper package for Go. clone from lxn/win
+
+win is a Windows API wrapper package for Go. clone from lxn/win - GitHub - pirogom/win: win is a Windows API wrapper package for Go. clone from lxn/win
+
+github.com
+
+github.com/lxn/walk 도 github.com/pirogom/walk 로 바꿔서 import 하시면 되겠습니다.
+
+[https://github.com/pirogom/walk](https://github.com/pirogom/walk)
+
+[](https://github.com/pirogom/walk)
+
+GitHub - pirogom/walk: Walk is a "Windows Application Library Kit" for the Go Programming Language. Clone from lxn/walk.
+
+Walk is a "Windows Application Library Kit" for the Go Programming Language. Clone from lxn/walk. - GitHub - pirogom/walk: Walk is a "Windows Application Library Kit" for the Go...
+
+github.com
+
+당연히
+
+go get github.com/pirogom/win
+
+go get github.com/pirogom/walk
+
+는 하셔야 합니다.
+
+필요한건 직접 수정해 가면서 써버릇 하다보니 .. 매번 어디에 뭘 고쳐라;; 라고 해가며 글을 쓰기도 그렇고 관리상 편의를 위해서 앞으론 깃헙을 최대한 활용해 볼까 합니다.
+
+----
+
+# [Go언어/윈도GUI 파일 드래그앤드랍(Drag&Drop) 처리](https://modu-print.tistory.com/732?category=863372)
+
+by 피로곰  2022. 3. 23.
+
+우선 앞서 lxn/walk 와 win 을 제 깃헙으로 클론해서 따로 관리한다고 글 올렸으니 참고하시구요.
+
+[https://modu-print.tistory.com/731](https://modu-print.tistory.com/731)
+
+[](https://modu-print.tistory.com/731)
+
+Go언어 윈도 GUI 개발관련 win/walk 패키지 분리
+
+기존에 Go언어로 윈도 GUI 개발과 관련하여 lxn/win, lxn/walk 패키지를 이용한 개발 방법을 글로 작성 했었는데요.. 작성한 글중중에도 .. WebView 의 자바스크립트 오류와 관련해서 이 패키지들을 수정
+
+modu-print.tistory.com
+
+창이나 특정 UI 객체에 드래그앤드랍을 통한 파일처리가 필요한 경우가 있습니다.
+
+예를들어 파일리스트에 파일을 드래그앤 드랍으로 던지면 던진 파일들이 추가가 된다던지..
+
+LineEdit 에 파일을 드래그앤드랍하면 해당 파일의 경로가 채워 진다던지 ..
+
+```
+/**
+*	TableViewWin
+**/
+func TableViewWin() {
+	cbModel := new(testTableViewListModel)
+	mgr, window := NewWindowMgrNoResizeNoMinMax("TableView 예제", 400, 300, GetIcon())
+
+	th := []tableViewHeader{{Title: "이름", Width: 150}, {Title: "설명", Width: 150}}
+	testTv := mgr.TableView(cbModel, th, true, true)
+
+	// 드랍파일
+	window.DropFiles().Attach(func(s []string) {
+		for _, fname := range s {
+			fmt.Println(fname)
+			//MsgBox(fname)
+		}
+	})
+
+	// 마우스 클릭
+	testTv.MouseDown().Attach(func(x int, y int, mouse walk.MouseButton) {
+		if mouse == walk.LeftButton && x > 18 {
+			nCurrItem := testTv.IndexAt(x, y)
+
+			if nCurrItem > -1 {
+				if cbModel.items[nCurrItem].checked {
+					cbModel.items[nCurrItem].checked = false
+				} else {
+					cbModel.items[nCurrItem].checked = true
+				}
+				testTv.UpdateItem(nCurrItem)
+			}
+		}
+	})
+
+	testTv.KeyUp().Attach(func(key walk.Key) {
+		if key == walk.KeyDelete {
+			currIdx := testTv.CurrentIndex()
+
+			if currIdx != -1 {
+				if !Confirm(fmt.Sprintf("%s 를 삭제합니다.", cbModel.items[currIdx].Name)) {
+					return
+				}
+
+				cbModel.items = append(cbModel.items[:currIdx], cbModel.items[currIdx+1:]...)
+				cbModel.PublishRowsReset()
+			}
+		} else if key == walk.KeyReturn {
+			od := testTableViewListItem{}
+			od.Name = "피로곰"
+			od.Desc = "만세"
+			cbModel.items = append(cbModel.items, od)
+			cbModel.PublishRowsReset()
+		}
+	})
+
+	testTv.ItemActivated().Attach(func() {
+		currIdx := testTv.CurrentIndex()
+
+		if currIdx != -1 {
+			MsgBox(fmt.Sprintf("선택된 아이템 : %d", currIdx))
+		}
+	})
+
+	mgr.PushButton("선택된 아이템", func() {
+		selectedIndex := testTv.SelectedIndexes()
+
+		if len(selectedIndex) == 0 {
+			MsgBox("없음")
+		} else {
+			MsgBox(fmt.Sprintf("%v", selectedIndex))
+		}
+	})
+
+	mgr.PushButton("전체체크", func() {
+		for idx, _ := range cbModel.items {
+			cbModel.items[idx].checked = true
+			testTv.UpdateItem(idx)
+		}
+	})
+
+	mgr.PushButton("전체체크해제", func() {
+		for idx, _ := range cbModel.items {
+			cbModel.items[idx].checked = false
+			testTv.UpdateItem(idx)
+		}
+	})
+
+	window.Starting().Attach(func() {
+		ad := []testTableViewListItem{
+			{Name: "피로곰", Desc: "만세"},
+			{Name: "Panic", Desc: "환자"},
+			{Name: "용민", Desc: "환자2"},
+		}
+
+		cbModel.items = append(cbModel.items, ad...)
+		cbModel.PublishRowsReset()
+	})
+
+	mgr.StartForeground()
+}
+```
+
+기존에 테이블뷰(리스트컨트롤)을 설명하면서 사용한 예제에
+
+```
+	// 드랍파일
+	window.DropFiles().Attach(func(s []string) {
+		for _, fname := range s {
+			fmt.Println(fname)
+			//MsgBox(fname)
+		}
+	})
+```
+
+드래그앤 드랍에 관한 이벤트 핸들러를 지정해 줬습니다. 보시면 window.DropFiles 라고 사용 했는데요 이러면 전체 창 어디에든 드래그앤 드랍이 먹게 되겠습니다.
+
+만약에 테이블뷰에만 이벤트를 먹게하고 싶으면?
+
+```
+	// 드랍파일
+	testTv.DropFiles().Attach(func(s []string) {
+		for _, fname := range s {
+			fmt.Println(fname)
+			//MsgBox(fname)
+		}
+	})
+```
+
+이렇게 테이블뷰 객체의 DropFiles 에다가 Attach 하면 되겠습니다.
+
+[]string 배열로 드래그앤 드랍된 파일경로와 파일명이 전달됩니다.
+
+LineEdit 라던지 TextArea 든 뭐든간에 이 DropFiles 메소드가 존재하는 walk 객체에는 전부 사용 가능합니다.
+
+한가지.. 기존 lxn/walk 의 경우에는 최근에는 관리되고 있질 않고 마지막 수정이 14개월전인 만큼 .. 최근 윈도 시스템 변경사항은 적용되지 못한 부분이 좀 있습니다.
+
+대표적으로 드래그앤드랍에 쓰이는 WM_DROPFILES 라는 윈도 메시지는 UAC(사용자계정컨트롤)이 동작하는 상황에서 관리자권한으로 실행된 프로세스에는 메시지 발생을 하지 않습니다.
+
+그리하여 관련 부분에 문제 없도록 제가 관리하는 walk 패키지쪽에 수정해서 적용해 두었습니다.
+
+go get github.com/pirogom/walk 해서 기존 lxn/walk 패키지를 대체하여 사용하시면 되구요
+
+기존에 쓰고 계신분들은
+
+go get -u github.com/pirogom/walk
+
+하시면 되겠습니다.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTkzOTA0NjQ4Niw3MzA5OTgxMTZdfQ==
+-->

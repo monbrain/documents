@@ -1,0 +1,277 @@
+
+# [Writing your own components](https://dash.plotly.com/plugins)
+
+[Dash Python](https://dash.plotly.com/) > Build Your Own Components
+
+# ![](https://dash.plotly.com/assets/images/language_icons/python_50px.svg)  Writing your own components
+
+One of the really cool things about Dash is that it is built on top of  [React.js](https://facebook.github.io/react/), a JavaScript library for building web components.
+
+The React community is huge. Thousands of components have been built and released with open source licenses. For example, here are just some of the  [slider components](https://react.rocks/?q=slider)  and  [table components](https://react.rocks/?q=tables)  that have been published by the React community, any of which could be adapted into a Dash component.
+
+## Creating a Component
+
+To create a Dash component, fork our sample component repository and follow the instructions in the README.md:  [https://github.com/plotly/dash-component-boilerplate](https://github.com/plotly/dash-component-boilerplate)
+
+If you are just getting started with React.js as a Python programmer, please check out our essay  [React for Python Devs](https://dash.plotly.com/react-for-python-developers)
+
+### How Are Components Converted From React.js to Python?
+
+Dash provides a framework that converts React components (written in JavaScript) into Python classes that are compatible with the Dash ecosystem.
+
+On a high level, this is how that works:
+
+-   Components in Dash are serialized as  [JSON](https://www.json.org/). To write a Dash-compatible component, all of the props shared between the Python code and the React code―numbers, strings, booleans, as well as arrays or objects containing numbers, strings, or booleans―must be serializable as JSON. For example, JavaScript functions are not valid input arguments. In fact, if you try to add a function as a prop to your Dash component, you will see that the generated Python code for your component will not include that prop as part of your component's accepted list of props. (It's not going to be listed in the  `Keyword arguments`  enumeration or in the  `self._prop_names`  array of the generated Python file for your component).
+-   By annotating components with React docstrings (not required but helpful and encouraged), Dash extracts the information about the component's name, properties, and description through  [React Docgen](https://github.com/reactjs/react-docgen). This is exported as a JSON file (metadata.json).
+-   At build time, Dash reads this JSON file and dynamically creates Python classes that subclass a core Dash component. These classes include argument validation, Python docstrings, types, and a basic set of methods.  _These classes are generated entirely automatically._  A JavaScript developer does not need to write  _any_  Python in order to generate a component that can be used in the Dash ecosystem.
+-   You will find all of the auto-generated files from the build process in the folder named after your component. When you create your Python package, by default any non-Python files won't be included in the actual package. To include these files in the package, you must list them explicitly in  `MANIFEST.in`. That is,  `MANIFEST.in`  needs to contain each JavaScript, JSON, and CSS file that you have included in your  `my_dash_component/`  folder. In the  `dash-component-boilerplate`  repository, you can see that all the JavaScript for your React component is included in the build.js file.
+-   The Dash app crawls through the app's  `layout`  property and checks which component packages are included in the layout; then it extracts that component's necessary JavaScript or CSS bundles. Dash serves these bundles to Dash's front-end. These JavaScript bundles are used to render the components.
+-   Dash's  `layout`  is serialized as JSON and served to Dash's front-end. This  `layout`  is recursively rendered with these JavaScript bundles and React.
+
+[Dash Python](https://dash.plotly.com/) > Build Your Own Components
+
+----
+
+https://stackoverflow.com/questions/66121787/converting-responsive-grid-layout-to-plotly-dash/66141429#66141429
+
+3
+
+[](https://stackoverflow.com/posts/66141429/timeline)
+
+### Implementing the custom component
+
+If you just want to use components from a library with a package available through  `npm`  (like  `react-grid-layout`), you don't need to re-implement the components in these libraries. You can simply install them with  `npm`  and use them in your custom component.
+
+Example component using  `ResponsiveGridLayout`  (`src/lib/components/GridLayout.react.js`):
+
+```javascript
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import RGL, {WidthProvider} from 'react-grid-layout';
+import '../../../node_modules/react-grid-layout/css/styles.css';
+import '../../../node_modules/react-resizable/css/styles.css';
+
+const ResponsiveGridLayout = WidthProvider(RGL);
+
+export default class GridLayout extends Component {
+    render() {
+        const {id, setProps} = this.props;
+        const layout = [
+            {x: 0, y: 0, w: 3, h: 3, i: 'a'},
+            {x: 0, y: 1, w: 3, h: 3, i: 'b'},
+        ];
+
+        return (
+            <div id={id}>
+                <ResponsiveGridLayout rowHeight={30}>
+                    {layout.map((item) => (
+                        <div key={item.i} data-grid={item}>
+                            <span>{item.i}</span>
+                        </div>
+                    ))}
+                </ResponsiveGridLayout>
+            </div>
+        );
+    }
+}
+
+GridLayout.defaultProps = {};
+
+GridLayout.propTypes = {
+    /**
+     * The ID used to identify this component in Dash callbacks.
+     */
+    id: PropTypes.string,
+
+    /**
+     * Dash-assigned callback that should be called to report property changes
+     * to Dash, to make them available for callbacks.
+     */
+    setProps: PropTypes.func,
+};
+
+```
+
+### Environment setup (Skip if you've already done this)
+
+To create and edit your custom component you need to have followed the instructions to setup the  [cookiecutter dash-component-boilerplate](https://dash.plotly.com/react-for-python-developers).
+
+But to re-iterate what is said in a couple of bullet points, you need to:
+
+-   Install  `cookiecutter`:  `pip install cookiecutter`
+-   Run cookiecutter  `https://github.com/plotly/dash-component-boilerplate.git`. This will generate the environment where you can create your custom components.
+-   After filling in the name you want your custom component to have you change directory into the directory generated based on the name you provided. I have chosen the name  `grid_layout`, your structure will be different if you choose different values after being prompted by  `cookiecutter`.
+-   At this point you need to install the needed python dependencies by running  `pip install -r requirements.txt`. You can now also install  `react-grid-layout`  using  `npm i react-grid-layout`.
+
+### Basic usage
+
+When everything is installed we can edit the custom component inside the  `src/lib/components`  directory. When we've made some change (replaced the example code with the code listed above) and we are satisfied we can run  `npm run build`  to persist the changes.
+
+After this you can run  `python usage.py`  and your dash app using your custom component will be run.
+
+`usage.py`  is a regular  `Dash`  application that imports the component that is generated from the  `react`  component after the build process and can look something like this:
+
+```javascript
+import grid_layout
+import dash
+from dash.dependencies import Input, Output
+import dash_html_components as html
+
+app = dash.Dash(__name__)
+
+app.layout = html.Div([grid_layout.GridLayout(id="grid-layout")])
+
+
+if __name__ == "__main__":
+    app.run_server(debug=True)
+
+```
+
+You can also edit this as you like.
+
+
+-----
+
+# [Plotly Dash or React.js + Plotly.js? A side by side comparison](https://towardsdatascience.com/plotly-dash-or-react-js-plotly-js-b491b3615512)
+
+## Dash value proposal is to hide the complexity of writing a React Web App while presenting some data in a dashboard. Let’s do a side by side comparison with a machine learning use case
+
+We have seen in “[Which library should I use for my Python dashboard?](https://towardsdatascience.com/which-library-should-i-use-for-my-dashboard-c432726a52bf)” that creating a data visualization in a Web dashboard is quickly getting complex and requires a framework that is doing more than stitching some plots.  [Plotly Dash](https://dash.plotly.com/)  is one such framework and is very reachable to most data scientists as the application is pure Python code.
+
+![](https://miro.medium.com/max/1400/1*nsqq6j7dF7kAHnJAdQROvg.jpeg)
+
+Dash and React.js leading you to the top. Photo by  [Stéphane Fellay](https://unsplash.com/@fins?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)  on  [Unsplash](https://unsplash.com/s/photos/catch22?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
+At the same time, Dash is generating a Web application built on  [React.js](https://reactjs.org/), a leading Javascript framework for Web applications. Sooner or later you will feel limited by Dash. Either by the constraints or the principles of Dash, or by the lack of control on the generated app, or by the integration of the dashboard with a larger application. For example, your application may require authentication of the user, it may fetch some client data and eventually lead to the Dashboard.
+
+**What if I want to switch from Dash to a classical React.js application after my prototyping phase? Is this costly?**
+
+**What if I want to skip completely the Dash phase and directly create a React.js app? Is the learning curve too steep?**
+
+In the following is shown what it means to write a Dash application and the React.js alternative, based on a use case that fits with Dash: upon user selection, the inference is performed on an Audio file using the  [YAMNet](https://github.com/tensorflow/models/tree/master/research/audioset/yamnet)  classifier. The inference is returning the scores as well as the waveform, these series are plotted on the dashboard.
+
+![](https://miro.medium.com/max/1400/1*JVEhOKUn4Kpxm1oXm8_IIw.png)
+
+Dashboard showing audio waveform and inference scores © the author
+
+**The code of the article is available in a Github repository** [**tonio73/dash-to-react**](https://github.com/tonio73/dash-to-react)**.**  This is a tutorial, more than a template to start your development. That’s why the steps to reproduce this code are explained here below.
+
+Both versions of the dashboard are based on  [Plotly](https://plotly.com/graphing-libraries/)  for the plots,  [Bootstrap 4](https://getbootstrap.com/)  for the HTML and CSS design. The two are available as plugins to Dash and as Node.js packages for React.js.
+
+# Plotly Dash application
+
+**In folder** `[**dash_version/**](https://github.com/tonio73/dash-to-react/tree/main/dash_version)`
+
+In the case of Plotly Dash, all user code is in Python. Dash is not only generating the required Javascript code but also the Web API to create and update the content of the Web application in the browser. Dash is creating all this plumbing, and serving the code over HTTP using Flask (that shall be deployed over a strong web server in production: Gunicorn + Nginx recommended).
+
+![](https://miro.medium.com/max/1400/1*Ao61XZNF3yPoNNW4rWYMwQ.png)
+
+Layer architecture of the Dash application © the author
+
+Creating a Dash application requires four steps:
+
+1.  Install the required Python packages ([ref](http://dash.plotly.com/installation))
+2.  Create the application layout ([ref](http://dash.plotly.com/layout)) using base HTML Components from  _Dash Core Components_  ([ref](https://dash.plotly.com/dash-core-components)) or  _Dash HTML Components_  (DCC,  [ref](https://dash.plotly.com/dash-html-components)), or with a more complete HTML framework like Bootstrap 4, wrapped into  _Dash Boostrap Components_  (DBC,  [ref](https://dash-bootstrap-components.opensource.faculty.ai/))
+3.  Create the Dash application with the above layout ([ref](http://dash.plotly.com/layout))
+4.  Add callbacks to handle user interaction ([ref](https://dash.plotly.com/basic-callbacks))
+
+Steps 1 to 3 should be rather straightforward given the Dash documentation. Main design decisions are on how to present data in the visualization, how to set Plotly parameters. You will probably bump into the choice between Plotly’s APIs:  _Express_  or  _Graphical Object_?  _Express_  is nice if the data is within a Pandas data frame. However, even in this case, it is quite limited to plotting homogeneous series. For more complex plots,  _Graphical Object_  is needed.
+
+Step 4, callbacks, is trickier than the previous steps. It requires first to define the user interaction and second to find a way to express it in the Dash concepts. This is often quite complicated as soon as controls are chained (e.g. a select that is changing the options of another select that defines a plot). Here are a few recommendations:
+
+-   If the user selection is required, do not initialize Plotly Figures while building the layout. The Figures are set within the callbacks.
+-   If the data to plot requires computation or is quite heavy (more than 100 points), wrap the plots into a Loading component of Dash Core Components.
+
+Wait! How is the data to display loaded? How is the inference performed?
+
+These questions lead to another important concept of Dash: the server should not keep track of user-specific values, that is it should be stateless ([ref](https://en.wikipedia.org/wiki/Stateless_protocol)). As there is no language boundary or package split between server and client (browser) software, it is very easy to create some state within the server. As a rule: to be stateless, callbacks shall not use variables that are not available from the callback function arguments.
+
+However, it is sometimes recommended to keep some state. For example, to preload some big variables like the machine learning model that is used for inference. In our case, loading Tensorflow and the YAMNet model takes several seconds and should not be done at each inference call. It would be not only slow but also CPU and memory consuming.
+
+# React.js application with Flask API server
+
+**In folder** `[**react_version/**](https://github.com/tonio73/dash-to-react/tree/main/react_version)`
+
+In this setup, the Python Web server is only acting as an API server exposing some REST end-points. The application is natively designed on React.js using the Plotly.js and React-plotly.js ([ref1](https://github.com/plotly/react-plotly.js),  [ref2](https://plotly.com/javascript/react/)) packages. Bootstrap is also added as a dependency on the React.js application. The asynchronous calls to the API server are performed by Axios ([ref](https://www.npmjs.com/package/axios)).
+
+![](https://miro.medium.com/max/1400/1*jWq4pqgRc7QlXsGLN_5KyA.png)
+
+React.js & Flask layer architecture © the author
+
+Two servers are used during the development (can be gathered into a single server for production):
+
+-   Flask is running a development server to develop and debug the API
+-   The compiled React.js application, as well as other HTML dependencies (CSS, images…), are supplied by a server based on Node.js
+
+Similarly, there are two lists of dependencies:
+
+-   Python dependencies managed by Conda or Pip
+-   Javascript dependencies managed by Node Package Manager (NPM)
+
+The last major change is the need to compile and bundle the React.js application. This is handled by Yarn using Webpack and React-scripts.
+
+The blog post  [How To Create a React + Flask Project](https://blog.miguelgrinberg.com/post/how-to-create-a-react--flask-project)  provides a clean way to set up and run such a setup and to avoid security issues like cross-origin resource sharing ([ref](https://medium.com/javascript-in-plain-english/what-is-cors-cross-origin-resource-sharing-98df12d0f7db)): the Node.js server is configured to act as a proxy for the API server: any unknown request is forwarded to the API server.
+
+The next steps are the API design and the React.js application.
+
+## API server
+
+In the tutorial’s application, the API server has two endpoints (file  [api/app.py](https://github.com/tonio73/dash-to-react/blob/main/react_version/api/app.py)):
+
+-   `/api/samples`  to get the list of available audio samples metadata (URL, title, filename)
+-   `/api/infer`  to perform inference on the user-selected sample
+
+## React.js application
+
+In React with JSX ([ref](https://reactjs.org/docs/introducing-jsx.html)) components are instantiated hierarchically as custom HTML-like tags. Three components are used at the top level:
+
+-   `<audio>`  which is the standard HTML 5 audio player
+-   `<SampleList>`  that is fetching from the API server the list of samples and provides a dropdown to get the user's selection
+-   `<Scores>`  the is calling the inference on the API server and displaying sound waveform and inference scores.
+
+![](https://miro.medium.com/max/1400/1*2AvqDzT37Jv7piYqypHE-A.png)
+
+Top-level application components in React.js version © the author
+
+While being simple, this application is requiring a good understanding of React.js components’ concepts ([ref](https://reactjs.org/docs/react-component.html)):
+
+-   The state and props within the components
+-   The creation and update cycles of a component
+-   Updating the parent’s state through callbacks
+
+When the user is selecting a sample from the dropdown of  `[<SampleList>](https://github.com/tonio73/dash-to-react/blob/main/react_version/src/components/SampleList.js)`[:](https://github.com/tonio73/dash-to-react/blob/main/react_version/src/components/SampleList.js)
+
+1.  The selected value is passed to the parent (`<App>`)
+2.  `<App>`  is updating,  `<audio>`  with the URL of the static file on the server, and  `<Scores>`  with the file name of the sample to perform inference on
+3.  `<Scores>`  is updated and is calling asynchronously the server to perform inference
+4.  `<Scores>`  is rendered when inference is completed and the waveform and scores are received
+
+## Plotly.js
+
+Plotly.js is the backbone of Plotly for both the Python and the React versions.
+
+That should probably mean that Python statements are massaged to produce the React code… However, for some obscure reason, Plotly-react.js is not theming the plots, the  `template`  property of the plot needs to be defined. Using the Chrome inspector, this property is copied from the Dash version. At this time, it is observed that Plotly Python is quite lazy: the full template containing theming for all types of graphs is always transmitted to the client and for each graph. This seems like some overhead that could be decreased if there were a default template in the Javascript component.
+
+Also, React build tools are complaining that the application bundle is too large and should be split ([ref](https://reactjs.org/docs/code-splitting.html)). Using Source-map-explorer ([ref](https://www.npmjs.com/package/source-map-explorer)), I have found out that this is not possible as almost all of the bundle weight is the Plotly package.
+
+# Wrap-up
+
+The Dash implementation is quite neat, 1 file, only 47 statements, a single language. At the same time, there is already a learning curve to get around the formalism of the Dash callbacks. It gets a lot more arduous when the application is more complex with more components, multi-pages. Integration into a more complex Flask application would be required if the application is handling authentication, or is editing some data in forms.
+
+However, writing the React application is not that complex too:
+
+-   1 Python file with 24 statements
+-   6 Javascript files, all of them with few statements
+
+The learning curve is steeper, even more, if Javascript or React have to be learned first. There are more tools, more concepts. But eventually, the framework (React.js) is more coherent, more powerful, and supported by a wide community.
+
+Dash is a good fit for a simple application as the one shown, and for internal use only. As soon as the application gets a bit bigger, or the user interface needs more refinements, it is better to switch to a React.js application.
+
+At the same time, Plotly having Python and Javascript versions is allowing for a smooth transition between the two implementations.
+
+That’s your turn to try, code is available on Github:
+
+[https://github.com/tonio73/dash-to-react](https://github.com/tonio73/dash-to-react)
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEwODg0MzMyMzcsNzMwOTk4MTE2XX0=
+-->

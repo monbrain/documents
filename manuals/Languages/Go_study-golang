@@ -1,0 +1,8065 @@
+
+
+# [Golang 설치 및 실행](https://dev-yakuza.posstree.com/ko/golang/installation/)
+
+2021-09-17 
+
+## Golang을 설치하고 Golang으로 작성된 코드를 실행하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+Golang을 사용하여 웹 서비스를 개발해 보려고 합니다. 이번 블로그 포스트에서는 Golang을 설치하고 Golang으로 작성한 코드를 실행하는 방법에 대해서 알아보도록 하겠습니다.
+
+-   Golang:  [공식 홈페이지](https://golang.org/)
+
+이번 블로그는 제가 맥 유저이기 때문에 macOS를 기준으로 작성되었습니다. 다른 OS에서 설명하는 내용의 명령어 등이 동작하지 않을 수 있습니다.
+
+## Golang 설치
+
+Golang의 공식 홈페이지에서 각 OS에 맞는 Golang을 설치할 수 있습니다.
+
+-   공식 홈페이지:  [Downloads](https://golang.org/dl/)
+
+macOS에서는 다음 명령어를 사용하여 Golang을 설치할 수 있습니다.
+
+```bash
+brew install go
+```
+
+설치가 완료되었다면, 다음 명령어를 실행하여 설치가 잘되었는지 확인합니다.
+
+```bash
+go version
+```
+
+잘 설치되었다면, 다음과 같이 Golang의 버전이 표시됩니다.
+
+```bash
+go version go1.16.6 darwin/amd64
+```
+
+## VScode 설정
+
+저는 Golang으로 개발할 때, VSCode를 사용합니다. VSCode를 사용하고 계신다면 Golang에 관한 플러그인을 설치할 필요가 있습니다.
+
+VSCode를 열고 Golang 플러그인을 검색하여 설치합니다.
+
+![Golang VSCode plugin](https://dev-yakuza.posstree.com/assets/images/category/golang/2021/installation/golang-vscode-plugin.jpg)
+
+또는 다음 명령어를 실행하여 Golang 플러그인을 설치할 수 있습니다.
+
+```bash
+code --install-extension golang.go
+```
+
+나중에 Go 파일을 생성하면 오른쪽 하단에 추가로 설치하라는 화면이 나옵니다.  `Install All`을 선택하여 모두 설치해 줍니다.
+
+## Hello World
+
+그럼 이렇게 설치한 Golang을 사용하여  `Hello world`를 출력하는 프로그램을 작성해 봅시다. 여기서 소개하는 소스 코드는 아래에 링크를 통해 확인할 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/hello_world](https://github.com/dev-yakuza/study-golang/tree/main/hello_world)
+
+Hello world를 화면에 출력하기 위한 프로그램을 작성하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+```
+
+프로그램 작성이 완료되었다면, 다음 명령어를 실행하여 프로그램을 실행해 봅니다.
+
+```bash
+go run main.go
+```
+
+그럼 다음과 같이  `Hello, World!`가 화면에 잘 출력되는 것을 확인할 수 있습니다.
+
+```go
+Hello, World!
+```
+
+## 완료
+
+이것으로 Golang으로 개발을 하기 위해 Golang을 설치하고 Golang으로 프로그램을 작성하고 실행하는 방법에 대해서 알아보았습니다. 이제 Golang을 사용하여 개발해 봅시다.
+
+
+# [Golang 코딩 및 빌드](https://dev-yakuza.posstree.com/ko/golang/hello-world/)
+
+2021-09-19 
+
+## Golang으로 Hello world를 출력하는 프로그램을 작성 및 빌드를 해보고, 작성한 프로그램을 자세히 살펴봅시다.
+
+## 개요
+
+이전 블로그 포스트에서 Golang을 설치하고,  `Hello, World!`가 화면에 출력되는 프로그램을 Golang을 사용하여 작성해 보았습니다.
+
+-   [[Golang] 설치 및 실행](https://dev-yakuza.posstree.com/ko/golang/installation/)
+
+이번 블로그 포스트에서는 다시 한번  `Hello, World!`가 출력되는 프로그램을 생성하고, 해당 프로그램을 좀 더 자세히 살펴보도록 하겠습니다. 이번 블로그 포스트에서 소개하는 소스코드는 다음 링크를 통해 확인할 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/hello_world](https://github.com/dev-yakuza/study-golang/tree/main/hello_world)
+
+## 프로그램 작성
+
+Golang을 사용하여  `Hello world`를 출력하는 프로그램을 작성해 봅시다. Hello world를 화면에 출력하는 프로그램을 작성하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+```
+
+프로그램 작성이 완료되었다면, 다음 명령어를 실행하여 프로그램을 실행해 봅니다.
+
+```bash
+go run main.go
+```
+
+그럼 다음과 같이  `Hello, World!`가 화면에 잘 출력되는 것을 확인할 수 있습니다.
+
+```go
+Hello, World!
+```
+
+## 코드 분석
+
+그럼 이제 우리가 Golang으로 작성한  `Hello world`를 출력하는 소스코드를 자세히 살펴봅시다.
+
+```go
+package main
+```
+
+`package`는 Golang에서 코드를 묶어주는 하나의 단위입니다. Golang으로 프로그램을 작성할 때, 모든 프로그램은  `package`로 시작이 되어야 합니다. 이  `package`는 현재 작성하고 있는 소스코드가 어떤 패키지에 소속되어있는지 알려주는 역할을 합니다.
+
+패키지명은 아무거나 사용할 수 있지만, 패키지 명이  `main`인 소스코드가 꼭 필요합니다.  `package main`은 프로그램의 시작점을 가지고 있음을 의미하며, Golang은 이 패키지를 기준으로 프로그램을 시작하게 됩니다.
+
+Golang의 프로그램은  `main`  패키지 하나와 다른 여러 패키지들로 구성됩니다.
+
+```go
+import "fmt"
+```
+
+`fmt`라는 패키지를 로드(import)함을 의미합니다. 패키지는 소스코드의 집합입니다. 다시 말하면 패키지는 여러 기능들을 가지고 있는 하나의 단위입니다. 우리는  `fmt`  패키지가 제공하는  `Println`이라는 기능을 사용하여  `Hello, World!`를 출력할 예정입니다. 이처럼 패키지가 가지고 있는 특정 기능을 사용하려면 해당 패키지를 로드해야 합니다.
+
+```go
+func main() {
+    ...
+}
+```
+
+Golang에서는 함수를 정의할 때,  `func`  키워드를 사용합니다. 함수명은 아무거나 사용할 수 있지만, 함수명에  `main`을 사용함으로써, Golang에 프로그램의 시작점을 알려주었습니다.
+
+즉, Golang으로 프로그램을 작성할 때,  `main`으로 시작하는  `package`가 존재해야 하며, 해당 패키지에는  `main`이라는 함수가 꼭 존재해야합니다. 그렇지 않으면 Golang은 프로그램의 시작점을 찾을 수 없으므로 프로그램을 시작시킬 수 없습니다.
+
+```go
+fmt.Println("Hello, World!")
+```
+
+우리가 앞에서 가져온  `fmt`  패키지에 포함된  `Println`이라는 함수(기능)을 호출하겠다는 의미입니다.
+
+## 빌드
+
+이렇게 Golang으로 작성한 프로그램은 빌드하여 실행 파일을 만들 수 있습니다. 실행 파일을 만들기 위해서는  `Module`을 생성해야 합니다. 다음 명령어를 실행하여  `Module`을 생성합니다.
+
+```bash
+go mod init hello_world
+```
+
+모듈의 이름(`hello_world`)은 어떤 것이든 상관이 없으나 유니크해야 합니다. 보통은 폴더명을 사용합니다.
+
+이렇게 모듈을 생성하면 폴더 안에  `go.mod`가 생성된 것을 확인할 수 있습니다.
+
+```bash
+.
+├── go.mod
+└── main.go
+```
+
+이제 다음 명령어를 실행하여 Golang으로 작성한 프로그램을 빌드합니다.
+
+```bash
+go build
+```
+
+빌드가 완료되면 다음과 같이  `hello_world`  파일이 새로 생성된 것을 알 수 있습니다. (각 OS에 맞는 실행 파일이 생성됩니다. macOS가 아닌 분들은 파일명이 다를 수 있습니다.)
+
+```bash
+.
+├── go.mod
+├── hello_world
+└── main.go
+```
+
+이제 다음 명령어를 실행하여 우리가 작성한 프로그램을 실행해 봅니다.
+
+```bash
+./hello_world
+```
+
+그럼 다음과 같이 프로그램이 잘 실행되는 것을 확인할 수 있습니다.
+
+```bash
+Hello, World!
+```
+
+## 완료
+
+이것으로 Golang으로 작성한  `Hello world`  프로그램을 자세히 살펴보았습니다. 또한, Golang으로 제작한 프로그램을 빌드하여 실행 파일을 만들고, 실행 파일을 통해 프로그램을 실행해 보았습니다.
+
+[Github Sponsor](https://github.com/sponsors/dev-yakuza)
+
+
+# [Golang 변수](https://dev-yakuza.posstree.com/ko/golang/variables/)
+
+2021-09-22 
+
+## Golang에서 변수의 종류와 변수의 사용법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서 사용할 수 있는 변수의 종류에 대해서 살펴보고, 변수를 사용하여 코드를 작성하는 방법에 대해서 살펴보도록 하겠습니다.
+
+이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/variables](https://github.com/dev-yakuza/study-golang/tree/main/variables)
+
+## 변수
+
+Golang의 변수에 대해서 살펴보기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  var num int = 1
+  var message string = "Hello, World!"
+  fmt.Println(num, message)
+
+  num = 2
+  message = "Hello, Universe!"
+  fmt.Println(num, message)
+}
+```
+
+이렇게 수정하였다면, 다음 명령어를 실행하여 Golang으로 작성한 프로그램을 실행해 봅니다.
+
+```bash
+go run main.go
+```
+
+그럼 다음과 같은 결과를 확인할 수 있습니다.
+```
+1 Hello, World!
+2 Hello, Universe!
+```
+
+## 변수 선언
+
+Golang에서는 다음과 같이 변수를 선언합니다. Golang에서는 변수를 선언한 후, 변수를 사용하지 않으면 컴파일 에러가 발생합니다.
+
+```go
+// var 변수명 변수타입 = 초기값
+var num int = 1
+```
+
+변수를 선언할 때에는  `var`  키워드를 사용해야 하며, 어떤 타입에 변수가 저장될지 변수 타입을 지정해 줄 필요가 있습니다.
+
+변수를 선언할 시, 다음과 같이 초기값을 설정하지 않고 생략할 수 있습니다.
+
+```go
+var num int
+```
+
+다른 언어와는 다르게 Golang에서는 초기값을 설정하지 않으면  `null`이 저장되는 것이 아니라, 각 타입에 따른 기본값이 저장됩니다.
+
+-   모든 정수 타입(int, int8…):  `0`
+-   모든 실수 타입(float, float8…):  `0.0`
+-   bool:  `false`
+-   문자열:  `""`
+-   그 외:  `nil`
+
+초기값을 설정하는 경우 다음과 같이 변수 타입을 생략할 수 있습니다.
+
+```go
+var num = 10
+```
+
+변수 타입을 생략하면, Golang은 초기값을 확인하여 타입 추론하게 됩니다.
+
+마지막으로 다음과 같이  `:=`(Short variable declarations)을 사용하여 변수를 선언할 수 있습니다.
+
+```go
+num := 10
+```
+
+## 타입 정의
+
+Golang에서는  `type`  키워드를 사용하여, 기존의 타입에 별칭을 지정할 수 있습니다. 이를 Golang에서는 타입 정의(Defined type)라고 합니다.
+
+```go
+type myInt int
+```
+
+Golang에서 제공하는  `int`  타입을  `myInt`으로 정의하였습니다.  `myInt`는  `int`와 동일한 메모리 크기를 가지며  `int`와 동일한 역할을 수행하지만,  `int`  타입과는 별개의 타입으로 존재하게 됩니다.
+
+```go
+var myNum myInt = 10
+var num int = 10
+
+fmt.Printf("%T\n", myNum)
+fmt.Printf("%T\n", num)
+```
+
+위와 같이 프로그램을 작성하고 실행해 보면, 다음과 같은 결과를 확인할 수 있습니다.
+
+```go
+main.myInt
+int
+```
+
+Golang에서는 타입이 서로 다른 경우, 연산을 수행할 수 없습니다. 따라서 연산을 수행하기 위해서는 타입 변환을 해야 합니다.
+
+## 변수 타입
+
+Golang에서는 다음과 같은 타입을 사용할 수 있습니다.
+
+-   uint8, uint16, uint32, uint64
+-   int8, int16, int32, int64
+-   float32, float64
+-   byte: uint8 별칭
+-   rune: UTF8 형식 문자 한개를 저장할 때, 사용하는 변수, int32 별칭
+-   int: int32 별칭
+-   uint: uint32 별칭
+-   bool
+-   string
+-   배열
+-   슬라이스
+-   구조체
+-   포인터
+-   함수 타입
+-   맵
+-   인터페이스
+-   채널
+
+## 타입 변환
+
+앞서 이야기 했지만, Golang에서는 변수의 타입이 다르면 연산을 수행할 수 없다. 따라서 연산을 수행하기 위해서는 같은 변수 타입이 되도록 타입을 변환(Type Conversion)해 주어야 한다.
+
+```go
+var num1 int = 10
+var num2 int32 = 10
+
+// fmt.Println(num1 + num2) // ERROR!!
+fmt.Println(num1 + int(num2))
+
+var num3 float32 = 10.32
+fmt.Println(num1 + int(num3))
+```
+
+서로 다른 타입의 변수를 가지고 연산을 시도하면 컴파일 에러가 발생한다. 이때 타입 변환을 사용하여 같은 타입으로 변환 시킨 후 연산을 수행해야 합니다.
+
+위에 코드를 실행시키면 다음과 같은 결과를 얻을 수 있다.
+
+```bash
+20
+20
+```
+
+## 변수 스코프
+
+Golang에서는 변수의 스코프(Scope)가 존재하며, 변수는 해당 스코프안에서만 사용이 가능하다. 스코프는 중괄호(`{}`)를 통해 표현한다.
+
+```go
+func main() {
+  num1 := 10
+
+  {
+    num2 := 20
+    fmt.Println(num2)
+  }
+
+  fmt.Println(num1)
+  // fmt.Println(num2) // ERROR!!
+}
+```
+
+`num1`은 main 함수의 스코프에서 사용이 가능하지만,  `num2`는  `num1`과 다르게 새로운 스코프 영역안에서만 사용이 가능하다. 따라서 하단에  `fmt.Println(num2)`는  `num2`를 가지고 있는 스코프밖에서 호출하였기 때문에 에러가 발생하게 된다.
+
+## 패키지 전역 변수
+
+Golang의 모든 소스 코드는 어떤 패키지에 소속되게 된다. 이때 함수 밖에 변수를 선언하게 되면, 패키지내에서 사용할 수 있는 패키지 전역 변수를 생성할 수 있다.
+
+```go
+var num int = 10
+
+func main() {
+    fmt.Println(num)
+}
+```
+
+패키지 전역 변수는 같은 패키지라면 어디에서든 사용이 가능하다.
+
+## 빈칸 지시자
+
+Golang에서는 선언한 변수는 반드시 사용해야 한다. 하지만, 변수를 할당은 해야 하지만 사용하지 않을 때 빈칸 지시자(Blank identifier,  `_`)를 사용하여 에러를 피할 수 있다.
+
+```go
+func main() {
+  tmp := make(map[string]string)
+
+  tmp["name"] = "John"
+  tmp["job"] = "Programmer"
+
+  fmt.Println(tmp)
+
+  for k, v := range tmp {
+    fmt.Println(k, v)
+  }
+
+  for k := range tmp {
+    fmt.Println(k)
+  }
+
+  for _, v := range tmp {
+    fmt.Println(v)
+  }
+}
+```
+
+위에 예제는  `map`  타입을 사용하여 변수를 생성한 후, 변수를 사용하는 다양한 방법을 보여주고 있습니다.  `map`은  `make`를 사용하여 생성한 후,  `range`와  `for`를 사용하여 모든 내용을 화면에 출력할 수 있습니다.
+
+`range`를 사용하면  `map`의  `key`와  `value`를 한번에 가져올 수 있습니다.  `key`와  `value`  모두 사용하고 싶을 때도 있지만,  `value`만 사용하고 싶은 경우도 있습니다.
+
+```go
+// ERROR!!
+// for k, v := range tmp {
+//     fmt.Println(v)
+// }
+for _, v := range tmp {
+    fmt.Println(v)
+}
+```
+
+이렇게 할당은 해야하지만, 사용하지 않을 때, 빈칸 지시자를 사용하여 컴파일 에러가 발생하지 않도록 할 수 있습니다.
+
+## 완료
+
+이것으로 Golang의 변수와 변수를 사용하는 방법에 대해서 기초적인 내용을 살펴보았습니다. 여기서 설명하지 않은 부분(`map`,  `slice`의 사용법 등)은 다른 블로그 포스트에서 더욱 자세히 설명하도록 하겠습니다.
+
+
+# [Golang 상수](https://dev-yakuza.posstree.com/ko/golang/constants/)
+
+2021-09-25 
+
+## Golang에서 상수를 선언하고 사용하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서 상수를 선언하고 사용하는 방법에 대해서 알아봅니다. Golang에서 변수를 선언하고 사용하는 방법에 대해 궁금하신 분들은 아래에 링크를 참고하시기 바랍니다.
+
+-   [[Golang] 변수](https://dev-yakuza.posstree.com/ko/golang/variables/)
+
+이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/constants](https://github.com/dev-yakuza/study-golang/tree/main/constants)
+
+## 상수
+
+상수는 변수와 다르게 설정한 값을 변경할 수 없습니다. Golang에서 상수를 사용하는 방법을 알아보기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    const num int = 10
+
+    fmt.Println(num)
+}
+```
+
+Golang에서 다음과 같이  `const`  키워드를 사용하여 상수를 선언합니다.
+
+```go
+// const 상수명 타입 = 초기값
+const value int = 10
+```
+
+상수는 초기값을 생략할 수 있는 변수와 다르게 항상 초기화를 해야합니다. 그렇지 않으면 컴파일 에러가 발생합니다.
+
+```go
+const value int = 10
+value = 20 // ERROR
+```
+
+한번 초기화된 상수는 다시 값을 설정할 수 없습니다. 값을 설정하게 되면 컴파일 에러가 발생합니다.
+
+## 상수의 타입
+
+상수도 변수처럼 타입을 지정하지 않고 생략할 수 있습니다. 하지만 상수는 변수와는 다르게 상수를 사용하는 시점에 타입이 결정됩니다.
+
+```go
+func main() {
+    const PI = 3.14
+
+    var a int = PI * 100
+
+    fmt.Println(a)
+}
+```
+
+Golang은 같은 타입만 연산이 가능합니다. 따라서  `float`  타입인 3.14에  `int`  타입인 100을 곱하는 연산은 할 수 없습니다. 하지만 상수에 타입을 지정하지 않았으므로, 상수를 사용하는 시점에서 타입이 결정되므로 위에 코드는 컴파일 에러가 발생하지 않습니다.
+
+```go
+func main() {
+    const PI float32 = 3.14
+
+    var a int = PI * 100 // ERROR
+
+    fmt.Println(a)
+}
+```
+
+하지만 위와 같이 상수를 타입과 함께 정의하는 경우, 타입이 다르다고 판단하여 컴파일 에러가 발생하게 됩니다.
+
+```go
+func main() {
+    var PI = 3.14
+
+    var a int = PI * 100 // ERROR
+
+    fmt.Println(a)
+}
+```
+
+변수는 상수와 다르게 변수를 선언할 때, 타입이 결정됩니다. 따라서 위와 같이 상수 대신 변수를 사용하면 컴파일 에러가 발생합니다.
+
+## 열거형
+
+Golang에서는 상수를 다음과 같이 열거형(Enum)으로 많이 활용합니다.
+
+```go
+const (
+    Red   int = 0
+    Blue  int = 1
+    Green int = 2
+)
+
+func main() {
+    fmt.Println(Red)
+    fmt.Println(Blue)
+    fmt.Println(Green)
+}
+```
+
+프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+0
+1
+2
+```
+
+## iota
+
+Golang에서는 다음과 같이  `iota`  키워드를 사용하면 좀 더 쉽게 열거형 상수를 생성할 수 있습니다.
+
+```go
+const (
+    Red int = iota
+    Blue int = iota
+    Green int = iota
+)
+
+func main() {
+    fmt.Println(Red)
+    fmt.Println(Blue)
+    fmt.Println(Green)
+}
+```
+
+반복적으로 사용되는 타입과  `iota`는 다음과 같이 생략이 가능합니다.
+
+```go
+const (
+    Red int = iota
+    Blue
+    Green
+)
+```
+
+또한, 타입도 생략이 가능하여 다음과 같이 간단하게 선언할 수 있습니다.
+
+```go
+const (
+    Red = iota
+    Blue
+    Green
+)
+```
+
+## 완료
+
+이것으로 Golang에서 상수를 선언하고 사용하는 방법에 대해서 살펴보았습니다. 또한  `iota`를 활용하여 열거형 상수를 생성하는 방법에 대해서도 살펴보았습니다.
+
+
+# [Golang fmt 패키지를 이용한 표준 입출력](https://dev-yakuza.posstree.com/ko/golang/fmt/)
+
+2021-09-29 
+
+## Golang에서 표준 입출력에 사용되는 fmt 패키지에 대해서 살펴보도록 하겠습니다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서 기본적으로 제공하는 입출력 패키지인  `fmt`에 대해서 살펴보려 합니다.
+
+-   공식 사이트:  [fmt](https://pkg.go.dev/fmt)
+
+이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/fmt](https://github.com/dev-yakuza/study-golang/tree/main/fmt)
+
+## 표준 출력
+
+Golang에서  `fmt`를 사용하는 방법을 알아보기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    var a int = 10
+    var b int = 20
+    var f float64 = 3.14
+
+    fmt.Print("a: ", a);
+    fmt.Println("b: ", b);
+    fmt.Printf("a: %d / f: %f\n", a, f);
+}
+```
+
+프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```go
+a: 10b:  20
+a: 10 / f: 3.140000
+```
+
+각각의 표준 출력 함수는 다음과 같은 특징을 가지고 있습니다.
+
+-   Print(): 함수의 입력값들을 출력하고 개행(줄바꿈)을 하지 않습니다.
+-   Println(): 함수의 입력값들을 출력하고 개행(줄바꿈)합니다.
+-   Printf(): 포맷(Format)에 맞도록 입력값들을 출력합니다.
+
+### 포맷
+
+`Printf`에서 사용되는 포맷(Format)은 다음과 같습니다.
+
+-   `%v`: 데이터 타입에 맞춰서 기본 형태로 출력
+-   `%T`: 데이터 타입 출력
+-   `%t`: bool을 true/false로 출력
+-   `%d`: 정수
+-   `%b`: 2진수로 출력
+-   `%c`: 유니코드 문자로 출력(정수만 가능)
+-   `%o`: 8진수로 출력
+-   `%O`: 앞에 8진수임을 표시하는  `Oo`를 붙여서 출력
+-   `%x`: 16진수로 값을 출력 10이상은 a-f로 표시
+-   `%X`: 16진수로 값을 출력 10이상은 A-F로 표시
+-   `%e`: 지수 형태로 실수값을 출력(실수만 가능)
+-   `%E`: 지수 형태로 실수값을 출력(실수만 가능)
+-   `%f`: 실수값을 그대로 출력(소수점 6자리까지만)
+-   `%F`: 실수값을 그대로 출력
+-   `%g`: 값이 큰 실수값은 지수 형태로 표시. 값이 작은 경우 그대로 표시(6자리가 넘어가면 지수 표현)
+-   `%G`: 값이 큰 실수값은 지수 형태로 표시. 값이 작은 경우 그대로 표시
+-   `%s`: 문자열을 출력
+-   `%q`: 특수 문자 기능을 동작하지 않고 문자열 그대로 출력(ex> \n, \t)
+
+정수는 다음과 같은 포맷을 사용하여 정렬을 사용할 수 있습니다.
+
+-   `%5d`: 5칸에 맞춰 출력(오른쪽 정렬)
+-   `%05d`: 5칸에 맞춰 출력(0이 추가됨)
+-   `%-5d`: 5칸에 맞춰 출력(왼쪽 정렬)
+
+이를 확인하기 위해 다음과 같이 코드를 수정합니다.
+
+```go
+func main() {
+    a := 1
+    b := 10
+    c := 100
+    d := 1000
+    e := 10000
+
+    fmt.Printf("a: %5d\n", a)
+    fmt.Printf("b: %5d\n", b)
+    fmt.Printf("c: %5d\n", c)
+    fmt.Printf("d: %5d\n", d)
+    fmt.Printf("e: %5d\n", e)
+
+    fmt.Println()
+    fmt.Printf("a: %05d\n", a)
+    fmt.Printf("b: %05d\n", b)
+    fmt.Printf("c: %05d\n", c)
+    fmt.Printf("d: %05d\n", d)
+    fmt.Printf("e: %05d\n", e)
+
+    fmt.Println()
+    fmt.Printf("a: %-5d\n", a)
+    fmt.Printf("b: %-5d\n", b)
+    fmt.Printf("c: %-5d\n", c)
+    fmt.Printf("d: %-5d\n", d)
+    fmt.Printf("e: %-5d\n", e)
+}
+```
+
+이 코드를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+a:     1
+b:    10
+c:   100
+d:  1000
+e: 10000
+
+a: 00001
+b: 00010
+c: 00100
+d: 01000
+e: 10000
+
+a: 1
+b: 10
+c: 100
+d: 1000
+e: 10000
+```
+
+## 표준 입력
+
+`fmt`를 사용하면 사용자의 입력을 받을 수 있습니다.  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    var a int
+    var b int
+
+    n, err := fmt.Scanln(&a, &b)
+    if err != nil {
+        fmt.Println(err)
+    } else {
+        fmt.Println(n, a, b)
+    }
+}
+```
+
+작성한 프로그램을 실행하면 다른 프로그램들과 다르게 프로그램이 종료되지 않고, 커서가 화면에 표시되는 것을 확인할 수 있습니다. 그럼 다음과 같이 입력해 봅니다.
+
+```bash
+10 30
+```
+
+그럼 다음과 같은 결과가 표시되는 것을 확인할 수 있습니다.
+
+```bash
+2 10 30
+```
+
+`Scanln`는 사용자로부터 입력받은 값을 파라메터로 전달받은 메모리 주소에 저장하고, 입력 받은 갯수와 에러가 있는 경우, 에러를 반환합니다.
+
+이 밖에 사용자의 입력을 받기 위한  `fmt`  함수는 다음과 같습니다.
+
+-   `Scan()`: 표준 입력에서 값을 입력 받는다.
+-   `Scanf()`: 표준 입력에서 포맷(Format) 형태로 값을 입력 받는다.
+-   `Scanln()`: 표준 입력에서 한 줄을 읽어서 값을 입력 받는다.
+
+`Scan`으로 변수를 전달할 때,  `&`을 사용하여 메모리 주소값을 전달합니다.  `Scan`은 이렇게 전달받은 주소에 사용자로부터 입력받은 값을 저장하게 됩니다.
+
+### 입력 버퍼 지우기
+
+만약 다음과 같이 사용자의 입력을 두번 받는 프로그램이 있다고 가정해 봅시다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    var a int
+    var b int
+
+    n, err := fmt.Scanln(&a, &b)
+    if err != nil {
+        fmt.Println(err)
+    } else {
+        fmt.Println(n, a, b)
+    }
+
+    n, err = fmt.Scanln(&a, &b)
+    if err != nil {
+        fmt.Println(err)
+    } else {
+        fmt.Println(n, a, b)
+    }
+}
+```
+
+해당 프로그램을 실행하고 다음과 같이 입력해 봅니다.
+
+```bash
+3 a
+```
+
+그러면 입력값과 해당 값을 저장할 수 있는 변수의 타입이 다르기 때문에 런타임 에러가 발생하게 됩니다.
+
+```bash
+expected integer
+```
+
+하지만, 두번 입력을 받도록 프로그램을 작성했지만, 두번째 입력은 실행이되지 않고 에러가 발생하여 종료되었습니다.
+
+```bash
+unexpected newline
+```
+
+이것은 처음 에러가 발생하였을 때, 에러가 발생한 시점 이후에 내용이 아직 버퍼에 저장되어 있고, 버퍼의 내용이 그대로 사용되면서 문제가 발생하였습니다.
+
+이와 같은 문제를 해결하기 위해서는, 다음과 에러가 발생한 경우, 버퍼를 초기화해 줄 필요가 있습니다.
+
+```go
+package main
+
+import (
+    "bufio"
+    "fmt"
+    "os"
+)
+
+func main() {
+    stdin := bufio.NewReader(os.Stdin)
+
+    var a int
+    var b int
+
+    n, err := fmt.Scanln(&a, &b)
+    if err != nil {
+        fmt.Println(err)
+        stdin.ReadString('\n')
+    } else {
+        fmt.Println(n, a, b)
+    }
+
+    n, err = fmt.Scanln(&a, &b)
+    if err != nil {
+        fmt.Println(err)
+        stdin.ReadString('\n')
+    } else {
+        fmt.Println(n, a, b)
+    }
+}
+```
+
+에러가 발생하면,  `stdin.ReadString('\n')`을 사용하면 입력 버퍼에서 개행 문자가 나올때 까지 버퍼의 내용을 읽으므로, 버퍼를 비워줄 수 있습니다.
+
+## 완료
+
+이것으로 Golang의 표준 입출력에 사용되는  `fmt`  패키지에 대해서 살펴보았습니다. 입력시에는  `Scan`을 이용하고 출력시에는  `Print`를 사용하며, 입력시 에러가 발생하면 입력 버퍼를 비워줘야 한다는 것에 대해서 알게 되었습니다.
+
+
+# [Golang 연산자](https://dev-yakuza.posstree.com/ko/golang/operator/)
+
+2021-10-01 
+
+## Golang에서 사용할 수 있는 연산자에 대해서 살펴보도록 하겠습니다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서 사용할 수 있는 연산자들에 대해서 살펴보도록 하겠습니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/operator](https://github.com/dev-yakuza/study-golang/tree/main/operator)
+
+## 사칙 연산자
+
+Golang에서는 다음과 같은 사칙 연산을 사용할 수 있습니다.
+
+-   `+`: 덧셈 (정수, 실수, 문자열)
+-   `-`: 뺄셈 (정수, 실수)
+-   `*`: 곱셈 (정수, 실수)
+-   `/`: 나눗셈 (정수, 실수)
+-   `%`: 나머지 (정수만 가능)
+
+`main.go`  파일을 생성하여 다음과 같이 코드를 작성하여 확인할 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    a := 6
+    b := 5
+
+    fmt.Println("Result:", a+b)
+    fmt.Println("Result:", a-b)
+    fmt.Println("Result:", a*b)
+    fmt.Println("Result:", a/b)
+    fmt.Println("Result:", a%b)
+}
+```
+
+이렇게 작성한 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+Result: 11
+Result: 1
+Result: 30
+Result: 1
+Result: 1
+```
+
+## 비트 연산자
+
+Golang에서는 다음과 같은 비트 연산을 사용할 수 있습니다.
+
+-   `&`: AND 비트연산 (정수)
+-   `|`: OR 비트연산 (정수)
+-   `^`: XOR 비트연산 (정수)
+-   `&^`: 비트 클리어 (정수)
+
+`main.go`  파일을 수정하여 다음과 같이 코드를 작성하여 확인할 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    a := 6
+    b := 5
+
+    fmt.Printf("Result: %08b\n", a&b)
+    fmt.Printf("Result: %08b\n", a|b)
+    fmt.Printf("Result: %08b\n", a^b)
+    fmt.Printf("Result: %08b\n", a&^b)
+}
+```
+
+이렇게 작성한 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+Result: 00000100
+Result: 00000111
+Result: 00000011
+Result: 00000010
+```
+
+## 시프트 연산자
+
+-   `<<`: 왼쪽 시프트 (양의 정수)
+-   `>>`: 오른쪽 시프트 (양의 정수)
+
+`main.go`  파일을 수정하여 다음과 같이 코드를 작성하여 확인할 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    a := 6
+
+    fmt.Printf("Result: %08b\n", a)
+    fmt.Printf("Result: %08b\n", a<<2)
+    fmt.Printf("Result: %08b\n", a>>1)
+}
+```
+
+이렇게 작성한 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+Result: 00000110
+Result: 00011000
+Result: 00000011
+```
+
+## 비교 연산자
+
+-   `==`: 같다
+-   `!=`: 다르다
+-   `<`: 작다
+-   `>`: 크다
+-   `<=`: 작거나 같다
+-   `>=`: 크거나 같다
+
+`main.go`  파일을 수정하여 다음과 같이 코드를 작성하여 확인할 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    a := 6
+    b := 5
+
+    fmt.Println("Result:", a == b)
+    fmt.Println("Result:", a != b)
+    fmt.Println("Result:", a < b)
+    fmt.Println("Result:", a > b)
+    fmt.Println("Result:", a <= b)
+    fmt.Println("Result:", a >= b)
+}
+```
+
+이렇게 작성한 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```go
+Result: false
+Result: true
+Result: false
+Result: true
+Result: false
+Result: true
+```
+
+## 논리 연산자
+
+-   `&&`: AND 연산자
+-   `||`: OR 연산자
+-   `!`: NOT 연산자
+
+`main.go`  파일을 수정하여 다음과 같이 코드를 작성하여 확인할 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    a := true
+    b := false
+
+    fmt.Println("Result:", a && b)
+    fmt.Println("Result:", a || b)
+    fmt.Println("Result:", !a)
+}
+```
+
+이렇게 작성한 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+Result: false
+Result: true
+Result: false
+```
+
+## 대입 연산자
+
+Golang에서는 다음과 같이 대입 연산자를 사용할 수 있습니다.
+
+```go
+a = 1
+a, b = 1, 2
+```
+
+대입 연산자를 다음과 같이 사용하면, 두 변수의 값을 교환할 수 있습니다.
+
+```go
+a, b = b, a
+```
+
+## 복합 대입 연산자
+
+Golang에서는 다음과 같이 연산과 동시에 값을 대입할 수 있습니다.
+
+-   `+=`: a += 1 / a = a + 1
+-   `-=`
+-   `*=`
+-   `/=`
+-   `%=`
+-   `&=`
+-   `|=`
+-   `^=`
+-   `<<=`
+-   `>>=`
+
+## 증감 연산자
+
+-   `++`: a ++ / a = a + 1
+-   `--`
+
+증감 연산자는 값을 반환하지 않는다. 따라서 다음과 같이 사용할 수 없습니다.
+
+```go
+b = a++
+```
+
+## 연산자 우선 순위
+
+Golang의 연산자는 다음과 같이 우선 순위를 가지고 있습니다.
+
+| 우선 순위 | 연산자 |
+| --- | --- |
+| 1 | *, /, %, <<, >>, &, &^ |
+| 2 | +, -, |, ^ |
+| 3 | ==, !=, <, <=, >, >= |
+| 4 | && |
+| 5 | || |
+
+물론, 괄호(`(,)`)안에 식이 가장 먼저 실행됩니다.
+
+## Nextafter
+
+비트로는 실수를 정확히 표현할 수가 없습니다. 그래서 실수를 표현할 때는, 원래 수보다 1비트 크거나 1비트 작은 근접수로 실수를 표현한다.
+
+```go
+package main
+
+import (
+    "fmt"
+    "math"
+)
+
+func main() {
+    var a float64 = 0.1
+    var b float64 = 0.2
+    var c float64 = 0.3
+
+    fmt.Printf("%0.18f\n", c)
+    fmt.Printf("%0.18f\n", a+b)
+    fmt.Printf("%0.18f == %0.18f (%v)\n", c, a+b, c == a+b)
+}
+```
+
+위와 같이 프로그램을 작성하고 실행해 보면, 다음과 같은 결과를 확인할 수 있습니다.
+```
+0.299999999999999989
+0.300000000000000044
+0.299999999999999989 == 0.300000000000000044 (false)
+```
+
+기대했던 결과와는 다르게  `false`가 표시되는 것을 확인할 수 있습니다.
+
+이를 해결하기 위해서는 우리는  `math`  패키지의  `Nextafter`  함수를 사용할 필요가 있습니다.
+
+```go
+fmt.Printf("%0.18f == %0.18f (%v)\n", c, a+b, c == math.Nextafter(a+b, c))
+```
+
+이를 실행해보면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+0.299999999999999989 == 0.300000000000000044 (true)
+```
+
+`Nextafter`는 전달받은 두 수중에서, 앞에 수를 뒤에 수를 향해 1비트만큼 이동한 값을 반환합니다. 따라서, 정확하게 실수의 값을 비교할 수 있습니다.
+
+## 완료
+
+이것으로 Golang에서 사용할 수 있는 연산자에 대해서 살펴보았습니다. 다른 프로그래밍 언어와 대부분 동일하므로, 다른 언어를 공부해보신 분들은 쉽게 이해할 수 있는 부분이라고 생각합니다.
+
+다만, 실수를 비교할 때, 실수의 오차를 고려하여  `Nextafter`를 사용해야함을 기억해둘 필요가 있습니다.
+
+
+# [Golang Function 기초](https://dev-yakuza.posstree.com/ko/golang/function/)
+
+2021-11-18 
+
+## Golang에서 Function(함수)를 선언하고 사용하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서 함수를 선언하고 사용하는 방법에 대해서 알아봅시다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/function](https://github.com/dev-yakuza/study-golang/tree/main/function)
+
+## 함수 정의
+
+Golang에서 함수를 정의하고 사용하는 방법에 대해서 알아봅시다. 함수를 정의하고 사용하는 방법에 대해서 알아보기 위해,  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func Add(a int, b int) int {
+    return a + b
+}
+
+func main() {
+    c := Add(1, 2)
+    fmt.Println(c)
+}
+```
+
+함수는 다음과 같이 함수 정의 키워드인  `func`을 사용하여 정의합니다.
+```
+// func 함수명(매개변수...) 반환 타입 {
+//     코드블록
+// }
+func Add(a int, b int) int {
+    return a + b
+}
+```
+
+만약, 매개 변수에서 같은 타입이 연속된다면, 다음과 같이 타입을 생략할 수 있습니다.
+
+```go
+func Add(a, b int) int {
+    return a + b
+}
+```
+
+## Public과 Private
+
+Golang에서는  `Public`과  `Private`이라는 키워드는 존재하지 않지만, 대소문자로  `Public`  함수와  `Pirvate`  함수를 구별합니다.
+
+-   함수명이 대문자로 시작:  `Public`  함수
+-   함수명이 소문자로 시작:  `Private`  함수
+
+`Public`  함수는 다른 패키지에서 해당 함수를 사용하는 것이 가능하며,  `Private`  함수는 해당 패키지내에서만 사용이 가능합니다.
+
+## 멀티 반환 함수
+
+Golang에서는 다음과 같이 함수가 다수의 값을 반환할 수 있습니다.
+
+```go
+func Divide(a, b int) (int, bool) {
+    if b == 0 {
+        return 0, false
+    }
+
+    return a / b, true
+}
+
+func main() {
+    c, success := Divide(10, 2)
+    fmt.Println(c, success)
+    d, success := Divide(10, 0)
+    fmt.Println(d, success)
+}
+```
+
+Golang에서는 다음과 같이 선언 대입문(`:=`)을 사용하여 변수를 선언할 때, 이미 변수명이 선언이 되어있다면, 컴파일 에러가 발생합니다.
+
+```go
+func main() {
+    c, success := Divide(10, 2)
+    c, success := Divide(10, 0) // ERROR!
+    fmt.Println(c, success)
+}
+```
+
+선언 대입문(`:=`)은 변수를 새로 정의하고 할당한다는 의미이기에 중복된 이름으로 새 변수를 생성할 수 없기 때문입니다. 하지만, 멀티 반환 함수에서 반환받는 값을 저장하는 변수명이 하나만 달라도 컴파일 에러가 발생하지 않습니다.
+
+```go
+func main() {
+    c, success := Divide(10, 2)
+    fmt.Println(c, success)
+    d, success := Divide(10, 0)
+    fmt.Println(d, success)
+}
+```
+
+### 출력값에 이름 지정
+
+멀티 반환 함수에서 다음과 같이 반환되는 값의 변수를 미리 선언하고 사용할 수 있습니다.
+
+```go
+func Divide(a, b int) (result int, success bool) {
+    if b == 0 {
+        result = 0
+        success = false
+        return
+    }
+
+    result = a / b
+    success = true
+    return
+}
+```
+
+## 함수 심화
+
+이밖에도 함수의 다양한 기능들이 있습니다. 좀 더 깊게 함수에 대해 공부하고 싶은 분들은 아래에 블로그를 참고하시기 바랍니다.
+
+-   [[Golang] Function 심화](https://dev-yakuza.posstree.com/ko/golang/function/deep-dive/)
+
+## 완료
+
+이것으로 Golang에서 함수를 정의하고 사용하는 방법에 대해서 알아보았습니다. 또한 Golang에서  `Public`과  `Private`  함수를 구별하기 위해, 함수명의 첫글자를 사용한다는 것에 대해서 알게되었습니다.
+
+
+# [Golang if 문](https://dev-yakuza.posstree.com/ko/golang/if-statement/)
+
+2021-10-07 
+## Golang에서 if문을 사용하는 방법에 대해서 살펴봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `if`문을 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/if-statement](https://github.com/dev-yakuza/study-golang/tree/main/if-statement)
+
+## if문
+
+Golang에서는 다음과 같이  `if`문을 사용할 수 있습니다. if문을 사용하여 조건을 검사하고, 조건에 해당하는 구문을 실행할 수 있습니다.
+
+```go
+if 조건 {
+  코드 블록
+} else if 조건 {
+  코드 블록
+} else {
+  코드 블록
+}
+```
+
+if문을 사용하는 방법에 대해서 알아보기 위해,  `main.go`  파일을 생성하고 다음과 같이 작성합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  v := 89
+
+  if v > 90 {
+    fmt.Println("B")
+  } else if v > 80 {
+    fmt.Println("B")
+  } else if v > 70 {
+    fmt.Println("C")
+  } else {
+    fmt.Println("F")
+  }
+}
+```
+
+작성한 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+B
+```
+
+## 쇼트 서킷
+
+Golang에서는 조건식을 실행할 때, 쇼트 서킷(Short circuit)이 사용됩니다.
+
+```go
+false && 조건
+```
+
+논리 연산을 수행할 때, 앞에 조건을 수행하고, 그 다음 뒤에 조건을 수행하게 됩니다.  `&&`  연산은 두 조건이 모두 참일 때만, 참이 됩니다. 따라서 위와 같이 앞에 실행한 조건이  `false`이면 뒤에 조건을 실행해도 절대로  `true`가 될 수 없기 때문에, 뒤에 조건은 실행하지 않고, 결과로  `false`를 반환하게 됩니다.
+
+```go
+true || 조건
+```
+
+위에 조건도 역시, 앞에 조건이 이미  `true`이고,  `or`  연산은 둘중 하나만 참이여도 참이 되므로, 뒤에 연산을 굳이 실행할 필요가 없습니다.
+
+Golang에서는 이와 같은 쇼트 서킷이 사용되며,  `main.go`를 다음과 같이 수정하여 확인할 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+func first(result bool) bool {
+  fmt.Println("first condition is called!")
+  return result
+}
+
+func second() bool {
+  fmt.Println("Second condition is called!")
+  return true
+}
+
+func main() {
+  fmt.Println("ex 1")
+  if first(false) && second() {
+  }
+
+  fmt.Println("ex 2")
+  if first(true) && second() {
+  }
+
+  fmt.Println("ex 3")
+  if first(true) || second() {
+  }
+
+  fmt.Println("ex 4")
+  if first(false) || second() {
+  }
+}
+```
+
+작성한 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+ex 1
+first condition is called!
+ex 2
+first condition is called!
+Second condition is called!
+ex 3
+first condition is called!
+ex 4
+first condition is called!
+Second condition is called!
+```
+
+이로써 쇼트 서킷이 적용되어 두번째 조건을 실행하지 않는 것을 확인할 수 있습니다.
+
+## 조건문의 초기화문
+
+다른 언어와는 다르게 Golang에서는  `if`문에서 초기화문(Initialization statement)을 사용할 수 있습니다.
+
+```go
+if 초기화문; 조건문 {
+  코드 블록
+}
+```
+
+초기화문에서 할당된 변수는, 조건문에서 사용되거나 조건문안에 코드 블록에서 사용할 수 있습니다.
+
+```go
+func testFunc() (int, bool) {
+  return 1, true
+}
+
+func main() {
+  if v, success := testFunc(); success {
+   fmt.Println(v)
+  }
+
+  fmt.Println(v) // ERROR
+}
+```
+
+초기화문에서 선언된 변수는 외부에서는 사용할 수 없으므로, 위와 같이 외부에서 사용하는 경우 컴파일 에러가 발생합니다.
+
+## 완료
+
+이것으로 Golang에서  `if`문을 사용하는 방법에 대해서 알아보았습니다. 또한 Golang의 특유 문법인 조건문의 초기화문에 대해서도 알아보았습니다.
+
+
+# [Golang switch문](https://dev-yakuza.posstree.com/ko/golang/swtich-statement/)
+
+2021-10-10 
+
+## Golang에서 switch문을 사용하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `switch`문을 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/switch-statement](https://github.com/dev-yakuza/study-golang/tree/main/switch-statement)
+
+## switch문
+
+`if`문은 조건을 검사하여 코드 블록을 실행하지만,  `switch`문은 값을 검사하고 해당 코드 블록을 실행합니다.
+
+```go
+switch 비교값{
+  case 값1:
+    코드 블록
+  case 값2:
+    코드 블록
+  default:
+    코드 블록
+}
+```
+
+Golang에서  `switch`문을 사용하는 방법에 대해서 살펴보기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  a := 2
+
+  switch a {
+  case 1:
+    fmt.Println("a == 1")
+  case 2:
+    fmt.Println("a == 2")
+  case 3:
+    fmt.Println("a == 3")
+  default:
+    fmt.Println("a is not 1, 2 or 3")
+  }
+}
+```
+
+프로그램을 실행하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+a == 2
+```
+
+## break & fallthrough
+
+보통 다른 언어에서  `switch`문을 사용할 때,  `break`를 사용하여 코드 블록을 종료시키지만, Golang에서는  `break`  구문을 생략할 수 있습니다.
+
+다른 언어에서  `break`문을 생략하면 다음 케이스 구문이 함께 실행됩니다. 하지만, Golang에서는  `break`  구문이 없으므로, 다음 케이스도 함께 실행하고 싶다면, 다음과 같이  `fallthrought`를 사용해야 합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  a := 2
+
+  switch a {
+  case 1:
+    fmt.Println("a == 1")
+  case 2:
+    fmt.Println("a == 2")
+    fallthrough
+  case 3:
+    fmt.Println("a == 3")
+  default:
+    fmt.Println("a is not 1, 2 or 3")
+  }
+}
+```
+
+위의 코드를 실행하면 이전과는 다르게 다음과 같이, 다음 케이스 블록도 실행되는 것을 확인할 수 있습니다.
+
+```bash
+# go run main.go
+a == 2
+a == 3
+```
+
+## 여러값 검사
+
+Golang에서는 다음과 같이 여러 값을 검사할 수 있습니다.
+
+```go
+switch 비교값{
+  case 값1, 값2:
+    ...
+  case 값3, 값4:
+    ...
+  case 값5:
+    ...
+  default:
+    ...
+}
+```
+
+Golang에서 여러 값을 검사하는 방법을 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  a := 2
+
+  switch a {
+  case 1, 3, 5, 7, 9:
+    fmt.Println("Odd")
+  case 2, 4, 6, 8:
+    fmt.Println("Even")
+  default:
+    fmt.Println("Please insert 0 < value < 10.")
+  }
+}
+```
+
+위에 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Even
+```
+
+## 초기화문
+
+`switch`문도  `if`문과 같이 초기화문을 사용할 수 있습니다.
+
+```go
+switch 초기화문; 비교값{
+  case 값1, 값2:
+    ...
+  case 값3, 값4:
+    ...
+  case 값5:
+    ...
+  default:
+    ...
+}
+```
+
+`switch`문에서 초기화문을 사용하는 방법에 대해서 알아보기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  switch a := 2; a {
+  case 1, 3, 5, 7, 9:
+    fmt.Println("Odd")
+  case 2, 4, 6, 8:
+    fmt.Println("Even")
+  default:
+    fmt.Println("Please insert 0 < value < 10.")
+  }
+}
+```
+
+위에 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Even
+```
+
+## 완료
+
+이것으로 Golang에서  `switch`문을 사용하는 방법을 확인해 보았습니다. Golang에서  `switch`문은 다른 언어와 다르게  `break`를 생략할 수 있으며,  `fallthrough`를 통해 다음 케이스를 함께 실행할 수 있습니다. 또한  `if`문과 같이 초기화문을 사용할 수 있는 것을 확인하였습니다.
+
+
+# [Golang for문](https://dev-yakuza.posstree.com/ko/golang/for-statement/)
+
+2021-10-13 
+## Golang에서 유일한 반복문인 for문을 사용하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `for`문을 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/for-statement](https://github.com/dev-yakuza/study-golang/tree/main/for-statement)
+
+## for문
+
+Golang에서는 하나의 반복문만 존재하며,  `for`문이 그 역할을 수행합니다. Golang에서는  `while`문과 같은 반복문이 존재하지 않지만,  `for`문으로 그와 동일한 기능을 실행할 수 있습니다.
+
+Golang에서는 다음과 같이  `for`문을 정의하여 사용할 수 있습니다.
+
+```go
+for 초기화문; 조건문; 후처리 {
+  // 조건문이 true이면 실행
+  코드 블록
+}
+```
+
+또한, 다음과 같이 초기화문을 생략할 수 있습니다.
+
+```go
+for ; 조건문; 후처리 {
+  ...
+}
+```
+
+반대로, 다음과 같이 후처리를 생략하는 것도 가능합니다.
+
+```go
+for 초기화문 ; 조건문;  {
+  ...
+}
+```
+
+물론, 초기화문과 후처리를 동시에 생략하는 것도 가능합니다.
+
+```go
+for ; 조건문;  {
+  ...
+}
+```
+
+이를 다음과 같이 좀 더 간단하게 정의하여 사용할 수 있습니다.
+
+```go
+for 조건문 {
+  ...
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 만들고, 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  for i := 0; i < 10; i++ {
+    fmt.Println(i)
+  }
+
+  i := 0
+  for ; i < 10; i++ {
+    fmt.Println(i)
+  }
+
+  for i := 0; i < 10; {
+    fmt.Println(i)
+    i++
+  }
+
+  i = 0
+  for i < 10 {
+    fmt.Println(i)
+    i++
+  }
+
+  i = 0
+  for i < 10 {
+    fmt.Println(i)
+    i++
+  }
+}
+```
+
+## continue와 break
+
+Golang에서도 반복문안에서  `continue`와  `break`을 사용하여 반복문을 조절할 수 있습니다.
+
+-   continue: 후처리로 이동
+-   break: 반복문 종료
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  for i := 0; i < 10; i++ {
+    if i == 3 {
+      continue
+    }
+    if i == 6 {
+      break
+    }
+    fmt.Println(i)
+  }
+}
+```
+
+프로그램을 실행하면 다음과 같이  `i`가  `3`일 때 후처리로 이동하여, 화면에  `i`가 표시되지 않은 것을 알 수 있습니다. 또한,  `i`가  `6`일 때, 반복문이 종료된 것을 알 수 있습니다.
+
+```bash
+# go run main.go
+0
+1
+2
+4
+5
+```
+
+## 무한 루프
+
+Golang에서는  `for`문을 사용하여 무한 루프를 구현할 수 있습니다.  `for`문에서 다음과 같이 초기화문과 후처리를 생략하고, 조건에  `true`를 설정함으로써 무한 루프를 구현할 수 있습니다.
+
+```go
+for true {
+  코드 블록
+}
+```
+
+이를 다음과 같이 간단하게 표현할 수 있습니다.
+
+```go
+for {
+  코드 블록
+}
+```
+
+무한 루프를 확인하기 위해, 다음과 같이  `main.go`  파일을 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "time"
+)
+
+func main() {
+  i := 1
+  for {
+    time.Sleep(time.Second)
+    fmt.Println(i)
+    i ++
+  }
+}
+```
+
+이를 실행하면, 1초에 한번씩 화면에  `i`를 출력하는 것을 확인할 수 있으며, 프로그램이 종료되지 않는 것을 확인할 수 있습니다.
+
+```bash
+# go run main.go
+1
+2
+3
+4
+...
+```
+
+이렇게 프로그램이 종료되지 않고 계속 실행될 때에는,  `ctrl + c`키를 눌러 프로그램을 종료할 수 있습니다.
+
+## 완료
+
+이것으로 Golang으로 유일한 반복문인  `for`문을 사용하는 방법에 대해서 알아보았습니다. 또한  `for`문의 초기화문과 후처리를 생략할 수 있음을 확인하였고, 무한 루프를 만드는 방법에 대해서도 살펴보았습니다.
+
+
+# [Golang 배열(Array)](https://dev-yakuza.posstree.com/ko/golang/array/)
+
+2021-10-18 
+
+## Golang에서 배열(Array)를 정의하고 사용하는 방법에 대해서 알아봅시다.
+
+-   [완료](https://dev-yakuza.posstree.com/ko/golang/array/#%EC%99%84%EB%A3%8C)
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `array`(배열)를 사용하여 변수를 선언하고 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/array](https://github.com/dev-yakuza/study-golang/tree/main/array)
+
+## 배열
+
+Golang에서 배열은 같은 데이터 타입에 데이터들을 저장하기 위한 타입으로써, 연속된 메모리에 데이터가 저장됩니다. 배열은 다음과 같이 선언하여 사용할 수 있습니다.
+
+```go
+var 변수명 [요소 개수]타입
+var a [5]int
+```
+
+다음과 같이 배열은 선언한 경우, 크기가 5이며  `int`형 값을 저장하는 배열이 생성되고, 초기값이 선언되지 않았기 때문에,  `int`의 기본값인  `0`이 할당되게 됩니다.
+
+```go
+var a [5]int
+```
+
+배열 선언시 배열의 크기는 상수만 사용이 가능하며, 변수를 사용한 경우 컴파일 오류가 발생합니다.
+
+```go
+const LEN = 5
+var a = [LEN]int
+
+// Error
+len := 5
+var b := [len]int
+```
+
+이를 확인한기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  var a [5]int
+  fmt.Println(a)
+
+  const LEN = 5
+  var b [LEN]int
+  fmt.Println(b)
+
+  // ERROR
+  // var len = 5
+  // var c [len]int
+  // fmt.Println(c)
+}
+```
+
+위의 코드를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+[0 0 0 0 0]
+[0 0 0 0 0]
+```
+
+## 초기값
+
+Golang에서 배열은 다음과 같이 변수를 선언할 때, 초기값을 설정할 수 있습니다.
+
+```go
+var a [5]int = [5]int{1, 2, 3, 4, 5}
+// [1 2 3 4 5]
+var a = [5]int{1, 2, 3, 4, 5}
+// [1 2 3 4 5]
+```
+
+배열도 변수 할당이므로 다음과 같이  `선언 대입문`을 사용할 수 있습니다.
+
+```go
+days := [3]string{"Mon", "Tue", "Wed"}
+// [Mon Tue Wed]
+```
+
+초기값은 다음과 같이 일부만 설정할 수 있으며, 초기값이 설정되지 않은 부분은 변수 타입의 기본값이 설정되게 됩니다.
+
+```go
+a := [5]int{1, 2}
+// [1 2 0 0 0]
+```
+
+다음과 같이 특정 위치에만 초기값을 설정할 수도 있습니다.
+
+```go
+a := [5]int{1: 10, 3: 30}
+// [0 10 0 30 0]
+```
+
+다음과 같이 초기값을 선언하면 길이가 초기값의 크기와 동일한 배열이 생성됩니다.
+
+```go
+a := [...]int{1, 2, 3, 4, 5}
+// [5]int
+// [1 2 3 4 5]
+```
+
+다음과 같이 사용한 경우, 길이가 고정되지 않은  `slice`가 생성되게 됩니다. (배열이 아님)
+
+```go
+a := []int{1, 2, 3, 4, 5}
+// []int
+// [1 2 3 4 5]
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  var a [5]int = [5]int{1, 2, 3, 4, 5}
+  fmt.Println(a)
+
+  var b = [5]int{1, 2, 3, 4, 5}
+  fmt.Println(b)
+
+  days := [3]string{"Mon", "Tue", "Wed"}
+  fmt.Println(days)
+
+  e := [5]int{1, 2}
+  fmt.Println(e)
+
+  f := [5]int{1: 10, 3: 30}
+  fmt.Println(f)
+
+  g := [...]int{1, 2, 3, 4, 5}
+  fmt.Printf("%T\n", g)
+  fmt.Println(g)
+
+  h := []int{1, 2, 3, 4, 5}
+  fmt.Printf("%T\n", h)
+  fmt.Println(h)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+[1 2 3 4 5]
+[1 2 3 4 5]
+[Mon Tue Wed]
+[1 2 0 0 0]
+[0 10 0 30 0]
+[5]int
+[1 2 3 4 5]
+[]int
+[1 2 3 4 5]
+```
+
+## 배열 복사
+
+배열은 일반 변수를 복사하는 것과는 다릅니다.
+
+```go
+a := [...]int{1, 2, 3, 4, 5}
+b := [...]int{10, 20, 30, 40, 50}
+
+fmt.Println(a)
+fmt.Println(b)
+
+b = a
+fmt.Println(a)
+fmt.Println(b)
+```
+
+위에 예제를 살펴보면 다음과 같은 코드를 통해 배열을 복사합니다.
+
+```go
+b = a
+```
+
+배열 복사는  `a`의 메모리 크기만큼을  `b`에 복사하게 됩니다. 배열은 연속된 메모리에 데이터가 저장되므로  `a`를  `b`에 복사할 때, 값 하나하나를 복사하는 것이 아니라 메모리를 통째로 복사하게 됩니다.
+
+따라서 배열의 크기가 다르면 복사를 할 수 없습니다. Golang은 기본적으로 양변의 타입이 같아야 복사가 가능합니다. 따라서 다음과 같이  `[3]int`  타입의 배열을  `[5]int`  배열에 복사할 수 없습니다.
+
+```go
+c := [3]int{1, 2, 3}
+d := [5]int{10, 20, 30, 40, 50}
+
+// ERROR
+d = c
+fmt.Println(c)
+fmt.Println(d)
+```
+
+## 다차원 배열
+
+Golang에서도 다차원 배열을 사용할 수 있습니다.
+
+```go
+var a [2][5]int
+```
+
+기본 배열 사용법과 동일하게, 배열을 선언하면서 초기값을 설정할 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  a := [2][5]int{
+    {1, 2, 3, 4, 5},
+    {10, 20, 30, 40, 50},
+  }
+
+  for _, arr := range a {
+    for _, v := range arr {
+      fmt.Print(v, " ")
+    }
+    fmt.Println()
+  }
+}
+```
+
+위에 내용을 실행해 보면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+1 2 3 4 5
+10 20 30 40 50
+```
+
+## 완료
+
+이것으로 Golang에서 배열을 정의하고 사용하는 방법에 대해서 살펴보았습니다. 또한, 배열을 복사하기 위해서는 동일한 타입과 크기의 배열을 사용해야 된다는 점에 대해서도 알게 되었습니다.
+
+
+# [Golang struct(구조체)](https://dev-yakuza.posstree.com/ko/golang/struct/)
+
+2021-10-22 
+
+## Golang에서 struct(구조체)를 정의하고 사용하는 방법에 대해서 알아보도록 하겠습니다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `struct`(구조체)를 사용하여 변수를 선언하고 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/struct](https://github.com/dev-yakuza/study-golang/tree/main/struct)
+
+## 구조체
+
+Golang에서 구조체(struct)는 여러 타입의 필드를 묶어서 제공할 수 있는 타입입니다.
+
+## 구조체의 역할
+
+구조체는 코드의 결합도, 의존성을 낮게 만들고 응집도를 높게 만드는 역할을 합니다.
+
+> Low coupling, high cohesion
+
+-   `함수`는 관련 코드 블록을 묶어서 응집도를 높이고 재사용성을 증가시킵니다.
+-   `배열`은 같은 타입의 데이터들을 묶어서 응집도를 높입니다.
+-   `구조체`는 관련 데이터들을 묶어서 응집도를 높이고 재사용성을 증가시킵니다.
+
+이런 구조체는 객체 지향 프로그래밍(OOP - Object Oriented Programming)에 기반이 됩니다.
+
+## 구조체 정의
+
+Golang에서 구조체(struct)는 다음과 같이 정의할 수 있습니다.
+
+```go
+type 타입명 struct {
+  필드명 타입
+  ...
+  필드명 타입
+}
+```
+
+구조체도 함수와 마찬가지로 필드명을 사용하여 외부에 노출시킬 필드(Public)와 노출 시키지 않을 필드(Private)를 설정할 수 있습니다. 필드명이 대문자로 시작하면 외부에서 사용이 가능하지만, 소문자로 시작하는 경우에는 외부에서 사용이 불가능하다.
+
+이를 확인하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Student struct {
+  Name  string
+  Class int
+  No    int
+}
+
+func main() {
+  var s Student
+  s.Name = "Tom"
+  s.Class = 1
+  s.No = 1
+
+  fmt.Println(s)
+  fmt.Printf("%v\n", s)
+  fmt.Printf("Name: %s, Class: %d, No: %d\n", s.Name, s.Class, s.No)
+}
+```
+
+이렇게 수정한 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+{Tom 1 1}
+{Tom 1 1}
+Name: Tom, Class: 1, No: 1
+```
+
+## 초기화
+
+다음과 같이 구조체를 초기화하지 않고 변수를 선언한 경우, 모든 필드값은 필드 타입의 기본값으로 설정됩니다.
+
+```go
+type Student struct {
+  Name  string
+  Class int
+  No    int
+}
+
+var s Student;
+```
+
+구조체로 변수를 생성할 때, 필드 순서로 초기값을 대입할 수 있습니다.
+
+```go
+var s1 Student = Student{"Tom", 1, 2}
+var s2 Student = Student{
+  "John",
+  1,
+  3,
+}
+```
+
+또는 다음과 같이 필드명을 지정하여 초기화할 수 있다.
+
+```go
+var a Student = Student{ Name: "Deku", Class: 1, No: 3 };
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Student struct {
+  Name  string
+  Class int
+  No    int
+}
+
+func main() {
+  var s Student
+  fmt.Println(s)
+
+  var s1 Student = Student{"Tom", 1, 2}
+  var s2 Student = Student{
+    "John",
+    1,
+    3,
+  }
+  fmt.Println(s1)
+  fmt.Println(s2)
+
+  var s3 Student = Student{Name: "Deku", Class: 1, No: 3}
+  fmt.Println(s3)
+}
+```
+
+이렇게 수정한 코드를 실행하면, 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+{ 0 0}
+{Tom 1 2}
+{John 1 3}
+{Deku 1 3}
+```
+
+## 구조체를 포함한 구조체
+
+Golang에서는 다음과 같이 구조체가 다른 구조체를 포함할 수 있습니다. Golang에서는 이를  `Nested struct`라고 부릅니다.
+
+```go
+type ClassInfo struct {
+  Class int
+  No int
+}
+
+type Student struct {
+  Class ClassInfo
+  Name string
+}
+```
+
+이렇게 구조체가 포함된 구조체는 다음과 같이 초기화를 할 수 있습니다.
+
+```go
+var s Student = Student{
+  Class: ClassInfo{Class: 1, No: 1},
+  Name:  "John",
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type ClassInfo struct {
+  Class int
+  No    int
+}
+
+type Student struct {
+  Class ClassInfo
+  Name  string
+}
+
+func main() {
+  var s Student = Student{
+    Class: ClassInfo{Class: 1, No: 1},
+    Name:  "John",
+  }
+
+  fmt.Println(s.Class.Class)
+  fmt.Println(s.Class.No)
+  fmt.Println(s.Name)
+}
+```
+
+이렇게 수정한 코드를 실행하면, 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+1
+1
+John
+```
+
+## Embedded field
+
+Golang에서는 구조체가 다른 구조체를 포함할 수 있으며, 다음과 같이 필드명을 사용하지 않고 구조체를 포함 시킬 수 있습니다. 이를 Golang에서는  `Embedded field`라고 부릅니다.
+
+```go
+type ClassInfo struct {
+  Class int
+  No int
+}
+
+type Student struct {
+  ClassInfo
+  Name string
+}
+```
+
+이렇게 선언된  `Embedded Field`는 다음과 같이 초기화할 수 있습니다.
+
+```go
+var s Student = Student{
+  ClassInfo: ClassInfo{Class: 1, No: 1},
+  Name:      "John",
+}
+```
+
+이렇게 사용된  `Embedded Field`는 다음과 같이 직접 접근하여 사용할 수 있습니다.
+
+```go
+fmt.Println(s.Class)
+fmt.Println(s.No)
+fmt.Println(s.Name)
+```
+
+`Embedded Field`는 다음과 같이 현재 구조체의 필드명과 중복되는 필드를 사용할 수 있습니다.
+
+```go
+type ClassInfo struct {
+  Class int
+  No int
+}
+
+type Student struct {
+  ClassInfo
+  Name string
+  No int
+}
+```
+
+이렇게 중복된 필드명은 다음과 같이 초기화할 수 있습니다.
+
+```go
+var s1 DupStudent = DupStudent{
+  ClassInfo: ClassInfo{Class: 1, No: 1},
+  Name:      "John",
+  No:        10,
+}
+```
+
+필드명이 중복되었기 때문에 다음과 같이 중복된 필드를 직접 접근하여 사용하면, 현재 구조체의 값이 반환되게 됩니다.
+
+```go
+fmt.Println(s1.No) // 10
+```
+
+그럼, 앞에서와 같이  `Embedded Field`의 필드값에 접근하고 싶다면, 다음과 같이 사용할 수 있습니다.
+
+```go
+fmt.Println(s1.ClassInfo.No) // 1
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type ClassInfo struct {
+  Class int
+  No    int
+}
+
+type Student struct {
+  ClassInfo
+  Name string
+}
+
+type DupStudent struct {
+  ClassInfo
+  Name string
+  No   int
+}
+
+func main() {
+  var s Student = Student{
+    ClassInfo: ClassInfo{Class: 1, No: 1},
+    Name:      "John",
+  }
+
+  fmt.Println(s.Class)
+  fmt.Println(s.No)
+  fmt.Println(s.Name)
+
+  var s1 DupStudent = DupStudent{
+    ClassInfo: ClassInfo{Class: 1, No: 1},
+    Name:      "John",
+    No:        10,
+  }
+
+  fmt.Println(s1.Class)
+  fmt.Println(s1.No)
+  fmt.Println(s1.Name)
+  fmt.Println(s1.ClassInfo.No)
+}
+```
+
+이렇게 수정한 파일을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+1
+1
+John
+1
+10
+John
+1
+```
+
+## 메모리 정렬
+
+Golang에서는 보통 프로그래밍할 때에는 메모리를 크게 신경 쓸 필요가 없습니다. 하자만, 만약 여러분이 메모리가 작은 디바이스나 메모리 효율을 생각하며 프로그램을 작성해야 한다면, 구조체의 메모리 정렬(Memory Alignment)을 알아둘 필요가 있다.
+
+```go
+s := Student{"John", 1}
+var str string = "John"
+var i int = 1
+
+fmt.Println(unsafe.Sizeof(s))
+fmt.Println(unsafe.Sizeof(str))
+fmt.Println(unsafe.Sizeof(i))
+```
+
+Golang은 CPU에서 계산하기 편하게 하기 위해, 구조체를 8의 배수로 정렬하여 메모리에 저장합니다.
+
+```bash
+24
+16
+8
+```
+
+만약 필드의 타입이 8의 배수보다 작은 경우, Golang은 빈 공간(Memory Padding)을 추가하여 8의 배수로 만들어 저장하게 됩니다.
+
+```go
+type Memory struct {
+  A int8 // 1 바이트
+  B int // 8 바이트
+  C int8 // 1 바이트
+  D int // 8 바이트
+  E int8 // 1 바이트
+  // 19 바이트
+}
+```
+
+위와 같은 구조체는 변수의 타입만 고려한다면, 19 바이트만이 사용되야 하지만, 구조체는 8의 배수로 정렬이 되기 때문에 A, C, E에 빈 공간을 추가하여 8 바이트로 계산하므로 실제로 사용되는 메모리는 40 바이트가 됩니다.
+
+이렇게 빈 공간(Memory Padding)에 추가로 낭비되는 메모리가 많아지는 것을 막기 위해 다음과 같이 작은 메모리를 먼저 선언하여 메모리 정렬을 수행할 수 있습니다.
+
+```go
+type Memory struct {
+  A int8 // 1 바이트
+  C int8 // 1 바이트
+  E int8 // 1 바이트
+  B int // 8 바이트
+  D int // 8 바이트
+  // 19 바이트
+}
+```
+
+역시 19 바이트가 실제로 사용되는 메모리이지만, A, C, E가 함께 선언되었기 때문에 3바이트의 실제 공간과 5바이트의 빈 공간을 추가하여 8바이트로 계산되게 됩니다. 따라서 사용되는 메모리는 24바이트가 됩니다.
+
+이처럼 Golang은 CPU의 계산을 효율적으로 하기 위해 8배수 정렬을 하며, 이로 인한 메모리 낭비를 최소화하기 위해서는 위와 같이 메모리 정렬을 수행하는 것이 좋습니다.
+
+이를 확인하기 위해  `main.go`  파일을 열고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "unsafe"
+)
+
+type Student struct {
+  Name  string
+  Class int
+}
+
+type Memory struct {
+  A int8
+  B int
+  C int8
+  D int
+  E int8
+}
+
+type MemoryAlignment struct {
+  A int8
+  C int8
+  E int8
+  B int
+  D int
+}
+
+func main() {
+  s := Student{"John", 1}
+  var str string = "John"
+  var i int = 1
+
+  fmt.Println(unsafe.Sizeof(s))
+  fmt.Println(unsafe.Sizeof(str))
+  fmt.Println(unsafe.Sizeof(i))
+
+  m := Memory{1, 2, 3, 4, 5}
+  fmt.Println(unsafe.Sizeof(m))
+
+  ma := MemoryAlignment{1, 2, 3, 4, 5}
+  fmt.Println(unsafe.Sizeof(ma))
+}
+```
+
+이렇게 수정한 코드를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+24
+16
+8
+40
+24
+```
+
+## 완료
+
+이것으로 Golang에서 구조체(struct)를 정의하고 사용하는 방법에 대해서 알아보았습니다. 또한, 구조체의 메모리 사용에 대해서 알아보았고, 메모리 정렬을 통해 좀 더 효율적으로 메모리를 사용할 수 있음을 알게 되었습니다.
+
+
+# [Golang Pointer](https://dev-yakuza.posstree.com/ko/golang/pointer/)
+
+2021-10-25 
+
+## Golang에서 포인터(Pointer)를 사용하여 변수의 메모리 주소값을 다루는 방법을 알아보도록 하겠습니다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `Pointer`(포인터)를 사용하여 변수의 메모리 주소를 다루는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/pointer](https://github.com/dev-yakuza/study-golang/tree/main/pointer)
+
+## 포인터
+
+포인터(Pointer)는 메모리 주소를 값으로 갖는 타입입니다. Golang에서 포인터는 다음과 같이 선언할 수 있습니다.
+
+```go
+var 변수명 *타입
+var p *int
+```
+
+이렇게 선언한 포인터 변수는 다른 변수의 주소값을 저장할 수 있으며, 다른 변수의 주소값은  `&`  연산자를 사용하여 접근할 수 있습니다.
+
+```go
+var a int
+var p *int
+p = &a
+*p = 20
+```
+
+이때, 서로 타입이 서로 맞아야하며, 타입이 다른 경우 컴파일 에러가 발생합니다.
+
+Golang에서 포인터(Pointer)를 다루는 방법을 확인하기 위해,  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  var a int = 10
+  var p *int
+
+  fmt.Println(a)
+
+  p = &a
+  fmt.Printf("%v\n", &a)
+  fmt.Printf("%v\n", p)
+
+  *p = 20
+  fmt.Println(a)
+  fmt.Println(*p)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 볼 수 있습니다.
+
+```bash
+# go run main.go
+10
+0xc00001a0e8
+0xc00001a0e8
+20
+20
+```
+
+실행 결과를 보면, 변수  `a`와 포인터 변수  `p`의 메모리 주소값이 같음을 알 수 있으며, 포인터 변수의 값을 변경하였을 때, 동일한 메모리 주소의 변수인  `a`값이 변경되는 것을 알 수 있습니다.
+
+## 포인터 변수의 기본값
+
+Golang에서 변수를 선언하고 값을 할당하지 않으면, 변수 타입의 기본값이 할당됩니다. 하지만 포인터 변수는 메모리 주소값을 할당하는 변수이므로 값을 할당하지 않으면  `nil`이 할당되게 됩니다.
+
+이를 확인하기 위해서  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  var p *int
+
+  fmt.Println(p)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+<nil>
+```
+
+그러므로 포인터 변수를 사용할 때, 다음과 같이 변수가 할당되었는지 확인할 수 있습니다.
+
+```go
+var p *int
+if p != nil {
+  fmt.Println("Assigned")
+}
+```
+
+## 함수에서 포인터
+
+Golang에서는 다음과 같이 포인터 변수를 활용할 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+type Data struct {
+  value int
+  data  [200]int
+}
+
+func ChangeData(arg Data) {
+  arg.value = 100
+  arg.data[100] = 999
+}
+
+func ChangePData(arg *Data) {
+  arg.value = 100
+  arg.data[100] = 999
+}
+
+func main() {
+  var data Data
+  ChangeData(data)
+  fmt.Printf("value = %d\n", data.value)
+  fmt.Printf("data[100] = %d\n", data.data[100])
+
+  ChangePData(&data)
+  fmt.Printf("value = %d\n", data.value)
+  fmt.Printf("data[100] = %d\n", data.data[100])
+}
+```
+
+이를 실행하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+value = 0
+data[100] = 0
+value = 100
+data[100] = 999
+```
+
+함수에 포인터 변수를 사용하면, 전달받은 변수의 값을 함수에서 직접 변경할 수 있습니다.
+
+## 구조체 포인터 초기화
+
+Golang에서는 구조체(Struct) 포인터는 다음과 같이 초기화를 할 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+type Data struct {
+  value int
+  data  [200]int
+}
+
+func main() {
+  var data Data
+  var p1 *Data = &data
+  var p2 *Data = &Data{}
+
+  fmt.Println(*p1)
+  fmt.Println(*p2)
+}
+```
+
+## 인스턴스
+
+메모리에 할당된 데이터의 실체를  `인스턴스(instance)`라고 합니다.
+
+### new 내장 함수
+
+다음과 같이  `new`  내장 함수를 사용하여 구조체의 인스턴스를 생성할 수 있습니다.
+
+```go
+p1 := &Data{}
+var p2 = new(Data)
+```
+
+여기서  `p1`,  `p2`는 포인터 변수이며,  `*Data`  타입이다.
+
+### 인스턴스가 사라지는 시점
+
+Golang에도 가비지 콜렉터(Garbage Collector)가 존재하며, 인스턴스를 참조하는 변수가 모두 사라지면 자동으로 제거됩니다.
+
+-   허상 포인터(Dangling Pointer): 포인터 변수가 더이상 유효하지 않은 메모리를 참조할 때, 발생하는 에러를 말합니다.
+
+```go
+package main
+
+import "fmt"
+
+type User struct {
+  Name string
+  Age  int
+}
+
+func NewUser(name string, age int) *User {
+  var u = User{name, age}
+  return &u
+}
+
+func main() {
+  userPointer := NewUser("John", 20)
+  fmt.Println(userPointer)
+  fmt.Println(userPointer.Age)
+  fmt.Println(userPointer.Name)
+}
+```
+
+C, C++ 관점에서 보면 변수 u는 NewUser함수의 중괄호 안에 있으므로 함수 호출이 끝나는 시점(`}`)에서 변수가 사라지게 됩니다. 따라서 사라진 변수의 주소를 넘기고 있으므로 해당 주소를 전달받아 사용하는  `userPointer`  포인터 변수는 허상 포인터(Dangling Pointer) 에러가 발생하게 됩니다.
+
+```go
+func NewUser(name string, age int) *User {
+  var u = User{name, age}
+  return &u
+}
+```
+
+하지만, Golang에서는 main함수 안에서 userPointer 포인터 변수가 변수 u의 메모리 주소를 참조하고 있기 때문에 u 변수의 인스턴스가 사라지지 않고 계속 유지가 되므로 허상 포인터(Dangling Pointer) 에러가 발생하지 않습니다. Golang은  `Escape Analysis`을 사용하여, 함수를 벗어나는 변수들을 검사하여 힙 메모리에 저장하기 때문에 이런 문제가 발생하지 않습니다.
+
+## 완료
+
+이것으로 Golang에서 포인터(Pointer)를 사용하여 메모리 주소를 참조하고 해당 메모리 주소의 값을 사용하는 방법에 대해서 알아보았습니다. 내용을 조금 요약하면 다음과 같습니다.
+
+-   인스턴스는 메모리에 생성된 데이터의 실체이며, 포인터를 이용해서 인스턴스를 가리키게 할 수 있다.
+-   함수 호출시 포인터 인수를 통해서 인스턴스를 입력받고, 함수 안에서 그 값을 수정할 수 있다.
+-   쓸모 없어진 인스턴스는 가비지 컬렉터가 자동으로 삭제한다.
+
+Golang에서는 포인터 변수가 많이 활용되므로, 이 부분을 잘 기억해둡시다.
+
+
+# [Golang String(문자열)](https://dev-yakuza.posstree.com/ko/golang/string/)
+
+2021-10-28 
+
+## Golang에서 String(문자열)을 선언하고 사용하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `String`(문자열)을 사용하여 변수를 생성하고 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/string](https://github.com/dev-yakuza/study-golang/tree/main/string)
+
+## 문자열
+
+Golang에서는 다음과 같이 문자열을 선언하고 사용할 수 있습니다.
+
+```go
+str1 := "Hello\nWorld!"
+fmt.Println(str1)
+```
+
+또한, 다음과 같이  `\``을 사용하여 여러 줄의 문자열을 선언하고 사용할 수 있습니다.
+
+```go
+str2 := `Hello
+World!`
+fmt.Println(str2)
+```
+
+이를 확인하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  str1 := "Hello\nWorld!"
+  fmt.Println(str1)
+
+  str2 := `Hello
+World!`
+  fmt.Println(str2)
+}
+```
+
+이를 실행하면 다음과 같은 결과가 출력됩니다.
+
+```bash
+# go run main.go
+Hello
+World!
+Hello
+World!
+```
+
+## 문자열 순회
+
+Golang에서는 다음과 같이 문자열을 순회할 수 있습니다.
+
+```go
+str1 := "Hello, world!"
+
+for i := 0; i < len(str1); i++ {
+  fmt.Printf("%c", str1[i])
+}
+```
+
+하지만  `len()`는 바이트 길이를 반환합니다. 따라서 한국어와 같이 1바이트가 아닌 문자를 사용하면 글자가 제대로 표시되지 않습니다. (한국어 > 3바이트)
+
+```go
+str2 := "Hello, 월드!"
+
+for i := 0; i < len(str2); i++ {
+  fmt.Printf("%c", str2[i])
+}
+```
+
+이때는  `rune`(int32 별칭타입) 타입을 사용하여, 문자 하나를 4바이트로 변환시킨 후, 출력해야 합니다.
+
+```go
+str3 := "Hello, 월드!"
+arr := []rune(str3)
+
+for i := 0; i < len(arr); i++ {
+  fmt.Printf("%c", arr[i])
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  str1 := "Hello, world!"
+
+  for i := 0; i < len(str1); i++ {
+    fmt.Printf("%c", str1[i])
+  }
+
+  fmt.Println()
+
+  str2 := "Hello, 월드!"
+
+  for i := 0; i < len(str2); i++ {
+    fmt.Printf("%c", str2[i])
+  }
+
+  fmt.Println()
+
+  str3 := "Hello, 월드!"
+  arr := []rune(str3)
+
+  for i := 0; i < len(arr); i++ {
+    fmt.Printf("%c", arr[i])
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Hello, world!
+Hello, ìë!
+Hello, 월드!%
+```
+
+## 문자열 연산
+
+Golang에서는 문자열을 사용하여 다음과 같은 연산을 사용할 수 있습니다.
+
+### 문자열 합산
+
+Golang에서  `+`  연산자를 사용하여 다음과 같이 문자열을 합칠 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  str1 := "Hello"
+  str2 := "world!"
+  fmt.Println(str1 + " " + str2)
+
+  str := "Hello"
+  str += " " + "world!"
+  fmt.Println(str)
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 수정하고 실행하면, 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+Hello world!
+Hello world!
+```
+
+### 비교 연산
+
+Golang에서는 다음과 같이 비교 연산자를 사용하여 문자열을 비교할 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  str3 := "a"
+  str4 := "b"
+  fmt.Println(str3 == str4)
+  fmt.Println(str3 != str4)
+  fmt.Println(str3 < str4)
+  fmt.Println(str3 > str4)
+}
+```
+
+문자의 크기를 비교할 때에는 해당 문자의 코드 값을 사용하여 비교하게 됩니다.
+
+-   A-Z: 65-90
+-   a-z: 97-122
+
+이를 확인하기 위해,  `main.go`  파일을 수정하고 실행하면, 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+false
+true
+true
+false
+```
+
+## 문자열은 포인터
+
+Golang에서는 기본적으로 같은 크기의 데이터만 변수에 할당이 가능합니다. 하지만, 문자열은 데이터에 따라 문자열의 길이가 달라지므로, 데이터의 사이즈가 다릅니다. 하지만, 문자열은 Golang의 기본 규칙을 어기고 데이터가 할당되고 있습니다. 그 이유는 문자열이 포인터이기 때문입니다.
+
+이를 확인하기 위해,  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "reflect"
+  "unsafe"
+)
+
+func main() {
+  str1 := "Hello, World!"
+  str2 := str1
+
+  strHeader1 := (*reflect.StringHeader)(unsafe.Pointer(&str1))
+  strHeader2 := (*reflect.StringHeader)(unsafe.Pointer(&str2))
+
+  fmt.Println(strHeader1)
+  fmt.Println(strHeader2)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+&{17444156 13}
+&{17444156 13}
+```
+
+결과를 확인해 보면, 같은 메모리 주소를 가지고 있으며, 같은 크기의 데이터가 저장된 것을 확인할 수 있습니다.
+
+## 문자열은 불변이다
+
+문자열은 기본적으로 불변(Immutable)값입니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  str := "Hello, World!"
+  str = "Hello"
+  fmt.Println(str)
+
+  // str[0] = "a" // ERROR
+}
+```
+
+따라서 전체 재할당은 가능하지만, 하나의 문자만을 변경하는 것은 불가능합니다.
+
+만약, 하나의 문자만을 변경하고 싶다면, 다음과 같이 문자열을 새로운  `slice`  변수에 할당하여 수정하면 됩니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  var str1 string = "Hello, World!"
+  var slice []byte = []byte(str1)
+
+  slice[0] = "h"[0]
+  fmt.Println(str1)
+  fmt.Printf("%s\n", slice)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Hello, World!
+hello, World!
+```
+
+## strings 패키지
+
+Golang에서 문자열을 다룰 때는 Golang에서 제공하는  `strings`  패키지를 사용하게 됩니다.
+
+-   strings:  [https://pkg.go.dev/strings](https://pkg.go.dev/strings)
+
+`strings`  패키지는 다양한 기능들이 매우 효율적으로 구현되어있기 때문에, 직접 구현하는 것보다 성능이 좋습니다. 그러므로, 문자열을 다루는 프로그램을 작성한다면, 위에 링크를 통해  `strings`  패키지가 제공하는 기능을 먼저 확인해 보는 것이 좋습니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "strings"
+)
+
+func main() {
+  str := "hello, world!"
+  fmt.Println(strings.ToUpper(str))
+  fmt.Println(strings.Contains(str, "hello"))
+  fmt.Println(strings.Index(str, "w"))
+  fmt.Println(strings.Compare("a", "b"))
+}
+```
+
+위에 내용을 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+HELLO, WORLD!
+true
+7
+-1
+```
+
+## 완료
+
+이것으로 Golang에서 문자열을 생성하고 사용하는 방법에 대해서 알아보았습니다. 또한, Golang에서 문자열의 특징을 알아보았으며, Golang이 기본적으로 제공하는  `strings`  패키지를 사용하여, 문자열을 다루는 방법에 대해서도 알아보았습니다.
+
+
+# [Golang Module](https://dev-yakuza.posstree.com/ko/golang/module/)
+
+2021-11-02 
+
+## Golang에서 Module(모듈)에 대해서 알아보고 어떻게 사용하는지에 대해서 알아보도록 하겠습니다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `Module`(모듈)을 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/module](https://github.com/dev-yakuza/study-golang/tree/main/module)
+
+## 모듈
+
+Golang의 버전  `1.11`  이전에는 모듈이라는 기능이 존재하지 않았습니다.  `1.11`  버전에서 처음 모듈이 소개되었으며,  `1.13`에서 모듈 기능이 완성되었습니다.  `1.13`때에 모듈은 선택 사항이였습니다.  `1.16`  버전에서 모듈은 Golang의 기본 사양이 되었습니다.
+
+Golang에서 모듈은 패키지(Package)의 모음으로써, 한 개의 모듈은 다수의 패키지를 포함할 수 있습니다. 이런 모듈을 통해 Golang은 패키지들의 종속성을 관리할 수 있으며, 모듈은 패키지 관리 시스템으로써 활용이 됩니다.
+
+모듈은 패키지를 트리 형식으로 관리하며, 루트(root) 폴더에  `go.mod`  파일을 생성하여 모듈을 정의하고, 종속성 정보를 관리하게 됩니다.
+
+## go mod init
+
+Golang에서는 다음 명령어를 사용하여 모듈을 생성할 수 있습니다.
+
+```bash
+go mod init MODULE_NAME
+```
+
+이때 모듈의 이름은 유니크해야 합니다. 따라서 보통  `GitHub`  저장소 주소를 활용하거나 URL을 모듈 이름으로 사용하게 됩니다.
+
+```bash
+go mod init github.com/dev-yakuza/study-golang/module/greeting
+```
+
+## greeting 모듈
+
+그럼 예제를 만들어 보면서 Golang의 모듈을 이해해 보도록 하겠습니다. 먼저 다른 모듈에서 참조하는  `greeting`  모듈을 만들어보도록 하겠습니다.
+
+```bash
+mkdir greeting
+cd greeting
+touch main.go
+```
+
+`greeting`  모듈을 만들기 위해  `greeting`  폴더를 생성하고 greeting 폴더안에  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package greeting
+
+import "fmt"
+
+func Hello(name string) string {
+  message := fmt.Sprintf("Hello, %s", name)
+  return message
+}
+```
+
+`greeting`  모듈은  `greeting`이라는 패키지를 포함하고 있습니다.
+
+```go
+package greeting
+```
+
+`greeting`  패키지에는  `Hello`라는 함수가 있으며, 해당 함수는 다른 패키지에서도 사용할 수 있도록 Public 함수로(대문자로 시작) 제작하였습니다.
+
+```go
+func Hello(name string) string {
+  message := fmt.Sprintf("Hello, %s", name)
+  return message
+}
+```
+
+`Hello`  함수는  `name`  인자를 받아서  `Hello, NAME`으로 문자열을 반환합니다.
+
+### greeting 모듈 생성
+
+이제 이렇게 제작한  `greeting`  패키지를 다음 명령어를 사용하여 모듈을 생성합니다.
+
+```bash
+# cd greeting
+go mod init github.com/dev-yakuza/study-golang/module/greeting
+```
+
+명령어를 실행하면, 해당 폴더에  `go.mod`  파일이 생성되는 것을 확인할 수 있습니다.
+
+```bash
+module github.com/dev-yakuza/study-golang/module/greeting
+
+go 1.17
+```
+
+## hello 모듈
+
+다음으로  `greeting`  모듈을 사용하는  `hello`  모듈을 생성해 보도록 하겠습니다.
+
+```bash
+# cd ..
+mkdir hello
+cd hello
+touch main.go
+```
+
+`greeting`  폴더와 동일한 위치에  `hello`  폴더를 생성합니다. 그리고 생성한 폴더에  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+
+  "github.com/dev-yakuza/study-golang/module/greeting"
+)
+
+func main() {
+  message := greeting.Hello("John")
+  fmt.Println(message)
+}
+```
+
+이렇게 만든  `hello`  모듈은  `main`  패키지와  `main`  함수를 포함하고 있습니다. 즉, 프로그램의 시작점을 의미합니다. 이 프로그램은 우리가 미리 만들어둔  `greeting`  모듈을 사용할 예정입니다.  `greeting`  모듈을 사용하기 위해서는 앞에서 만든 모듈 이름을 사용합니다.
+
+```go
+import (
+  "fmt"
+
+  "github.com/dev-yakuza/study-golang/module/greeting"
+)
+```
+
+그런 다음  `greeting`  모듈이 제공하는  `Hello`  함수를 사용하여 메시지를 출력합니다.
+
+```go
+func main() {
+  message := greeting.Hello("John")
+  fmt.Println(message)
+}
+```
+
+이렇게 프로그램을 제작하면 다음과 같이  `greeting`  패키지를 찾을 수 없어 에러가 발생합니다.
+
+```go
+could not import github.com/dev-yakuza/study-golang/module/greeting (cannot find package "github.com/dev-yakuza/study-golang/module/greeting" in any of
+  /usr/local/Cellar/go/1.17/libexec/src/github.com/dev-yakuza/study-golang/module/greeting (from $GOROOT)
+  /Users/jeonghean/go/src/github.com/dev-yakuza/study-golang/module/greeting (from $GOPATH))compilerBrokenImport
+```
+
+이제  `hello`  모듈을 제작하여,  `greeting`  모듈을 사용할 수 있도록 수정해 봅시다.
+
+### hello 모듈 생성
+
+이제 다음 명령어를 사용하여  `hello`  모듈을 생성합니다.
+
+```bash
+go mod init github.com/dev-yakuza/study-golang/module/hello
+```
+
+명령어를 실행하면,  `hello`  폴더안에  `go.mod`  파일이 다음과 같이 생성된 것을 확인할 수 있습니다.
+
+```bash
+module github.com/dev-yakuza/study-golang/module/hello
+
+go 1.17
+```
+
+### go mod tidy
+
+Golang에서 기본적으로 제공하는 패키지가 아닌, 외부 패키지를 사용할 때, 해당 패키지를 다운로드할 필요가 있습니다. 이때, 모듈 안에서 다음 명령어를 실행하여 외부 패키지를 다운로드합니다.
+
+```bash
+go mod tidy
+```
+
+하지만, 우리가 만든  `greeting`  패키지는 아직 공개되지 않았기 때문에(GitHub 등과 같은 곳에 소스 코드를 공개하지 않았기 때문에), 다음과 같은 메시지가 표시됩니다.
+
+```go
+go: finding module for package github.com/dev-yakuza/study-golang/module/greeting
+github.com/dev-yakuza/study-golang/module/hello imports
+        github.com/dev-yakuza/study-golang/module/greeting: module github.com/dev-yakuza/study-golang@latest found (v0.0.0-20211026013945-559aef3c74a0), but does not contain package github.com/dev-yakuza/study-golang/module/greeting
+```
+
+이런 경우,  `greeting`  모듈을  `GitHub`에 올리고, 외부에 공유해서 해결할 수도 있습니다. 다른 방법으로는  `go.mod`를 사용하여 로컬 패키지를 참조하게 변경할 수 있습니다.
+
+### go mod edit -replace
+
+그럼 이제  `go.mod`를 사용하여 로컬 패키지를 참조하게 변경해 봅시다. 다음 명령어를 실행하여, 로컬 패키지를 참조하도록 변경합니다.
+
+```bash
+go mod edit -replace github.com/dev-yakuza/study-golang/module/greeting=../greeting
+```
+
+그리고 다시 다음 명령어를 실행하여 패키지를 설정합니다.
+
+```bash
+go mod tidy
+```
+
+## 실행
+
+이제 모든 준비가 끝났습니다. 지금까지 작업한 내용을 확인하기 위해  `hello`  폴더 안에서 다음 명령어를 실행해 봅니다.
+
+```bash
+# cd hello
+go run main.go
+```
+
+이렇게 실행하면, 다음과 같은 결과가 출력됩니다.
+
+```go
+Hello, John
+```
+
+## 외부 모듈 폴더
+
+Golang에서 다음 명령어를 실행하면 외부에서 제작된 모듈 다운로드하여, 프로그램에서 사용하는 것이 가능합니다.
+
+```bash
+go mod tidy
+```
+
+이렇게 다운로드된 모듈은  `GOPATH/pkg`에 저장되게 됩니다.
+
+```bash
+go env
+```
+
+위에 명령어를 실행하면 다음과 같이  `GOPATH`의 경로를 알 수 있으며, 해당 폴더로 이동하면  `pkg`  폴더를 확인할 수 있습니다.
+```
+...
+GOOS="darwin"
+GOPATH="/Users/dev-yakuza/go"
+GOPRIVATE=""
+...
+```
+
+## 완료
+
+이것으로 Golang에서 모듈이 무엇인지, 어떻게 사용하는지에 대해서 알아보았습니다. 이제 모듈을 사용하여 외부 패키지를 사용하거나, 외부에서 사용할 수 있도록 패키지를 제공해 보시기 바랍니다.
+
+
+# [Golang Package](https://dev-yakuza.posstree.com/ko/golang/package/)
+
+2021-11-05 
+
+## Golang에서 Package(패키지)에 대해 자세히 알아보고 사용하는 방법에 대해서도 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang의  `Package`(패키지)를 자세히 알아보고 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/package](https://github.com/dev-yakuza/study-golang/tree/main/package)
+
+## 패키지
+
+Golang에서 패키지는 코드를 묶는 기본 단위입니다. 따라서 모든 코드는 반드시 패키지로 묶어야 합니다.
+
+또한 Golang으로 프로그램을 작성한다면, 반드시  `main`  패키지가 존재해야 하며,  `main`  패키지안에  `main`  함수가 정의되어야 합니다. Golang에서는 이 main 패키지의 main 함수가 프로그램의 시작 위치가 됩니다.
+
+main 패키지이외에 패키지들은 실행 시점(main 함수)을 포함하지 않은 패키지들로써, main 패키지의 보조 패키지로 동작하게 됩니다.
+
+이런 모든 패키지를 가지고 있는 것이 모듈입니다. 모듈에 대해서는 아래에 링크를 참고하시기 바랍니다.
+
+-   [[Golang] Module](https://dev-yakuza.posstree.com/ko/golang/module/)
+
+## 패키지 사용
+
+그럼 패키지의 사용을 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "math/rand"
+)
+
+func main() {
+  fmt.Println(rand.Int())
+}
+```
+
+이 예제에서는  `fmt`  패키지와  `math`  패키지 하위의  `rand`  패키지를 가져왔으며, 화면에 숫자를 랜덤하게 표시하고 있습니다. 이렇게 작성한 코드를 실행하면, 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.
+5577006791947779410
+```
+
+## 패키지 외부 공개
+
+Golang에서는 패키지내 타입, 전역 변수, 상수, 함수, 메서드 등을 외부로 공개하여 다른 패키지에서 사용할 수 있습니다. 패키지에서 외부로 공개할 때에는 대문자로 시작하며, 외부로 공개하지 않을 때에는 소문자로 시작합니다.
+
+패키지를 외부에 공개하고 공개된 패키지를 사용할 때에는 모듈을 사용해야 합니다. 모듈에 대한 자세한 내용은 아래에 링크를 참고하시기 바랍니다.
+
+-   [[Golang] Module](https://dev-yakuza.posstree.com/ko/golang/module/)
+
+외부에 공개하는 패키지를 만들어보기 위해  `greeting`  폴더를 만들고  `greeting.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package greeting
+
+import "fmt"
+
+const PI = 3.14
+
+func PrintGreeting() {
+  print()
+}
+
+func print() {
+  fmt.Println("Hello, World!")
+}
+```
+
+이렇게 수정하였다면, 다음 명령어를 사용하여  `greeting`  모듈을 생성합니다.
+
+```bash
+go mod init github.com/dev-yakuza/study-golang/package/greeting
+```
+
+이  `greeting`  패키지는  `greeting`  모듈을 통해 공유될 예정입니다. 이렇게 공유되는  `greeting`  패키지를 사용하는  `main`  패키지를 만들어 봅시다.
+
+`greeting`  폴더와 같은 위치에  `main`  폴더를 생성하고 해당 폴더에  `main.go`  파일을 만들고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+
+  "github.com/dev-yakuza/study-golang/package/greeting"
+)
+
+func main() {
+  fmt.Println(greeting.PI)
+  greeting.PrintGreeting()
+}
+```
+
+이제 다음 명령어를 사용하여 모듈을 생성합니다.
+
+```bash
+go mod init github.com/dev-yakuza/study-golang/package/main
+```
+
+모듈을 생성하였다면, 로컬에 존재하는  `greeting`  모듈을 사용하기 위해 다음 명령어를 실행합니다.
+
+```bash
+go mod edit -replace github.com/dev-yakuza/study-golang/package/greeting=../greeting
+```
+
+마지막으로 다음 명령어를 실행하여 모듈을 설정합니다.
+
+```bash
+go mod tidy
+```
+
+이렇게 만든 프로그램을 실행하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+3.14
+Hello, World!
+```
+
+## init 함수
+
+패키지는  `init`  함수를 가질 수 있으며, 이  `init`  함수는 패키지가  `import`될 때 한번 호출됩니다. 패키지의  `init`  함수는 패키지내의 전역 변수를 초기화할 때 사용합니다.
+
+이를 확인하기 위해  `greeting/greeting.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package greeting
+
+import "fmt"
+
+const PI = 3.14
+
+var globalVal = 0
+
+func init() {
+  fmt.Println("init()", globalVal)
+  globalVal++
+}
+
+func PrintGreeting() {
+  print()
+}
+
+func print() {
+  fmt.Println("Hello, World!", globalVal)
+}
+```
+
+그리고  `main`  폴더에서 다음 명령어를 실행하여 수정된 내용을 확인합니다.
+
+```bash
+go run main.go
+```
+
+프로그램이 실행되면 다음과 같은 결과를 확인할 수 있습니다.
+
+```go
+init() 0
+3.14
+Hello, World! 1
+```
+
+## 별칭 패키지명
+
+Golang에서는 이처럼 미리 만들어진 패키지들을 활용하여 프로그램을 작성하게 됩니다. 하지만, 모든 개발자가 약속하고 패키지를 제작하는 것이 아니기 때문에, 때로는 패키지명이 중복되는 경우가 있습니다.
+```
+
+import (
+  "text/template"
+  "html/template"
+)
+
+template.New("foo").Parse(`{{define "T"}}Hello{{end}}`)
+template.New("foo").Parse(`{{define "T"}}Hello{{end}}`)
+```
+
+이처럼 중복된 패키지명을 사용해야하는 경우,  `별칭 패키지명`(Alias Package Name)을 사용할 수 있습니다.
+```
+
+import (
+  htmlplate "html/template"
+  "text/template"
+)
+
+template.New("foo").Parse(`{{define "T"}}Hello{{end}}`)
+htmlplate.New("foo").Parse(`{{define "T"}}Hello{{end}}`)
+```
+
+이를 확인하기 위해 아래와 같이  `main.go`  파일을 수정합니다.
+```
+
+package main
+
+import (
+  "fmt"
+  htmlplate "html/template"
+  "text/template"
+)
+
+func main() {
+  fmt.Println(template.New("foo").Parse(`{{define "T"}}Hello{{end}}`))
+  fmt.Println(htmlplate.New("foo").Parse(`{{define "T"}}Hello{{end}}`))
+}
+```
+
+이를 실행하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+&{foo 0xc00010e480 0xc00006c050  } <nil>
+&{<nil> 0xc000104140 0xc00010e900 0xc00006c0a0} <nil>
+```
+
+## 빈칸 지시자
+
+Golang에서는 패키지도 변수와 같이 선언하였다면 반드시 사용해야 합니다. 그렇지 않으면 컴파일 에러가 발생합니다. 하지만, 패키지를 직접 사용은 하지 않지만 import를 통해  `init()`  함수를 실행시켜 패키지를 초기화해야 하는 경우가 있습니다. 이때  `별칭 패키지명`과  `빈칸 지시자`(Blank identifier,  `_`)를 사용하여 에러를 해결할 수 있습니다.
+
+```go
+import (
+  "database/sql"
+  _ "github.com/mattn/go-sqlite3"
+)
+```
+
+패키지를 import하면 기본적으로 패키지 안에 있는  `init()`  함수가 호출되게 됩니다. 즉, 패키지를 import하여  `init()`  함수를 호출할 필요는 있지만, 다른 기능을 사용하지 않을 때, 위와 같이 별칭 패키지명과 빈칸 지시자를 활용합니다.
+
+이를 확인하기 위해  [init 함수](https://dev-yakuza.posstree.com/ko/golang/package/#init-%ED%95%A8%EC%88%98)의 예제에서  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+
+  _ "github.com/dev-yakuza/study-golang/package/greeting"
+)
+
+func main() {
+  fmt.Println("Hello")
+}
+```
+
+그리고 이를 실행하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+init() 0
+Hello
+```
+
+## import cycle
+
+Golang에서 서로 다른 패키지가 서로 서로를 import하면 import가 계속 반복되므로  `import cycle`  에러가 발생합니다.
+
+이를 확인하기 위해  `greeting/greeting.go`  파일을 생성한 후, 다음과 같이 수정합니다.
+
+```go
+package greeting
+
+import (
+  "fmt"
+
+  "github.com/dev-yakuza/study-golang/package/name"
+)
+
+func Print() {
+  fmt.Println("Hello, ", name.Name)
+}
+```
+
+이제 다음 명령어를 실행하여 모듈을 생성합니다.
+
+```bash
+# cd greeting
+go mod init github.com/dev-yakuza/study-golang/package/greeting
+```
+
+이제  `import cycle`  에러를 발생시키기 위해,  `greeting`  폴더와 동일한 위치에  `name/name.go`  파일을 생성한 후, 다음과 같이 수정합니다.
+
+```go
+package name
+
+import (
+  "github.com/dev-yakuza/study-golang/package/greeting"
+)
+
+var Name = "John"
+
+func print() {
+  greeting.Print()
+}
+```
+
+이렇게 생성한  `name`  패키지도 다음 명령어를 실행하여 모듈을 생성합니다.
+
+```bash
+# cd name
+go mod init github.com/dev-yakuza/study-golang/package/name
+```
+
+이렇게 만든 각각의 모듈에서 서로 참고하는 모듈을 연결하기 위해 다음 명령어를 실행합니다.
+
+```go
+cd greeting
+go mod edit -replace github.com/dev-yakuza/study-golang/package/name=../name
+go mod tidy
+cd ..
+cd name
+go mod edit -replace github.com/dev-yakuza/study-golang/package/greeting=../greeting
+go mod tidy
+```
+
+이제  `name.go`  파일을 열고  `greeting`  패키지를 추가하는 곳을 살펴보면 다음과 같이  `import cycle not allowed`  에러가 발생하는 것을 확인할 수 있습니다.
+
+![import cycle not allowed](https://dev-yakuza.posstree.com/assets/images/category/golang/2021/package/import-cycle-not-allowed.jpg)
+
+## 완료
+
+이것으로 Golang에서 패키지란 무엇이며 어떻게 사용하는지에 대해서 알아보았습니다. 이제 패키지를 제작하여 외부에 공유하거나, 외부로 공유된 패키지를 사용하여 프로그램을 제작해보시기 바랍니다.
+
+
+# [Golang Slice](https://dev-yakuza.posstree.com/ko/golang/slice/)
+
+2021-11-09 
+
+## Golang에서 Slice(슬라이스)에 대해 알아보고 사용하는 방법에 대해서 살펴보도록 하겠습니다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang의  `Slice`(슬라이스)에 대해 자세히 알아보고 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/slice](https://github.com/dev-yakuza/study-golang/tree/main/slice)
+
+## Slice
+
+슬라이스는 Golang에서 제공하는 동적 배열 타입(배열을 가리키는 포인터 타입)입니다.
+
+-   정적(Static): 컴파일 시점(Compile)에 결정
+-   동적(Dynamic): 실행 시점(Runtime)에 결정
+
+다음은 Golang에서 배열을 선언하는 방법입니다.
+
+```go
+var v [10]int
+```
+
+슬라이스는 다음과 같이 배열의 사이즈를 설정하지 않고 선언합니다.
+
+```go
+var v []int
+```
+
+이를 확인하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  var a [2]string
+  var b []string
+
+  fmt.Println(a)
+  fmt.Println(b)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+[ ]
+[]
+```
+
+## 배열과 슬라이스
+
+슬라이스는 배열을 가리키는 포인터 타입입니다. 이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func changeArr(arr2 [5]int) {
+  arr2[0] = 100
+}
+func changeSlice(slice2 []int) {
+  slice2[0] = 100
+}
+
+func main() {
+  arr := [5]int{1, 2, 3, 4, 5}
+  slice := []int{1, 2, 3, 4, 5}
+
+  changeArr(arr)
+  changeSlice(slice)
+
+  fmt.Println(arr)
+  fmt.Println(slice)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+[1 2 3 4 5]
+[100 2 3 4 5]
+```
+
+배열은 포인터 타입이 아니므로,  `changeArr`함수를 호출할 때,  `arr2`라는 새로운 인스턴스를 생성한 후,  `arr`의 내용을 복사하게 됩니다. 따라서  `changeArr`함수안에서  `arr2`값을 변경하여도  `arr`값은 변경되지 않습니다.
+
+하지만, 슬라이스는 포인터 타입입니다. 따라서  `changeSlice`함수를 호출하면,  `slice2`라는 새로운 인스턴스를 생성하는게 아니라  `slice`의 메모리 주소값을 복사하게 됩니다. 따라서  `changeSlice`함수 안에서  `slice2`값을 변경하면  `slice`값도 변경됩니다.
+
+## len과 cap
+
+슬라이스는 배열과는 다르게  `len`이외에도  `cap`이라는 데이터를 가지고 있습니다. 슬라이스의  `len`은 현재 슬라이스에서 사용중인 길이를 의미하며,  `cap`은 현재 슬라이스의 총 크기(사용중인 길이 + 비어있는 길이)를 의미합니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  slice1 := []int{1, 2, 3, 4, 5}
+  slice2 := make([]int, 2, 10)
+
+  fmt.Printf("slice1(%p): len=%d cap=%d %v\n", slice1, len(slice1), cap(slice1), slice1)
+  fmt.Printf("slice2(%p): len=%d cap=%d %v\n", slice2, len(slice2), cap(slice2), slice2)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+slice1(0xc0000b2000): len=5 cap=5 [1 2 3 4 5]
+slice2(0xc0000b4000): len=2 cap=10 [0 0]
+```
+
+## make 함수
+
+Golang에서 제공하는  `make`  함수를 사용하여 슬라이스를 생성할 수 있습니다.
+
+```go
+slice1 := make([]int, 10)
+fmt.Println(slice1)
+```
+
+위와 같이 make함수를 사용하여 10의 크기를 갖는 슬라이스를 생성할 수 있습니다.
+
+```go
+slice2 := make([]int, 2, 10)
+fmt.Println(slice2)
+```
+
+또는, 위와 같이 make함수를 사용하여 10의 크기를 갖는 슬라이스를 생성하고 두 개의 요소만 사용하도록 할 수 있습니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  slice1 := make([]int, 10)
+  fmt.Println(slice1)
+
+  slice2 := make([]int, 2, 10)
+  fmt.Println(slice2)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+[0 0 0 0 0 0 0 0 0 0]
+[0 0]
+```
+
+## 슬라이싱
+
+배열의 일부를 잘라내어 슬라이스를 만드는 것을 슬라이싱(Slicing)이라고 합니다.
+
+-   Array => Slicing => Slice
+
+Golang에서 슬라이싱은 다음과 같이 사용할 수 있습니다.
+
+```go
+Array[startIndex:endIndex]
+```
+
+startIndex에서부터 endIndex  `직전`(endIndex -1)까지 값을 반환합니다. 이때, 반환된 Slice의  `cap`은 startIndex부터 Array의 마지막 길이까지 입니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  array := [5]int{1, 2, 3, 4, 5}
+  slice := array[1:2]
+
+  fmt.Printf("array: len=%d %v\n", len(array), array)
+  fmt.Printf("slice: len=%d cap=%d %v\n", len(slice), cap(slice), slice)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+array: len=5 [1 2 3 4 5]
+slice: len=1 cap=4 [2]
+```
+
+슬라이스를 슬라이싱하여 슬라이스를 생성할 수 있습니다. 또한, 다음과 같이  `startIndex`에 0을 지정하면 처음부터 슬라이싱을 할 수 있으며,  `0`은 생략이 가능합니다.
+
+```go
+slice = []int{1, 2, 3, 4, 5}
+slice1 := slice[0:3]
+slice2 := slice[:3]
+```
+
+다음과 같이 사용하는 경우, 마지막까지 슬라이싱할 수 있으며, 마지막 인덱스를 생략할 수 있습니다.
+
+```go
+slice = []int{1, 2, 3, 4, 5}
+slice1 = slice[2:len(slice)]
+slice2 = slice[2:]
+```
+
+마지막으로, 다음과 같이 전체를 슬라이싱할 수 있으며, 배열을 슬라이스로 바꿀때, 자주 사용됩니다.
+
+```go
+arr := [5]int{1, 2, 3, 4, 5}
+slice := arr[:]
+```
+
+슬라이싱은 새로운 변수를 만드는 것이 아니라, 단순히 메모리 주소를 가리키기만 함으로 다음과 같이 사용할 수 있습니다.
+
+```go
+array1 := [100]int{1: 1, 2: 2, 99: 100}
+slice1 = array1[1:10]
+slice2 = slice1[2:99]
+
+fmt.Println(slice1)
+fmt.Println(slice2)
+```
+
+위의 예제에서  `slice1`은  `array1`의 메모리 주소를 가리키므로,  `slice1`에서 99번째까지의 값을 가져와서  `slice2`를 만드는 것이 가능합니다.
+
+## cap 사이즈 조절 슬라이싱
+
+Array를 슬라이싱하게 되면, 반환된 Slice의  `cap`은 startIndex부터 Array의 마지막 길이까지가 됩니다. 하지만, 다음과 같이 슬라이싱을 할 때  `maxIndex`를 추가하여 cap 사이즈를 조절할 수 있습니다.
+
+```go
+slice[startIndex:endIndex:maxIndex]
+```
+
+```go
+slice1 = []int{1, 2, 3, 4, 5}
+slice2 = slice1[1:3:4]
+
+fmt.Printf("slice1: len=%d cap=%d %v\n", len(slice1), cap(slice1), slice1)
+fmt.Printf("slice2: len=%d cap=%d %v\n", len(slice2), cap(slice2), sl
+```
+
+## append 함수
+
+슬라이스의 끝에 요소를 추가하기 위해서는  `append`  함수를 사용할 필요가 있습니다.  `append`  함수를 사용하여 슬라이스에 요소를 추가한 경우, 새로운 요소가 추가된 새로운 슬라이스가 반환됩니다.
+
+```go
+var slice1 = []int{1, 2, 3}
+slice2 := append(slice1, 4)
+```
+
+이때, 새로운 슬라이스는 기존 슬라이스와 동일한 메모리 주소를 사용할 때도 있고, 동일한 메모리 주소를 사용하지 않을 때도 있습니다.
+
+`append`를 사용하여 새로운 요소를 슬라이스에 추가할 때, 슬라이스에 새로운 요소를 추가할 충분한 공간이 있는 경우, 새로운 슬라이스는 기존 슬라이스의 메모리 주소를 사용하게 됩니다. 하지만, 기존 슬라이스에 충분한 공간이 없는 경우,  `append`는 새로운 메모리 주소에 기존 슬라이스를 복사한 후, 새로운 요소를 추가하게 됩니다.
+
+이를 확인하기 위해,  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  slice1 := make([]int, 3)
+  slice2 := append(slice1, 4)
+
+  fmt.Println("[New splice]")
+  fmt.Printf("slice(%p): len=%d cap=%d %v\n", slice1, len(slice1), cap(slice1), slice1)
+  fmt.Printf("slice2(%p): len=%d cap=%d %v\n", slice2, len(slice2), cap(slice2), slice2)
+
+  fmt.Println("slice1 changed ========================================================")
+  slice1[0] = 100
+  fmt.Printf("slice(%p): len=%d cap=%d %v\n", slice1, len(slice1), cap(slice1), slice1)
+  fmt.Printf("slice2(%p): len=%d cap=%d %v\n", slice2, len(slice2), cap(slice2), slice2)
+
+  fmt.Println("slice2 changed ========================================================")
+  slice2[0] = 200
+  fmt.Printf("slice(%p): len=%d cap=%d %v\n", slice1, len(slice1), cap(slice1), slice1)
+  fmt.Printf("slice2(%p): len=%d cap=%d %v\n", slice2, len(slice2), cap(slice2), slice2)
+
+  slice1 = make([]int, 1, 3)
+  slice2 = append(slice1, 4)
+
+  fmt.Println("[Same slice]")
+  fmt.Printf("slice(%p): len=%d cap=%d %v\n", slice1, len(slice1), cap(slice1), slice1)
+  fmt.Printf("slice2(%p): len=%d cap=%d %v\n", slice2, len(slice2), cap(slice2), slice2)
+
+  fmt.Println("slice1 changed ========================================================")
+  slice1[0] = 100
+  fmt.Printf("slice(%p): len=%d cap=%d %v\n", slice1, len(slice1), cap(slice1), slice1)
+  fmt.Printf("slice2(%p): len=%d cap=%d %v\n", slice2, len(slice2), cap(slice2), slice2)
+
+  fmt.Println("slice2 changed ========================================================")
+  slice2[0] = 200
+  fmt.Printf("slice(%p): len=%d cap=%d %v\n", slice1, len(slice1), cap(slice1), slice1)
+  fmt.Printf("slice2(%p): len=%d cap=%d %v\n", slice2, len(slice2), cap(slice2), slice2)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+[New splice]
+slice(0xc00012a000): len=3 cap=3 [0 0 0]
+slice2(0xc00012c000): len=4 cap=6 [0 0 0 4]
+slice1 changed ========================================================
+slice(0xc00012a000): len=3 cap=3 [100 0 0]
+slice2(0xc00012c000): len=4 cap=6 [0 0 0 4]
+slice2 changed ========================================================
+slice(0xc00012a000): len=3 cap=3 [100 0 0]
+slice2(0xc00012c000): len=4 cap=6 [200 0 0 4]
+[Same slice]
+slice(0xc00012a018): len=1 cap=3 [0]
+slice2(0xc00012a018): len=2 cap=3 [0 4]
+slice1 changed ========================================================
+slice(0xc00012a018): len=1 cap=3 [100]
+slice2(0xc00012a018): len=2 cap=3 [100 4]
+slice2 changed ========================================================
+slice(0xc00012a018): len=1 cap=3 [200]
+slice2(0xc00012a018): len=2 cap=3 [200 4]
+```
+
+슬라이스의  `cap`이 새로운 요소를 추가할 여유가 있는 경우, 동일한 메모리 주소를 사용하는 것을 확인할 수 있습니다. 따라서, 슬라이스의  `append`를 사용할 때, 기존 슬라이스와 새로운 슬라이스가 동시에 변경될 수 있으므로 주의하여 사용해야 합니다.
+
+## 슬라이스 복사
+
+다음과 같이 슬라이싱을 통해 슬라이스를 복사할 수 있습니다.
+
+```go
+slice1 = []int{1, 2, 3, 4, 5}
+slice2 = slice1[:]
+
+slice2[1] = 100
+
+fmt.Println(slice1)
+fmt.Println(slice2)
+```
+
+하지만, 슬라이싱은 새로운 슬라이스를 생성하는 것이 아니라 메모리 주소를 공유하는 것이므로, 위와 같이  `slice2`의 값을 변경하는 경우  `slice1`의 값도 변경이 됩니다.
+
+이와 같은 문제를 해결하기 위해서는 다음과 같이  `slice1`과 동일한 크기의  `slice2`를 만들고, 루프를 통해 값을 복사할 수 있습니다.
+
+```go
+slice1 = []int{1, 2, 3, 4, 5}
+slice2 = make([]int, len(slice1))
+
+for i, v := range slice1 {
+  slice2[i] = v
+}
+
+slice2[1] = 100
+
+fmt.Println(slice1)
+fmt.Println(slice2)
+```
+
+또는 다음과 같이  `append`  함수를 통해 새로운 슬라이스를 만들고, 모든 내용을 추가하여 복사할 수 있습니다.
+
+```go
+slice1 = []int{1, 2, 3, 4, 5}
+slice2 = append([]int{}, slice1...)
+
+slice2[1] = 100
+
+fmt.Println(slice1)
+fmt.Println(slice2)
+```
+
+마지막으로,  `make`  함수를 사용하여 동일한 크기의 슬라이스를 생성한 후,  `copy`  함수를 사용하여 모든 값을 복사할 수 있습니다.
+
+```go
+slice1 = []int{1, 2, 3, 4, 5}
+slice2 = make([]int, len(slice1))
+
+copy(slice2, slice1)
+
+slice2[1] = 100
+
+fmt.Println(slice1)
+fmt.Println(slice2)
+```
+
+Golang에서  `copy`  함수는 다음과 같이 사용할 수 있습니다.
+
+```go
+copy(dst, src)
+```
+
+## 삭제
+
+다음과 같이 슬라이스에서 특정 요소를 삭제할 수 있습니다.
+
+```go
+slice := []int{1, 2, 3, 4, 5, 6}
+deleteIdx := 2
+
+fmt.Println(slice)
+for i := deleteIdx + 1; i < len(slice); i++ {
+  slice[i-1] = slice[i]
+}
+slice = slice[:len(slice)-1]
+fmt.Println(slice)
+```
+
+또는 다음과 같이  `append`를 사용하여 삭제할 수 있습니다.
+
+```go
+slice = []int{1, 2, 3, 4, 5, 6}
+deleteIdx = 2
+
+fmt.Println(slice)
+slice = append(slice[:deleteIdx], slice[deleteIdx+1:]...)
+fmt.Println(slice)
+```
+
+마지막으로  `copy`  함수를 사용하여 삭제할 수 있습니다.
+
+```go
+slice = []int{1, 2, 3, 4, 5, 6}
+deleteIdx = 2
+
+fmt.Println(slice)
+copy(slice[deleteIdx:], slice[deleteIdx+1:])
+slice = slice[:len(slice)-1]
+fmt.Println(slice)
+```
+
+## 요소 삽입
+
+Golang에서는 다음과 같이  `for`  루프를 사용하여 슬라이스에 새로운 요소를 삽입할 수 있습니다.
+
+```go
+slice := []int{1, 2, 3, 4, 5, 6}
+insertIdx := 2
+
+fmt.Println(slice)
+slice = append(slice, 0)
+for i := len(slice) - 2; i >= insertIdx; i-- {
+  slice[i+1] = slice[i]
+}
+slice[insertIdx] = 100
+fmt.Println(slice)
+```
+
+또는 다음과 같이  `append`를 사용하여 슬라이스에 새로운 요소를 삽입할 수 있습니다.
+
+```go
+slice = []int{1, 2, 3, 4, 5, 6}
+insertIdx = 2
+
+fmt.Println(slice)
+slice = append(slice[:insertIdx], append([]int{100}, slice[insertIdx:]...)...)
+fmt.Println(slice)
+```
+
+마지막으로,  `copy`  함수를 사용하여 슬라이스에 새로운 요소를 삽입할 수 있습니다.
+
+```go
+slice = []int{1, 2, 3, 4, 5, 6}
+insertIdx = 2
+
+fmt.Println(slice)
+slice = append(slice, 0)
+copy(slice[insertIdx+1:], slice[insertIdx:])
+slice[insertIdx] = 100
+fmt.Println(slice)
+```
+
+## 슬라이스 정렬
+
+Golang에서 기본적으로 제공하는  `sort`  패키지를 사용하여, 슬라이스를 정렬할 수 있습니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "sort"
+)
+
+func main() {
+  slice := []int{6, 3, 1, 5, 4, 2}
+
+  fmt.Println(slice)
+  sort.Ints(slice)
+  fmt.Println(slice)
+}
+```
+
+다음과 같이 구조체 슬라이스도  `sort`를 사용하여 정렬할 수 있습니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "sort"
+)
+
+type Student struct {
+  Name string
+  Age  int
+}
+
+type Students []Student
+
+func (s Students) Len() int           { return len(s) }
+func (s Students) Less(i, j int) bool { return s[i].Age < s[j].Age }
+func (s Students) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
+
+func main() {
+  students := []Student{
+    {"c", 31},
+    {"a", 20},
+    {"b", 21},
+    {"d", 19},
+  }
+
+  fmt.Println(students)
+  sort.Sort(Students(students))
+  fmt.Println(students)
+}
+```
+
+## 완료
+
+이것으로 Golang에서 슬라이스를 선언하고 사용하는 방법에 대해서 알아보았습니다. 또한 배열과 슬라이스의 차이점, 슬라이싱을 통해 배열에서 슬라이스를 만드는 방법도 알아보았습니다.
+
+
+# [Golang Method](https://dev-yakuza.posstree.com/ko/golang/method/)
+
+2021-11-12 
+
+## Golang에서 Method(메서드)를 정의하고 사용하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang의  `Method`(메서드)에 대해 자세히 알아보고 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/method](https://github.com/dev-yakuza/study-golang/tree/main/method)
+
+## 메서드
+
+Golang에서 메서드는 함수의 한 종류로써, 타입에 속한 함수를 메서드라고 합니다. 함수는 일반적으로 타입과 독립적으로 존재하지만, 메서드는 타입에 종속되게 됩니다. Golang에서는 어떤 타입도 메서드를 가질 수 있습니다.
+
+Golang에서 메서드는 다음과 같이 정의합니다.
+```
+// func 리시버 메서드명
+func (r Person) greeting() string {
+  return r.width * r.height
+}
+```
+
+리시버에는 패키지의 모든 지역 타입(패키지 안에 선언된 타입)이 가능하며, 메서드는 리시버에 종속된 함수가 됩니다.
+
+이를 확인하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Person struct {
+  Name string
+  Age  int
+}
+
+func (r Person) greeting() string {
+  return "Hello, " + r.Name
+}
+
+func main() {
+  p := Person{Name: "Rob", Age: 4}
+  fmt.Println(p.greeting())
+}
+```
+
+이를 실행하면 다음과 같은 결과가 출력됩니다.
+
+```bash
+# go run main.go
+Hello, Rob
+```
+
+## 객체지향 프로그래밍
+
+Golang은 객체지향 프로그래밍 언어(OOP, Object Oriented Programming language)입니다. 여기서 객체(Object)는 데이터(State)와 기능(Function)을 가지는 것을 의미합니다.
+
+만약, Golang에 메서드가 존재하지 않으면, 데이터(타입)과 기능(함수)이 따로 존재하게 됩니다. 그렇면 Golang에서 객체를 생성할 수 없으며, 객체 지향 프로그래밍을 할 수 없게 됩니다.
+
+Golang에서는 메서드를 통해, 데이터에 종속된 기능들을 구현할 수 있게 되어 객체지향 프로그래밍을 할 수 있게 됩니다. 또한, 메서드는 다음과 같이 데이터간의 관계도 정의할 수 있습니다.
+```
+// Student <- Enroll -> Course
+func (s * Student) Enroll(c *Course) {
+  ...
+}
+
+// Student <- SendReport -> Professor, Report
+func (s * Student) SendReport(p *Professor, r *Report) {
+  ...
+}
+```
+
+물론, 함수를 사용해도 메서드와 동일한 기능을 구현할 수 있습니다. 기능상으로는 함수와 메서드는 동일합니다. 다만, 함수는 주어진 데이터를 단순히 연산만 하는 반면, 메서드는 데이터에 종속되어 있다는 개념의 차이만 존재합니다.
+
+## 포인터 타입 메서드와 값 타입 메서드
+
+Golang으로 프로그래밍을 하다보면, 포인터 타입 메서드와 값 타입 메서드가 존재하는 것을 확인할 수 있습니다. Golang에서는 주로 타입의 성격에 따라 포인터 타입 메서드와 값 타입 메서드는 메서드를 구별해서 사용하게 됩니다.
+
+메서드를 사용하였을 때, 새로운 객체를 생성할 필요가 있으면, 값 타입 메서드를 사용하게 되며, 새로운 객체를 생성할 필요가 없을 때 포인터 타입 메서드를 사용하게 됩니다.
+
+```go
+type Person struct {
+  Name string
+  Age  int
+}
+
+func (p *Person) AddAge() {
+  p.Age += 1
+}
+```
+
+예를 들어  `Person`이라는 타입이 있습니다. Person 타입으로 만든 사람 데이터의 나이가 한 살 증가하더라도, 해당 사람은 동일한 사람이여야 하므로, 포인터 타입 메서드를 사용하게 됩니다.
+
+```go
+type Temperature float64
+
+func (t Temperature) Up(temp float64) Temperature {
+  return t + Temperature(temp)
+}
+```
+
+반대로  `Temperature`라는 타입은 온도가 올라가면, 이전 온도와 상승된 온도는 개념적으로 다르므로 값 타입 메서드를 사용하는 것이 적합합니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Person struct {
+  Name string
+  Age  int
+}
+
+func (p *Person) AddAge() {
+  p.Age += 1
+}
+
+type Temperature float64
+
+func (t Temperature) Up(temp float64) Temperature {
+  return t + Temperature(temp)
+}
+
+func main() {
+  p1 := Person{Name: "Rob", Age: 4}
+
+  fmt.Println("P1: ", p1)
+  p1.AddAge()
+  fmt.Println("P1: ", p1)
+
+  t := Temperature(30.0)
+
+  fmt.Println("T: ", t)
+  t = t.Up(4.0)
+  fmt.Println("T: ", t)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+P1:  {Rob 4}
+P1:  {Rob 5}
+T:  30
+T:  34
+```
+
+## 생성자와 소멸자
+
+Golang에는 생성자와 소멸자가 존재하지 않습니다. 따라서 생성자가 필요한 경우, 패키지에서 생성자처럼 동작하는 함수를 만들어 제공해야 합니다.
+
+이를 확인하기 위해  `group/main.go`  파일을 만들고 다음과 같이 수정합니다.
+
+```go
+package group
+
+type Member struct {
+  Name string
+  Age  int
+}
+
+func NewMember(name string, age int) *Member {
+  return &Member{Name: name, Age: age}
+}
+```
+
+여기서  `NewMember`  함수가 생성자 역할을 하는 함수에 해당합니다.
+
+그런 다음 다음 명령어를 실행하여, 모듈을 생성합니다.
+
+```bash
+go mod init github.com/dev-yakuza/study-golang/method/group
+go mod tidy
+```
+
+그런 다음, 이를 실제로 사용할  `main`  패키지를 생성해 봅시다.  `group`  폴더와 동일한 위치에서  `main/main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+
+  "github.com/dev-yakuza/study-golang/method/group"
+)
+
+func main() {
+  member1 := group.Member{Name: "John", Age: 20}
+  member2 := group.NewMember("Paul", 30)
+
+  fmt.Println(member1)
+  fmt.Println(member2)
+}
+```
+
+그리고 다음 명령어를 사용하여 모듈을 생성하고, 로컬 모듈을 연결합니다.
+
+```bash
+go mod init github.com/dev-yakuza/study-golang/method/main
+go mod edit -replace github.com/dev-yakuza/study-golang/method/group=../group
+go mod tidy
+```
+
+그리고 다음 명령어를 사용하여 생성한 프로그램을 실행해 봅니다.
+
+```bash
+go run main.go
+```
+
+그럼 다음과 같은 결과를 확인할 수 있습니다.
+```
+{John 20}
+&{Paul 30}
+```
+
+Golang에서 모듈을 사용하는 방법에 대해서는 아래에 블로그 포스트를 참고하시기 바랍니다.
+
+-   [[Golang] Module](https://dev-yakuza.posstree.com/ko/golang/module/)
+
+## Embedded field 메서드
+
+Golang의 구조체는  `Embedded field`를 가질 수 있습니다.  `Embedded field`에 관한 자세한 내용은 아래에 블로그 포스트를 참고하시기 바랍니다.
+
+-   [[Golang] struct(구조체) - Embedded field](https://dev-yakuza.posstree.com/ko/golang/struct/#embedded-field)
+
+다음과 같이 구조체가  `Embedded field`를 가질 수 있으며, Embedded field의 구조체가 다음과 같이 메서드를 가지고 있을 수 있습니다.
+
+```go
+type Member struct {
+  Name string
+  Age  int
+}
+
+func (p *Member) AddAge() {
+  p.Age += 1
+}
+
+type Group struct {
+  Member
+  Grade int
+}
+```
+
+이런 경우, 다음과 같이 Embedded field의 메서드를 사용할 수 있습니다.
+
+```go
+g := Group{Member: Member{Name: "John", Age: 20}, Grade: 1}
+g.AddAge()
+fmt.Println(g)
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Member struct {
+  Name string
+  Age  int
+}
+
+func (p *Member) AddAge() {
+  p.Age += 1
+}
+
+type Group struct {
+  Member
+  Grade int
+}
+
+func main() {
+  g := Group{Member: Member{Name: "John", Age: 20}, Grade: 1}
+  fmt.Println(g)
+  g.AddAge()
+  fmt.Println(g)
+}
+```
+
+그리고 이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+{{John 20} 1}
+{{John 21} 1}
+```
+
+## 완료
+
+이것으로 Golang에서 메서드를 정의하고 사용하는 방법에 대해서 알아보았습니다. 또한, 메서드의 특징과 생성자를 만드는 방법에 대해서도 알아보았습니다.
+
+
+# [Golang Interface](https://dev-yakuza.posstree.com/ko/golang/interface/)
+
+2021-11-17 
+
+## Golang에서 Interface(인터페이스)에 대한 개념을 확인하고, 사용하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang의  `Interface`(인터페이스)에 대해 자세히 알아보고 사용하는 방법에 대해서 살펴보려고 합니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/interface](https://github.com/dev-yakuza/study-golang/tree/main/interface)
+
+## 인터페이스
+
+Golang에서 인터페이스는 구체화된 객체(Concrete object)가 아닌 추상화된 상호 작용으로, 관계를 표현하는데 사용합니다.
+
+Golang에서는 다음과 같이 인터페이스를 선언할 수 있습니다.
+
+```go
+type INTERFACE_NAME interface {
+  METHOD_NAME(PARAMETER_NAME) RETURN_TYPE
+  ...
+}
+```
+
+Golang에서는 타입 선언 키워드(type)를 사용하여 인터페이스를 선언하며, 인터페이스명 뒤에 인터페이스 선언 키워드(interface)를 추가하여 인터페이스를 정의합니다.
+
+인터페이스안에는 구현이 없는 메서드(메서드명, 파라메터, 리턴 타입만 선언)를 선언하며, 이렇게 선언된 메서드들을 가지고 있는 타입을 우리가 정의한 인터페이스로 인식하겠다는 것을 의미합니다.
+
+Golang에서는 인터페이스도 하나의 타입이며, 인터페이스로 변수를 선언할 수도 있습니다.
+
+이를 확인하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type SampleInterface interface {
+  SampleMethod()
+}
+
+func main() {
+  var s SampleInterface
+  fmt.Println(s)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+<nil>
+```
+
+인터페이스는 내부 동작을 감추는 추상화(Abstraction)을 위해 사용되며, 추상화를 통해 의존성을 제거하는 디커플링에 주로 사용됩니다.
+
+## 인터페이스 기본값
+
+Golang에서 인터페이스의 기본값은  `nil`입니다. 이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type SampleInterface interface {
+  SampleMethod()
+}
+
+func main() {
+  var s SampleInterface
+  fmt.Println(s)
+  s.SampleMethod()
+}
+```
+
+이렇게 프로그램을 작성하였다면, 다음 명령어를 실행하여 모듈을 생성하고 프로그램을 빌드해 봅니다.
+
+```bash
+go mod init github.com/dev-yakuza/study-golang/interface/nil
+go mod tidy
+go build
+```
+
+이렇게 빌드하면,  `main.go`  파일이 위치한 곳에  `nil`이라는 이름의 파일이 생성된 것을 확인할 수 있습니다.
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# ./nil
+<nil>
+panic: runtime error: invalid memory address or nil pointer dereference
+```
+
+위에 예제는 문법적으로 오류가 없기 때문에 빌드가 됩니다. 하지만 인터페이스 변수에 값이 설정되어 있지 않기 때문에 런타임 에러(nil pointer 에러)가 발생하는 것을 확인할 수 있습니다.
+
+Golang에서 모듈을 사용하는 방법에 대해서는 아래에 블로그 포스트를 참고하시기 바랍니다.
+
+-   [[Golang] Module](https://dev-yakuza.posstree.com/ko/golang/module/)
+
+## 인터페이스 규칙
+
+Golang에서 인터페이스는 다음과 같은 규칙을 가지고 있습니다.
+
+1.  메서드는 반드시 메서드명이 있어야 한다.
+2.  매개 변수와 반환이 다르더라도 이름이 같은 메서드는 있을 수 없다.
+3.  인터페이스에서는 메스드 구현을 포함하지 않는다.
+
+```go
+type SampleInterface interface {
+  String() string
+  String(a int) string // Error: duplicated method name
+  _(x int) int         // Error: no name method
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type SampleInterface interface {
+  String() string
+  String(a int) string // Error: duplicated method name
+  _(x int) int         // Error: no name method
+}
+
+func main() {
+  var s SampleInterface
+  fmt.Println(s)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+# command-line-arguments
+./main.go:7:2: duplicate method String
+./main.go:8:2: methods must have a unique non-blank name
+```
+
+## 예제
+
+간단한 예제를 만들어 보면서 Golang에서의 인터페이스를 이해해 봅시다.  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Human interface {
+  Walk() string
+}
+
+type Student struct {
+  Name string
+  Age  int
+}
+
+func (s Student) Walk() string {
+  return fmt.Sprintf("%s can walk", s.Name)
+}
+
+func (s Student) GetAge() int {
+  return s.Age
+}
+
+func main() {
+  s := Student{Name: "John", Age: 20}
+  var h Human
+
+  h = s
+  fmt.Println(h.Walk())
+  // fmt.Println(h.GetAge()) // ERROR
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+John can walk
+```
+
+소스 코드를 자세히 보면,  `Human`이라는 인터페이스는  `Walk`라는 함수를 가지고 있습니다.
+
+```go
+type Human interface {
+  Walk() string
+}
+```
+
+그리고  `Student`  구조체 타입은  `Name`과  `Age`라는 변수를 가지고 있으며,  `Walk`와  `GetAge`라는 메서드를 가지고 있습니다.
+
+```go
+type Student struct {
+  Name string
+  Age  int
+}
+
+func (s Student) Walk() string {
+  return fmt.Sprintf("%s can walk", s.Name)
+}
+
+func (s Student) GetAge() int {
+  return s.Age
+}
+```
+
+이제  `Student`  구조체를 사용하여 변수를 생성하고, 해당 변수를  `Human`  인터페이스에 할당하였습니다.
+
+```go
+func main() {
+  s := Student{Name: "John", Age: 20}
+  var h Human
+
+  h = s
+  fmt.Println(h.Walk())
+  // fmt.Println(h.GetAge()) // ERROR
+}
+```
+
+이렇게 할당된  `Human`  변수는  `Walk`라는 함수를 가지고 있으므로,  `Human`  변수의  `Walk`  함수를 호출하는 것은 가능하지만,  `GetAge`  함수를 호출할 수 없는 것을 알 수 있습니다.
+
+## 덕 타이핑
+
+Golang의 인터페이스는 덕 타이핑(Duck typing)을 구현하였습니다. 덕 타이핑이란 만약 어떤 새를 봤는데, 그 새가 오리처럼 걷고, 오리처럼 날고, 오리처럼 소리를 낸다면, 그 새는 오리라고 부르겠다라는 의미를 가지고 있습니다.
+
+즉, 어떤 객체가 어떤 변수를 가지고 있고, 어떤 함수를 가지고 있는지와 관계없이, 해당 객체를 사용하는 쪽에서, 이런 함수들을 가지고 있다면, 이런 타입으로 보겠다고 정의할 수 있습니다.
+
+예제를 통해 이 내용을 확인해 봅시다. 우선  `user/main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package user
+
+import "fmt"
+
+type User struct {
+  Name string
+}
+
+func (u User) Walk() {
+  fmt.Println("Walking")
+}
+func (u User) Talk() {
+  fmt.Println("Talking")
+}
+```
+
+그리고 다음과 같이 모듈을 생성합니다.
+
+```bash
+# cd user
+go mod init github.com/dev-yakuza/study-golang/interface/user
+go mod tidy
+```
+
+이렇게 생성한  `user`  패키지는  `User`  타입을 가지고 있으며, 해당 User 타입은  `Walk`  메서드와  `Talk`  메서드를 가지고 있습니다. 이제 이렇게 생성한 user 패키지를 인터페이스를 통해 덕 타이핑을 해 봅시다.
+
+덕 타이핑을 하기 위해  `user`  폴더와 동일한 위치에  `main/main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+
+  "github.com/dev-yakuza/study-golang/interface/user"
+)
+
+type Human interface {
+  Walk()
+  Talk()
+}
+
+func main() {
+  u := user.User{Name: "John"}
+  fmt.Println(u)
+
+  h := Human(u)
+  fmt.Println(h)
+}
+```
+
+그리고 다음 명령어를 실행하여 모듈을 생성하고, 로컬 모듈과 연동합니다.
+
+```bash
+go mod init github.com/dev-yakuza/study-golang/interface/main
+go mod edit -replace github.com/dev-yakuza/study-golang/interface/user=../user
+go mod tidy
+```
+
+이렇게 생성한 모듈을 실행하면, 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+{John}
+{John}
+```
+
+`main/main.go`  파일의 내용을 보면  `User`  타입이 어떤 타입인지 어떻게 구현되었는지 상관없이 구현된 타입이  `Walk`와  `Talk`를 가지고 있다면,  `main`  패키지에서는 이를  `Human`으로 보겠다고 정의하였습니다.
+
+이렇게 인터페이스는 외부 패키지를 사용할 때, 자신의 코드에 맞게 객체를 변경하여 사용할 수 있습니다. 외부 패키지를 구현하는 입장에서는 타입과 메서드를 구현할 때, 인터페이스를 고려할 필요가 없습니다. 그러므로, 인터페이스의 함수가 해당 타입에 구현이 되어 있지 않는 경우가 발생할 수 있으며, 이런 경우에는 컴파일 에러가 발생하게 됩니다.
+
+덕 타이핑은 코드를 사용하는 사용자 중심으로 코딩이 가능하도록 해 줍니다. 외부 패키지 제공자는 구체화된 객체를 제공하고, 이를 사용하는 사용자는 필요에 따라 인터페이스를 정의해서 자신의 프로그램에 맞게 사용할 수 있습니다.
+
+## Embedded interface
+
+Golang에서 인터페이스는 다음과 같이 인터페이스를 포함할 수 있습니다. 이를 Golang에서  `Embedded interface`라고 부릅니다.
+
+```go
+type Reader interface {
+  Read() (n int, err error)
+  Close() error
+}
+
+type Writer interface {
+  Write() (n int, err error)
+  Close() error
+}
+
+type ReadWriter interface {
+  Reader
+  Writer
+}
+```
+
+`ReadWriter`  인터페이스는  `Reader`와  `Writer`  인터페이스를 모두 포함하고 있으며,  `Read`,  `Write`,  `Close`  함수를 가지게 됩니다.
+
+## 타입 변환
+
+Golang에서는 다음과 같이 인터페이스를 타입(ConcreteType)으로 변환할 수 있습니다.
+
+```go
+var a Interface
+t := a.(ConcreteType)
+```
+
+인터페이스에서 타입으로 변환할 때  `.(타입)`을 사용합니다. 위와 같이 사용하면  `ConcreteType`  타입의 변수를 생성하여  `t`에 저장합니다.
+
+인터페이스를 타입으로 변환할 때, 같은 인터페이스 타입인 경우, 타입 변환은 가능하지만, 해당 타입이 가지고 있지 않은 변수나 함수를 실행하면, 런타임 에러가 발생합니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Human interface {
+  Learn()
+}
+
+type Teacher struct {
+  Name string
+}
+
+func (m *Teacher) Learn() {
+  fmt.Println("Teacher can learn")
+}
+
+func (m *Teacher) Teach() {
+  fmt.Println("Teacher can teach")
+}
+
+type Student struct {
+  Name string
+}
+
+func (m *Student) Learn() {
+  fmt.Println("Student can learn")
+}
+
+func Study(h Human) {
+  if h != nil {
+    h.Learn()
+
+    var s *Student
+    s = h.(*Student)
+    fmt.Printf("Name: %v\n", s.Name)
+    // s.Teach() // ERROR
+  }
+}
+
+func main() {
+  Study(&Student{Name: "John"})
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Student can learn
+Name: John
+```
+
+인터페이스 타입 변환시 변환하고자 하는 타입이 해당 인터페이스가 아닌 경우 컴파일 에러가 발생합니다. 이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Stringer interface {
+  String() string
+}
+
+type Student struct {
+}
+
+func main() {
+  var stringer Stringer
+  s := stringer.(*Student)
+  fmt.Println(s)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+# command-line-arguments
+./main.go:14:15: impossible type assertion:
+        *Student does not implement Stringer (missing String method)
+```
+
+## 다른 인터페이스 타입으로 변환
+
+Golang에서는 인터페이스를 다른 인터페이스로 타입 변환이 가능합니다. 문법적으로는 전혀 문제가 없지만, 실제로 실행할 시, 변경된 인터페이스에 해당 함수가 없어 런타임 에러가 발생할 수 있습니다.
+
+이를 확인하기 위해  `main.go`  다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Teacher interface {
+  Teach()
+}
+
+type Student interface {
+  Learn()
+}
+
+type Person struct {
+}
+
+func (f *Person) Learn() {
+  fmt.Println("Person can learn")
+}
+
+func Teach(s Student) {
+  t := s.(Teacher)
+  t.Teach()
+}
+
+func main() {
+  p := &Person{}
+  Teach(p)
+}
+```
+
+이를 실행하면 다음과 같은 결과가 표시됩니다.
+
+```bash
+# go run main.go
+panic: interface conversion: *main.Person is not main.Teacher: missing method Teach
+```
+
+`Person`  타입의 변수를  `Student`  인스턴스로 받고, 이렇게 할당 받은  `Student`  인터페이스를  `Teacher`  인터페이스로 변환한 뒤,  `Teacher`  인터페이스의  `Teach`  함수를 호출했습니다. 문법적으로는 문제가 없기 때문에 컴파일 에러가 발생하지 않습니다. 하지만, 실제로 실행을 하면  `Person`  타입에는  `Teach`  함수가 없기 때문에 에러가 발생합니다.
+
+Golang은 이런 문제를 방지하기 위해 타입 변환이 성공했는지 여부를 체크하는 기능을 제공하니다.
+
+## 타입 변환 성공 여부
+
+인터페이스의 타입 변환은 문법적으로 오류가 아니기 때문에, 빌드시 에러가 발생하지 않습니다. 하지만, 런타임시 에러가 날 가능성이 있습니다. 이를 방지하기 위해, Golang은 타입 변환시 타입이 제대로 변경되었는지 여부를 알 수 있는 방법이 제공하고 있습니다.
+
+```go
+var a Interface
+t, ok := a.(ConcreteType)
+```
+
+-   t: 타입 변환 결과
+-   ok: 변환 성공 여부
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Teacher interface {
+  Teach()
+}
+
+type Student interface {
+  Learn()
+}
+
+type Person struct {
+}
+
+func (f *Person) Learn() {
+  fmt.Println("Person can learn")
+}
+
+func main() {
+  p := &Person{}
+  s := Student(p)
+  s.Learn()
+
+  t, ok := s.(Teacher)
+  fmt.Println(ok)
+  if ok {
+    t.Teach()
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Person can learn
+false
+```
+
+`Person`  타입은  `Student`  인터페이스에 할당할 수 있지만,  `Student`  인터페이스는  `Teach`  함수가 없기 때문에  `Teacher`  인터페이스로 변경이 불가능합니다.
+
+따라서 인터페이스 타입 변환을 시도하였을 때, 변환 결과가  `false`인 것을 확인할 수 있습니다.
+
+이와 같이 인터페이스의 타입 변환이 잘 되었는지 확인할 수 있으며, 인터페이스 타입 변환을 할 때에는 주로 다음과 같이 사용합니다.
+
+```go
+if t, ok := s.(Teacher); ok {
+  t.Teach()
+}
+```
+
+## 빈 인터페이스
+
+Golang에서는 빈 인터페이스를 활용할 때가 있습니다. 빈 인터페이스는 메서드를 가지고 있지 않기 때문에, 모든 타입을 빈 인터페이스로 변환할 수 있습니다.
+
+```go
+interface {}
+```
+
+이런 빈 인터페이스는 다음과 같이 활용될 수 있습니다.
+
+```go
+package main
+
+import "fmt"
+
+type Student struct {
+  Age int
+}
+
+func Print(v interface{}) {
+  switch v := v.(type) {
+  case int:
+    fmt.Println("v is int", v)
+  case float64:
+    fmt.Println("v is float64", v)
+  case string:
+    fmt.Println("v is string", v)
+  default:
+    fmt.Printf("Not supported %T:%v", v, v)
+  }
+}
+
+func main() {
+  Print(10)
+  Print(3.14)
+  Print("Hello word")
+  Print(Student{Age: 10})
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+v is int 10
+v is float64 3.14
+v is string Hello word
+Not supported main.Student:{10}%
+```
+
+## 완료
+
+이것으로 Golang에서 인터페이스란 무엇이고, 인터페이스를 사용하는 방법에 대해서 알아보았습니다. 또한 인터페이스를 사용한 덕 타이핑과 타입 변환에 대해서도 알아보았습니다.
+
+
+# [Golang Function 심화](https://dev-yakuza.posstree.com/ko/golang/function/deep-dive/)
+
+2021-11-21 
+
+## Golang에서 Function(함수)를 좀 더 자세히 살펴보고, 함수를 활용하는 다양한 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `Function`(함수)에 대해 좀 더 자세히 알아보고 함수를 활용하는 다양한 방법에 대해서 알아봅시다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/function](https://github.com/dev-yakuza/study-golang/tree/main/function)
+
+## 함수 기초
+
+Golang에서 함수를 다루는 기초적인 방법은 이전 블로그 포스트를 확인해 주시기 바랍니다.
+
+-   [[Golang] Function 기초](https://dev-yakuza.posstree.com/ko/golang/function/)
+
+## 가변 인수 함수
+
+Golang에서는 함수에서 다음과 같이 가변 인수(Variable argument list)를 사용할 수 있습니다.
+
+```go
+fmt.Println()
+fmt.Println(1)
+fmt.Println(1, 2, 3, 4, 5)
+```
+
+Golang에서는 다음과 같이  `...`  키워드를 사용하여 가변 인수 함수를 만들 수 있습니다.
+
+```go
+func FUNCTION_NAME(param ...TYPE) TYPE {
+  // Code block
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func sum(nums ...int) int {
+  fmt.Printf("nums type: %T\n", nums)
+
+  sum := 0
+  for _, num := range nums {
+    sum += num
+  }
+  return sum
+}
+func main() {
+  fmt.Println(sum(1, 2, 3, 4, 5))
+  fmt.Println(sum(10, 20))
+  fmt.Println(sum())
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+nums type: []int
+15
+nums type: []int
+30
+nums type: []int
+0
+```
+
+## defer
+
+Golang은  `defer`라는 지연 실행 구문을 제공합니다.  `defer`는 함수 종료전에 실행됨을 보장합니다.
+
+```go
+defer STATEMENT
+```
+
+이를 확인하기 위해서  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func print() {
+  defer fmt.Println("World!")
+  fmt.Println("Hello")
+}
+
+func main() {
+  print()
+}
+```
+
+이를 실행하면 다음과 같은 결과가 출력되는 것을 확인할 수 있습니다.
+
+```bash
+# go run main.go
+Hello
+World!
+```
+
+`defer`는 파일을 읽기 위해 파일을 열고 닫는 등, 주로 OS 자원을 반환할 때 사용됩니다. 이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "os"
+
+func readFile() {
+  f, err := os.Open("file.txt")
+
+  if err != nil {
+    return
+  }
+
+  f.Close()
+}
+
+func readFileDefer() {
+  f, err := os.Open("file.txt")
+  defer f.Close()
+
+  if err != nil {
+    return
+  }
+}
+
+func main() {
+  readFile()
+  readFileDefer()
+}
+```
+
+`defer`를 사용하지 않는 경우,  `Close`  함수 전에 오류가 발생하면,  `Close`  함수는 호출되지 않습니다.
+
+```go
+func readFile() {
+  f, err := os.Open("file.txt")
+
+  if err != nil {
+    return
+  }
+
+  f.Close()
+}
+```
+
+하지만  `defer`를 사용하면 오류가 발생하더라도,  `Close`  함수의 호출이 보장됩니다.
+
+```go
+func readFileDefer() {
+  f, err := os.Open("file.txt")
+  defer f.Close()
+
+  if err != nil {
+    return
+  }
+}
+```
+
+## 함수 타입 변수
+
+Golang에서는 함수도 타입으로 사용할 수 있습니다. 여기서 함수 타입 변수란 함수를 값으로 갖는 변수를 말합니다. 함수도 메모리에 시작 주소값을 가지고 있기 때문에 변수에 할당을 할 수 있습니다.
+
+함수 타입은 다음과 같이  `함수 시그니쳐`(Function signature)로 표현합니다.
+```
+// Function
+func add(a, b int) int {
+  return a + b
+}
+
+// Signature
+func (int int) int
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func add(a, b int) int {
+  return a + b
+}
+
+func multiple(a, b int) int {
+  return a * b
+}
+
+func getOperator(op string) func(int, int) int {
+  if op == "+" {
+    return add
+  } else if op == "*" {
+    return multiple
+  } else {
+    return nil
+  }
+}
+
+func main() {
+  var op func(int, int) int
+
+  op = getOperator("+")
+  result := op(10, 20)
+  fmt.Println(result)
+
+  op = getOperator("*")
+  result = op(10, 20)
+  fmt.Println(result)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+30
+200
+```
+
+## 함수 시그니쳐의 별칭 타입
+
+함수 시그니쳐에 별칭 타입을 사용하여 좀 더 간단하게 함수 타입을 사용할 수 있습니다.
+```
+// Function signature alias type
+type OperateFunc func(int, int) int
+
+func getOperator(op string) OperateFunc {
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type OperateFunc func(int, int) int
+
+func add(a, b int) int {
+  return a + b
+}
+
+func multiple(a, b int) int {
+  return a * b
+}
+
+func getOperator(op string) OperateFunc {
+  if op == "+" {
+    return add
+  } else if op == "*" {
+    return multiple
+  } else {
+    return nil
+  }
+}
+
+func main() {
+  var op OperateFunc
+
+  op = getOperator("+")
+  result := op(10, 20)
+  fmt.Println(result)
+
+  op = getOperator("*")
+  result = op(10, 20)
+  fmt.Println(result)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+30
+200
+```
+
+별칭 타입을 이용하면 함수 시그니쳐를 좀 더 간단하게 사용할 수 있음을 알 수 있습니다.
+
+## 함수 리터럴
+
+Golang에서도 함수 리터럴(익명 함수)을 사용할 수 있습니다.
+
+```go
+f := func(a, b int) int {
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type OperateFunc func(int, int) int
+
+func getOperator(op string) OperateFunc {
+  if op == "+" {
+    return func(a, b int) int {
+      return a + b
+    }
+  } else if op == "*" {
+    return func(a, b int) int {
+      return a * b
+    }
+  } else {
+    return nil
+  }
+}
+
+func main() {
+  var op OperateFunc
+
+  op = getOperator("+")
+  result := op(10, 20)
+  fmt.Println(result)
+
+  op = getOperator("*")
+  result = op(10, 20)
+  fmt.Println(result)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+30
+200
+```
+
+Golang에서 일반적으로 함수는 상태를 가질 수 없지만, 함수 리터럴은 내부 상태를 가질 수 있습니다. 이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  i := 0
+
+  f := func() {
+    i += 10
+  }
+
+  i++
+
+  f()
+
+  fmt.Println(i)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+11
+```
+
+일반 함수는 외부에 선언된 변수에 접근할 수 없지만, 함수 리터럴은 외부에 선언된 변수에 접근(캡쳐)하여 사용할 수 있습니다. 여기서 캡쳐(Captured)된 값은 값 복사가 아닌 레퍼런스 복사가 이루어집니다. 즉, 포인터가 복사된다고 할 수 있습니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func CaptureLoop1() {
+  f := make([]func(), 3)
+  fmt.Println("CaptureLoop1")
+
+  for i := 0; i < 3; i++ {
+    f[i] = func() {
+      fmt.Println(i)
+    }
+  }
+
+  for i := 0; i < 3; i++ {
+    f[i]()
+  }
+}
+
+func CaptureLoop2() {
+  f := make([]func(), 3)
+  fmt.Println("CaptureLoop2")
+
+  for i := 0; i < 3; i++ {
+    v := i
+    f[i] = func() {
+      fmt.Println(v)
+    }
+  }
+
+  for i := 0; i < 3; i++ {
+    f[i]()
+  }
+}
+
+func main() {
+  CaptureLoop1()
+  CaptureLoop2()
+}
+```
+
+이를 실행하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+# go run main.go
+CaptureLoop1
+3
+3
+3
+CaptureLoop2
+0
+1
+2
+```
+
+`CaptureLoop1`은  `for`의 변수  `i`의 인스턴스를 직접 참조하고 있으므로,  `i`의 마지막 값인 3이 모두 출력됩니다. 하지만,  `CaptureLoop2`는  `i`의 값을  `v`로 복사한 후,  `v`의 인스턴스를 참조하고 있고  `v`는 for 루프에서 매번 새롭게 생성되므로, 0~2까지 모든 값들이 출력되는 것을 확인할 수 있습니다.
+
+## 의존성 주입
+
+Golang에서는 함수 타입을 이용하여 의존성 주입(DI - Dependency Injection)을 사용할 수 있습니다. 의존성 주입이란 비즈니스 로직이 내부에 존재하는 것이 아니라 외부로부터 로직을 주입받는 것을 의미합니다.
+
+```go
+package main
+
+import "fmt"
+
+type PrintConsole func(string)
+
+func PrintHello(p PrintConsole) {
+  p("Hello, World!")
+}
+
+func main() {
+  PrintHello(func(msg string) {
+    fmt.Println(msg)
+  })
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Hello, World!
+```
+
+`PrintHello`는  `PrintConsole`이 어떤 역할(비즈니스 로직)을 하는지 알지 못합니다.  `PrintHello`는  `PrintConsole`을 통해 의존성이 주입되었다고 할 수 있습니다.
+
+## 완료
+
+이것으로 함수에 대해서 좀 더 깊게 알아보고, 함수를 활용하는 방법에 대해서 알아보았습니다. 여기서 소개한 방법들을 활용하여 좀 더 멋진 코드를 작성해 보시기 바랍니다.
+
+#   [Golang 자료 구조](https://dev-yakuza.posstree.com/ko/golang/data-structure/)
+
+2021-11-25 
+
+## Golang에서 주로 사용되는 리스트, 큐, 스택, 링 자료 구조를 생성하고 사용하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `자료 구조`(Data structure)에 대해 알아보고 사용하는 방법에 대해서 알아보도록 하겠습니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/data-structure](https://github.com/dev-yakuza/study-golang/tree/main/data-structure)
+
+맵(Map) 자료 구조에 관해서는 다음 블로그 포스트에서 확인하실 수 있습니다.
+
+-   [[Golang] Map](https://dev-yakuza.posstree.com/ko/golang/map/)
+
+## 자료 구조
+
+자료 구조(Data structure)란 자료(값, Value)들을 어떤 형태로 저장, 관리할 것인가를 의미합니다. 자료 구조에는 크게 배열, 리스트, 큐, 스택 등이 있습니다.
+
+## Big-O 표기법
+
+Golang에서 자료 구조를 사용하는 방법을 알아보전에  `Big-O`  표기법에 대해서 살펴보도록 하겠습니다. Big-O 표기법이란 알고리즘의 시간적, 공간적 효율성을 나타내는 표기법중 하나로써, 가장 많이 사용되는 표기법입니다.
+
+Big-O 표기법은 가장 오랜 걸린 시간, 가장 공간을 많이 차지하는 상한선을 표시합니다.
+
+Big-O 표기법은 다음과 같은 순서로 효율성을 나타낼 수 있습니다.
+
+```txt
+O(1) < O(N) < O(N*log2N) < O(N2) < O(N3)
+```
+
+## List
+
+리스트(List)는 가장 기본적으로 사용되는 선형 자료 구조중 하나입니다.
+
+리스트는 다음과 같은 형태를 가지고 있습니다.
+
+```go
+type Element struct {
+  Value interface{}
+  Next  *Element
+  Prve  *Element
+}
+```
+
+리스트는 현재 변수에 저장된 값과 이전과 다음 값에 접근할 수 있는 포인터 변수를 가지고 있습니다.
+
+Golang에서  `container/list`  패키지를 사용하여 리스트를 사용할 수 있습니다.
+
+```go
+import "container/list"
+
+v := list.New()
+```
+
+이를 확인하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "container/list"
+  "fmt"
+)
+
+func main() {
+  l := list.New()
+  element4 := l.PushBack(4)
+  element2 := l.PushFront(1)
+  l.InsertBefore(3, element4)
+  l.InsertAfter(2, element2)
+
+  fmt.Println("From Front")
+
+  for e := l.Front(); e != nil; e = e.Next() {
+    fmt.Print(e.Value, " ")
+  }
+
+  fmt.Println()
+  fmt.Println("From Back")
+
+  for e := l.Back(); e != nil; e = e.Prev() {
+    fmt.Print(e.Value, " ")
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+From Front
+1 2 3 4
+From Back
+4 3 2 1
+```
+
+여기서 사용된 함수들은 다음과 같은 기능을 합니다.
+
+-   제일 마지막에 값을 추가: PushBack
+-   제일 처음에 값을 추가: PushFront
+-   지정한 위치 바로 이전에 값을 추가: InsertBefore
+-   지정한 위치 바로 이후에 값을 추가: InsertAfter
+
+### 데이터 삽입
+
+배열에서 맨 앞에 데이터를 삽입하는 경우, 모든 데이터를 하나씩 이동시킨 후, 제일 앞에 데이터를 추가하게 됩니다. 따라서 배열에서 맨 앞에 데이터를 삽입하는 경우는  `O(N)`  알고리즘이 됩니다.
+
+리스트에서 맨 앞에 데이터를 삽입하는 경우, 하나의 요소를 만들어 추가하게 됩니다. 따라서, 리스트에서 맨 앞에 데이터를 삽입하는 경우  `O(1)`  알고리즘이 됩니다.
+
+### 특정 요소 접근
+
+특정 요소(`Random Access`)에 접근하는 경우, 배열은 인덱스를 사용하여 바로 접근이 가능하므로  `O(1)`, 리스트는 처음부터 해당 요소가 발견될때까지 이동해야하므로  `O(N)`  알고리즘이 됩니다.
+
+| 행위 | 배열, 슬라이스 | 리스트 |
+| --- | --- | --- |
+| 요소 삽입 | O(N) | O(1) |
+| 요소 삭제 | O(N) | O(1) |
+| 요소 접근 | O(1) | O(N) |
+
+따라서 요소 삽입이나 삭제가 많은 경우 리스트를 사용하는 것이 유리하고, 특정 요소에 접근을 많이 하는 경우 배열을 사용하는 것이 성능상 유리합니다.
+
+또한, 일반적으로 요소의 수가 적은 경우, 데이터의 지역성때문에 리스트보다 배열이 더 빠르게 처리됩니다.
+
+-   데이터 지역성: 데이터가 인접해 있을 수록 캐시 성공률이 올라가고 성능도 증가한다.
+
+## 큐
+
+큐(Queue)는 선입선출(FIFO - First in First Out) 구조를 가진 자료 구조로써, 대기열 등을 구현하는데 많이 사용됩니다.
+
+Golang에서는 다음과 같이 리스트를 사용하여 큐를 구현할 수 있습니다.
+
+```go
+import "container/list"
+
+type Queue struct {
+  v *list.List
+}
+
+func NewQueue() *Queue {
+  return &Queue{list.New()}
+}
+
+func (q *Queue) Push(v interface{}) {
+  q.v.PushBack(v)
+}
+
+func (q *Queue) Pop() interface{} {
+  front := q.v.Front()
+  if front == nil {
+    return nil
+  }
+
+  return q.v.Remove(front)
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "container/list"
+  "fmt"
+)
+
+type Queue struct {
+  v *list.List
+}
+
+func NewQueue() *Queue {
+  return &Queue{list.New()}
+}
+
+func (q *Queue) Push(v interface{}) {
+  q.v.PushBack(v)
+}
+
+func (q *Queue) Pop() interface{} {
+  front := q.v.Front()
+  if front == nil {
+    return nil
+  }
+
+  return q.v.Remove(front)
+}
+
+func main() {
+  queue := NewQueue()
+
+  for i := 0; i < 5; i++ {
+    queue.Push(i)
+  }
+
+  v := queue.Pop()
+  for v != nil {
+    fmt.Println(v)
+    v = queue.Pop()
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+0
+1
+2
+3
+4
+```
+
+## 스택
+
+스택(Stack)은 선입후출(FILO - First in Last Out)의 구조를 가진 자료구조로써, 함수의 콜 스택 등에서 사용됩니다.
+
+Golang에서는 다음과 같이 리스트를 사용하여 스택을 구현할 수 있습니다.
+
+```go
+import "container/list"
+
+type Stack struct {
+  v *list.List
+}
+
+func NewStack() *Stack {
+  return &Stack{list.New()}
+}
+
+func (q *Stack) Push(v interface{}) {
+  q.v.PushBack(v)
+}
+
+func (q *Stack) Pop() interface{} {
+  back := q.v.Back()
+  if back == nil {
+    return nil
+  }
+
+  return q.v.Remove(back)
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "container/list"
+  "fmt"
+)
+
+type Stack struct {
+  v *list.List
+}
+
+func NewStack() *Stack {
+  return &Stack{list.New()}
+}
+
+func (q *Stack) Push(v interface{}) {
+  q.v.PushBack(v)
+}
+
+func (q *Stack) Pop() interface{} {
+  back := q.v.Back()
+  if back == nil {
+    return nil
+  }
+
+  return q.v.Remove(back)
+}
+
+func main() {
+  stack := NewStack()
+
+  for i := 0; i < 5; i++ {
+    stack.Push(i)
+  }
+
+  v := stack.Pop()
+  for v != nil {
+    fmt.Println(v)
+    v = stack.Pop()
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+4
+3
+2
+1
+0
+```
+
+## 링
+
+링(Ring) 자료 구조는 마지막 요소가 첫번째 요소를 가리키는 리스트를 말합니다. 링은 마지막 요소가 첫번째 요소를 가리키므로, 보통 일정한 갯수를 가지고, 오래된 요소를 제거해도 되는 자료일 경우에 많이 사용됩니다.
+
+-   실행 취소 기능: 문서 편집기 등에서 일정한 개수의 명령을 저장하고 실행 취소하는 경우
+-   고정 크기 버퍼 기능: 데이터에 따라 버퍼가 증가되지 않고 고정된 길이로 쓸 때
+-   리플레이 기능: 게임 등에서 최근 플레이 10초를 다시 리플레이할 때와 같이 고정된 길이의 리플레이 기능을 제공할 때
+
+링은 다음과 같이 길이를 고정시킨 리스트를 생성하여 구현할 수 있습니다.
+
+```go
+import "container/ring"
+
+ring := ring.New(5)
+
+n := ring.Len()
+
+for i := 0; i < n; i++ {
+  ring.Value = i
+  ring = ring.Next()
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "container/ring"
+  "fmt"
+)
+
+func main() {
+  ring := ring.New(5)
+
+  n := ring.Len()
+
+  for i := 0; i < n; i++ {
+    ring.Value = i
+    ring = ring.Next()
+  }
+
+  fmt.Println("From Front")
+  for i := 0; i < n; i++ {
+    fmt.Print(ring.Value, " ")
+    ring = ring.Next()
+  }
+
+  fmt.Println("")
+  fmt.Println("From Back")
+  for i := 0; i < n; i++ {
+    fmt.Print(ring.Value, " ")
+    ring = ring.Prev()
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+From Front
+0 1 2 3 4
+From Back
+0 4 3 2 1
+```
+
+## 완료
+
+이것으로 Golang에서 자주 사용되는 자료 구조인 리스트, 큐, 스택, 링에 대해서 알아보았습니다. 이런 자료 구조들을 활용하여 좀 더 효율적으로 데이터들을 관리해 보시기 바랍니다.
+
+
+# [Golang Map](https://dev-yakuza.posstree.com/ko/golang/map/)
+
+2021-11-29 
+
+## Golang에서 자료구조중 하나인 맵(Map)을 정의하고 사용하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `맵(Map)`에 대해 알아보고 사용하는 방법에 대해서 알아보도록 하겠습니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/map](https://github.com/dev-yakuza/study-golang/tree/main/map)
+
+## 맵(Map)
+
+맵(Map)은 키와 값 형태로 데이터를 저장하는 자료 구조입니다. 프로그래밍 언어에 따라 딕셔너리(Dictionary), 해시테이블(Hash table), 해시맵(Hash map)등으로 부르기도 합니다.
+
+Golang에서는 다음과 같이 맵을 정의할 수 있습니다.
+```
+// map[KEY_TYPE]VALUE_TYPE
+map[string]int
+```
+
+`make`  함수를 통해 변수를 선언할 수 있습니다.
+
+```go
+m := make(map[string]string)
+```
+
+이를 확인하기 위해,  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  m := make(map[string]string)
+
+  m["name"] = "John"
+  m["country"] = "Korea"
+  fmt.Println(m)
+
+  m["city"] = "Seoul"
+  fmt.Println(m)
+
+  fmt.Printf("No key: %s / %T\n", m["language"], m["language"])
+}
+```
+
+이를 실행하면 다음과 같은 결과가 출력됩니다.
+
+```bash
+# go run main.go
+map[country:Korea name:John]
+map[city:Seoul country:Korea name:John]
+No key:  / string
+```
+
+맵에 존재하지 않는 키에 접근하면, 값의 타입의 기본값이 반환됩니다. 위에 예제에서는 값의 타입인  `string`의 기본값인 ``이 반환된 것을 확인할 수 있습니다.
+
+## 키값의 존재 여부
+
+맵에 존재하지 않는 키에 접근하면, 값의 타입의 기본값이 반환되는 것을 알 수 있었습니다. 그럼 다음과 같이 값의 기본값을 저장한 경우, 이것이 값이 할당되지 않아 기본값이 반환되는지, 기본값을 할당한 것인지 어떻게 알 수 있을까요?
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  m := make(map[string]string)
+
+  m["name"] = ""
+  fmt.Printf("name: %s / %T\n", m["name"], m["name"])
+  fmt.Printf("country: %s / %T\n", m["country"], m["country"])
+}
+```
+
+이를 위해, Golang에서는 키를 사용하여 맵의 값을 가져올 때, 해당 키값이 맵에 존재하는지 여부를 함께 반환해 줍니다.
+
+```go
+v, ok := m["name"]
+```
+
+해당 키값이 맵에 존재하는 경우  `ok`  변수는  `true`가 되고, 존재하지 않는 경우  `false`가 됩니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  m := make(map[string]string)
+
+  m["name"] = ""
+  fmt.Printf("name: %s / %T\n", m["name"], m["name"])
+  fmt.Printf("country: %s / %T\n", m["country"], m["country"])
+
+  v, ok := m["name"]
+  fmt.Println(v, ok)
+
+  v, ok = m["country"]
+  fmt.Println(v, ok)
+}
+```
+
+이를 실행하면 다음과 같은 결과가 출력됩니다.
+
+```bash
+# go run main.go
+name:  / string
+country:  / string
+ true
+ false
+```
+
+이것으로 우리는 해당 키값이 존재하는지 여부를 확인할 수 있습니다.
+
+## 요소 삭제
+
+Golang에서는 다음과 같이  `delete`  함수를 사용하여 맵의 요소를 삭제할 수 있습니다.
+
+```go
+delete(MAP_VARIABLE, KEY)
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  m := make(map[int]int)
+
+  m[1] = 0
+  m[2] = 2
+  m[3] = 3
+
+  v, ok := m[1]
+  fmt.Println(v, ok)
+
+  delete(m, 1)
+
+  v, ok = m[1]
+  fmt.Println(v, ok)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+0 true
+0 false
+```
+
+`delete`  함수를 사용하여 해당 키의 요소를 제거하기 전에도 값이  `0`이며,  `delete`  함수를 사용하여 해당 요소를 제거하였을 때에도  `0`이 반환된 것을 확인할 수 있습니다.
+
+`delete`  함수를 사용하여 해당 요소를 제거한 후에  `0`이 반환된 것은 맵의 해당 키값이 존재하지 않아 값 타입의 기본값(int)인  `0`이 반환된 것입니다. 이렇게 값만을 확인하면  `0`을 대입한 것인지, 기본값이 출련된 것인지 알 수 없습니다.
+
+여기서 맵의 두번째 반환값(`ok`)을 체크하여 해당 값이 설정된 값인지, 제거되고 기본값이 반환되는 것인지 확인할 수 있습니다.
+
+## 맵 순회
+
+맵의 모든 키/값에 접근하기 위해서 다음과 같이  `for`  문과  `range`를 사용할 수 있습니다.
+
+```go
+m := make(map[int]int)
+
+for key, value := range m {
+  fmt.Println(key, value)
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+type Product struct {
+  Name  string
+  Price int
+}
+
+func main() {
+  m := make(map[int]Product)
+
+  m[19] = Product{Name: "TV", Price: 3000}
+  m[16] = Product{Name: "Phone", Price: 1000}
+  m[18] = Product{Name: "PC", Price: 500}
+  m[17] = Product{Name: "Tablet", Price: 2000}
+
+  for key, value := range m {
+    fmt.Println(key, value)
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+18 {PC 500}
+17 {Tablet 2000}
+19 {TV 3000}
+16 {Phone 1000}
+```
+
+Golang은 해시맵(Hash map)을 사용하고 있기 때문에, 맵의 순서가 보장되지 않습니다.
+
+-   Hash map: unsorted map
+-   Sorted map: sorted map
+
+## 맵, 배열, 리스트 비교
+
+맵과 배열, 리스트를  `Big-O`  표기법을 사용하여 비교하면 다음과 같습니다.
+
+| 기능 | 배열, 슬라이스 | 리스트 | 맵 |
+| --- | --- | --- | --- |
+| 추가 | O(N) | O(1) | O(1) |
+| 삭제 | O(N) | O(1) | O(1) |
+| 읽기 | O(1) | O(N) | O(1) |
+
+맵은 추가, 삭제, 읽기가 모두  `O(1)`으로 성능이 좋지만,  `for`  문을 사용하여 순회할 때 순서가 보장이 안되며, 많은 메모리를 차지한다는 단점이 있습니다.
+
+Big-O 표기법에 관해 궁금하신 분들은, 다음 링크를 통해 이전 블로그 포스트를 확인해 주시기 바랍니다.
+
+-   [[Golang] 자료 구조의 Big-O 표기법](https://dev-yakuza.posstree.com/ko/golang/data-structure/#big-o-%ED%91%9C%EA%B8%B0%EB%B2%95)
+
+## 완료
+
+이것으로 Golang에서 맵을 사용하는 방법에 대해서 알아보았습니다. Golang에서 사용되는 다른 자료 구조들인 리스트, 큐, 스택, 링이 궁금하신 분들은 이전 블로그 포스트를 참고하시기 바랍니다.
+
+-   [[Golang] 자료 구조](https://dev-yakuza.posstree.com/ko/golang/data-structure/)
+
+
+# [Golang 에러 처리](https://dev-yakuza.posstree.com/ko/golang/error-handling/)
+
+2021-12-03 
+
+## Golang에서 에러를 생성하거나 처리하는 방법에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서 에러를 다루는 방법에 대해서 알아보도록 하겠습니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/error-handling](https://github.com/dev-yakuza/study-golang/tree/main/error-handling)
+
+## 에러 핸들링
+
+프로그래밍에서 에러는 언제 어디서나 발생할 수 있는 문제입니다.
+
+-   버그: 휴먼 에러(프로그래머의 실수), 프로그램의 오동작
+-   외부 환경: 머신의 문제(메모리 부족), 물리적인 문제(전원 차단)
+
+이런 에러를 처리할 때, 두 가지 방법이 있습니다. 하나는 실행중인 프로그램을 종료시키는 것과, 또 하나는 에러를 처리(Handling)하고 프로그램을 지속시키는 방법이 있습니다.
+
+## 에러 반환
+
+Golang에서 다음과 같이 에러를 반환하여, 코드를 사용하는 쪽에서 에러를 다룰 수 있도록 합니다.
+
+```go
+import "os"
+
+file, err := os.Open(filename)
+file, err := os.Create(filename)
+```
+
+이를 확인하기 위해서  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "bufio"
+  "fmt"
+  "os"
+)
+
+func ReadFile(filename string) (string, error) {
+  file, err := os.Open(filename)
+
+  if err != nil {
+    return "", err
+  }
+
+  defer file.Close()
+
+  rd := bufio.NewReader(file)
+  line, _ := rd.ReadString('\n')
+
+  return line, nil
+}
+
+func WriteFile(filename string, data string) error {
+  file, err := os.Create(filename)
+  if err != nil {
+    return err
+  }
+
+  defer file.Close()
+
+  _, err = fmt.Fprintf(file, data)
+  return err
+}
+
+const filename string = "data.txt"
+
+func main() {
+  line, err := ReadFile(filename)
+  if err != nil {
+    err = WriteFile(filename, "Hello, World!\n")
+    if err != nil {
+      fmt.Println("Failed to create file!", err)
+      return
+    }
+    line, err = ReadFile(filename)
+    if err != nil {
+      fmt.Println("Failed to read file!", err)
+      return
+    }
+  }
+  fmt.Println("File contents: ", line)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+File contents:  Hello, World!
+```
+
+이처럼 함수를 생성하고 제공할 때, 에러를 반환하도록 하여 사용하는 쪽에서 에러를 처리하도록 하는 것이 좋습니다.
+
+## 사용자 에러 반환
+
+Golang에서는 다음과 같이 사용자 에러(Custom error)를 만들 수 있습니다.
+
+```go
+fmt.Errorf(formatter string, ...interface {})
+```
+
+또는, 다음과 같이  `errors`  패키지를 사용하여 생성할 수 있습니다.
+
+```go
+import "errors"
+
+errors.New(text string) error
+```
+
+이를 확인하기 위해, 다음과 같이  `main.go`  파일을 수정합니다.
+
+```go
+package main
+
+import (
+  "errors"
+  "fmt"
+)
+
+func errorTest(i int) (int, error) {
+  switch i {
+  case 0:
+    return i, fmt.Errorf("Error: %d", i)
+  case 1:
+    return i, errors.New("Error")
+  default:
+    return i, nil
+  }
+}
+
+func main() {
+  i, err := errorTest(0)
+  if err != nil {
+    fmt.Println(err)
+  }
+
+  i, err = errorTest(1)
+  if err != nil {
+    fmt.Println(err)
+  }
+
+  i, err = errorTest(2)
+  if err != nil {
+    fmt.Println(err)
+  }
+  fmt.Println(i)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Error: 0
+Error
+2
+```
+
+보통, 에러 메시지에 특정 변수값을 출력하고 싶을 때에는  `fmt.Errorf`를 사용하고, 단순히 문자열 에러 메시지를 출력할 때는  `errors.New`를 사용합니다.
+
+## 에러 타입
+
+에러 메시지에 여러 정보들을 추가하고 출력하고 싶을 때, 에러 타입을 사용할 수 있습니다.
+
+```go
+type error interface {
+  Error() string
+}
+```
+
+Golang에서는  `Error`  메서드를 구현하는 객체를 에러 타입으로 사용할 수 있습니다. 예를 들어 다음과 같이  `PasswordError`  타입을 정의하고,  `Error`  메소드를 구현하면, 에러 타입으로 사용할 수 있습니다.
+
+```go
+type PasswordError struct {
+  RequiredLen int
+  Len         int
+}
+
+func (e PasswordError) Error() string {
+  return "Password is too short."
+}
+```
+
+이를 확인하기 위해,  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+type PasswordError struct {
+  RequiredLen int
+  Len         int
+}
+
+func (e PasswordError) Error() string {
+  return "Password is too short."
+}
+
+func RegisterAccount(name, password string) error {
+  if len(password) < 8 {
+    return PasswordError{RequiredLen: 8, Len: len(password)}
+  }
+  // register account logic
+  // ...
+  return nil
+}
+
+func main() {
+  err := RegisterAccount("john", "12345")
+  if err != nil {
+    if errInfo, ok := err.(PasswordError); ok {
+      fmt.Printf("%v (Required: %d Len: %d)\n", errInfo, errInfo.RequiredLen, errInfo.Len)
+    }
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Password is too short. (Required: 8 Len: 5)
+```
+
+이처럼 에러에 여러 부가 정보를 추가할 때, 에러 타입을 사용하게 됩니다.
+
+## 에러 랩핑
+
+Golang에서는 에러를 랩핑(Wrapping)하여 여러 에러들을 추가하여 하나의 에러를 만들 수 있습니다. 에러 랩핑에는 다음과 같이  `fmt.Errorf`을 사용합니다.
+
+```go
+fmt.Errorf("%w", err)
+```
+
+또한,  `errors`  패키지의  `Is`와  `As`를 사용하여, 랩핑된 에러인지 확인하거나 변환하여 사용할 수 있습니다.
+
+```go
+errors.Is(err, StrError)
+errors.As(err, &strError)
+```
+
+이를 확인하기 위해,  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "errors"
+  "fmt"
+)
+
+type StrError struct {
+  Msg string
+}
+
+func (e *StrError) Error() string {
+  return fmt.Sprintf("Message: %s", e.Msg)
+}
+
+func msgError(msg string) error {
+  return &StrError{Msg: msg}
+}
+
+func WrapError(msg string) error {
+  err := msgError(msg)
+  return fmt.Errorf("(Wrapping) %w", err)
+}
+
+func main() {
+  err1 := msgError("Error")
+  fmt.Println("[Normal Error]", err1)
+
+  err2 := WrapError("Test Error Message")
+  fmt.Println("[Wrapping Error]", err2)
+
+  var strErr *StrError
+  if errors.As(err2, &strErr) {
+    fmt.Printf("[Failed] %s\n", strErr)
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+[Normal Error] Message: Error
+[Wrapping Error] (Wrapping) Message: Test Error Message
+[Failed] Message: Test Error Message
+```
+
+이와 같이 Golang에서는 에러를 랩핑하여 하나의 에러로 처리할 수 있습니다.
+
+## 패닉
+
+Golang에서는 패닉(Panic)을 사용하여 에러와 함께 프로그램을 종료시킬 수 있습니다. 패닉은 프로그램을 빠르게 종료시켜, 프로그래머가 오류를 인식하게 하고 오류를 해결하도록 유도하도록 합니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "fmt"
+
+func divide(a, b int) {
+  if b == 0 {
+    panic("divide by zero")
+  }
+  fmt.Printf("%d / %d = %d\n", a, b, a/b)
+}
+
+func main() {
+  divide(4, 2)
+  divide(4, 0)
+  divide(4, 3)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+4 / 2 = 2
+panic: divide by zero
+
+goroutine 1 [running]:
+main.divide(0x4, 0x2)
+        /study-golang/error-handling/5.panic/main.go:7 +0x10b
+main.main()
+        /study-golang/error-handling/5.panic/main.go:14 +0x31
+exit status 2
+```
+
+두번째  `divide`  함수 호출에서 패닉이 발생하여 프로그램이 종료되었고, 그로 인해 세번째  `divide`  함수가 호출되지 않았음을 알 수 있습니다.
+
+패닉은 다음과 같이 어떠한 타입도 전달 받을 수 있습니다.
+
+```go
+func panic(v interface{})
+```
+
+따라서 다음과 같이 패닉을 사용할 수 있습니다.
+
+```go
+panic(42)
+panic("error")
+panic(fmt.Errorf("error num: %d", 42))
+panic(SomeType{SomeData})
+```
+
+## 패닉 전파 그리고 복구
+
+프로그램을 개발할 때에는 문제를 빠르게 파악하고 해결하는 것이 중요합니다. 따라서 패닉을 사용하여 문제가 발생하였을 때, 프로그램을 종료시키고 빠르게 문제를 해결할 수 있도록 하는 것이 좋습니다.
+
+하지만, 개발한 프로그램을 외부에 공개하고 서비스할 때에는 프로그램을 최대한 종료되지 않게 만들어야 합니다. 조금만 사용하면 프로그램이 강제 종료된다면 어느 누구도 그 프로그램을 사용하려 하지 않을 것입니다.
+
+Golang은 이를 위해 패닉을 복구하는  `recover`를 제공하고 있습니다.
+
+```go
+func recover() interface {}
+```
+
+`recover`는  `defer`와 함께 사용하여 패닉을 복구할 수 있습니다. 그럼 이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+func firstCall() {
+  fmt.Println("(2) firstCall function start")
+  defer func() {
+    if r := recover(); r != nil {
+      fmt.Println("Recovered in firstCall", r)
+    }
+  }()
+
+  group()
+  fmt.Println("(2) firstCall function end")
+}
+
+func group() {
+  fmt.Println("(3) group function start")
+  fmt.Printf("4/2 = %d\n", divide(4, 2))
+  fmt.Printf("4/0 = %d\n", divide(4, 0))
+  fmt.Println("(3) group function end")
+}
+
+func divide(a, b int) int {
+  if b == 0 {
+    panic("divide by zero")
+  }
+  return a / b
+}
+
+func main() {
+  fmt.Println("(1) main function start")
+  firstCall()
+  fmt.Println("(1) main function end")
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+(1) main function start
+(2) firstCall function start
+(3) group function start
+4/2 = 2
+Recovered in firstCall divide by zero
+(1) main function end
+```
+
+패닉을 복구하기 위해  `recover`를 사용한 함수는  `firstCall`임을 알 수 있습니다. 패닉이 발생하는 곳은  `divide`  함수입니다. 이처럼 패닉은  `divide() > group() > firstCall() > main()`  순으로 전파됩니다. 여기서는  `firstCall`함수에서 복구를 하였으므로,  `main`함수까지는 전파되지 않고  `firstCall`에서 복구되는 것을 확인할 수 있습니다.
+
+프로그램을 개발할 때에는 복구를 사용하지 않는 것을 추천드립니다. 복구를 사용하게 된다면 프로그램이 죽지 않기 때문에 문제의 원인을 찾거나 문제를 인식하는 것이 늦어질 수 있습니다.
+
+배포된 상태에서는 복구를 사용할 수 밖에 없습니다. 그럼 위와 같이 문제의 원인을 찾거나 인식하는 것이 늦어질 수 있으므로, 패닉이 발생하면 이메일로 알리거나 디비에 저장하여 이를 빨리 인식할 수 있도록 하는 것이 좋습니다.
+
+## Golang은 SHE를 지원하지 않는다
+
+Golang은 구조화된 에러 처리(SHE, Structured Error Handling)를 지원하지 않습니다.
+
+```go
+try {
+  ...
+} catch (Exception ex) {
+  ...
+} finally {
+  ...
+}
+```
+
+다른 프로그래밍 언어에서는  `try-catch`  문을 사용하여 에러를 처리하지만, Golang은 이를 지원하지 않습니다. SHE는 다음과 같은 문제점을 가지고 있습니다.
+
+1.  성능 문제: 정상일 때에도 이 구조를 가지기 위해 성능이 저하된다.
+2.  에러를 인지하기 어렵다. 이로 인해 에러 처리를 하지 않거나 방치하는 경우가 발생한다.
+
+## 완료
+
+이것으로 Golang에서 에러를 처리하는 방법에 대해서 알아보았습니다. 프로그램을 지속하면서 에러를 발생시키는 방법과 패닉을 이용해 프로그램을 종료시키는 방법, 그리고 패닉을 복구하는 방법에 대해서 알아보았습니다.
+
+에러는 프로그래밍에서 굉장히 중요한 역할을 합니다. 그러므로 에러를 반환하는 함수가 있다면, 빈칸지시자(`_`)로 무시하지 말고 꼭 처리를 하는 것이 좋습니다. 패닉 역시 프로그램의 종료를 막기 위해  `recover`를 사용하는 것은 좋지만, 이 문제를 인식하고 처리할 수 있는 장치(이메일, 디비 등)를 함께 사용해야 합니다.
+
+
+# [Golang 고루틴](https://dev-yakuza.posstree.com/ko/golang/goroutine/)
+
+2021-12-08
+
+## Golang에서 쓰레드를 사용하는 방법인 고루틴(Goroutine)에 대해서 알아봅시다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서 고루틴(Goroutine)을 사용하는 방법에 대해서 알아보도록 하겠습니다. 고루틴을 이해하기 위해 쓰레드에 대해서 간단하게 살펴볼 예정입니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/goroutine](https://github.com/dev-yakuza/study-golang/tree/main/goroutine)
+
+## 쓰레드
+
+쓰레드(Thread)는 프로그램내에서 실행 흐름을 의미합니다. 프로그램은 일반적으로는 하나의 실행 흐름(쓰레드)을 가지지만, 경우에 따라 하나 이상의 쓰레드를 갖는 경우도 있습니다. 이를 멀티 쓰레드라고 합니다.
+
+CPU는 단순한 계산기입니다. 따라서 주어진 값을 계산만 할 뿐, 이 값이 어디서 왔고, 어디로 가는지는 신경쓰지 않습니다. 멀티 쓰레드인 경우, OS에서 쓰레드를 관리하고, 쓰레드의 개수가 CPU보다 많은 경우, 쓰레드를 교체해가면서 CPU를 사용하도록 합니다. 이를 컨텍스트 스위칭(Context Switching)이라고 합니다.
+
+컨텍스트 스위칭은 하나의 CPU가 여러 쓰레드를 다룰 때, 쓰레드를 전환시키며 CPU를 사용하도록 하는 것을 의미합니다. 이렇게 컨텍스트 스위칭이 발생하면 전환 비용이 발생하므로 성능이 저하되는 문제가 발생할 수 있습니다.
+
+반대로, CPU의 개수가 쓰레드의 개수와 동일하다면, 컨텍스트 스위칭이 발생하지 않으므로 성능에 아무 문제가 발생하지 않습니다.
+
+## 고루틴
+
+고루틴(Goroutine)은 Golang이 사용하는 경량 쓰레드를 의미합니다. Golang에서 실행되는 모든 프로그램은 고루틴에서 실행됩니다. 즉, 메인 함수도 고루틴에서 실행이 됩니다.
+
+다시 말하면, Golang의 모든 프로그램은 반드시 하나 이상의 고루틴을 가지고 있음을 의미합니다.
+
+Golang에서는 다음과 같이  `go`  키워드를 사용하여 함수를 호출하여 고루틴을 실행할 수 있습니다.
+
+```bash
+go FUNCTION()
+```
+
+이를 확인하기 위해  `main.go`  파일을 만들고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "time"
+)
+
+func PrintAlphabet() {
+  alphabet := "abcdefghijklmnopqrstuvwxyz"
+
+  for _, v := range alphabet {
+    time.Sleep(200 * time.Millisecond)
+    fmt.Printf("%c", v)
+  }
+}
+
+func PrintNumbers() {
+  for i := 1; i <= 10; i++ {
+    time.Sleep(200 * time.Millisecond)
+    fmt.Printf("%d", i)
+  }
+}
+
+func main() {
+  PrintAlphabet()
+  fmt.Println("")
+
+  PrintNumbers()
+  fmt.Println("")
+
+  go PrintAlphabet()
+  go PrintNumbers()
+  time.Sleep(3 * time.Second)
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+abcdefghijklmnopqrstuvwxyz
+12345678910
+a12bc34d5ef67g8hi910jklmn
+```
+
+알파벳을  `200`  밀리세컨드로 출력하는  `PrintAlphabet`  함수와  `1~10`까지의 숫자를 역시  `200`  밀리세컨드로 출력하는  `PrintNumbers`함수를, 일반적으로 호출한 경우, 함수의 동작이 완료된 후, 다음 함수가 실행되고 있음을 알 수 있습니다.
+
+여기서  `go`  키워드를 사용하여 호출한 경우, 순서와 상관없이 함수가 실행되고 있음을 알 수 있습니다.
+
+마지막으로  `main`  함수에서  `3`초간 대기하는 코드를 추가하였습니다. 해당 코드는 main 고루틴을 3초간 유지하기 위함입니다. 만약, 해당 코드가 없다면  `main`  함수는  `PrintAlphabet`와  `PrintNumbers`을 고루틴으로 실행하고 실행 결과를 기다리지 않으므로 메인 고루틴이 종료되게 됩니다. 그럼 메인 고루틴에서 실행한 고루틴(서브 고루틴)도 함께 종료되므로 어떠한 결과도 출력되지 않습니다.
+
+## 서브 고루틴 대기
+
+앞에서 살펴봤듯이 메인 고루틴이 종료되면 메인 고루틴에서 실행한 서브 고루틴도 모두 함께 종료되게 됩니다. 서브 고루틴이 어느정도 시간이 걸릴지 예상할 수 있다면 앞에서 사용한 방식으로 메인 고루틴을 유지할 수 있지만, 보통은 서브 고루틴이 언제 끝날지 알 수 없습니다.
+
+Golang에서는 서브 고루틴이 종료될 때까지 메인 고루틴을 유지할 수 있도록  `WaitGroup`을 제공합니다.
+
+```go
+var wg sync.WaitGroup
+
+wg.Add(3)
+
+wg.Done()
+wg.Wait()
+```
+
+`WaitGroup`의  `Add`를 통해 메인 고루틴이 대기할 서브 고루틴의 개수를 정의합니다. 이후, 서브 고루틴에서는  `Done`  함수를 통해 고루틴의 종료를 알리고, 메인 고루틴에서는  `Wait`  함수를 통해 모든 서브 고루틴이 종료될 때까지 대기하도록 할 수 있습니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "sync"
+  "time"
+)
+
+func PrintAlphabet() {
+  alphabet := "abcdefghijklmnopqrstuvwxyz"
+
+  for _, v := range alphabet {
+    time.Sleep(200 * time.Millisecond)
+    fmt.Printf("%c", v)
+  }
+
+  wg.Done()
+}
+
+func PrintNumbers() {
+  for i := 1; i <= 10; i++ {
+    time.Sleep(200 * time.Millisecond)
+    fmt.Printf("%d", i)
+  }
+
+  wg.Done()
+}
+
+var wg sync.WaitGroup
+
+func main() {
+  wg.Add(2)
+
+  go PrintAlphabet()
+  go PrintNumbers()
+
+  wg.Wait()
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+a1b23cd4e56fg78hi910jklmnopqrstuvwxyz%
+```
+
+이전과는 다르게 메인 고루틴이 모든 서브 고루틴이 끝나고 종료되는 것을 확인할 수 있습니다.
+
+## 고루틴 동작 원리
+
+고루틴은 OS 쓰레드를 이용하는 경량 쓰레드(lightweight thread)입니다. 고루틴은 쓰레드가 아니고 쓰레드를 이용합니다.
+
+고루틴은 OS 쓰레드별로 실행이 되고, OS 쓰레드보다 고루틴이 많이 실행되는 경우, 고루틴은 다른 고루틴이 끝날 때까지 대기하게 됩니다. OS 쓰레드를 사용하고 있는 고루틴이 완료되면, 대기중에 있던 고루틴이 실행되게 됩니다.
+
+또는 고루틴이 시스템콜(파일 읽기, 쓰기 / 네트워크 읽기, 쓰기)를 수행하게 되면, OS가 응답하기 전까지 고루틴이 할 일이 없으므로, 해당 고루틴은 대기열에 들어가고 대기열에 있던 다른 고루틴이 실행되게 됩니다.
+
+고루틴을 아무리 많이 생성해도 OS 쓰레드를 이용하기 때문에 OS 레벨의 컨텍스트 스위칭 비용이 발생하지 않습니다.
+
+## 동시성 프로그래밍의 주의점
+
+고루틴과 같이 쓰레드를 이용하는 프로그래밍을 동시성 프로그래밍(Concurrent programming)이라고 합니다. 이때, 동일한 메모리 자원을 여러 고루틴(쓰레드)에서 접근하게 되면 동시성 문제가 발생하게 됩니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "sync"
+  "time"
+)
+
+type Account struct {
+  Balance int
+}
+
+func DepositAndWithdraw(account *Account) {
+  fmt.Println("Balance:", account.Balance)
+  if account.Balance < 0 {
+    panic(fmt.Sprintf("Balance should not be negative value: %d", account.Balance))
+  }
+  account.Balance += 1000
+  time.Sleep(time.Millisecond)
+  account.Balance -= 1000
+}
+
+func main() {
+  var wg sync.WaitGroup
+
+  account := &Account{Balance: 10}
+  wg.Add(10)
+  for i := 0; i < 10; i++ {
+    go func() {
+      for {
+        DepositAndWithdraw(account)
+      }
+    }()
+  }
+  wg.Wait()
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Balance: 6010
+Balance: 10
+Balance: 7010
+Balance: 6010
+Balance: 5010
+panic: Balance should not be negative value: -1990
+```
+
+고루틴을 사용하기 때문에 위와 같은 결과가 아닐 수 있습니다.  `DepositAndWithdraw`  함수는  `Account`  변수의 값을  `1000`  증가시키고 감소 시킵니다. 예제는 이 함수를 무한히 반복하는 고루틴을 10개 가지고 있습니다.
+
+만약 함수가 고루틴을 사용하지 않고 순차적으로 실행된다면, 음수값은 절대로 나올 수 없으므로,  `panic`이 발생하지 않습니다. 하지만, 여러 고루틴이 동일한 메모리 주소의 값을 변경하고 있어 위와 같이 동시성 문제로  `panic`이 발생하는 것을 알 수 있습니다. (패닉이 발생하지 않는다면, 프로그램을 종료시키고 다시 실행해보세요.)
+
+### 뮤텍스
+
+이와 같은 동시성 문제를 해결하기 위해 뮤텍스(Mutex, Mutual Exclusion)을 사용하여 메모리 자원을 하나의 고루틴에서만 접근하도록  `Lock`을 걸 수 있습니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "sync"
+  "time"
+)
+
+var mutex sync.Mutex
+
+type Account struct {
+  Balance int
+}
+
+func DepositAndWithdraw(account *Account) {
+  mutex.Lock()
+  defer mutex.Unlock()
+
+  fmt.Println("Balance:", account.Balance)
+  if account.Balance < 0 {
+    panic(fmt.Sprintf("Balance should not be negative value: %d", account.Balance))
+  }
+  account.Balance += 1000
+  time.Sleep(time.Millisecond)
+  account.Balance -= 1000
+}
+
+func main() {
+  var wg sync.WaitGroup
+
+  account := &Account{Balance: 10}
+  wg.Add(10)
+  for i := 0; i < 10; i++ {
+    go func() {
+      for {
+        DepositAndWithdraw(account)
+      }
+    }()
+  }
+  wg.Wait()
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Balance: 10
+Balance: 10
+Balance: 10
+Balance: 10
+Balance: 10
+Balance: 10
+```
+
+뮤텍스는 간단하게 동시성 문제를 해결할 수 있지만, 다음과 같은 문제점을 가지고 있습니다.
+
+1.  동시성 프로그래밍으로 인한 성능 향상을 얻을 수 없다. 심지어 과도한 락킹으로 성능이 하락할 수 있다.
+2.  고루틴을 완전히 멈추게 만드는 데드락(Deadlock) 문제가 발생한다.
+
+따라서 뮤텍스를 사용할 경우는 주의를 해야 합니다.
+
+### 데드락
+
+동시성 프로그래밍의 문제점중 하나인 데드락을 확인하기 위해  `식사하는 철학자들`(Dining Philosophers Problem) 문제를 살펴보도록 하겠습니다.
+
+식사하는 철학자들에 관한 자세한 내용은  `Wiki`를 참고하시기 바랍니다.
+
+-   Wiki:  [Dining Philosophers Problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "math/rand"
+  "sync"
+  "time"
+)
+
+var wg sync.WaitGroup
+
+func diningProblem(name string, first, second *sync.Mutex, firstName, secondName string) {
+  for i := 0; i < 100; i++ {
+    fmt.Printf("(%s) Try to eat\n", name)
+    first.Lock()
+    fmt.Printf("(%s) Grab %s\n", name, firstName)
+    second.Lock()
+    fmt.Printf("(%s) Grab %s\n", name, secondName)
+    fmt.Printf("(%s) Eating\n", name)
+    time.Sleep(time.Duration(rand.Int()) * time.Millisecond)
+    second.Unlock()
+    first.Unlock()
+  }
+  wg.Done()
+}
+
+func main() {
+  rand.Seed(time.Now().UnixNano())
+
+  wg.Add(2)
+  fork := &sync.Mutex{}
+  spoon := &sync.Mutex{}
+
+  go diningProblem("A", fork, spoon, "Fork", "Spoon")
+  go diningProblem("B", spoon, fork, "Spoon", "Fork")
+
+  wg.Wait()
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+(B) Try to eat
+(A) Try to eat
+(A) Grab Fork
+(B) Grab Spoon
+fatal error: all goroutines are asleep - deadlock!
+```
+
+뮤텍스는 간단하게 동시성 문제를 해결할 수 있지만, 데드락과 같은 문제로 프로그램이 의도하지 않게 종료될 수 있습니다.
+
+## 완료
+
+이것으로 Golang에서 쓰레드를 사용하기 위한 고루틴에 대해서 알아보았습니다. 또한 서브 고루틴을 기다리는 방법과 뮤텍스를 사용하여 동시성 문제를 해결하는 방법에 대해서도 알아보았습니다.
+
+
+# [Golang 채널](https://dev-yakuza.posstree.com/ko/golang/channel/)
+
+2021-12-10 
+
+## Golang에서 채널(Channel)을 사용하여 고루틴간에 메시지를 주고 받는 방법에 대해서 알아보겠습니다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `채널`(Channel)을 사용하여 고루틴간에 메시지를 주고 받는 방법에 대해서 알아보겠습니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/channel](https://github.com/dev-yakuza/study-golang/tree/main/channel)
+
+고루틴한 자세한 정보는 이전 블로그 포스트를 참고하시기 바랍니다.
+
+-   [[Golang] 고루틴](https://dev-yakuza.posstree.com/ko/golang/goroutine/)
+
+## 채널
+
+채널은 고루틴간의 메시지를 전달할 수 있는 메시지 큐(Thread-safe queue)입니다.
+
+Golang에서는 다음과 같이 make()로 채널 인스턴스 생성할 수 있습니다.
+```
+// var VARIABLE_NAME chan MESSAGE_TYPE = make(chan MESSAGE_TYPE)
+var messages chan string = make(chan string)
+```
+
+채널을 생성하였다면  `<-`  연산자를 통해 채널에 데이터를 전달할 수 있습니다.
+```
+// CHANNEL <- DATA
+messages <- "This is a message"
+```
+
+반대로  `<-`  연산자를 통해 채널에서 데이터를 가져올 수 있습니다.
+```
+// var VARIABLE <- CHANNEL
+var msg string = <- messages
+```
+
+이를 확인하기 위해,  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "sync"
+  "time"
+)
+
+func main() {
+  var wg sync.WaitGroup
+  ch := make(chan int)
+
+  wg.Add(1)
+  go square(&wg, ch)
+  time.Sleep(time.Second)
+
+  ch <- 3
+  wg.Wait()
+}
+
+func square(wg *sync.WaitGroup, ch chan int) {
+  fmt.Println("Square start")
+  n := <-ch
+  fmt.Println("Square:", n*n)
+  wg.Done()
+  fmt.Println("Square end")
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Square start
+Square: 9
+Square end
+```
+
+소스 코드를 좀 더 자세히 살펴보면, 우선  `WaitGroup`을 사용하여 한 개의 서브 고루틴이 종료될 때까지 메인 고루틴을 대기하도록 합니다.
+
+```go
+func main() {
+  var wg sync.WaitGroup
+  ...
+  wg.Add(1)
+  ...
+  wg.Wait()
+}
+```
+
+그리고,  `make`  함수를 사용하여 채널을 생성하고,  `go`  키워드를 사용하여  `square`  함수를 서브 고루틴으로 실행합니다. 이때,  `WaitGroup`과 채널을 함께 전달합니다.
+
+```go
+func main() {
+  ...
+  ch := make(chan int)
+  ...
+  go square(&wg, ch)
+  ...
+}
+```
+
+`square`  함수를 보면 채널에서 값을 읽어와 계산하여 화면에 표시한 후,  `WaitGroup`의  `Done`을 이용해, 고루틴이 종료되었음을 알리고 있습니다.
+
+```go
+func square(wg *sync.WaitGroup, ch chan int) {
+  ...
+  n := <-ch
+  ...
+  wg.Done()
+  ...
+}
+```
+
+`n := <-ch`  코드를 만나면, 채널에서 데이터를 가져오게 됩니다. 하지만 현재 채널에 데이터가 없기 때문에, 데이터를 가져올 수 없어 데이터를 가져올 수 있을 때까지 고루틴은 대기하게 됩니다.
+
+이때, 메인 고루틴에서  `ch <- 3`으로 데이터를 보내면, 서브 고루틴은 채널에서 데이터를 가져올 수 있으므로 서브 고루틴이 수행되고,  `wg.Done()`이 실행되므로 메인 고루틴은 더이상 서브 고루틴을 대기하지 않고 프로그램이 종료되게 됩니다.
+
+## 채널 크기
+
+채널의 기본 크기는  `0`입니다. 따라서 다음과 같이 프로그램을 작성하면, 고루틴은 채널에 있는 데이터를 가져갈 때까지 계속 대기하게 됩니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "time"
+)
+
+func main() {
+  ch := make(chan int)
+
+  go square()
+  ch <- 9
+  fmt.Println("Never Print")
+}
+
+func square() {
+  for {
+    time.Sleep(2 * time.Second)
+    fmt.Println("sleep")
+  }
+}
+```
+
+채널의 사이즈가 0이기 때문에, 고루틴은 채널에 데이터를 추가할 수 없습니다. 데이터를 가져가는 코드가 있다면, 바로 전달할 수 있기 때문에 문제가 없지만, 데이터를 가져가는 코드를 추가하지 않으면, 고루틴은 데이터를 추가할 수 없기 때문에 계속 대기하게 됩니다.
+
+이제 다음과 같이 채널의 사이즈를 지정하여 채널을 생성해 봅시다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "time"
+)
+
+func main() {
+  // ch := make(chan int)
+  ch := make(chan int, 1)
+
+  go square()
+  ch <- 9
+  fmt.Println("Never Print")
+}
+
+func square() {
+  for {
+    time.Sleep(2 * time.Second)
+    fmt.Println("sleep")
+  }
+}
+```
+
+채널에 크기가 지정되면 해당 크기만큼 데이터를 추가할 수 있습니다. 따라서 고루틴은 채널에 데이터를 가져가는 코드가 없어도, 채널에 데이터를 저장할 수 있으므로 채널에 데이터를 저장한 후, 계속 진행할 수 있게 됩니다.
+
+## 채널에서 데이터 대기
+
+다음과 같이 채널을 사용하면, 데이터가 추가될 때까지 고루틴을 대기하게 만들 수 있습니다.
+
+```go
+for n := range ch {
+  ...
+}
+```
+
+이를 확인하기 위해서  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "sync"
+  "time"
+)
+
+func main() {
+  var wg sync.WaitGroup
+  ch := make(chan int)
+
+  wg.Add(1)
+  go square(&wg, ch)
+
+  for i := 0; i < 10; i++ {
+    ch <- i * 2
+  }
+
+  wg.Wait()
+}
+
+func square(wg *sync.WaitGroup, ch chan int) {
+  for n := range ch {
+    fmt.Println("Square:", n*n)
+    time.Sleep(time.Second)
+  }
+  fmt.Println("Done")
+  wg.Done()
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Square: 100
+Square: 144
+Square: 196
+Square: 256
+Square: 324
+fatal error: all goroutines are asleep - deadlock!
+```
+
+메인 함수에서는 채널에 데이터를 추가하게 됩니다. 하지만, 채널 사이즈가 0이기 때문에, 채널에서 데이터를 읽는 코드가 없다면 계속 대기하게 될 것입니다. 이때 서브 고루틴으로 실행된  `square`  함수에서 채널에 데이터가 존재하는 경우 데이터를 읽어오게 됩니다.
+
+그러니깐, 메인 함수에서 데이터를 연속적으로 10번 추가하고 싶은데, 채널 사이즈가 0이므로 기다리게 됩니다. 이때,  `square`  함수에서 데이터가 있는 경우, 데이터를 읽어오는 코드가 있어, 메인 함수에서 데이터를 한번 쓰고,  `square`  함수에서 데이터를 가져와 출력할 수 있게 됩니다. 그럼 다시 메인 함수는 채널에 데이터를 추가할 수 있게 되고,  `square`함수는 이를 다시 읽어오게 됩니다.
+
+이것이 반복되며 10번이 반복되면, 메인 함수는 더이상 채널에 데이터를 추가하지 않습니다. 하지만  `square`  함수는 채널에 데이터를 계속 읽어오도록 대기하는 코드가 존재하기 때문에, 서브 고루틴이 종료되지 않고, 어떠한 동작도 수행하지 않기 때문에  `데드락(Deadlock)`이 발생한 것을 확인할 수 있습니다.
+
+## 채널 닫기
+
+이처럼 고루틴에서 채널에 데이터를 계속 기다리는 코드를 사용하면, 고루틴이 무한 대기하는 좀비 고루틴 또는 고루틴 릭(Leak)이 발생하게 됩니다.
+
+이를 방지하기 위해서는 다 사용한 채널은  `close`  함수를 통해 채널을 닫아주어야 합니다.
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "sync"
+  "time"
+)
+
+func main() {
+  var wg sync.WaitGroup
+  ch := make(chan int)
+
+  wg.Add(1)
+  go square(&wg, ch)
+
+  for i := 0; i < 10; i++ {
+    ch <- i * 2
+  }
+  close(ch)
+
+  wg.Wait()
+}
+
+func square(wg *sync.WaitGroup, ch chan int) {
+  for n := range ch {
+    fmt.Println("Square:", n*n)
+    time.Sleep(time.Second)
+  }
+  fmt.Println("Done")
+  wg.Done()
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Square: 100
+Square: 144
+Square: 196
+Square: 256
+Square: 324
+Done
+```
+
+이전과 다르게 데드락이 발생하지 않는 것을 확인할 수 있습니다. 메인 함수에서 채널에 메시지를 모두 추가한 후  `close(ch)`를 통해 채널을 닫습니다. 그럼  `square`  함수는 더이상 채널에서 데이터를 가져오기 위해 대기할 필요가 없으므로 서브 고루틴이 정상 종료되게 됩니다. 따라서 이전과는 다르게 데드락이 발생하지 않습니다.
+
+## select 문
+
+다음과 같이  `select`문을 사용하면 여러 채널에 데이터를 동시에 기다리며 데이터를 가져올 수 있습니다.
+
+```go
+select {
+  case n := <- ch1:
+    ...
+  case n := <- ch2:
+    ...
+  case ...
+}
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "sync"
+  "time"
+)
+
+func main() {
+  var wg sync.WaitGroup
+  ch := make(chan int)
+
+  wg.Add(1)
+  go square(&wg, ch)
+
+  for i := 0; i < 10; i++ {
+    ch <- i * 2
+  }
+  close(ch)
+
+  wg.Wait()
+}
+
+func square(wg *sync.WaitGroup, ch chan int) {
+  tick := time.Tick(time.Second)
+  terminate := time.After(10 * time.Second)
+
+  for {
+    select {
+    case <-tick:
+      fmt.Println("Tick")
+    case <-terminate:
+      fmt.Println("Terminate")
+      wg.Done()
+      return
+    case n := <-ch:
+      fmt.Println("Square:", n*n)
+      time.Sleep(time.Second)
+    }
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Square: 0
+Square: 4
+Square: 16
+Tick
+Square: 36
+Square: 64
+Tick
+Square: 100
+Tick
+Square: 144
+Tick
+Square: 196
+Tick
+Square: 256
+Square: 324
+Square: 0
+Terminate
+```
+
+`time`  패키지의  `Tick()`은 일정 간격으로 신호를 주는 채널을 반환합니다. 또한  `After()`는 일정 시간 대기후 한번만 신호를 주는 채널을 반환하게 됩니다. 여기서  `select`  문을 통해  `square`  함수가 여러 채널에 데이터를 동시에 기다리고 동작하도록 구현할 수 있었습니다.
+
+## 단방향 채널
+
+Golang에서는 다음과 같이 단방향 채널을 생성할 수 있습니다.
+```
+// 데이터를 넣을 수만 있는 채널
+chan <- string
+// 데이터를 빼낼 수만 있는 채널
+<- chan string
+```
+
+이를 확인하기 위해 다음과 같이  `main.go`  파일을 수정합니다.
+
+```go
+package main
+
+import (
+  "fmt"
+  "sync"
+  "time"
+)
+
+func main() {
+  var wg sync.WaitGroup
+  ch := make(chan int)
+
+  wg.Add(1)
+  go square(&wg, ch)
+
+  for i := 0; i < 10; i++ {
+    ch <- i * 2
+  }
+  close(ch)
+
+  wg.Wait()
+}
+
+func square(wg *sync.WaitGroup, ch <-chan int) {
+  for n := range ch {
+    fmt.Println("Square:", n*n)
+    time.Sleep(time.Second)
+  }
+  fmt.Println("Done")
+  wg.Done()
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Square: 0
+Square: 4
+Square: 16
+Square: 36
+Square: 64
+Square: 100
+Square: 144
+Square: 196
+Square: 256
+Square: 324
+Done
+```
+
+단방향 채널은 채널의 역할을 명확하게 하기 위해서 사용합니다. 예제와 같이  `square`  함수에서 채널은 단순히 데이터를 읽어오기 위해 사용합니다. 이때 단방향 채널을 사용하여 명확하게 이를 지정할 수 있습니다. 그럼 실수로  `square`  함수에서 채널에 데이터를 추가하는 코드를 작성하더라도 컴파일 에러가 발생하기 때문에 안정하게 채널을 사용할 수 있게 됩니다.
+
+## 완료
+
+이번 블로그 포스트에서는 Golang에서 채널을 사용하여 고루틴간에 데이터를 주고 받는 방법에 대해서 알아보았습니다. 또한 채널의 크기 조절, 데이터를 계속 기다리는 채널 등 채널을 활용하는 다양한 방법에 대해서도 알아보았습니다.
+
+
+# [Golang 컨텍스트](https://dev-yakuza.posstree.com/ko/golang/context/)
+
+2021-12-13 
+
+## Golang에서 컨텍스트(Context)란 무엇인지 살펴보고 컨텍스트를 정의하고 사용하는 방법에 대해서 알아보도록 하겠습니다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang에서  `컨텍스트`(Context)를 사용하여 작업 흐름(고루틴)을 제어하는 방법에 대해서 알아보도록 하겠습니다. 이 블로그 포스트에서 소개하는 코드는 다음 링크를 통해 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/context](https://github.com/dev-yakuza/study-golang/tree/main/context)
+
+고루틴과 채널에 관한 자세한 정보는 이전 블로그 포스트를 참고하시기 바랍니다.
+
+-   [[Golang] 고루틴](https://dev-yakuza.posstree.com/ko/golang/goroutine/)
+-   [[Golang] 채널](https://dev-yakuza.posstree.com/ko/golang/channel/)
+
+## 컨텍스트
+
+Golang에서 컨텍스트(Context)는 작업 명세서와 같은 역할로, 작업 가능한 시간, 작업 취소 등 작업의 흐름을 제어하는데 사용됩니다.
+
+Golang에서는 다음과 같이  `context`  패키지를 사용하여 컨텍스트를 정의할 수 있습니다.
+
+```go
+import "context"
+
+// Cancel
+ctx, cancel := context.WithCancel(context.Background())
+// Deadline
+ctx, cancel := context.WithDeadline(context.Background(), TIME)
+// Timeout
+ctx, cancel := context.WithTimeout(context.Background(), DURATION)
+```
+
+## WithCancel
+
+컨텍스트가  `cancel`  혹은  `timeout`으로 종료되면 컨텍스트의  `Done`이 호출됩니다. 여기서는  `cancel`을 사용하여 컨텍스트를 종료 시키는 방법에 대해서 알아보도록 하겠습니다.
+
+```go
+ctx, cancel := context.WithCancel(context.Background())
+```
+
+이를 확인하기 위해  `main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "context"
+  "fmt"
+  "sync"
+  "time"
+)
+
+var wg sync.WaitGroup
+
+func main() {
+  wg.Add(1)
+  ctx, cancel := context.WithCancel(context.Background())
+
+  go PrintTick(ctx)
+
+  time.Sleep(5 * time.Second)
+  cancel()
+
+  wg.Wait()
+}
+
+func PrintTick(ctx context.Context) {
+  tick := time.Tick(time.Second)
+  for {
+    select {
+    case <-ctx.Done():
+      fmt.Println("Done:", ctx.Err())
+      wg.Done()
+      return
+    case <-tick:
+      fmt.Println("tick")
+    }
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+tick
+tick
+tick
+tick
+tick
+Done: context canceled
+```
+
+소스코드를 자세히 살펴보면  `WaitGroup`을 사용하여 메인 고루틴이 서브 고루틴을 기다릴 수 있도록 하였습니다.
+
+```go
+var wg sync.WaitGroup
+
+func main() {
+  wg.Add(1)
+  ...
+  wg.Wait()
+}
+```
+
+그리고  `context`  패키지를 사용하여 컨텍스트를 생성하였고, 이를 서브 고루틴에게 전달하였습니다.
+
+```go
+func main() {
+  ...
+  ctx, cancel := context.WithCancel(context.Background())
+
+  go PrintTick(ctx)
+  ...
+}
+```
+
+서브 고루틴으로 실행된  `PrintTick`  함수는  `time`  패키지의  `Tick`  함수를 사용하여 매초 신호를 발생시키는 채널을 생성하였습니다. 또한  `switch`  문을 사용하여 컨텍스트의  `Done`  채널과  `time`  패키지의  `Tick`  함수로 생성한 채널에서 데이터를 기다리도록 했습니다.
+
+```go
+func PrintTick(ctx context.Context) {
+  tick := time.Tick(time.Second)
+  for {
+    select {
+    case <-ctx.Done():
+      fmt.Println("Done:", ctx.Err())
+      wg.Done()
+      return
+    case <-tick:
+      fmt.Println("tick")
+    }
+  }
+}
+```
+
+`Tick`  함수로 생성한 채널에서 데이터가 들어오면,  `tick`이라는 문자열을 화면에 출력하였으며, 컨텍스트의  `Done`  함수 채널에서 데이터가 들어오면 화면에  `Done`  문자와 종료 이유(`ctx.Err()`)를 표시하게 됩니다. 그후  `WaitGroup`의  `Done`  함수를 호출하여, 서브 고루틴이 종료되었음을 메인 고루틴에게 알렸습니다.
+
+```go
+func main() {
+  ...
+  ctx, cancel := context.WithCancel(context.Background())
+
+  go PrintTick(ctx)
+
+  time.Sleep(5 * time.Second)
+  cancel()
+  ...
+}
+```
+
+메인 고루틴에서는  `PrintTick`  함수를 실행한 후, 5초후 컨텍스트의  `cancel`을 호출하여 컨텍스트를 종료시켰습니다. 따라서 화면에는  `tick`이 5번 출력되고, 컨텍스트의 종료 이유가 화면에 표시 된 후, 프로그램이 종료되는 것을 확인할 수 있습니다.
+
+## WithDeadline
+
+컨텍스트의  `Deadline`은 작업 흐름(고루틴)을 언제까지 유지할지 결정할 때 사용합니다.
+
+```go
+ctx, cancel := context.WithDeadline(context.Background(), TIME)
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "context"
+  "fmt"
+  "sync"
+  "time"
+)
+
+var wg sync.WaitGroup
+
+func main() {
+  wg.Add(1)
+
+  d := time.Now().Add(3 * time.Second)
+  ctx, cancel := context.WithDeadline(context.Background(), d)
+
+  go PrintTick(ctx)
+
+  time.Sleep(time.Second * 5)
+  cancel()
+
+  wg.Wait()
+}
+
+func PrintTick(ctx context.Context) {
+  tick := time.Tick(time.Second)
+  for {
+    select {
+    case <-ctx.Done():
+      fmt.Println("Done:", ctx.Err())
+      wg.Done()
+      return
+    case <-tick:
+      fmt.Println("tick")
+    }
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+tick
+tick
+tick
+Done: context deadline exceeded
+```
+
+`cancel`을 설명할 때 사용한 예제에서, 컨텍스트를 생성할 때, 지금으로부터 3초후 컨텍스트를 종료시키기 위해 데드라인을 지정하였습니다.
+
+```go
+d := time.Now().Add(3 * time.Second)
+ctx, cancel := context.WithDeadline(context.Background(), d)
+```
+
+따라서  `tick`이 세번 화면에 표시된 후, 데드라인에 의해 컨텍스트가 종료되는 것을 확인할 수 있습니다. 하지만, 메인 고루틴은 5초간 유지되므로, 5초후에 프로그램이 종료되는 것을 확인할 수 있습니다.
+
+```go
+func main() {
+  ...
+  d := time.Now().Add(3 * time.Second)
+  ctx, cancel := context.WithDeadline(context.Background(), d)
+  ...
+  time.Sleep(time.Second * 5)
+  cancel()
+  ...
+}
+```
+
+데드라인을 지정하여 컨텍스트를 종료시키더라도,  `cancel`  함수를 사용하여 컨텍스트를 닫아주는 코드를 꼭 추가해야 합니다.
+
+## WithTimeout
+
+컨텍스트의  `Timeout`은 작업 흐름(컨텍스트)을 얼마간 유지할지 결정할 때 사용합니다.
+
+```go
+ctx, cancel := context.WithTimeout(context.Background(), TIME)
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "context"
+  "fmt"
+  "sync"
+  "time"
+)
+
+var wg sync.WaitGroup
+
+func main() {
+  wg.Add(1)
+
+  ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+
+  go PrintTick(ctx)
+
+  time.Sleep(time.Second * 5)
+  cancel()
+
+  wg.Wait()
+}
+
+func PrintTick(ctx context.Context) {
+  tick := time.Tick(time.Second)
+  for {
+    select {
+    case <-ctx.Done():
+      fmt.Println("Done:", ctx.Err())
+      wg.Done()
+      return
+    case <-tick:
+      fmt.Println("tick")
+    }
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+tick
+tick
+tick
+Done: context deadline exceeded
+```
+
+결과는  `Deadline`을 사용하였을 때와 동일한 것을 알 수 있습니다. 둘의 차이점은  `Deadline`은 언제까지 유지할 것인지를 지정한다면,  `Timeout`은 얼마간 유지할지를 지정합니다.
+```
+// Deadline
+d := time.Now().Add(3 * time.Second)
+ctx, cancel := context.WithDeadline(context.Background(), d)
+// Timeout
+ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+```
+
+타임아웃 역시, 타임아웃에 의해 컨텍스트를 종료시키더라도,  `cancel`  함수를 사용하여 컨텍스트를 닫아주는 코드를 꼭 추가해야 합니다.
+
+## WithValue
+
+컨텍스트의  `WithValue`를 사용하여 채널과 같이 서브 고루틴에 데이터를 전달할 수 있습니다.
+
+```go
+ctx := context.WithValue(context.Background(), KEY, VALUE)
+
+v := ctx.Value(KEY)
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "context"
+  "fmt"
+  "sync"
+)
+
+var wg sync.WaitGroup
+
+func main() {
+  wg.Add(1)
+
+  ctx := context.WithValue(context.Background(), "v", 3)
+
+  go square(ctx)
+
+  wg.Wait()
+}
+
+func square(ctx context.Context) {
+  if v := ctx.Value("v"); v != nil {
+    n := v.(int)
+    fmt.Println("Square:", n*n)
+  }
+  wg.Done()
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+Square: 9
+```
+
+## 컨텍스트 랩핑
+
+Golang에서 컨텍스트는 다음과 같이 랩핑(Wrapping)하여 사용할 수 있습니다.
+
+```go
+ctx, cancel := context.WithCancel(context.Background())
+ctx = context.WithValue(ctx, "key", "value")
+ctx = context.WithValue(ctx, "key2", "value2")
+```
+
+이를 확인하기 위해  `main.go`  파일을 다음과 같이 수정합니다.
+
+```go
+package main
+
+import (
+  "context"
+  "fmt"
+  "sync"
+  "time"
+)
+
+var wg sync.WaitGroup
+
+func main() {
+  wg.Add(1)
+  ctx, cancel := context.WithCancel(context.Background())
+  ctx = context.WithValue(ctx, "s", 2)
+
+  go PrintTick(ctx)
+
+  time.Sleep(5 * time.Second)
+  cancel()
+
+  wg.Wait()
+}
+
+func PrintTick(ctx context.Context) {
+  tick := time.Tick(time.Second)
+
+  if v := ctx.Value("s"); v != nil {
+    s := v.(int)
+    tick = time.Tick(time.Duration(s) * time.Second)
+  }
+
+  for {
+    select {
+    case <-ctx.Done():
+      fmt.Println("Done:", ctx.Err())
+      wg.Done()
+      return
+    case <-tick:
+      fmt.Println("tick")
+    }
+  }
+}
+```
+
+이를 실행하면 다음과 같은 결과를 얻을 수 있습니다.
+
+```bash
+# go run main.go
+tick
+tick
+Done: context canceled
+```
+
+`WithCancel`  예제에서  `WithValue`를 사용하여 컨텍스트를 랩핑하였습니다.
+
+```go
+func main() {
+  ...
+  ctx, cancel := context.WithCancel(context.Background())
+  ctx = context.WithValue(ctx, "s", 2)
+  ...
+}
+```
+
+이렇게 컨텍스트를 랩핑하여 컨텍스트를 통해 값을 전달하였으며, 전달받은 값을 사용하여  `tick`  문자열을 1초가 아닌 2초에 한번 표시되도록 하였습니다.
+
+```go
+func PrintTick(ctx context.Context) {
+  tick := time.Tick(time.Second)
+
+  if v := ctx.Value("s"); v != nil {
+    s := v.(int)
+    tick = time.Tick(time.Duration(s) * time.Second)
+  }
+  ...
+}
+```
+
+이와 같이 컨텍스트는 여러번 랩핑하여 필요한 작업 명세서를 작성할 수 있습니다.
+
+## 완료
+
+이것으로 Golang에서 컨텍스트를 사용하는 방법에 대해서 알아보았습니다.  `WithCancel`,  `WithDeadline`,  `WithTimeout`을 사용하여 컨텍스트를 정의하는 방법뿐만 아니라  `WithValue`를 사용하여 컨텍스트를 통해 데이터를 전달하는 방법, 컨텍스트를 랩핑하여 사용하는 방법에 대해서도 알아보았습니다. 컨텍스트는 고루틴을 관리하는데 자주 사용되므로 잘 기억해 두도록 합시다.
+
+
+# [Golang Gin 시작하기](https://dev-yakuza.posstree.com/ko/golang/gin/start/)
+
+2022-04-11 
+
+## Golang의 웹 프레임워크중 가장 유명한 Gin 웹 프레임워크를 사용하여 Golang으로 웹 서버를 개발하는 방법에 대해 알아보도록 하겠습니다.
+
+## 개요
+
+이번 블로그 포스트에서는 Golang을 사용하여 웹 서버를 개발하는 방법에 대해서 알아보려고 합니다. Golang에는 많은 웹 프레임워크가 있습니다만, 그 중에서 가장 유명한 웹 프레임워크인  `Gin`  웹 프레임워크를 사용하는 방법에 대해서 알아봅시다.
+
+-   Gin web framework:  [https://gin-gonic.com/](https://gin-gonic.com/%7D)
+
+이 블로그 포스트에서 소개하는 소스 코드는 아래의 링크에서 확인하실 수 있습니다.
+
+-   GitHub:  [https://github.com/dev-yakuza/study-golang/tree/main/gin/start](https://github.com/dev-yakuza/study-golang/tree/main/gin/start)
+
+## 블로그 시리즈
+
+이 블로그 포스트는 Golang에서 Gin 웹 프레임워크를 사용하는 방법에 관해 시리즈로 제작되었습니다. Gin 웹 프레임워크의 다른 사용법을 알고 싶으시다면, 다음 링크를 참고하시기 바랍니다.
+
+-   [Golang] Gin 시작하기
+
+## Go 프로젝트 생성
+
+`Gin`  웹 프레임워크의 사용 방법을 확인하기 위해, 다음 명령어를 사용하여 Go 모듈을 통해 프로젝트를 준비합니다.
+
+```bash
+mkdir start
+cd start
+go mod init github.com/dev-yakuza/study-golang/gin/start
+```
+
+그럼 다음과 같이  `./go.mod`  파일이 생성되는 것을 확인할 수 있습니다.
+
+```bash
+module github.com/dev-yakuza/study-golang/gin/start
+
+go 1.17
+```
+
+## Gin 웹 프레임워크 설치
+
+`Gin`  웹 프레임워크를 사용하기 위해, 다음 명령어를 사용하여  `Gin`  웹 프레임워크를 설치합니다.
+
+```bash
+go get -u github.com/gin-gonic/gin
+```
+
+그럼 다음과 같이  `./go.mod`  파일에  `Gin`  웹 프레임워크와 관련된 내용이 추가된 것을 확인할 수 있습니다.
+
+```bash
+module github.com/dev-yakuza/study-golang/gin/start
+
+go 1.17
+
+require (
+  github.com/gin-contrib/sse v0.1.0 // indirect
+  github.com/gin-gonic/gin v1.7.7 // indirect
+  github.com/go-playground/locales v0.14.0 // indirect
+  github.com/go-playground/universal-translator v0.18.0 // indirect
+  github.com/go-playground/validator/v10 v10.10.1 // indirect
+  github.com/golang/protobuf v1.5.2 // indirect
+  github.com/json-iterator/go v1.1.12 // indirect
+  github.com/leodido/go-urn v1.2.1 // indirect
+  github.com/mattn/go-isatty v0.0.14 // indirect
+  github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+  github.com/modern-go/reflect2 v1.0.2 // indirect
+  github.com/ugorji/go/codec v1.2.7 // indirect
+  golang.org/x/crypto v0.0.0-20220331220935-ae2d96664a29 // indirect
+  golang.org/x/sys v0.0.0-20220406163625-3f8b81556e12 // indirect
+  golang.org/x/text v0.3.7 // indirect
+  google.golang.org/protobuf v1.28.0 // indirect
+  gopkg.in/yaml.v2 v2.4.0 // indirect
+)
+```
+
+또한,  `./go.sum`  파일이 생성된 것을 확인할 수 있습니다.
+
+## Gin 웹 프레임워크 사용
+
+그럼  `Gin`  웹 프레임워크를 사용하여 웹 서버를 기동해 보도록 하겠습니다.  `./main.go`  파일을 생성하고 다음과 같이 수정합니다.
+
+```go
+package main
+
+import "github.com/gin-gonic/gin"
+
+func setupRouter() *gin.Engine {
+  r := gin.Default()
+  r.GET("/ping", func(c *gin.Context) {
+    c.String(200, "pong")
+  })
+  return r
+}
+
+func main() {
+  r := setupRouter()
+  r.Run(":8080")
+}
+```
+
+코드를 조금 자세히 살펴봅시다.
+
+```go
+func setupRouter() *gin.Engine {
+  r := gin.Default()
+  r.GET("/ping", func(c *gin.Context) {
+    c.String(http.StatusOK, "pong")
+  })
+  return r
+}
+```
+
+`Gin`  웹 프레임워크가 제공하는  `gin.Default()`를 사용하여 웹 서버를 생성하고 특정 URL(`/ping`)에 원하는 동작을 하는 함수를 정의할 수 있습니다. 이번 예제에서는 간단하게  `pong`이라는 문자를  `StatusOK`(200) 상태와 함께 반환하도록 하였습니다.
+
+```go
+func main() {
+  r := setupRouter()
+  r.Run(":8080")
+}
+```
+
+이렇게 특정 URL과 그에 필요한 동작을 정의한 후, 생성된 웹 서버를  `run`  함수를 통해  `8080`  포트로 실행하도록 하였습니다.
+
+이제 다음 명령어를 사용하여 웹 서버를 실행해 봅니다.
+
+```bash
+go run ./main.go
+```
+
+그리고 웹 브라우저를 열고  `http://localhost:8080/ping`  URL을 입력하면 다음과 같은 결과를 확인할 수 있습니다.
+
+```bash
+pong
+```
+
+## 완료
+
+이것으로 Golang에서 많이 사용되는  `Gin`  웹 프레임워크를 사용하여 웹 서버를 실행 시키는 방법에 대해서 알아보았습니다. 앞으로는 이 Gin 웹 프레임워크를 사용하는 방법에 대한 블로그 포스트를 작성할 예정입니다.
+
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMzcwMDMzNDA5LDIwOTQxNzE1ODEsODA3OD
+g2OTY5LDIwNTAzNjcyMDMsLTczNjc4OTIxOCwtNTUwNTgxNTA1
+LDczMDk5ODExNl19
+-->

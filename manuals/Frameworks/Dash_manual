@@ -1,0 +1,2611 @@
+# [Part1. Dash 설치](https://blog.naver.com/raymondjin_/222202394796)
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 10. 1:00
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202394796&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222202394796")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202394796&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+**Python Module Dash를 소개합니다.**
+
+Dash 는 웹기반 데이터 분석 프레임 워크입니다.
+
+Flask와 Poltly.js, React.js로 쓰여 져있습니다.
+
+​
+
+**파이썬으로 데이터분석**을 하다보면
+
+**code 기반으로 데이터 분석**을 해야합니다.
+
+이는 상황에 따라서는 **단점**이 되기도 합니다
+
+​
+
+**빠른 데이터 분석이 필요할 때**에는
+
+이미 구현된 기능을 활용하면 되는데
+
+코드를 다시 짜야하거나, 내가 작성한 코드가 어디있는지 기억해야하니까요
+
+​
+
+​
+
+**1. 설치 pip install dash**
+
+**​**
+
+!pip install dash==1.18.1
+
+꽤 많은 module들이 설치되어야 합니다.
+
+약 1분 정도 시가니 걸립니다.
+
+Collecting dash==1.18.1 Downloading dash-1.18.1.tar.gz (74 kB) Requirement already satisfied: Flask>=1.0.4 in d:\anaconda3\envs\python_visualization\lib\site-packages (from dash==1.18.1) (1.1.2) Collecting flask-compress Downloading Flask_Compress-1.8.0-py3-none-any.whl (7.2 kB) Collecting plotly Downloading plotly-4.14.1-py2.py3-none-any.whl (13.2 MB) Collecting dash_renderer==1.8.3 Downloading dash_renderer-1.8.3.tar.gz (1.0 MB) Collecting dash-core-components==1.14.1 Downloading dash_core_components-1.14.1.tar.gz (3.5 MB) Collecting dash-html-components==1.1.1 Downloading dash_html_components-1.1.1.tar.gz (188 kB) Collecting dash-table==4.11.1 Downloading dash_table-4.11.1.tar.gz (1.8 MB) Requirement already satisfied: future in d:\anaconda3\envs\python_visualization\lib\site-packages (from dash==1.18.1) (0.18.2) Requirement already satisfied: Jinja2>=2.10.1 in d:\anaconda3\envs\python_visualization\lib\site-packages (from Flask>=1.0.4->dash==1.18.1) (2.11.2) Requirement already satisfied: itsdangerous>=0.24 in d:\anaconda3\envs\python_visualization\lib\site-packages (from Flask>=1.0.4->dash==1.18.1) (1.1.0) Requirement already satisfied: click>=5.1 in d:\anaconda3\envs\python_visualization\lib\site-packages (from Flask>=1.0.4->dash==1.18.1) (7.1.2) Requirement already satisfied: Werkzeug>=0.15 in d:\anaconda3\envs\python_visualization\lib\site-packages (from Flask>=1.0.4->dash==1.18.1) (1.0.1) Collecting brotli Downloading Brotli-1.0.9-cp38-cp38-win_amd64.whl (365 kB) Requirement already satisfied: six in d:\anaconda3\envs\python_visualization\lib\site-packages (from plotly->dash==1.18.1) (1.15.0) Collecting retrying>=1.3.3 Downloading retrying-1.3.3.tar.gz (10 kB) Requirement already satisfied: MarkupSafe>=0.23 in d:\anaconda3\envs\python_visualization\lib\site-packages (from Jinja2>=2.10.1->Flask>=1.0.4->dash==1.18.1) (1.1.1) Building wheels for collected packages: dash, dash-renderer, dash-core-components, dash-html-components, dash-table, retrying Building wheel for dash (setup.py): started Building wheel for dash (setup.py): finished with status 'done' Created wheel for dash: filename=dash-1.18.1-py3-none-any.whl size=83681 sha256=d0422f46c475b21d2f7c52ad758fe1b0503131cf21944541fa66a54a015b23f8 Stored in directory: c:\users\jhr\appdata\local\pip\cache\wheels\33\6f\03\094db0f27625579ae1ae85fb385dedc7e3dc6d8de8cd6146f7 Building wheel for dash-renderer (setup.py): started Building wheel for dash-renderer (setup.py): finished with status 'done' Created wheel for dash-renderer: filename=dash_renderer-1.8.3-py3-none-any.whl size=1013946 sha256=a0cb4dc2dd0d59e6d5f09f7e5c884896f502552d0450f32a098a9a31e4cb29b6 Stored in directory: c:\users\jhr\appdata\local\pip\cache\wheels\82\4d\8c\0764de014b25313cf54199f212bad4fb4b228ecfaef58be3b9 Building wheel for dash-core-components (setup.py): started Building wheel for dash-core-components (setup.py): finished with status 'done' Created wheel for dash-core-components: filename=dash_core_components-1.14.1-py3-none-any.whl size=3525935 sha256=813976b53d21bd8726040c0ea9a11ebc155f8b40f2ada94ec77b19baaad3f54d Stored in directory: c:\users\jhr\appdata\local\pip\cache\wheels\4f\83\9f\bf95c8533a915b0588f84324257ae92bc1207d325000c9fa5e Building wheel for dash-html-components (setup.py): started Building wheel for dash-html-components (setup.py): finished with status 'done' Created wheel for dash-html-components: filename=dash_html_components-1.1.1-py3-none-any.whl size=427900 sha256=560874707d07a8196c2ba248b11d237e982a556f7a79f3896b92d1d6a9beafe4 Stored in directory: c:\users\jhr\appdata\local\pip\cache\wheels\ed\fc\1c\f68ef111763cc328876457a871024052e0b48950c63bc1ac04 Building wheel for dash-table (setup.py): started Building wheel for dash-table (setup.py): finished with status 'done' Created wheel for dash-table: filename=dash_table-4.11.1-py3-none-any.whl size=1839872 sha256=12e5114fc048339bf4dc0d6d76177df7052235ea3902dcb9c33d574ca448c764 Stored in directory: c:\users\jhr\appdata\local\pip\cache\wheels\0d\19\4a\9dbfa67779caa671ffec1124c0c7fe60184497b971a619036c Building wheel for retrying (setup.py): started Building wheel for retrying (setup.py): finished with status 'done' Created wheel for retrying: filename=retrying-1.3.3-py3-none-any.whl size=11435 sha256=68eecd9122755c4cb997fe7134aaa240b427c7d780a46be1a386df394239bbe6 Stored in directory: c:\users\jhr\appdata\local\pip\cache\wheels\c4\a7\48\0a434133f6d56e878ca511c0e6c38326907c0792f67b476e56 Successfully built dash dash-renderer dash-core-components dash-html-components dash-table retrying Installing collected packages: brotli, flask-compress, retrying, plotly, dash-renderer, dash-core-components, dash-html-components, dash-table, dash Successfully installed brotli-1.0.9 dash-1.18.1 dash-core-components-1.14.1 dash-html-components-1.1.1 dash-renderer-1.8.3 dash-table-4.11.1 flask-compress-1.8.0 plotly-4.14.1 retrying-1.3.3
+
+​----
+
+# [Part2. Dash Layout, Dash App 시작하기 (1)](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202418823&categoryNo=14&parentCategoryNo=&from=thumbnailList)
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 10. 1:47
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202418823&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222202418823")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202418823&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+**Dash apps** 은 크게
+
+**"layout"** 과 **"application"** 으로 구성됩니다.
+
+application 은 다음 포스팅에서 살펴보도록 하겠습니다.
+
+​
+
+Dash는
+
+application의 가시화 할 요소들을
+
+Python class로 제공합니다.
+
+​
+
+dash_core_componenets, dash_html_components 를
+
+관리할 예정이며 이 부분을
+
+사용자 스스로가 JavaScript, React.js를 활용하여
+
+커스터미이징 할 수 있습니다.
+
+​
+
+여기서부터는 python code가
+
+app.py 에 있다고 가정하겠습니다.
+
+​
+
+jupyterlab 에서 이용할 경우에는
+
+jupyter-dash를 설치해 주어야 합니다.
+
+!pip install jupyter-dash
+
+Collecting jupyter-dash Downloading jupyter_dash-0.3.1-py3-none-any.whl (49 kB) Requirement already satisfied: requests in d:\anaconda3\envs\python_visualization\lib\site-packages (from jupyter-dash) (2.24.0) Requirement already satisfied: retrying in d:\anaconda3\envs\python_visualization\lib\site-packages (from jupyter-dash) (1.3.3) Requirement already satisfied: dash in d:\anaconda3\envs\python_visualization\lib\site-packages (from jupyter-dash) (1.18.1) Requirement already satisfied: ipykernel in d:\anaconda3\envs\python_visualization\lib\site-packages (from jupyter-dash) (5.3.0) Collecting ansi2html Downloading ansi2html-1.6.0-py3-none-any.whl (14 kB) Requirement already satisfied: ipython in d:\anaconda3\envs\python_visualization\lib\site-packages (from jupyter-dash) (7.16.1) Requirement already satisfied: flask in d:\anaconda3\envs\python_visualization\lib\site-packages (from jupyter-dash) (1.1.2) Requirement already satisfied: chardet<4,>=3.0.2 in d:\anaconda3\envs\python_visualization\lib\site-packages (from requests->jupyter-dash) (3.0.4) Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 in d:\anaconda3\envs\python_visualization\lib\site-packages (from requests->jupyter-dash) (1.25.9) Requirement already satisfied: idna<3,>=2.5 in d:\anaconda3\envs\python_visualization\lib\site-packages (from requests->jupyter-dash) (2.10) Requirement already satisfied: certifi>=2017.4.17 in d:\anaconda3\envs\python_visualization\lib\site-packages (from requests->jupyter-dash) (2020.6.20) Requirement already satisfied: six>=1.7.0 in d:\anaconda3\envs\python_visualization\lib\site-packages (from retrying->jupyter-dash) (1.15.0) Requirement already satisfied: plotly in d:\anaconda3\envs\python_visualization\lib\site-packages (from dash->jupyter-dash) (4.14.1) Requirement already satisfied: flask-compress in d:\anaconda3\envs\python_visualization\lib\site-packages (from dash->jupyter-dash) (1.8.0) Requirement already satisfied: dash-table==4.11.1 in d:\anaconda3\envs\python_visualization\lib\site-packages (from dash->jupyter-dash) (4.11.1) Requirement already satisfied: dash-renderer==1.8.3 in d:\anaconda3\envs\python_visualization\lib\site-packages (from dash->jupyter-dash) (1.8.3) Requirement already satisfied: dash-html-components==1.1.1 in d:\anaconda3\envs\python_visualization\lib\site-packages (from dash->jupyter-dash) (1.1.1) Requirement already satisfied: future in d:\anaconda3\envs\python_visualization\lib\site-packages (from dash->jupyter-dash) (0.18.2) Requirement already satisfied: dash-core-components==1.14.1 in d:\anaconda3\envs\python_visualization\lib\site-packages (from dash->jupyter-dash) (1.14.1) Requirement already satisfied: tornado>=4.2 in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipykernel->jupyter-dash) (6.0.4) Requirement already satisfied: traitlets>=4.1.0 in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipykernel->jupyter-dash) (4.3.3) Requirement already satisfied: jupyter-client in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipykernel->jupyter-dash) (6.1.3) Requirement already satisfied: jedi>=0.10 in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipython->jupyter-dash) (0.14.1) Requirement already satisfied: prompt-toolkit!=3.0.0,!=3.0.1,<3.1.0,>=2.0.0 in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipython->jupyter-dash) (3.0.5) Requirement already satisfied: pygments in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipython->jupyter-dash) (2.6.1) Requirement already satisfied: backcall in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipython->jupyter-dash) (0.2.0) Requirement already satisfied: colorama; sys_platform == "win32" in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipython->jupyter-dash) (0.4.3) Requirement already satisfied: decorator in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipython->jupyter-dash) (4.4.2) Requirement already satisfied: pickleshare in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipython->jupyter-dash) (0.7.5) Requirement already satisfied: setuptools>=18.5 in d:\anaconda3\envs\python_visualization\lib\site-packages (from ipython->jupyter-dash) (47.3.1.post20200622) Requirement already satisfied: itsdangerous>=0.24 in d:\anaconda3\envs\python_visualization\lib\site-packages (from flask->jupyter-dash) (1.1.0) Requirement already satisfied: Werkzeug>=0.15 in d:\anaconda3\envs\python_visualization\lib\site-packages (from flask->jupyter-dash) (1.0.1) Requirement already satisfied: Jinja2>=2.10.1 in d:\anaconda3\envs\python_visualization\lib\site-packages (from flask->jupyter-dash) (2.11.2) Requirement already satisfied: click>=5.1 in d:\anaconda3\envs\python_visualization\lib\site-packages (from flask->jupyter-dash) (7.1.2) Requirement already satisfied: brotli in d:\anaconda3\envs\python_visualization\lib\site-packages (from flask-compress->dash->jupyter-da
+
+​
+
+​
+
+코드를 작성하고
+
+실행한 다음
+
+서버로 접속해 보았습니다.
+```
+# -*- coding: utf-8 -*- 
+# Run this app with `python app.py` and # visit http://127.0.0.1:8050/ in your web browser. import dash import dash_core_components as dcc import dash_html_components as html import plotly.express as px import pandas as pd external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) # assume you have a "long-form" data frame # see https://plotly.com/python/px-arguments/ for more options df = pd.DataFrame({ "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"], "Amount": [4, 1, 2, 2, 4, 5], "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"] }) fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group") app.layout = html.Div(children=[ html.H1(children='Hello Dash'), html.Div(children=''' Dash: A web application framework for Python. '''), dcc.Graph( id='example-graph', figure=fig ) ]) if __name__ == '__main__': app.run_server(debug=True)
+```
+
+Dash is running on http://127.0.0.1:8050/ * Serving Flask app "__main__" (lazy loading) * Environment: production WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead. * Debug mode: on An exception has occurred, use %tb to see the full traceback. SystemExit: 1
+
+D:\Anaconda3\envs\python_visualization\lib\site-packages\IPython\core\interactiveshell.py:3351: UserWarning: To exit: use 'exit', 'quit', or Ctrl-D.
+
+페이지에 접속할 수 없다는 내용이 나옵니다.
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjU3/MDAxNjEwMjA5NDQ5OTU3.8cHfd3UnSunA0ceHY6mFNJn32e1IMWYezZ2H-wenRwAg.-aEMy7b3Kfq665viuNU8VwDtuctzm1eTAZCSVzXNcgUg.PNG.raymondjin_/image.png?type=w966)
+
+페이지 연결안됨
+
+​
+
+아마도 jupyter를 기반으로 실행해서 그런 것 같고
+
+python code app.py 를 만들어서 실행해야 할 것 같습니다.
+
+​
+
+가상환경을 만들고
+
+Dash를 설치한 다음
+
+app.py를 만들어 다시 실행해보겠습니다.
+
+​
+
+가상 환경 이름은 DataScience with Dash
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMTU5/MDAxNjEwMjA5NTE3OTAz.FRx4FHblNH2oa-SNhHhaetUmhxa2axmPDL1dqTsF6g0g.WNpupZHntjj654uxTiXU6wJtC4aPwfnNvH5T-K-HXlgg.PNG.raymondjin_/image.png?type=w966)
+
+​
+
+$cd VENV $cd virtualenv DSwD $cd DSwD $cd Scripts $activate $(DSwd) pip install dash $pip install
+
+$(DSwd) pip install pandas
+
+설치가 끝나면
+
+PyCharm 환경에서 접속합니다.
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjU2/MDAxNjEwMjA5ODAyNzgy.CjS0yede8JIhFurLCxI64U23OtyYOczeqbR8yWG_Y30g.uc8UIhzGKmLJ9ipa9lZ3_XowRA6_YTiN_bTbcm4SIOYg.PNG.raymondjin_/image.png?type=w966)
+
+PyCharm Project
+
+이때 interpreter를
+
+위에서 만든 가상환경 interpreter 와 일치시켜주어야 합니다.
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMTY4/MDAxNjEwMjEwMDQwOTkz.Q_Ub1qazswXgBxNma0dYvV2HIOH05Uf4ILlZUpwWG4sg.l3buiv2p5-j8Snjzd7Jj57UAmbaFXhBqeYCxKZnoorsg.PNG.raymondjin_/image.png?type=w966)
+
+파이썬 인터프리터 설정
+
+​
+
+그리고
+
+실행전 pandas module 을 설치해줍니다.
+
+​
+
+​
+
+​
+
+import dash import dash_core_components as dcc import dash_html_components as html import plotly.express as px import pandas as pd external_stylesheets = ['https://codpen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) df = pd.DataFrame({ "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"], "Amount": [4, 1, 2, 2, 4, 5], "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"] }) fig = px.bar(df, x='Fruit', y='Amount', color='City', barmode='group') app.layout = html.Div(children=[ html.H1(children='Hello Dash'), html.Div(children="Dash: A bel application framework for Python"), dcc.Graph( id='example-graph', figure=fig ) ]) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMTE0/MDAxNjEwMjEwMTEzNDEw.btNS3h-GXDlTbS10K9PSovLIPTDKMj7FzUA5FKAfKM0g.8tVH1nD5QGgTuE7WSfbeoRbPt-EvAAS9-JbH5JjkeNgg.PNG.raymondjin_/image.png?type=w966)
+
+app.py
+
+C:\Users\VENV\DSwD\Scripts\python.exe C:/Users/VENV/DSwD/src/app.py Dash is running on http://127.0.0.1:8050/ * Serving Flask app "app" (lazy loading) * Environment: production WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead. * Debug mode: on
+
+http://127.0.0.1:8050/ 으로 접속하면 끝
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMTQw/MDAxNjEwMjEwMzc2ODky.SJhcXtwzP3MhaGMIks-gj9SvBb2zUKTGMCyzBRqS7y8g.cXyQMnCntZaegje-_xXBYO26r8trWZ_DQK3TU8xyWr4g.PNG.raymondjin_/image.png?type=w966)
+
+Hello Dash
+
+​
+
+​
+
+----------
+
+자세히 보면
+
+기본적으로 제공하는 기능들이 있어 보입니다.
+
+드래그를 하면 확대 됩니다
+
+우측 상단의 auto scale을 누르면
+
+원래 크기로 돌아옵니다.
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMTY0/MDAxNjEwMjEwNTA1MzYx.ZGiDKqjRoVkWUTAKBt7VoqQ_c2nwPvYkJe8TZ-xVYtog.SVPS2Zdgrwb0Vt19NyfFS2x5y65raDfkQsw41SzR6Eog.PNG.raymondjin_/image.png?type=w966)
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMTY3/MDAxNjEwMjEwNTE1Mjc3.VgX_2rvHw-haU66plAEy5in8QszaR_At5lfrgLmkY08g.5Cd1MrWxxDDL1G1LzRZzvIP0G7dutK_05tx8_M012Ncg.PNG.raymondjin_/image.png?type=w966)
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjUz/MDAxNjEwMjEwNTYyNzM3.OJ3Atxvka22HsBe9sbaO-VDaAYsByAo8Qkgl-FvXGw0g.PW00SPDE67RPSDICEt1WMmejD1kiZD-owT78GrLDKMkg.PNG.raymondjin_/image.png?type=w966)
+
+Dash 에서 드래그 하기
+
+​
+
+우측상단의 버튼이 있는데
+
+사진으로 저장하기부터
+
+점선으로 표시하기 등 여러가지 기능이 있습니다.
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjk2/MDAxNjEwMjEwNzI1OTg0.xNx5qwfmX57FNXFbLGvDXDW0-i78Yszo802EOAaw35Qg.ZUAo63TvfKj1zHy8GL0CQCNLtEYlVA0hE2cE_seKE3Qg.PNG.raymondjin_/image.png?type=w966)
+
+기본 기능
+
+​
+
+이중에서 Toggle Spike Lines 기능은
+
+주변 값들과 비교하도록 도움을 줍니다.
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMSAg/MDAxNjEwMjEwODIwNDQx.e0lAyM2hYy9PZR92pFRENpisUPPAVaaJrqekwSlxQbgg.DD0AXKJIpDqZfCCO3Kc1ax85IvWSWQwXZRWeT5GTvQog.PNG.raymondjin_/image.png?type=w966)
+
+toggle spike line
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMTE4/MDAxNjEwMjEwNzU1NzAy._NCJuY5m1dY0U0SRFCkqfrwPMvHSRMV-OzFwJzLof1wg.FmZ7fMqU5Zh-N6CKYyaLSpt5G724U_85Zzbm21Y06W8g.PNG.raymondjin_/image.png?type=w966)
+
+Toggle Spike Line은 다른 값들과 비교 가능
+
+​
+
+Dash 에서의 HelloWorld를 시작했으니
+
+다음 포스팅에서는 본격적으로 layout 을 살펴보겠습니다.
+
+처음 Dash를 하느라 설치에 집중한 포스팅이 되어버렸네요
+
+----
+
+# [Part2. Dash Layout, Dash App 시작하기 (2)](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202452172&categoryNo=14&parentCategoryNo=0)
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 10. 3:19
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202452172&categoryNo=14&parentCategoryNo=0# "https://blog.naver.com/raymondjin_/222202452172")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202452172&categoryNo=14&parentCategoryNo=0#)
+
+저번 포스팅에서는
+
+Dash app 을 시작해보았습니다.
+
+설치부터 실행까지 몇 가지 고려해야할 사항이 있었습니다.
+
+​
+
+대표적으로 python file을
+
+app.py 로 지정하고
+
+main 함수에서 app.run_server() 로 실행해야 한다는 점으로 요약됩니다.
+
+​
+
+[https://blog.naver.com/raymondjin_/222202418823](https://blog.naver.com/raymondjin_/222202418823)
+
+[![](https://dthumb-phinf.pstatic.net/?src=%22https%3A%2F%2Fblogthumb.pstatic.net%2FMjAyMTAxMTBfMTQw%2FMDAxNjEwMjEwMzc2ODky.SJhcXtwzP3MhaGMIks-gj9SvBb2zUKTGMCyzBRqS7y8g.cXyQMnCntZaegje-_xXBYO26r8trWZ_DQK3TU8xyWr4g.PNG.raymondjin_%2Fimage.png%3Ftype%3Dw2%22&type=ff500_300)](https://blog.naver.com/raymondjin_/222202418823)[](https://blog.naver.com/raymondjin_/222202418823)
+
+**Part2. Dash Layout, Dash App 시작하기 (1)**
+
+Dash apps 은 크게 "layout" 과 "application" 으로 구성됩니다.application 은 다음...
+
+blog.naver.com
+
+​
+
+이번 포스팅에서는 layout 의 개념에 대해서
+
+본격적으로 살펴보겠습니다.
+
+----------
+
+**Layout 에서 주목할점**
+
+​
+
+**1. layout 은 components 로 구성**되어있습니다.
+
+componetns 는 html.Div, doc.Graph 와 같은 것들이 있습니다.
+
+​
+
+**2. dash_html_components** 라이브러리에는 **모든 HTLM tag** 가 들어있습니다.
+
+html.H1(children='Hello Dash') 는
+
+<h1>Hello Dash</h1> HTML을 만듭니다.
+
+​
+
+3. 모든 componets 는 완전한 HTML 이 아닙니다.
+
+**dash_core_components** 는 고차원의 **(추상) compoent** 도 있습니다.
+
+interactive 한 compoent를 구성해주며
+
+React.js 라이브로리로 쓰여진
+
+JavaScript, HTML, 그리고 CSS 코드로 되어있습니다.
+
+​
+
+**4. 각각의 component 는 keyword attributes****​**로 기술됩니다.
+
+​
+
+**5. children 속성**은 특별한 속성입니다.
+
+편의상 **항상 첫 번째 속성**입니다.
+
+문자열, 숫자, 다른 compoent , 다른 components 의 list를
+
+포함 할 수 있습니다.
+
+html.H1(children="Hello Dash") 와
+
+html.H1("Hello Dash") 는 같은 코드입니다.
+
+​
+
+**6. 사용되는 font 는 display 되는 화면에서 다르게 보일 수 있습니다.**
+
+app 은 CSS stylesheet 를 사용하여 기본 styles을 정의합니다.
+
+CSS 에 대한 자세한 공부는 : [https://dash.plotly.com/external-resources](https://dash.plotly.com/external-resources)
+
+[](https://dash.plotly.com/external-resources)
+
+**Adding CSS & JS and Overriding the Page-Load Template | Dash for Python Documentation | Plotly**
+
+Dash applications are rendered in the web browser with CSS and JavaScript. On page load, Dash serves a small HTML template that includes references to the CSS and JavaScript that are required to render the application. This chapter covers everything that you need to know about configuring this HTML ...
+
+dash.plotly.com
+
+기본 style sheet는 아래 코드가 담당합니다.
+
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+----------
+
+main 함수에서 실행되는
+
+app 인스턴스는
+
+dash.Dash() 객체입니다.
+
+​
+
+app name을 변경하고 싶다면
+
+python 파일의 이름을 바꾸는 것이 아닌
+
+이 부분을 바꾸어야 합니다.
+
+​
+
+temp.py
+```
+# -*- coding: utf-8 -*- # Run this app with `python app.py` and # visit http://127.0.0.1:8050/ in your web browser. import dash import dash_core_components as dcc import dash_html_components as html import plotly.express as px import pandas as pd external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] new_style = dash.Dash(__name__, external_stylesheets=external_stylesheets) colors = { 'background': '#111111', 'text': '#7FDBFF' } # assume you have a "long-form" data frame # see https://plotly.com/python/px-arguments/ for more options df = pd.DataFrame({ "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"], "Amount": [4, 1, 2, 2, 4, 5], "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"] }) fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group") fig.update_layout( plot_bgcolor=colors['background'], paper_bgcolor=colors['background'], font_color=colors['text'] ) new_style.layout = html.Div(style={'backgroundColor': colors['background']}, children=[ html.H1( children='Hello Dash', style={ 'textAlign': 'center', 'color': colors['text'] } ), html.Div(children='Dash: A web application framework for Python.', style={ 'textAlign': 'center', 'color': colors['text'] }), dcc.Graph( id='example-graph-2', figure=fig ) ]) if __name__ == '__main__': new_style.run_server(debug=True)
+```
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfNzUg/MDAxNjEwMjE1NTY3NjE4.5IVvqEC73qwBGoeE3GznqrWy5m1VA4cb_2Q07xwFOoIg.dWglt-Mv1b6x4MxViy7EoIOWKZ9bKS2MDghlzhHLC54g.PNG.raymondjin_/image.png?type=w966)
+
+style 변경
+
+​
+
+여기서 주목할 것은
+
+html.Div, html.H1 의 stype 속성을 변경한 점입니다.
+
+html.H1("Hello Dash", style={'textAlign':'center', 'color':'#7FDBFF'}) 는
+
+​
+
+<h1 style="text-align: center; color: [#7FDBFF](https://blog.naver.com/PostListByTagName.naver?blogId=raymondjin_&encodedTagName=7FDBFF)">Hello Dahs</h1> 로
+
+rendering 됩니다.
+
+​
+
+1. HTML tag 에서
+
+style 속성은 세미콜론으로 분리가 됩니다.
+
+Dash 에서는 dictionary에 입력해주면 됩니다.
+
+​
+
+2. key 값은 text-align 이 아닌
+
+textAlign 으로 입력이 되었습니다.
+
+중간중간 대문자가 나오는 낙타등 표기방식을 사용합니다.
+
+​
+
+3. HTML class 속성은 className 입니다.
+
+​
+
+4. HTML tag 의 children 은
+
+children=[] 키워드로 정의됩니다.
+
+편의상 첫 번째 argument 는 자동으로 children 으로 인식됩니다.
+
+----
+
+[Dash](https://blog.naver.com/PostList.naver?blogId=raymondjin_&categoryNo=14&from=postList)
+
+Part2. Dash Layout, Dash App 시작하기, Table 만들기 (3)
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 10. 17:49
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202882949&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222202882949")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202882949&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+Table 만들어보기 입니다.
+
+​
+
+HTML 문서에서 Table Tag를 작성하는 것과
+
+상당히 비슷한 로직을 가집니다.
+
+​
+
+html.Table() tag 아래에
+
+html.Thead() Table Head 를 만들어 주고
+
+그아래 Table row 를 만들어서 내용을 채우는 방식입니다.
+
+​
+
+기본적으로 Table 은
+
+pandas 의 DataFrame 과 대응이 됩니다.
+
+여러분이 가지고 있는 DataFrame 이
+
+multiindex 된 데이터의 경우에는
+
+​
+
+Thead 와 Tbody 의 내용물을
+
+튜닝해줄 필요가 있습니다.
+
+​
+
+app_3_style.py
+
+# Run this app with `python app.py` and # visit http://127.0.0.1:8050/ in your web browser. import dash import dash_core_components as dcc import dash_html_components as html import pandas as pd df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv') def generate_table(dataframe, max_rows=10): return html.Table([ html.Thead( html.Tr([html.Th(col) for col in dataframe.columns]) ), html.Tbody([ html.Tr([ html.Td(dataframe.iloc[i][col]) for col in dataframe.columns ]) for i in range(min(len(dataframe), max_rows)) ]) ]) external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) app.layout = html.Div(children=[ html.H4(children='US Agriculture Exports (2011)'), generate_table(df) ]) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+특이 pivot 또는 groupby 에 의해
+
+집계된 DataFrame 의 경우에는 Multiindex를 포함하기 때문에
+
+Thead에 열을 더 추가하지 않는다면
+
+아래와 같이 index 값이 column 에 들어가는 missmatch 가 발생합니다.
+
+​
+
+HTML tag는 여러분이 만든 index를
+
+smart 하게 인지하지 못한다는 점을
+
+기억해주시면 좋을 것 같습니다.
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjA0/MDAxNjEwMjY4NDE4OTYw.8P1Pz_57z7ptmAdWY3yAtCBUJD65nmn8U7YkXdVL_cgg.9SLed0r8Ocw5YTfm7uFdybv69X25fiawPNKcTjnEz1Qg.PNG.raymondjin_/image.png?type=w966)
+
+----
+
+[Dash](https://blog.naver.com/PostList.naver?blogId=raymondjin_&categoryNo=14&from=postList)
+
+Part2. Dash Layout, Dash App 시작하기, Graph, Scatter Plot Interactive (4)
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 10. 18:00
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202893951&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222202893951")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202893951&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+​
+
+dash_core_components 라이브러리에는
+
+Graph component가 있습니다.
+
+Graph 는 Interactive 한 Graph를 제공해줍니다.
+
+plotly.js 의 JavaScript 코드로 만들어져 있으며
+
+35종류의 차트를 사용할 수 있습니다.
+
+​
+
+dash_core_components.Graph 의 figure 인자는
+
+plotly.py 의 figure 와 같은 인자입니다.
+
+만약 새로운 그래프를 찾고 싶다면 plotly.py를
+
+살펴보는것이 필요하겠죠?
+
+​
+
+plotly library 입니다
+
+[https://plotly.com/python/](https://plotly.com/python/)
+
+[![](https://dthumb-phinf.pstatic.net/?src=%22https%3A%2F%2Fhelp.plot.ly%2Fimages%2Ftwitter-default.png%22&type=ff120)](https://plotly.com/python/)[](https://plotly.com/python/)
+
+**Plotly Python Graphing Library**
+
+Plotly's Python graphing library makes interactive, publication-quality graphs. Examples of how to make line plots, scatter plots, area charts, bar charts, error bars, box plots, histograms, heatmaps, subplots, multiple-axes, polar charts, and bubble charts.
+
+plotly.com
+
+​
+
+hover_name='country'를 지정한 뒤
+
+라벨을 클릭하면
+
+선택된 라벨만을 보여주도록 합니다.
+
+​
+
+# Run this app with `python app.py` and # visit http://127.0.0.1:8050/ in your web browser. import dash import dash_core_components as dcc import dash_html_components as html import plotly.express as px import pandas as pd external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/5d1ea79569ed194d432e56108a04d188/raw/a9f9e8076b837d541398e999dcbac2b2826a81f8/gdp-life-exp-2007.csv') fig = px.scatter(df, x="gdp per capita", y="life expectancy", size="population", color="continent", hover_name="country", log_x=True, size_max=60) app.layout = html.Div([ dcc.Graph( id='life-exp-vs-gdp', figure=fig ) ]) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+​
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMTY2/MDAxNjEwMjY5MTc3OTY1.TaTkPcVih582Y59DJuyUHGWrPvRpRTFSYcSNP-LqHRgg.2aBp6Kvym2NIOYtgSez1yfSn1g3yAHo_HdO1xodt0dwg.PNG.raymondjin_/image.png?type=w966)
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjY2/MDAxNjEwMjY5MTcxMzY0.-ELUj6bEB_wlMBuqesLRvGp8RnvtmEA_hTvBaHL-3JMg.YKgKypwoOAzh2tusVIDu4n-R2_cuA_NFF5DHBNIaQvog.PNG.raymondjin_/image.png?type=w966)
+
+​----
+
+[Dash](https://blog.naver.com/PostList.naver?blogId=raymondjin_&categoryNo=14&from=postList)
+
+Part2. Dash and Markdown (4)
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 10. 18:30
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202926071&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222202926071")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222202926071&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+Markdown 언어는
+
+HTML 언어와 비슷한데
+
+간단하게 표현하면 웹 페이지를
+
+어떻게 보여줄지를 정의해주는
+
+언어라고 생각하면 좋습니다.
+
+​
+
+핵심적인 Markdown 언어를
+
+배우고 싶다면 아래의
+
+URL을 참고해보시기 바랍니다.
+
+[https://commonmark.org/help/](https://commonmark.org/help/)
+
+[](https://commonmark.org/help/)
+
+**Markdown Reference**
+
+Type Or … to Get *Italic* _Italic_ Italic **Bold** __Bold__ Bold # Heading 1 Heading 1 ========= Heading 1 ## Heading 2 Heading 2 --------- Heading 2 [Link](http://a.com) [Link][1] ⋮ [1]: http://b.org Link ![Image](http://url/a.png) ![Image][1] ⋮ [1]: http://url/b.jpg > Blockquote Blockquote * List ...
+
+commonmark.org
+
+----------
+
+**Dash 에서도**
+
+**Markdown을 지원합니다.**
+
+Interactive Visualization 자체가
+
+HTML 위에서 동작하기 때문에
+
+자연스럽게 Markdown도 지원한 것임을
+
+예상할 수 있습니다.
+
+​
+
+# Run this app with `python app.py` and # visit http://127.0.0.1:8050/ in your web browser. import dash import dash_core_components as dcc import dash_html_components as html external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) markdown_text = ''' ### Dash and Markdown Dash apps can be written in Markdown. Dash uses the [CommonMark](http://commonmark.org/) specification of Markdown. Check out their [60 Second Markdown Tutorial](http://commonmark.org/help/) if this is your first introduction to Markdown! ''' app.layout = html.Div([ dcc.Markdown(children=markdown_text) ]) if __name__ == '__main__': app.run_server(debug=True)
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjI1/MDAxNjEwMjcwNjk3Mzc0.rEMOYQVklHviDtq-JI19PsbiTxq7eKrGLD8_MIiJLOYg.K1E_16_gUwEn8R87pt-JzjY8C0Mu32vo9GjzL_AiVPIg.PNG.raymondjin_/image.png?type=w966)
+
+markdown 출력
+
+​
+
+----------
+
+**Widget**
+
+실제로는 단순 라벨링 뿐 아니라
+
+Dropdown, Multi-Selet Dropdown
+
+Radio Items , Checkboxes
+
+Text Input, Slider 등등의
+
+Widget 을 사용해서
+
+사용자가 데이터를 선택할 수 있도록
+
+설계하고 싶을 때가 있습니다.
+
+​
+
+아래는 dash documentation에서
+
+가져온 예시입니다.
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjYz/MDAxNjEwMjcwODA0Mzk3.jwxtHSNgJog2Nl61c60yZZXGkyMLj3whSHbnqUDjgdkg._1cJ6RVd1cC7BovrkjMdczzepQ8Bl2YabqJpcNCLbL4g.PNG.raymondjin_/image.png?type=w966)
+
+dash core component 예시 Dropdown
+
+사용 법을 잘 모른다면
+
+help 함수를 사용하면 됩니다.
+
+>>>help(dcc.Dropdown)
+
+​
+
+​
+
+# -*- coding: utf-8 -*- # Run this app with `python app.py` and # visit http://127.0.0.1:8050/ in your web browser. import dash import dash_core_components as dcc import dash_html_components as html external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) app.layout = html.Div([ html.Label('Dropdown'), dcc.Dropdown( options=[ {'label': 'New York City', 'value': 'NYC'}, {'label': u'Montréal', 'value': 'MTL'}, {'label': 'San Francisco', 'value': 'SF'} ], value='MTL' ), html.Label('Multi-Select Dropdown'), dcc.Dropdown( options=[ {'label': 'New York City', 'value': 'NYC'}, {'label': u'Montréal', 'value': 'MTL'}, {'label': 'San Francisco', 'value': 'SF'} ], value=['MTL', 'SF'], multi=True ), html.Label('Radio Items'), dcc.RadioItems( options=[ {'label': 'New York City', 'value': 'NYC'}, {'label': u'Montréal', 'value': 'MTL'}, {'label': 'San Francisco', 'value': 'SF'} ], value='MTL' ), html.Label('Checkboxes'), dcc.Checklist( options=[ {'label': 'New York City', 'value': 'NYC'}, {'label': u'Montréal', 'value': 'MTL'}, {'label': 'San Francisco', 'value': 'SF'} ], value=['MTL', 'SF'] ), html.Label('Text Input'), dcc.Input(value='MTL', type='text'), html.Label('Slider'), dcc.Slider( min=0, max=9, marks={i: 'Label {}'.format(i) if i == 1 else str(i) for i in range(1, 6)}, value=5, ), ], style={'columnCount': 2}) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfNTkg/MDAxNjEwMjcwOTU0NDY2.r6f7c_WQt9XGy3AyEkqCOiwWrhN3Jfwovm2elwextqUg.3CEcJOH6PdyIQBvb55xo3JPOri2_Lmqk3A_kGoC1pFMg.PNG.raymondjin_/image.png?type=w966)
+
+component 갤러리
+
+​
+
+​
+
+위의 화면은
+
+다음에서 배워볼 Callbacks 함수와 연결한다면
+
+Interactive 시각화의 기능을 극대화 하게 됩니다.
+
+----
+
+[Dash](https://blog.naver.com/PostList.naver?blogId=raymondjin_&categoryNo=14&from=postList)
+
+Part2. Dash Callbacks 활용하기
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 10. 19:40
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203002760&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222203002760")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203002760&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+이제 사용자가 입력해주는 값을
+
+Interactive 하게 활용하는
+
+app을 만들어 보겠습니다.
+
+​
+
+가장 간단한 앱은
+
+상용자가 입력한 값을
+
+그대로 보여주는 앱입니다.
+
+​
+
+구조는 간단하지만
+
+callback 이라는 함수를 이용하는데요
+
+callback 함수는 어떤 동작이 일어날 때 마다
+
+호출이 되는 함수입니다.
+
+​
+
+예컨대 사용자가
+
+"a"라는 "값을 입력하면"
+
+그때마다 전달하는 함수가
+
+호출된다면
+
+​
+
+그 전달하는 함수는 callback 함수입니다.
+
+----------
+
+app_7_callback.py
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output external_stylesheets = ['https://codpen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__,external_stylesheets=external_stylesheets) app.layout = html.Div([ html.H6("Change the value in thetext box to see callbacks in action!"), html.Div(['Input: ', dcc.Input(id='my-input', value='initial value', type='text')]), html.Br(), html.Div(id='my-output') ]) @app.callback( Output(component_id='my-output', component_property='children'), Input(component_id='my-input',component_property='value') ) def update_output_div(input_value): return "Output: {}".format(input_value) if __name__ == '__main__': app.run_server(debug=True)
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjMg/MDAxNjEwMjcyNzkxODgz.Q2OW652GJWG6DwEqs9JF5q3-x7kQ8O2ryWCrLVCUpe8g.ro3VdTicY-wpqXDh2B8JV1oWN0NCeYz8Bi1OEkHsdSIg.PNG.raymondjin_/image.png?type=w966)
+
+callback 함수의 적용 결과
+
+​
+
+@app.callback 인자의 순서를 바꾼다면
+
+어떻게 될까요??
+
+예외가 발생합니다. dash app 에서는
+
+모든 output component를 먼저 적어야 합니다.
+
+@app.callback( Input(component_id='my-input', component_property='value'), Output(component_id='my-output', component_property='children'), )
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfODMg/MDAxNjEwMjcyODUwNTAw.bHuhcDagS-HOwS3vqhGg-zb95C56NjpdTdJ-Ef8QjLYg.WNWrBdLL22Bw-VwLIkBcLBbt0HjHIs1wC_6EYDRbrecg.PNG.raymondjin_/image.png?type=w966)
+
+Output을 먼저 적어야 합니다.
+
+----------
+
+아래의 Graph component 에 대해서
+
+callback 함수를 적용해보겠습니다.
+
+​
+
+callback 함수는 앞서 언급했듯
+
+Output(), Input() 순서로 먼저 값을 입력받고
+
+Output(children='graph-with-slider', figure='figure') 에 맞추어
+
+fig 값을 대입하여줍니다.
+
+​
+
+일반적인 dcc.Graph Compoent 의 구조를 참고하시면 좋습니다.
+
+​
+
+dcc.Graph(id='life-exp-vs-gdp', figure=fig),
+
+​
+
+@app.callback( Output('graph-with-slider', 'figure'), Input('year-slider', 'value')) def update_figure(selected_year): filtered_df = df[df.year == selected_year] fig = px.scatter(filtered_df, x="gdpPercap", y="lifeExp", size="pop", color="continent", hover_name="country", log_x=True, size_max=55) fig.update_layout(transition_duration=500) return fig
+
+​
+
+app_8_callback_scatter.py
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output import plotly.express as px import pandas as pd df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv') external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) app.layout = html.Div([ dcc.Graph(id='graph-with-slider'), dcc.Slider( id='year-slider', min=df['year'].min(), max=df['year'].max(), value=df['year'].min(), marks={str(year): str(year) for year in df['year'].unique()}, step=None ) ]) @app.callback( Output('graph-with-slider', 'figure'), Input('year-slider', 'value')) def update_figure(selected_year): filtered_df = df[df.year == selected_year] fig = px.scatter(filtered_df, x="gdpPercap", y="lifeExp", size="pop", color="continent", hover_name="country", log_x=True, size_max=55) fig.update_layout(transition_duration=500) return fig if __name__ == '__main__': app.run_server(debug=True)
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjEx/MDAxNjEwMjc1MTcwODY4.KuAglWpuzEyN5zwB858asEywjWW4xCh88mF-DX2X4AUg.f-jz6Rkfnnrs9uDgAoimG-LmWQRs-4JZ50LpuS1lragg.PNG.raymondjin_/image.png?type=w966)
+
+선택된 년도만 가시화 됩니다.
+
+​
+
+코드를 정리해보겠습니다.
+
+Slider 의 value 값이 최종적으로 callback 함수와 연결되어
+
+Graph component의 figure property 에 반영됩니다.
+
+​
+
+한 가지 주목할 것이 있습니다.
+
+Bigdata를 다룬다고 가정했을 때
+
+df 의 size는 클 것입니다.
+
+​
+
+사전에 df를 메모리에 올려놓고
+
+querying data를 app의 시작점에 놓아서
+
+사용자 관점에서는 app server starts 시점부터
+
+접근하도록 합니다.
+
+​
+
+사용자가 접속한 상태에서는 이미 df가 메모리에 올라온 상태이기 때문에
+
+비교적 느린 속도를 느끼지 않습니다.
+
+​
+
+Callback 함수에서 한가지 유의해야할 점은
+
+original data를 바꾸지 않아야 한다는 것입니다.
+
+반드시 filtering 하는 코드 내에서만 코드가 이루어져야 합니다.
+
+그렇지 않다면 User 의 사용에 따른 데이터가 바뀔 수 있습니다.
+
+이것을 허용하지 않는다면 scope를 고려해야합니다.
+
+​
+
+시간에 따라 변화하는 Graph는
+
+layout.transition 을 활용할 수 있습니다.
+
+----
+
+[Dash](https://blog.naver.com/PostList.naver?blogId=raymondjin_&categoryNo=14&from=postList)
+
+Part2. Dash Callbacks 활용하기 심화
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 10. 20:44
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203083440&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222203083440")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203083440&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+이전 포스팅에서
+
+callback 을 통해
+
+하나의 Output 과 Input을 연결하는 방법을
+
+살펴보았습니다.
+
+​
+
+Dash 에서는 일반적으로
+
+Ouput은 여러개의 Input Componets와 연결 될 수 있습니다.
+
+이를 활용하면
+
+Spotfire 라는 통계 Tool 에서 사용할 수 있었던
+
+Interactive 한 변수조절을 할 수 있습니다.
+
+​
+
+아래의 app.callback 함수를 보면
+
+총 5개의 Input 값을 조절할 수 있음을 확인할 수 있습니다.
+
+​
+
+첫 번째 인자로 입력된 값인
+
+'axis-column', 'yaxis-column',... 등은 전체코드에서
+
+어떻게 정의되어있는지 확인하겠습니다.
+
+​
+
+update_graph 에서는 단순 인자값을 기준으로
+
+scatter plot을 그니는 것 외에 특별한 코드는 없습니다.
+
+fig.update_layout() 함수를 통해 deisgn에 margin 값을 줄 수 있으며
+
+update_xaxes, update_yaxes를 활용하여
+
+축의 이름과, scale을 조절할 수 있습니다.
+
+​
+
+@app.callback( Output('indicator-graphic', 'figure'), Input('xaxis-column', 'value'), Input('yaxis-column', 'value'), Input('xaxis-type', 'value'), Input('yaxis-type', 'value'), Input('year--slider', 'value')) def update_graph(xaxis_column_name, yaxis_column_name, xaxis_type, yaxis_type, year_value): dff = df[df['Year'] == year_value] fig = px.scatter(x=dff[dff['Indicator Name'] == xaxis_column_name]['Value'], y=dff[dff['Indicator Name'] == yaxis_column_name]['Value'], hover_name=dff[dff['Indicator Name'] == yaxis_column_name]['Country Name']) fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest') fig.update_xaxes(title=xaxis_column_name, type='linear' if xaxis_type == 'Linear' else 'log') fig.update_yaxes(title=yaxis_column_name, type='linear' if yaxis_type == 'Linear' else 'log') return fig
+
+​
+
+​
+
+app_9_callback_advnaced_spotfire.py
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output import plotly.express as px import pandas as pd external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) df = pd.read_csv('https://plotly.github.io/datasets/country_indicators.csv') available_indicators = df['Indicator Name'].unique() app.layout = html.Div([ html.Div([ html.Div([ dcc.Dropdown( id='xaxis-column', options=[{'label': i, 'value': i} for i in available_indicators], value='Fertility rate, total (births per woman)' ), dcc.RadioItems( id='xaxis-type', options=[{'label': i, 'value': i} for i in ['Linear', 'Log']], value='Linear', labelStyle={'display': 'inline-block'} ) ], style={'width': '48%', 'display': 'inline-block'}), html.Div([ dcc.Dropdown( id='yaxis-column', options=[{'label': i, 'value': i} for i in available_indicators], value='Life expectancy at birth, total (years)' ), dcc.RadioItems( id='yaxis-type', options=[{'label': i, 'value': i} for i in ['Linear', 'Log']], value='Linear', labelStyle={'display': 'inline-block'} ) ],style={'width': '48%', 'float': 'right', 'display': 'inline-block'}) ]), dcc.Graph(id='indicator-graphic'), dcc.Slider( id='year--slider', min=df['Year'].min(), max=df['Year'].max(), value=df['Year'].max(), marks={str(year): str(year) for year in df['Year'].unique()}, step=None ) ]) @app.callback( Output('indicator-graphic', 'figure'), Input('xaxis-column', 'value'), Input('yaxis-column', 'value'), Input('xaxis-type', 'value'), Input('yaxis-type', 'value'), Input('year--slider', 'value')) def update_graph(xaxis_column_name, yaxis_column_name, xaxis_type, yaxis_type, year_value): dff = df[df['Year'] == year_value] fig = px.scatter(x=dff[dff['Indicator Name'] == xaxis_column_name]['Value'], y=dff[dff['Indicator Name'] == yaxis_column_name]['Value'], hover_name=dff[dff['Indicator Name'] == yaxis_column_name]['Country Name']) fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest') fig.update_xaxes(title=xaxis_column_name, type='linear' if xaxis_type == 'Linear' else 'log') fig.update_yaxes(title=yaxis_column_name, type='linear' if yaxis_type == 'Linear' else 'log') return fig if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTAxMTBfMjMy/MDAxNjEwMjc4Nzg4NjM2.TARxWbqObnqcniyZxnEofvs_JWtNV4EQ_2E649DmYk8g.qNqgvEiB_Eaanlh31tdanc5JmN8Y-HfnDjlsVjq4elAg.PNG.raymondjin_/image.png?type=w966)
+
+첫 화면
+
+**[Interactive Scatter Plot](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203083440&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수51_
+
+00:00  |  00:11
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+Interactive 하게 X 값과 Y값을 변경해가며 Trend를 확인해 볼 수 있도록 만들었습니다.
+
+interactive scatter plot 그리기
+
+----
+
+Part2. Dash Callbacks 활용하기 심화 예시 app
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 10. 22:00
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203176593&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222203176593")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203176593&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+callback 함수를 활용해서
+
+Interactive 하게 X, Y 축을 바꾸는 방법에 대해서
+
+살펴보았는데요
+
+​
+
+어디에 활용할 수 있을 지 실제 사례를 보여드리겠습니다.
+
+​
+
+해외주식 분석을 한다고 가정해보겠습니다.
+
+2021 년 1주차에 대해서
+
+어떤 변수와 어떤 변수가 상관관계가 있는지
+
+확인해보고 싶을 떄가 있습니다.
+
+​
+
+예컨대 P/E 값이 낮으면 Price 가 높은가?
+
+등등 말이지요
+
+​
+
+Sector 별로 이러한 상관관계는
+
+다른 양상을 보이는가?
+
+등등..
+
+​
+
+**[2021년 해외주식 1주차 트렌드](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203176593&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수25_
+
+00:00  |  01:11
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+해외주식의 섹터별 TREND 분석하는 영상입니다. 실제 데이터를 기반으로 여러 변수의 상관관계를 분석할 수 있습니다.
+
+​
+
+​
+
+당연스럽게도
+
+earning이 좋으면
+
+가격도 비쌉니다. ㅎ
+
+​
+
+**[해외주식 1주차 earning 과 Prices 상관관계 분석](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203176593&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수15_
+
+00:00  |  00:22
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+해외주식 섹터별 earning 과 Prices 상관관계 분석
+
+​
+
+​
+
+해외주식 저 Sector 별 저 시가총액 종목 LIST UP
+
+W1
+
+​
+
+상단부터 Energy, Technology 주식등..입니다.
+
+| Sector | Company | Market Cap | Prices |
+|---|---|---|---|
+| Energy | Exxon Mobil Corporation | 193.99B | 45.46 |
+|  | Enterprise Products Partners L.P. | 46.60B | 21.39 |
+|  | Kinder Morgan, Inc. | 32.56B | 14.49 |
+|  | The Williams Companies, Inc. | 25.71B | 21.3 |
+|  | Pioneer Natural Resources Company | 21.71B | 131.24 |
+|  | ONEOK, Inc. | 17.62B | 39.93 |
+|  | Cheniere Energy Partners, L.P. | 17.00B | 36.15 |
+|  | Cheniere Energy, Inc. | 16.40B | 64.19 |
+|  | Magellan Midstream Partners, L.P. | 9.97B | 44.86 |
+|  | Cabot Oil & Gas Corporation | 6.96B | 17.27 |
+|  | Phillips 66 Partners LP | 6.40B | 28.27 |
+|  | Western Midstream Partners, LP | 6.36B | 15.43 |
+|  | Texas Pacific Land Trust | 6.18B | 801 |
+|  | Hess Midstream LP | 5.60B | 20.14 |
+|  | Valvoline Inc. | 4.47B | 23.95 |
+|  | Shell Midstream Partners, L.P. | 4.26B | 10.91 |
+|  | Renewable Energy Group, Inc. | 3.41B | 84.29 |
+|  | Sunoco LP | 2.38B | 28.76 |
+|  | Cactus, Inc. | 2.28B | 30.55 |
+|  | Clean Energy Fuels Corp. | 2.12B | 10.25 |
+|  | TC PipeLines, LP | 2.09B | 30.2 |
+|  | World Fuel Services Corporation | 2.09B | 32.64 |
+|  | Black Stone Minerals, L.P. | 1.63B | 7.79 |
+|  | Delek Logistics Partners, LP | 1.47B | 34.18 |
+|  | Holly Energy Partners, L.P. | 1.46B | 14.48 |
+|  | Rattler Midstream LP | 1.45B | 9.63 |
+|  | BP Midstream Partners LP | 1.25B | 12.06 |
+|  | Noble Midstream Partners LP | 1.05B | 11.83 |
+|  | National Energy Services Reunited Corp. | 914.48M | 10.45 |
+|  | Dorian LPG Ltd. | 722.80M | 14.43 |
+| Technology | Apple Inc. | 2262.52B | 132.05 |
+|  | Microsoft Corporation | 1654.91B | 219.62 |
+|  | NVIDIA Corporation | 331.02B | 531.07 |
+|  | Adobe Inc. | 231.47B | 485.1 |
+|  | Intel Corporation | 207.12B | 51.65 |
+|  | salesforce.com, inc. | 203.05B | 222.04 |
+|  | Cisco Systems, Inc. | 189.25B | 45.06 |
+|  | Oracle Corporation | 185.76B | 63.38 |
+|  | Broadcom Inc. | 180.00B | 445.64 |
+|  | QUALCOMM Incorporated | 174.38B | 156.64 |
+|  | Texas Instruments Incorporated | 155.75B | 171.16 |
+|  | Advanced Micro Devices, Inc. | 114.47B | 94.58 |
+|  | International Business Machines Corporation | 113.13B | 128.53 |
+|  | Square, Inc. | 110.58B | 241.45 |
+|  | ServiceNow, Inc. | 102.76B | 529.64 |
+|  | Intuit Inc. | 97.27B | 374.46 |
+|  | Applied Materials, Inc. | 87.96B | 95.56 |
+|  | Micron Technology, Inc. | 82.72B | 77.42 |
+|  | Fiserv, Inc. | 77.63B | 116.79 |
+|  | Lam Research Corporation | 74.10B | 501.63 |
+|  | Autodesk, Inc. | 68.97B | 319.85 |
+|  | VMware, Inc. | 59.02B | 142.86 |
+|  | Analog Devices, Inc. | 57.31B | 156.74 |
+|  | Dell Technologies Inc. | 57.28B | 77.22 |
+|  | KLA Corporation | 43.95B | 283.18 |
+|  | Cognizant Technology Solutions Corporation | 43.34B | 81.95 |
+|  | Amphenol Corporation | 40.21B | 135.36 |
+|  | Synopsys, Inc. | 39.86B | 262.8 |
+|  | The Trade Desk, Inc. | 38.17B | 795.81 |
+|  | Microchip Technology Incorporated | 38.01B | 147.4 |
+| Utilities | NextEra Energy, Inc. | 156.39B | 81.13 |
+|  | Duke Energy Corporation | 65.55B | 90.05 |
+|  | The Southern Company | 64.16B | 61.57 |
+|  | Dominion Energy, Inc. | 58.81B | 73.2 |
+|  | Exelon Corporation | 40.90B | 42.21 |
+|  | American Electric Power Company, Inc. | 38.47B | 79.18 |
+|  | Sempra Energy | 34.12B | 119.78 |
+|  | Xcel Energy Inc. | 34.03B | 65.76 |
+|  | Eversource Energy | 30.55B | 90.33 |
+|  | Public Service Enterprise Group Incorporated | 28.52B | 57.31 |
+|  | American Water Works Company, Inc. | 27.93B | 156.98 |
+|  | WEC Energy Group, Inc. | 27.30B | 87.95 |
+|  | Consolidated Edison, Inc. | 23.51B | 69.93 |
+|  | Edison International | 23.13B | 62.3 |
+|  | DTE Energy Company | 22.55B | 118.19 |
+|  | PPL Corporation | 20.92B | 27.81 |
+|  | Entergy Corporation | 18.89B | 95.49 |
+|  | Ameren Corporation | 18.28B | 75 |
+|  | CMS Energy Corporation | 16.22B | 57.68 |
+|  | FirstEnergy Corp. | 15.96B | 29.91 |
+|  | Avangrid, Inc. | 14.55B | 46.97 |
+|  | Alliant Energy Corporation | 12.14B | 49.35 |
+|  | Essential Utilities, Inc. | 11.77B | 48.72 |
+|  | Evergy, Inc. | 11.71B | 53 |
+|  | Atmos Energy Corporation | 11.02B | 89.26 |
+|  | Vistra Corp. | 10.18B | 20.99 |
+|  | NRG Energy, Inc. | 9.23B | 39.01 |
+|  | Pinnacle West Capital Corporation | 8.66B | 77.77 |
+|  | UGI Corporation | 7.24B | 35.25 |
+|  | Clearway Energy, Inc. | 7.20B | 33.49 |
+| Basic Materials | The Sherwin-Williams Company | 65.49B | 728.77 |
+|  | Ecolab Inc. | 62.97B | 221.75 |
+|  | Air Products and Chemicals, Inc. | 62.67B | 285.74 |
+|  | Southern Copper Corporation | 55.82B | 71.44 |
+|  | Newmont Corporation | 50.86B | 62.79 |
+|  | PPG Industries, Inc. | 34.79B | 148.3 |
+|  | LyondellBasell Industries N.V. | 32.10B | 96.75 |
+|  | Corteva, Inc. | 31.99B | 43.25 |
+|  | Vulcan Materials Company | 21.31B | 162.83 |
+|  | Albemarle Corporation | 19.83B | 184.1 |
+|  | Martin Marietta Materials, Inc. | 19.13B | 310.43 |
+|  | Nucor Corporation | 16.83B | 56.02 |
+|  | Avantor, Inc. | 16.29B | 29.01 |
+|  | Celanese Corporation | 15.95B | 136.82 |
+|  | FMC Corporation | 15.60B | 121.08 |
+|  | Eastman Chemical Company | 14.32B | 105.73 |
+|  | International Flavors & Fragrances Inc. | 13.01B | 119 |
+|  | The Scotts Miracle-Gro Company | 12.42B | 225.94 |
+|  | RPM International Inc. | 11.40B | 88.01 |
+|  | Westlake Chemical Corporation | 11.24B | 88.28 |
+|  | CF Industries Holdings, Inc. | 9.06B | 43.16 |
+|  | Reliance Steel & Aluminum Co. | 8.33B | 131.29 |
+|  | Steel Dynamics, Inc. | 8.24B | 39.49 |
+|  | Royal Gold, Inc. | 7.05B | 105.6 |
+|  | Axalta Coating Systems Ltd. | 6.93B | 29.43 |
+|  | Huntsman Corporation | 6.32B | 28.4 |
+|  | MDU Resources Group, Inc. | 5.27B | 26.73 |
+|  | Quaker Chemical Corporation | 4.81B | 271.38 |
+|  | Eagle Materials Inc. | 4.75B | 113 |
+|  | Element Solutions Inc | 4.68B | 18.87 |
+| Communication Services | Alphabet Inc. | 1240.59B | 1807.21 |
+|  | Alphabet Inc. | 1205.84B | 1797.83 |
+|  | Facebook, Inc. | 758.52B | 267.57 |
+|  | Verizon Communications Inc. | 236.70B | 57.8 |
+|  | Comcast Corporation | 230.46B | 51.54 |
+|  | Netflix, Inc. | 218.76B | 510.4 |
+|  | AT&T Inc. | 204.86B | 29.02 |
+|  | T-Mobile US, Inc. | 165.68B | 135.06 |
+|  | Charter Communications, Inc. | 125.25B | 634.38 |
+|  | Zoom Video Communications, Inc. | 104.76B | 349.61 |
+|  | Activision Blizzard, Inc. | 69.60B | 91.3 |
+|  | Electronic Arts Inc. | 40.71B | 141.86 |
+|  | Match Group, Inc. | 40.59B | 151.79 |
+|  | Liberty Broadband Corporation | 32.35B | 153.45 |
+|  | Liberty Broadband Corporation | 26.77B | 151.5 |
+|  | Sirius XM Holdings Inc. | 25.27B | 5.91 |
+|  | The Liberty SiriusXM Group | 25.21B | 42.19 |
+|  | ViacomCBS Inc. | 24.53B | 40.06 |
+|  | Take-Two Interactive Software, Inc. | 24.04B | 210.43 |
+|  | Altice USA, Inc. | 19.84B | 35.77 |
+|  | Fox Corporation | 17.89B | 30.09 |
+|  | Fox Corporation | 17.38B | 29.62 |
+|  | DISH Network Corporation | 17.00B | 33.16 |
+|  | Discovery, Inc. | 15.46B | 34.63 |
+|  | Omnicom Group Inc. | 13.57B | 63.59 |
+|  | Cable One, Inc. | 12.57B | 2064.36 |
+|  | Lumen Technologies, Inc. | 11.52B | 10.53 |
+|  | Dolby Laboratories, Inc. | 9.70B | 96.06 |
+|  | The Liberty SiriusXM Group | 9.64B | 41.93 |
+|  | The Interpublic Group of Companies, Inc. | 9.47B | 24.34 |
+| Consumer Cyclical | Amazon.com, Inc. | 1611.11B | 3182.7 |
+|  | Tesla, Inc. | 834.17B | 880.02 |
+|  | The Home Depot, Inc. | 289.31B | 269.09 |
+|  | NIKE, Inc. | 229.92B | 146.35 |
+|  | McDonald's Corporation | 158.58B | 215.87 |
+|  | Starbucks Corporation | 122.85B | 105.67 |
+|  | Lowe's Companies, Inc. | 120.97B | 165.05 |
+|  | Booking Holdings Inc. | 92.52B | 2281.54 |
+|  | The TJX Companies, Inc. | 84.32B | 70.22 |
+|  | General Motors Company | 61.93B | 43.06 |
+|  | Peloton Interactive, Inc. | 47.47B | 158.88 |
+|  | Ross Stores, Inc. | 43.52B | 122.41 |
+|  | Marriott International, Inc. | 41.60B | 129.69 |
+|  | Chipotle Mexican Grill, Inc. | 38.89B | 1402.44 |
+|  | eBay Inc. | 37.78B | 54.48 |
+|  | O'Reilly Automotive, Inc. | 34.57B | 477.92 |
+|  | Yum! Brands, Inc. | 32.61B | 107.15 |
+|  | Ball Corporation | 29.52B | 90.57 |
+|  | Best Buy Co., Inc. | 28.30B | 107.57 |
+|  | AutoZone, Inc. | 28.29B | 1252.92 |
+|  | D.R. Horton, Inc. | 24.84B | 66.96 |
+|  | Lennar Corporation | 22.92B | 73.39 |
+|  | Etsy, Inc. | 22.80B | 175.65 |
+|  | International Paper Company | 20.20B | 51.48 |
+|  | Rollins, Inc. | 19.64B | 40.8 |
+|  | Tractor Supply Company | 17.66B | 149.31 |
+|  | CarMax, Inc. | 16.67B | 102.1 |
+|  | Ulta Beauty, Inc. | 16.34B | 294.26 |
+|  | Tiffany & Co. | 15.95B | 131.51 |
+|  | Pool Corporation | 15.48B | 390.99 |
+| Consumer Defensive | Walmart Inc. | 414.94B | 146.63 |
+|  | The Procter & Gamble Company | 339.36B | 138.79 |
+|  | The Coca-Cola Company | 217.91B | 51.08 |
+|  | PepsiCo, Inc. | 197.92B | 144.18 |
+|  | Costco Wholesale Corporation | 162.85B | 369.94 |
+|  | Philip Morris International Inc. | 127.35B | 83.09 |
+|  | Target Corporation | 95.50B | 193.6 |
+|  | The Estee Lauder Companies Inc. | 93.02B | 260.73 |
+|  | Mondelez International, Inc. | 82.55B | 58.19 |
+|  | Altria Group, Inc. | 76.80B | 41.59 |
+|  | Colgate-Palmolive Company | 69.94B | 82.35 |
+|  | Dollar General Corporation | 52.78B | 215.81 |
+|  | Monster Beverage Corporation | 49.59B | 94.99 |
+|  | Keurig Dr Pepper Inc. | 44.78B | 32 |
+|  | Constellation Brands, Inc. | 44.28B | 230.21 |
+|  | Kimberly-Clark Corporation | 44.25B | 131.76 |
+|  | Brown-Forman Corporation | 36.24B | 78.43 |
+|  | General Mills, Inc. | 34.34B | 56.4 |
+|  | The Hershey Company | 31.27B | 152.03 |
+|  | Archer-Daniels-Midland Company | 28.96B | 52.57 |
+|  | Dollar Tree, Inc. | 26.51B | 112.97 |
+|  | McCormick & Company, Incorporated | 25.12B | 95.21 |
+|  | The Clorox Company | 24.83B | 197.84 |
+|  | Hormel Foods Corporation | 24.44B | 45.44 |
+|  | The Kroger Co. | 23.92B | 31.63 |
+|  | Tyson Foods, Inc. | 23.05B | 64.03 |
+|  | Church & Dwight Co., Inc. | 21.09B | 85.4 |
+|  | Kellogg Company | 20.46B | 60.2 |
+|  | Conagra Brands, Inc. | 16.58B | 34.07 |
+|  | Campbell Soup Company | 14.10B | 46.86 |
+| Financial | Berkshire Hathaway Inc. | 545.66B | 352039 |
+|  | Visa Inc. | 502.71B | 215.45 |
+|  | JPMorgan Chase & Co. | 409.04B | 136.02 |
+|  | Mastercard Incorporated | 351.39B | 353.85 |
+|  | PayPal Holdings, Inc. | 280.82B | 242.46 |
+|  | Bank of America Corporation | 278.35B | 32.53 |
+|  | Wells Fargo & Company | 135.27B | 33.19 |
+|  | Morgan Stanley | 134.77B | 75.25 |
+|  | Citigroup Inc. | 134.33B | 65.37 |
+|  | BlackRock, Inc. | 113.35B | 756.45 |
+|  | The Charles Schwab Corporation | 109.36B | 58.98 |
+|  | The Goldman Sachs Group, Inc. | 98.19B | 290.08 |
+|  | American Express Company | 96.86B | 121.78 |
+|  | S&P Global Inc. | 77.42B | 326.85 |
+|  | The Blackstone Group Inc. | 74.98B | 62.9 |
+|  | U.S. Bancorp | 73.60B | 49.32 |
+|  | CME Group Inc. | 70.09B | 199.68 |
+|  | Truist Financial Corporation | 67.48B | 50.65 |
+|  | The PNC Financial Services Group, Inc. | 66.08B | 158.19 |
+|  | Intercontinental Exchange, Inc. | 64.80B | 117.63 |
+|  | Marsh & McLennan Companies, Inc. | 56.58B | 113.48 |
+|  | The Progressive Corporation | 54.52B | 94.5 |
+|  | Moody's Corporation | 51.77B | 280.21 |
+|  | Capital One Financial Corporation | 50.07B | 110.56 |
+|  | MetLife, Inc. | 43.95B | 49.41 |
+|  | Rocket Companies, Inc. | 41.43B | 19.95 |
+|  | The Bank of New York Mellon Corporation | 39.00B | 44.8 |
+|  | MSCI Inc. | 36.72B | 452.68 |
+|  | The Travelers Companies, Inc. | 35.05B | 139.65 |
+|  | T. Rowe Price Group, Inc. | 34.57B | 154.52 |
+| Healthcare | Johnson & Johnson | 417.75B | 160.04 |
+|  | UnitedHealth Group Incorporated | 339.20B | 363.39 |
+|  | Merck & Co., Inc. | 206.96B | 83.03 |
+|  | Pfizer Inc. | 206.05B | 37.13 |
+|  | Thermo Fisher Scientific Inc. | 201.28B | 512.3 |
+|  | Abbott Laboratories | 195.92B | 111.61 |
+|  | AbbVie Inc. | 186.06B | 107.27 |
+|  | Danaher Corporation | 171.83B | 243.49 |
+|  | Eli Lilly and Company | 157.46B | 166.41 |
+|  | Amgen Inc. | 137.18B | 238.49 |
+|  | CVS Health Corporation | 97.20B | 74.86 |
+|  | Intuitive Surgical, Inc. | 95.92B | 818.75 |
+|  | Stryker Corporation | 90.45B | 243.66 |
+|  | Anthem, Inc. | 81.99B | 337.08 |
+|  | Zoetis Inc. | 79.30B | 168.11 |
+|  | Cigna Corporation | 78.19B | 220.8 |
+|  | Gilead Sciences, Inc. | 76.84B | 63.04 |
+|  | Becton, Dickinson and Company | 73.14B | 255.06 |
+|  | Vertex Pharmaceuticals Incorporated | 60.67B | 237 |
+|  | HCA Healthcare, Inc. | 57.55B | 172.28 |
+|  | Humana Inc. | 57.22B | 436.77 |
+|  | Edwards Lifesciences Corporation | 55.53B | 90.67 |
+|  | Illumina, Inc. | 54.54B | 379.61 |
+|  | Regeneron Pharmaceuticals, Inc. | 52.69B | 498.73 |
+|  | Veeva Systems Inc. | 44.32B | 288.54 |
+|  | Align Technology, Inc. | 44.14B | 570.53 |
+|  | IDEXX Laboratories, Inc. | 43.52B | 513.2 |
+|  | Baxter International Inc. | 41.19B | 81.7 |
+|  | Centene Corporation | 38.82B | 68.21 |
+|  | Biogen Inc. | 38.66B | 252.54 |
+| Industrials | Honeywell International Inc. | 146.16B | 210.03 |
+|  | Union Pacific Corporation | 145.87B | 218.82 |
+|  | United Parcel Service, Inc. | 135.15B | 158.39 |
+|  | Caterpillar Inc. | 104.39B | 194.26 |
+|  | General Electric Company | 98.51B | 11.34 |
+|  | 3M Company | 95.74B | 166.62 |
+|  | Lockheed Martin Corporation | 93.82B | 336.1 |
+|  | Deere & Company | 91.11B | 293.91 |
+|  | CSX Corporation | 72.96B | 95.84 |
+|  | Automatic Data Processing, Inc. | 72.35B | 171.05 |
+|  | Illinois Tool Works Inc. | 65.59B | 208.96 |
+|  | FedEx Corporation | 65.02B | 244.96 |
+|  | Norfolk Southern Corporation | 64.08B | 254.04 |
+|  | Global Payments Inc. | 60.25B | 206.32 |
+|  | Waste Management, Inc. | 49.70B | 118.6 |
+|  | Emerson Electric Co. | 48.60B | 81.82 |
+|  | Northrop Grumman Corporation | 47.74B | 288.33 |
+|  | Roper Technologies, Inc. | 44.24B | 431.1 |
+|  | General Dynamics Corporation | 43.12B | 150.77 |
+|  | L3Harris Technologies, Inc. | 37.69B | 180.7 |
+|  | Cintas Corporation | 36.43B | 350.15 |
+|  | Parker-Hannifin Corporation | 35.86B | 280.66 |
+|  | Carrier Global Corporation | 35.27B | 40.69 |
+|  | Cummins Inc. | 34.36B | 234.31 |
+|  | TransDigm Group Incorporated | 33.24B | 613.26 |
+|  | Paychex, Inc. | 32.82B | 92.02 |
+|  | Verisk Analytics, Inc. | 32.38B | 200.9 |
+|  | Republic Services, Inc. | 30.72B | 96.97 |
+|  | PACCAR Inc | 30.27B | 87.8 |
+|  | Rockwell Automation, Inc. | 30.21B | 261.81 |
+| Real Estate | American Tower Corporation (REIT) | 96.89B | 222.2 |
+|  | Prologis, Inc. | 70.81B | 96.6 |
+|  | Crown Castle International Corp. (REIT) | 65.28B | 154.06 |
+|  | Equinix, Inc. (REIT) | 60.51B | 692.46 |
+|  | Public Storage | 38.58B | 222.62 |
+|  | Digital Realty Trust, Inc. | 37.12B | 133.6 |
+|  | CoStar Group, Inc. | 36.28B | 919.52 |
+|  | Simon Property Group, Inc. | 27.94B | 86.49 |
+|  | Welltower Inc. | 25.82B | 62.68 |
+|  | Weyerhaeuser Company | 25.00B | 33.38 |
+|  | Alexandria Real Estate Equities, Inc. | 21.99B | 165.91 |
+|  | AvalonBay Communities, Inc. | 21.79B | 158.44 |
+|  | Equity Residential | 21.57B | 58.26 |
+|  | CBRE Group, Inc. | 20.91B | 62.64 |
+|  | Realty Income Corporation | 20.67B | 59.74 |
+|  | Ventas, Inc. | 17.59B | 47.14 |
+|  | Invitation Homes Inc. | 16.35B | 29.33 |
+|  | Essex Property Trust, Inc. | 15.31B | 233.89 |
+|  | Healthpeak Properties, Inc. | 15.20B | 28.59 |
+|  | MGM Growth Properties LLC | 14.58B | 31.48 |
+|  | Extra Space Storage Inc. | 14.34B | 112.05 |
+|  | Duke Realty Corporation | 14.23B | 38.75 |
+|  | Mid-America Apartment Communities, Inc. | 14.14B | 125.27 |
+|  | Sun Communities, Inc. | 14.06B | 145.44 |
+|  | Boston Properties, Inc. | 13.92B | 90.04 |
+|  | VICI Properties Inc. | 13.87B | 25.67 |
+|  | W. P. Carey Inc. | 11.55B | 66.7 |
+|  | Medical Properties Trust, Inc. | 11.20B | 21.07 |
+|  | Equity LifeStyle Properties, Inc. | 11.01B | 61.06 |
+|  | UDR, Inc. | 10.88B | 37.38 |
+
+----
+
+Part2. Dash Callbacks 활용하기 심화 (2)
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 10. 22:39
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203218624&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222203218624")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203218624&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+Dash App 에서 사용자로부터
+
+Input 값을 받아서
+
+Output 값에 Interactive 하게 반영하는 방법을 살펴보았습니다.
+
+​
+
+이전 포스팅에서는
+
+여러개의 Input 값이 있고 하나의 Output 값이 있는
+
+callback 함수를 만들어 보았었습니다.
+
+[https://blog.naver.com/raymondjin_/222203083440](https://blog.naver.com/raymondjin_/222203083440)
+
+[![](https://dthumb-phinf.pstatic.net/?src=%22https%3A%2F%2Fblogthumb.pstatic.net%2FMjAyMTAxMTBfNDYg%2FMDAxNjEwMjc3MzY0MDEw.diAyjkXHEaVmm20fIPpNOMf3k2JvrBU0mxIvH2Y__MQg.kZYKa5MDlGpsyVYqA8ua2PDwrZ90sP04d5s6MS98YJ4g.JPEG.raymondjin_%2F%25EC%25BD%2594%25EB%2594%25A9%253F%258F%25AC%253F%258A%25A4%253F%258C%2585.jpg%3Ftype%3Dw2%22&type=ff500_300)](https://blog.naver.com/raymondjin_/222203083440)[](https://blog.naver.com/raymondjin_/222203083440)
+
+**Part2. Dash Callbacks 활용하기 심화**
+
+이전 포스팅에서callback 을 통해하나의 Output 과 Input을 연결하는 방법을살펴보았습니다.​Dash 에서...
+
+blog.naver.com
+
+​
+
+이번 포스팅에서는 반대로
+
+하나의 Input 값에 대해서
+
+여러개의 Output 값을 return 하는
+
+callback 함수를 만들어보겠습니다.
+
+​
+
+----------
+
+입력한 값을 기반으로
+
+x제곱, x세제곱,.. 등등을 계산하는 app입니다.
+
+return 된 값을 표시해줄 html.Table tag에
+
+값을 입력하여 visualization 합니다.
+
+​
+
+html.Td() 마다 적절한 id값을 지정해주는 것이 중요합니다.
+
+또한 Output 값 모두가 callback 함수의
+
+인자로 앞에 위치해야합니다.
+
+​
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) app.layout = html.Div([ dcc.Input( id='num-multi', type='number', value=5 ), html.Table([ html.Tr([html.Td(['x', html.Sup(2)]), html.Td(id='square')]), html.Tr([html.Td(['x', html.Sup(3)]), html.Td(id='cube')]), html.Tr([html.Td([2, html.Sup('x')]), html.Td(id='twos')]), html.Tr([html.Td([3, html.Sup('x')]), html.Td(id='threes')]), html.Tr([html.Td(['x', html.Sup('x')]), html.Td(id='x^x')]), ]), ]) @app.callback( Output('square', 'children'), Output('cube', 'children'), Output('twos', 'children'), Output('threes', 'children'), Output('x^x', 'children'), Input('num-multi', 'value')) def callback_a(x): return x**2, x**3, 2**x, 3**x, pow(x,x) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+**[MultiOutput 적용하기](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203218624&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수24_
+
+음소거
+
+00:00  |  00:09
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+PythonDash MultiOutput 적용 app입니다.
+
+----
+
+Part2. Layout 개념 요약
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 11. 3:38
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203391918&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222203391918")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203391918&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+Layout 에서 꼭 기억해야할 개념입니다.
+
+​
+
+1. Layout을 Design 하는 것은
+
+HTML 을 Design 하는 것 과 같다.
+
+상하 관계는 children 속성을 통해서 한다.
+
+​
+
+2. children 속성에는
+
+개개의 component 뿐만 아니라
+
+list도 대입이 가능하다.
+
+​
+
+3. style을 변경하고 싶다면
+
+style 속성을 통해서 변경한다
+
+이때 dictinary 형태로 속성을 지정해준다.
+
+​
+
+4. dcc.Graph 는
+
+첫 번쨰 인다로는 id, 두 번째 인자로는 figure 값이 들어온다.
+
+이때 figure 값은 plotly 의figure 개념과 동일하다.
+
+​
+
+5. main 함수에서 실행되는
+
+app 은 dash.Dash() 에 의해 만들어진 instance 이므로
+
+파일명이 꼭 app.py 일 필요는 없다.
+
+​
+
+import dash import dash_core_components as dcc import dash_html_components as html import plotly.express as px import pandas as pd external_stylesheets = ['https://codepen.io/chriddpy/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) df = pd.read_excel("../data/abroad_stock_W1.xlsx") fig = px.bar(df, x='Sector',y="cap_value", color='Sector',barmode='group') app.layout = html.Div(children=['Abroad Stock Sector Volume', html.H1(children="marketcap by sector"), dcc.Graph(id='example-graph',figure=fig), ], style={'textAlign':'center'}) if __name__ == '__main__': app.run_server(debug=True)
+
+**[해외주식 종목구성](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203391918&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수31_
+
+00:00  |  00:37
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+Sector 별 Market Cap을 비교하였습니다.
+
+해외주식 Sector 별 Market Cap 분석 - W1
+
+----
+
+Part2. Callbacks 개념 요약
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 11. 3:55
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203396291&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222203396291")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203396291&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+Callbacks 개념 요약입니다.
+
+​
+
+Input과 Output 을 연결하는 작업으로 이해하면 좋습니다.
+
+dash core component 의 component 간 연결을 해줍니다.
+
+​
+
+component는 id, value, type 등의 속성을 가지는데
+
+연결은 component_id 와, component_property 값을 기반으로 합니다.
+
+​
+
+@app.callback() 데코레이터를 활용하여
+
+callback함수를 호출하도록 합니다.
+
+​
+
+먼더 파이썬 데코레이터는
+
+"함수"를 인자로 받아 "함수를"
+
+return 하는 함수라고 생각하면 좋습니다.
+
+​
+
+선형 대수학에서 functional과 비슷한 개념입니다
+
+(함수를 정의역으로 삼는 함수)
+
+​
+
+**@app.callback() 데코레이터**가 어려운 이유는
+
+단순 함수만을 인자로 받는 것이 아니라
+
+**Output(), Input() 값을 또 다른 인자**로 받기 때문입니다.
+
+​
+
+app.callback(Output(), Input(),f(x))
+
+형태로 callback 함수를 구성합니다.
+
+이때 반드시
+
+Output() 인자들이 가장 앞쪽에 대입되어야 하며
+
+Input() 에서의 값을 f(x) 에 연결 해 줍니다.
+
+​
+
+**Input(component_id='X',component_property='A')**
+
+**Output(component_id='Y', component_property='B')**
+
+라고 할 때
+
+**component_id가 X인 component A 속성을 f(x)의 x값에 넣어주고**
+
+**return 값을 component_id 가 Y인 compoent B 속성값에 넣어줍니다.**
+
+​
+
+좀더 일반화가 된다고 가정하면
+
+Ouput 에 component_property='figure'가 들어간다면
+
+Interactive하게 Graph가 Update 된다고 볼 수 있습니다.
+
+​
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output external_stylesheets = ['https://codepen/io/chriddpy/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets= external_stylesheets) app.layout = html.Div([ html.H6(children='Change the value in the text box'), html.Div(["Input: ", dcc.Input(id='my-input', value='initial value', type='text')]), html.Br(), html.Div(id='my-output'), ]) @app.callback( Output(component_id='my-output', component_property='children'), Input(component_id='my-input', component_property='value') ) def update_output_div(initial_value): return "Output : {}".format(initial_value) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+​
+
+**[callback함수활용하기](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203396291&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수17_
+
+00:00  |  00:08
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+Interactive Inputvalue
+
+​
+
+​
+
+​
+
+----------
+
+아래의 Interactive 한 Scatter Plot 이 이해가 된다면 성공!
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output import plotly.express as px import pandas as pd df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv') external_stylesheets =['https://codepen.io/chriddpy/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets= external_stylesheets) app.layout = html.Div([ dcc.Graph(id='graph-with-slider'), dcc.Slider( id='year-slider', min=df['year'].min(), max=df['year'].max(), value=df['year'].min(), marks={str(year):str(year) for year in df['year'].unique()}, step=None ) ]) @app.callback( Output('graph-with-slider','figure'), Input('year-slider','value') ) def update_figure(selected_year): filtered_df =df[df.year==selected_year] fig = px.scatter(filtered_df,x='gdpPercap',y='lifeExp',size='pop',color='continent',hover_name='country', log_x=True, size_max =55) fig.update_layout(transition_duration=500) return fig if __name__ == '__main__': app.run_server(debug=True)
+
+**[Interactive Scatter Plot](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203396291&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수8_
+
+00:00  |  00:20
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+Slider 에 입력된 값을 Interactive 하게 반영하여 Scatter Plot을 그립니다.
+
+​----
+
+Part2. Callbacks MultiInput 개념 요약
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 11. 5:30
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203418320&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222203418320")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203418320&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+지난 번 포스팅에서
+
+compoent_id, component_property 인자를 지정하여
+
+Input과 Ouput을 연결하는 callback함수를 정의했었습니다.
+
+​
+
+[https://blog.naver.com/raymondjin_/222203396291](https://blog.naver.com/raymondjin_/222203396291)
+
+[![](https://dthumb-phinf.pstatic.net/?src=%22https%3A%2F%2Fblogthumb.pstatic.net%2FMjAyMTAxMTFfMjAz%2FMDAxNjEwMzA0MjY4MjMy.B0-ori1BDO6vWQ4nbadUkDFTwmsJvPwrVwt-RKaHGkYg.rTuy7Mc0h9DjUW1veFNDBBibQb0wqX1MGqmp8E7Pzwog.JPEG.raymondjin_%2Fblur-1853262_1920.jpg%3Ftype%3Dw2%22&type=ff500_300)](https://blog.naver.com/raymondjin_/222203396291)[](https://blog.naver.com/raymondjin_/222203396291)
+
+**Part2. Callbacks 개념 요약**
+
+Callbacks 개념 요약입니다.​Input과 Output 을 연결하는 작업으로 이해하면 좋습니다.dash core compo...
+
+blog.naver.com
+
+​
+
+이점을 고려한다면
+
+여러개의 Input 값을 가지는
+
+Callback 함수로 일반화 할 수 있습니다.
+
+​
+
+update_graph 라는 함수는
+
+callback 함수의 Input 인자들을 순서대로 대입받습니다.
+
+그리고 그 결과물을 indicator-graphic 이라는 component 의 figure 에 대입해줍니다.
+
+​
+
+@app.callback( Output('indicator-graphic', 'figure'), Input('xaxis-column', 'value'), Input('yaxis-column', 'value'), Input('xaxis-type', 'value'), Input('yaxis-type', 'value'), Input('year--slider', 'value')) def update_graph(xaxis_column_name, yaxis_column_name, xaxis_type, yaxis_type, year_value): dff = df[df['Year'] == year_value] fig = px.scatter(x=dff[dff['Indicator Name'] == xaxis_column_name]['Value'], y=dff[dff['Indicator Name'] == yaxis_column_name]['Value'], hover_name=dff[dff['Indicator Name'] == yaxis_column_name]['Country Name']) fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest') fig.update_xaxes(title=xaxis_column_name, type='linear' if xaxis_type == 'Linear' else 'log') fig.update_yaxes(title=yaxis_column_name, type='linear' if yaxis_type == 'Linear' else 'log') return fig
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output import plotly.express as px import pandas as pd external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) df = pd.read_csv('https://plotly.github.io/datasets/country_indicators.csv') available_indicators = df['Indicator Name'].unique() app.layout = html.Div([ html.Div([ html.Div([ dcc.Dropdown( id='xaxis-column', options=[{'label': i, 'value': i} for i in available_indicators], value='Fertility rate, total (births per woman)' ), dcc.RadioItems( id='xaxis-type', options=[{'label': i, 'value': i} for i in ['Linear', 'Log']], value='Linear', labelStyle={'display': 'inline-block'} ) ], style={'width': '48%', 'display': 'inline-block'}), html.Div([ dcc.Dropdown( id='yaxis-column', options=[{'label': i, 'value': i} for i in available_indicators], value='Life expectancy at birth, total (years)' ), dcc.RadioItems( id='yaxis-type', options=[{'label': i, 'value': i} for i in ['Linear', 'Log']], value='Linear', labelStyle={'display': 'inline-block'} ) ],style={'width': '48%', 'float': 'right', 'display': 'inline-block'}) ]), dcc.Graph(id='indicator-graphic'), dcc.Slider( id='year--slider', min=df['Year'].min(), max=df['Year'].max(), value=df['Year'].max(), marks={str(year): str(year) for year in df['Year'].unique()}, step=None ) ]) @app.callback( Output('indicator-graphic', 'figure'), Input('xaxis-column', 'value'), Input('yaxis-column', 'value'), Input('xaxis-type', 'value'), Input('yaxis-type', 'value'), Input('year--slider', 'value')) def update_graph(xaxis_column_name, yaxis_column_name, xaxis_type, yaxis_type, year_value): dff = df[df['Year'] == year_value] fig = px.scatter(x=dff[dff['Indicator Name'] == xaxis_column_name]['Value'], y=dff[dff['Indicator Name'] == yaxis_column_name]['Value'], hover_name=dff[dff['Indicator Name'] == yaxis_column_name]['Country Name']) fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest') fig.update_xaxes(title=xaxis_column_name, type='linear' if xaxis_type == 'Linear' else 'log') fig.update_yaxes(title=yaxis_column_name, type='linear' if yaxis_type == 'Linear' else 'log') return fig if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+**[callback함수응요](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222203418320&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수8_
+
+00:00  |  00:19
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+multiinput
+
+----
+
+Part2. Dash Callbacks MultiOutput, Chained Callbacks
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 12. 21:51
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205333462&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222205333462")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205333462&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+MultiInput을 적용할 수 있다면
+
+MultiOutput은 자연스럽습니다.
+
+​
+
+app.callback 함수가 호출하는
+
+함수의 return 값을 여러개 지정하고
+
+대응되는 Output을 배치하면 됩니다.
+
+​
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) app.layout = html.Div([ dcc.Input( id='num-multi', type='number', value=5 ), html.Table([ html.Tr([html.Td(['x', html.Sup(2)]), html.Td(id='square')]), html.Tr([html.Td(['x', html.Sup(3)]), html.Td(id='cube')]), html.Tr([html.Td([2, html.Sup('x')]), html.Td(id='twos')]), html.Tr([html.Td([3, html.Sup('x')]), html.Td(id='threes')]), html.Tr([html.Td(['x', html.Sup('x')]), html.Td(id='x^x')]), ]), ]) @app.callback( Output('square', 'children'), Output('cube', 'children'), Output('twos', 'children'), Output('threes', 'children'), Output('x^x', 'children'), Input('num-multi', 'value')) def callback_a(x): return x**2, x**3, 2**x, 3**x, pow(x,x) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+​
+
+**[MultiOutput Dash](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205333462&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수9_
+
+00:00  |  00:06
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+MultiOutput Dash
+
+​
+
+​
+
+​
+
+A → B → C 가 연쇄적으로
+
+바뀌는 구조의 callback도 가능합니다.
+
+합성함수 같습니다.
+
+​
+
+# -*- coding: utf-8 -*- import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) all_options = { 'America': ['New York City', 'San Francisco', 'Cincinnati'], 'Canada': [u'Montréal', 'Toronto', 'Ottawa'] } app.layout = html.Div([ dcc.RadioItems( id='countries-radio', options=[{'label': k, 'value': k} for k in all_options.keys()], value='America' ), html.Hr(), dcc.RadioItems(id='cities-radio'), html.Hr(), html.Div(id='display-selected-values') ]) @app.callback( Output('cities-radio', 'options'), Input('countries-radio', 'value')) def set_cities_options(selected_country): return [{'label': i, 'value': i} for i in all_options[selected_country]] @app.callback( Output('cities-radio', 'value'), Input('cities-radio', 'options')) def set_cities_value(available_options): return available_options[0]['value'] @app.callback( Output('display-selected-values', 'children'), Input('countries-radio', 'value'), Input('cities-radio', 'value')) def set_display_children(selected_country, selected_city): return u'{} is a city in {}'.format( selected_city, selected_country, ) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+----
+
+Part2. Dash App 에서의 State 활용하기 , Form
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 12. 22:18
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205357159&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222205357159")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205357159&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+실시간으로 어떤 값을 입력하면
+
+callback 함수로 연결하여
+
+실시간으로 반영하였습니다.
+
+​
+
+특정 상황에서는 Form Tag 처럼
+
+사용자의 클릭 신호에 맞추어서
+
+반영해야할 때가 있습니다.
+
+​
+
+이런 경우에는 State Class를 활용하여
+
+callbacks 함수를 연결하면 됩니다.
+
+​
+
+Input('submit-button-state','n_clicks') 에서는
+
+Button이 클릭될 경우 n_clicks 값이 바뀌게 되며
+
+이어서 app.callbacks 함수가 State 인자에 값을 전달해줍니다.
+
+​
+
+n_clicks 값에는 실제로 클릭한 횟수가 들어갑니다.
+
+​
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output, State external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) app.layout = html.Div( [ dcc.Input(id='input-1-state', type='text', value="Montreal"), dcc.Input(id='input-2-state', type='text', value='Canada'), html.Button(id='submit-button-state', n_clicks=0, children='Submit'), html.Div(id='output-state') ] ) @app.callback( Output('output-state', 'children'), Input('submit-button-state', 'n_clicks'), State('input-1-state','value'), State('input-2-state','value') ) def update_ouput(n_clicks, input1, input2): return u"Input 1 is {} and Input 2 is {}".format(input1, input2) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+----
+
+[Dash](https://blog.naver.com/PostList.naver?blogId=raymondjin_&categoryNo=14&from=postList)
+
+Part2. Callbacks Graph에서 선택한 데이터 정보 실시간으로 확인하기
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 12. 23:13
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205407950&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222205407950")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205407950&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+데이터 분석을 하다보면
+
+특이값을 만날 때가 있습니다.
+
+​
+
+자명하게 입력된 값이 오류인 경우에
+
+빠르게 제끼고 데이터분석을 하야하는 상황이 발생하는데요
+
+빠르게 FeedBack 하기 위해서는
+
+그레프에서 나타는 데이터의 정보를
+
+실시간으로 확인할 수 있어야 합니다.
+
+​
+
+그레프를 눌렀을 때
+
+누른 데이터, 클릭한 데이터 , 레이아웃 정보
+
+등을 callback 함수로 연결할 수 있는데
+
+dcc.Graph에 이미 정의된
+
+​
+
+'hoverData'
+
+'clickData'
+
+'selectedData'
+
+'relayoutData'
+
+​
+
+인자로부터 값을 받아서
+
+출력하면 됩니다.
+
+​
+
+import json import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output import plotly.express as px import pandas as pd external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets= external_stylesheets) styles ={ 'pre':{ 'border':'thin lightgrey solid', 'overflowX':'scroll', } } df = pd.DataFrame({ 'x':[1,2,1,2], 'y':[1,2,3,4], 'customdata':[1,2,3,4], 'fruit':['apple','apple','orange','orange'] }) # custom_data 의 인자로서는 column이 list 형태로 대입될 수 있다. # 이때 데이터는 데이터 한 포인트에 대한 값을 제공해 준다. # curveNumber, pointNumber, pointIndex, 값은 데이터의 순서?와 관련되어 보이지는 않는다. fig = px.scatter(df, x='x',y='y',color='fruit', custom_data=['customdata','fruit']) fig.update_layout(clickmode='event+select') fig.update_traces(marker_size=20) app.layout = html.Div([ dcc.Graph( id='basic-interactions', figure=fig ), html.Div(className='row',children=[ html.Div([ dcc.Markdown("""**Hover Data** Mouse over values in the graph."""), html.Pre(id='hover-data',style=styles['pre']) ], className='three columns'), html.Div([ dcc.Markdown("""**Click Data** Click on points in the graph."""), html.Pre(id='click-data', style=styles['pre']), ], className='three columns'), html.Div([ dcc.Markdown("""**Selection Data** Choose the lass or rectangle tool in the graph's meu bar and the select points in the graph Not that if 'layout.clickmode=event+select', selection data also accumulates (or un-accumulates) selected data if you hold down the shift button while clicking. """), html.Pre(id='selected-data', style=styles['pre']), ], className='three columns'), html.Div([ dcc.Markdown("""**Zoom and Relayout Data** Click and drag on the graph to zoom or click on the zoom buttons in the graph's menu bar. Clicking on legend items will also fire this event. """), html.Pre(id='relayout-data',style=styles['pre']), ], className="three columns") ]) ]) @app.callback( Output('hover-data','children'), Input('basic-interactions','hoverData') ) def display_hover_data(hoverData): print("Display Hover Data") print(hoverData) # 특정 데이터에 마우스를 올려놓았을 때 (한 번) 호출됨, 올려놓고 한번 더 올려놓으면 호출 안됨 return json.dumps(hoverData,indent=2) @app.callback( Output('click-data', 'children'), Input('basic-interactions','clickData') ) def display_click_data(clickData): print("Click Data") print(clickData) # points 에 대한 value 값으로 list가 대입 return json.dumps(clickData, indent=2) @app.callback( Output('selected-data','children'), Input('basic-interactions','selectedData') ) def display_selected_data(selectedData): # selected Data를 활용하기 위해서는 shift key를 이용해서 데이터를 클릭해야함 print("selectedData") print(selectedData) return json.dumps(selectedData, indent=2) @app.callback( Output('relayout-data','children'), Input('basic-interactions','relayoutData') ) def display_layout_data(relayoutData): # 배율을 확대하는 동작을 완료했을 때 Callback이 진행됨 # Zoom In / Zoom Out / Auto Scale 등 # 데이터 전송 방식은 dictionary 형태로 x1, x2 , y1, y2가 정의되지만 순사는 상관없음. # xaxis.range[0] key 값에 대응되는 value를 대입해주면 되는 방식 print("RelayoutData") print(type(relayoutData)) print(relayoutData) return json.dumps(relayoutData,indent=2) if __name__ == '__main__': app.run_server(debug=True)
+
+**[그레프에 나타난 데이터 정보 callback하기](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205407950&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수44_
+
+00:00  |  00:13
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+그레프에 나타난 데이터 정보 callback하기
+
+----
+
+Part2. Callbacks Graph 에서 선택한 데이터만 다른 Graph로 연결하여 표현하기, Update Graphs on Hover
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 13. 0:33
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205476054&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222205476054")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205476054&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+hover : (허공을) 맴돌다
+
+​
+
+​
+
+이전 포스팅은
+
+Graph 에서 선택한 데이터의 정보를
+
+실시간으로 화면에 표시해주었습니다.
+
+​
+
+이를 응용하면
+
+Graph 에서 선택한 데이터를 기반으로
+
+다른 Graph들을 실시간으로 그릴 수 있습니다.
+
+​
+
+Spotfire 에서
+
+Drill Down 기법이라는
+
+분석기법을 적용하는 셈이지요.
+
+​
+
+import dash import dash_core_components as dcc import dash_html_components as html import pandas as pd import plotly.express as px external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) df = pd.read_csv('https://plotly.github.io/datasets/country_indicators.csv') available_indicators = df['Indicator Name'].unique() app.layout = html.Div([ html.Div([ html.Div([ dcc.Dropdown( id='crossfilter-xaxis-column', options=[{'label': i, 'value': i} for i in available_indicators], value='Fertility rate, total (births per woman)' ), dcc.RadioItems( id='crossfilter-xaxis-type', options=[{'label': i, 'value': i} for i in ['Linear', 'Log']], value='Linear', labelStyle={'display': 'inline-block'} ) ], style={'width': '49%', 'display': 'inline-block'}), html.Div([ dcc.Dropdown( id='crossfilter-yaxis-column', options=[{'label': i, 'value': i} for i in available_indicators], value='Life expectancy at birth, total (years)' ), dcc.RadioItems( id='crossfilter-yaxis-type', options=[{'label': i, 'value': i} for i in ['Linear', 'Log']], value='Linear', labelStyle={'display': 'inline-block'} ) ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'}) ], style={ 'borderBottom': 'thin lightgrey solid', 'backgroundColor': 'rgb(250, 250, 250)', 'padding': '10px 5px' }), html.Div([ dcc.Graph( id='crossfilter-indicator-scatter', hoverData={'points': [{'customdata': 'Japan'}]} ) ], style={'width': '49%', 'display': 'inline-block', 'padding': '0 20'}), html.Div([ dcc.Graph(id='x-time-series'), dcc.Graph(id='y-time-series'), ], style={'display': 'inline-block', 'width': '49%'}), html.Div(dcc.Slider( id='crossfilter-year--slider', min=df['Year'].min(), max=df['Year'].max(), value=df['Year'].max(), marks={str(year): str(year) for year in df['Year'].unique()}, step=None ), style={'width': '49%', 'padding': '0px 20px 20px 20px'}) ])
+
+@app.callback( dash.dependencies.Output('crossfilter-indicator-scatter', 'figure'), [dash.dependencies.Input('crossfilter-xaxis-column', 'value'), dash.dependencies.Input('crossfilter-yaxis-column', 'value'), dash.dependencies.Input('crossfilter-xaxis-type', 'value'), dash.dependencies.Input('crossfilter-yaxis-type', 'value'), dash.dependencies.Input('crossfilter-year--slider', 'value')]) def update_graph(xaxis_column_name, yaxis_column_name, xaxis_type, yaxis_type, year_value): dff = df[df['Year'] == year_value] fig = px.scatter(x=dff[dff['Indicator Name'] == xaxis_column_name]['Value'], y=dff[dff['Indicator Name'] == yaxis_column_name]['Value'], hover_name=dff[dff['Indicator Name'] == yaxis_column_name]['Country Name'] ) fig.update_traces(customdata=dff[dff['Indicator Name'] == yaxis_column_name]['Country Name']) fig.update_xaxes(title=xaxis_column_name, type='linear' if xaxis_type == 'Linear' else 'log') fig.update_yaxes(title=yaxis_column_name, type='linear' if yaxis_type == 'Linear' else 'log') fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest') return fig def create_time_series(dff, axis_type, title): fig = px.scatter(dff, x='Year', y='Value') fig.update_traces(mode='lines+markers') fig.update_xaxes(showgrid=False) fig.update_yaxes(type='linear' if axis_type == 'Linear' else 'log') fig.add_annotation(x=0, y=0.85, xanchor='left', yanchor='bottom', xref='paper', yref='paper', showarrow=False, align='left', bgcolor='rgba(255, 255, 255, 0.5)', text=title) fig.update_layout(height=225, margin={'l': 20, 'b': 30, 'r': 10, 't': 10}) return fig @app.callback( dash.dependencies.Output('x-time-series', 'figure'), [dash.dependencies.Input('crossfilter-indicator-scatter', 'hoverData'), dash.dependencies.Input('crossfilter-xaxis-column', 'value'), dash.dependencies.Input('crossfilter-xaxis-type', 'value')]) def update_y_timeseries(hoverData, xaxis_column_name, axis_type): country_name = hoverData['points'][0]['customdata'] dff = df[df['Country Name'] == country_name] dff = dff[dff['Indicator Name'] == xaxis_column_name] title = '<b>{}</b><br>{}'.format(country_name, xaxis_column_name) return create_time_series(dff, axis_type, title) @app.callback( dash.dependencies.Output('y-time-series', 'figure'), [dash.dependencies.Input('crossfilter-indicator-scatter', 'hoverData'), dash.dependencies.Input('crossfilter-yaxis-column', 'value'), dash.dependencies.Input('crossfilter-yaxis-type', 'value')]) def update_x_timeseries(hoverData, yaxis_column_name, axis_type): dff = df[df['Country Name'] == hoverData['points'][0]['customdata']] dff = dff[dff['Indicator Name'] == yaxis_column_name] return create_time_series(dff, axis_type, yaxis_column_name) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+**[drilldown방법 Graph 내 선택한 데이터 새롭게 표현하기](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222205476054&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수46_
+
+00:00  |  00:16
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+drilldown방법 Graph 내 선택한 데이터 새롭게 표현하기
+
+----
+
+[Dash](https://blog.naver.com/PostList.naver?blogId=raymondjin_&categoryNo=14&from=postList)
+
+Part2. Callbacks Graph에서 선택한 데이터 정보 실시간으로 확인하기 (2)
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 16. 23:22
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222209733395&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222209733395")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222209733395&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+마우스 를 특정 데이터 위에 올려주면
+
+dcc.Graph에서 hoverData 에 값이 들어옵니다.
+
+'points' key에 대응되는 값을 가지고
+
+대응되는 새로운 그레프를 그리는 예제입니다.
+
+​
+
+우측에는 그레프 2개가 있는데
+
+DataFrame과 축, 제목 문자열을 받아서
+
+fig를 만들어주는 함수를 정의하고
+
+이 함수와 callbacks 을 연결합니다.
+
+​
+
+아래의 코드는 design part, callback 부분을 나누었습니다.
+
+import dash import dash_core_components as dcc import dash_html_components as html import pandas as pd import plotly.express as px external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) df = pd.read_csv('https://plotly.github.io/datasets/country_indicators.csv') available_indicators = df['Indicator Name'].unique() app.layout = html.Div([ html.Div([ html.Div([ dcc.Dropdown( id='crossfilter-xaxis-column', options=[{'label': i, 'value': i} for i in available_indicators], value='Fertility rate, total (births per woman)' ), dcc.RadioItems( id='crossfilter-xaxis-type', options=[{'label': i, 'value': i} for i in ['Linear', 'Log']], value='Linear', labelStyle={'display': 'inline-block'} ) ], style={'width': '49%', 'display': 'inline-block'}), html.Div([ dcc.Dropdown( id='crossfilter-yaxis-column', options=[{'label': i, 'value': i} for i in available_indicators], value='Life expectancy at birth, total (years)' ), dcc.RadioItems( id='crossfilter-yaxis-type', options=[{'label': i, 'value': i} for i in ['Linear', 'Log']], value='Linear', labelStyle={'display': 'inline-block'} ) ], style={'width': '49%', 'float': 'right', 'display': 'inline-block'}) ], style={ 'borderBottom': 'thin lightgrey solid', 'backgroundColor': 'rgb(250, 250, 250)', 'padding': '10px 5px' }), html.Div([ dcc.Graph( id='crossfilter-indicator-scatter', hoverData={'points': [{'customdata': 'Japan'}]} ) # style 에 'display' : 'inline-block' 을 할 경우 묶여서 표현하게 된다. ], style={'width': '49%', 'display': 'inline-block', 'padding': '0 20'}), html.Div([ dcc.Graph(id='x-time-series'), dcc.Graph(id='y-time-series'), ], style={'display': 'inline-block', 'width': '49%'}), html.Div(dcc.Slider( id='crossfilter-year--slider', min=df['Year'].min(), max=df['Year'].max(), value=df['Year'].max(), marks={str(year): str(year) for year in df['Year'].unique()}, step=None ), style={'width': '49%', 'padding': '0px 20px 20px 20px'}) ])
+
+@app.callback( dash.dependencies.Output('crossfilter-indicator-scatter', 'figure'), [dash.dependencies.Input('crossfilter-xaxis-column', 'value'), dash.dependencies.Input('crossfilter-yaxis-column', 'value'), dash.dependencies.Input('crossfilter-xaxis-type', 'value'), dash.dependencies.Input('crossfilter-yaxis-type', 'value'), dash.dependencies.Input('crossfilter-year--slider', 'value')]) def update_graph(xaxis_column_name, yaxis_column_name, xaxis_type, yaxis_type, year_value): dff = df[df['Year'] == year_value] fig = px.scatter(x=dff[dff['Indicator Name'] == xaxis_column_name]['Value'], y=dff[dff['Indicator Name'] == yaxis_column_name]['Value'], hover_name=dff[dff['Indicator Name'] == yaxis_column_name]['Country Name'] ) fig.update_traces(customdata=dff[dff['Indicator Name'] == yaxis_column_name]['Country Name']) fig.update_xaxes(title=xaxis_column_name, type='linear' if xaxis_type == 'Linear' else 'log') fig.update_yaxes(title=yaxis_column_name, type='linear' if yaxis_type == 'Linear' else 'log') fig.update_layout(margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest') return fig def create_time_series(dff, axis_type, title): fig = px.scatter(dff, x='Year', y='Value') fig.update_traces(mode='lines+markers') fig.update_xaxes(showgrid=False) fig.update_yaxes(type='linear' if axis_type == 'Linear' else 'log') fig.add_annotation(x=0, y=0.85, xanchor='left', yanchor='bottom', xref='paper', yref='paper', showarrow=False, align='left', bgcolor='rgba(255, 255, 255, 0.5)', text=title) fig.update_layout(height=225, margin={'l': 20, 'b': 30, 'r': 10, 't': 10}) return fig @app.callback( dash.dependencies.Output('x-time-series', 'figure'), [dash.dependencies.Input('crossfilter-indicator-scatter', 'hoverData'), dash.dependencies.Input('crossfilter-xaxis-column', 'value'), dash.dependencies.Input('crossfilter-xaxis-type', 'value')]) def update_y_timeseries(hoverData, xaxis_column_name, axis_type): country_name = hoverData['points'][0]['customdata'] # 선택한 데이터 포인트의 첫 번째에 대해서 그레프를 그린다. dff = df[df['Country Name'] == country_name] dff = dff[dff['Indicator Name'] == xaxis_column_name] title = '<b>{}</b><br>{}'.format(country_name, xaxis_column_name) return create_time_series(dff, axis_type, title) @app.callback( dash.dependencies.Output('y-time-series', 'figure'), [dash.dependencies.Input('crossfilter-indicator-scatter', 'hoverData'), dash.dependencies.Input('crossfilter-yaxis-column', 'value'), dash.dependencies.Input('crossfilter-yaxis-type', 'value')]) def update_x_timeseries(hoverData, yaxis_column_name, axis_type): dff = df[df['Country Name'] == hoverData['points'][0]['customdata']] dff = dff[dff['Indicator Name'] == yaxis_column_name] return create_time_series(dff, axis_type, yaxis_column_name) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+**[hoverData 연동하여 새로운 그레프 그리기](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222209733395&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수26_
+
+00:00  |  00:12
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+DrillDown 분석법을 활용할 수 있음
+
+----
+
+Part2. Callback의 응용, Generic Crossfilter Recipe
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 16. 23:43
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222209752296&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222209752296")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222209752296&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+여러개의 산점도 그래프에서
+
+선택을 했을 때
+
+그 선택된 값을 강조하는 코드입니다.
+
+​
+
+핵심은
+
+fig.update_layout(... , dragmode='select', hovermode =False)라고 생각합니다.
+
+선택된 데이터들을 여러개 지정하여
+
+다른 그래프와 연동을 시키니까요.
+
+​
+
+산점도 그래프 내에서
+
+값을 표시하는 등의 기능은
+
+fig.update_traces(marker={}) 를 통해서 진행이 됩니다.
+
+import dash import dash_core_components as dcc import dash_html_components as html import numpy as np import pandas as pd from dash.dependencies import Input, Output import plotly.express as px external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) # make a sample data frame with 6 columns df = pd.DataFrame({"Col " + str(i+1): np.random.rand(30) for i in range(6)}) app.layout = html.Div([ html.Div( dcc.Graph(id='g1', config={'displayModeBar': False}), className='four columns' ), html.Div( dcc.Graph(id='g2', config={'displayModeBar': False}), className='four columns' ), html.Div( dcc.Graph(id='g3', config={'displayModeBar': False}), className='four columns' ) ], className='row') def get_figure(df, x_col, y_col, selectedpoints, selectedpoints_local): if selectedpoints_local and selectedpoints_local['range']: ranges = selectedpoints_local['range'] selection_bounds = {'x0': ranges['x'][0], 'x1': ranges['x'][1], 'y0': ranges['y'][0], 'y1': ranges['y'][1]} else: selection_bounds = {'x0': np.min(df[x_col]), 'x1': np.max(df[x_col]), 'y0': np.min(df[y_col]), 'y1': np.max(df[y_col])} # set which points are selected with the `selectedpoints` property # and style those points with the `selected` and `unselected` # attribute. see # https://medium.com/@plotlygraphs/notes-from-the-latest-plotly-js-release-b035a5b43e21 # for an explanation fig = px.scatter(df, x=df[x_col], y=df[y_col], text=df.index) fig.update_traces(selectedpoints=selectedpoints, customdata=df.index, mode='markers+text', marker={ 'color': 'rgba(0, 116, 217, 0.7)', 'size': 20 }, unselected={'marker': { 'opacity': 0.3 }, 'textfont': { 'color': 'rgba(0, 0, 0, 0)' }}) fig.update_layout(margin={'l': 20, 'r': 0, 'b': 15, 't': 5}, dragmode='select', hovermode=False) fig.add_shape(dict({'type': 'rect', 'line': { 'width': 1, 'dash': 'dot', 'color': 'darkgrey' }}, **selection_bounds)) return fig # this callback defines 3 figures # as a function of the intersection of their 3 selections @app.callback( Output('g1', 'figure'), Output('g2', 'figure'), Output('g3', 'figure'), Input('g1', 'selectedData'), Input('g2', 'selectedData'), Input('g3', 'selectedData') ) def callback(selection1, selection2, selection3): selectedpoints = df.index for selected_data in [selection1, selection2, selection3]: if selected_data and selected_data['points']: selectedpoints = np.intersect1d(selectedpoints, [p['customdata'] for p in selected_data['points']]) return [get_figure(df, "Col 1", "Col 2", selectedpoints, selection1), get_figure(df, "Col 3", "Col 4", selectedpoints, selection2), get_figure(df, "Col 5", "Col 6", selectedpoints, selection3)] if __name__ == '__main__': app.run_server(debug=True)
+
+**[산점도그레프연동하기](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222209752296&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수28_
+
+00:00  |  00:09
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+산점도그래프연동하기, 3개의 그레프의
+
+----
+
+Part3. 데이터 공유하면서 Visualization
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 1. 17. 0:03
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222209768747&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222209768747")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222209768747&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+우리의 기본적인 마인드는
+
+데이터를 처리할 때
+
+전체 데이터를 변형하지 않는 것입니다.
+
+​
+
+불필요한 이상치는 제외하는것이 필요하지만
+
+실수 등으로 인해 데이터가 사라질 수 있기 때문입니다.
+
+​
+
+아래는 global 변수를 선언하는 것입니다.
+
+​
+
+df = pd.DataFrame({ 'a': [1, 2, 3], 'b': [4, 1, 4], 'c': ['x', 'y', 'z'], }) app.layout = html.Div([ dcc.Dropdown( id='dropdown', options=[{'label': i, 'value': i} for i in df['c'].unique()], value='a' ), html.Div(id='output'), ]) @app.callback(Output('output', 'children'), Input('dropdown', 'value')) def update_output_1(value): # Here, `df` is an example of a variable that is # "outside the scope of this function". # *It is not safe to modify or reassign this variable # inside this callback.* global df = df[df['c'] == value] # do not do this, this is not safe! return len(df)
+
+​
+
+일반적으로는
+
+함수 내에서 filtered_df 라는 변수를 활용하여
+
+일부 데이터만을 처리하도록 합니다.
+
+함수 바깥에서는 원래의 df 가 있습니다.
+
+df = pd.DataFrame({ 'a': [1, 2, 3], 'b': [4, 1, 4], 'c': ['x', 'y', 'z'], }) app.layout = html.Div([ dcc.Dropdown( id='dropdown', options=[{'label': i, 'value': i} for i in df['c'].unique()], value='a' ), html.Div(id='output'), ]) @app.callback(Output('output', 'children'), Input('dropdown', 'value')) def update_output_1(value): # Safely reassign the filter to a new variable filtered_df = df[df['c'] == value] return len(filtered_df)
+
+​
+
+​
+
+​
+
+만약 여러 유저가 데이터를 공유해야한다면
+
+server의 역할을 해줄 수 있는 무언가가 필요합니다.
+
+​
+
+가능성이 있는 후보는
+
+​
+
+1. 사용자의 browser session
+
+​
+
+2. 저장소
+
+​
+
+3. 공유된 메모리
+
+​
+
+만약 데이터를 Browser의 Hidden Div 에 저장하는 경우
+
+data 전송은 JSON 형식으로 이루어지며,
+
+브라우저의 세션이 유효한 기간동안만 가능합니다.
+
+app의 메모리 차지율은 느러나지 않습니다. 하지만
+
+네트워크에는 부담을 줄 수 있습니다.
+
+​
+
+​
+
+​
+
+예시 1. 브라우저 Hidden Div 에 저장하기
+
+global_df = pd.read_csv('...') app.layout = html.Div([ dcc.Graph(id='graph'), html.Table(id='table'), dcc.Dropdown(id='dropdown'), # Hidden div inside the app that stores the intermediate value html.Div(id='intermediate-value', style={'display': 'none'}) ]) @app.callback(Output('intermediate-value', 'children'), Input('dropdown', 'value')) def clean_data(value): # some expensive clean data step cleaned_df = your_expensive_clean_or_compute_step(value) # more generally, this line would be # json.dumps(cleaned_df) return cleaned_df.to_json(date_format='iso', orient='split') @app.callback(Output('graph', 'figure'), Input('intermediate-value', 'children')) def update_graph(jsonified_cleaned_data): # more generally, this line would be # json.loads(jsonified_cleaned_data) dff = pd.read_json(jsonified_cleaned_data, orient='split') figure = create_figure(dff) return figure @app.callback(Output('table', 'children'), Input('intermediate-value', 'children')) def update_table(jsonified_cleaned_data): dff = pd.read_json(jsonified_cleaned_data, orient='split') table = create_table(dff) return table
+
+​
+
+​
+
+예시2. Upfront에서 계산하기
+
+@app.callback( Output('intermediate-value', 'children'), Input('dropdown', 'value')) def clean_data(value): # an expensive query step cleaned_df = your_expensive_clean_or_compute_step(value) # a few filter steps that compute the data # as it's needed in the future callbacks df_1 = cleaned_df[cleaned_df['fruit'] == 'apples'] df_2 = cleaned_df[cleaned_df['fruit'] == 'oranges'] df_3 = cleaned_df[cleaned_df['fruit'] == 'figs'] datasets = { 'df_1': df_1.to_json(orient='split', date_format='iso'), 'df_2': df_2.to_json(orient='split', date_format='iso'), 'df_3': df_3.to_json(orient='split', date_format='iso'), } return json.dumps(datasets) @app.callback( Output('graph', 'figure'), Input('intermediate-value', 'children')) def update_graph_1(jsonified_cleaned_data): datasets = json.loads(jsonified_cleaned_data) dff = pd.read_json(datasets['df_1'], orient='split') figure = create_figure_1(dff) return figure @app.callback( Output('graph', 'figure'), Input('intermediate-value', 'children')) def update_graph_2(jsonified_cleaned_data): datasets = json.loads(jsonified_cleaned_data) dff = pd.read_json(datasets['df_2'], orient='split') figure = create_figure_2(dff) return figure @app.callback( Output('graph', 'figure'), Input('intermediate-value', 'children')) def update_graph_3(jsonified_cleaned_data): datasets = json.loads(jsonified_cleaned_data) dff = pd.read_json(datasets['df_3'], orient='split') figure = create_figure_3(dff) return figure
+
+​
+
+예제3. 캐싱과 시그널링
+
+import os import copy import time import datetime import dash import dash_core_components as dcc import dash_html_components as html import numpy as np import pandas as pd from dash.dependencies import Input, Output from flask_caching import Cache external_stylesheets = [ # Dash CSS 'https://codepen.io/chriddyp/pen/bWLwgP.css', # Loading screen CSS 'https://codepen.io/chriddyp/pen/brPBPO.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) CACHE_CONFIG = { # try 'filesystem' if you don't want to setup redis 'CACHE_TYPE': 'redis', 'CACHE_REDIS_URL': os.environ.get('REDIS_URL', 'redis://localhost:6379') } cache = Cache() cache.init_app(app.server, config=CACHE_CONFIG) N = 100 df = pd.DataFrame({ 'category': ( (['apples'] * 5 * N) + (['oranges'] * 10 * N) + (['figs'] * 20 * N) + (['pineapples'] * 15 * N) ) }) df['x'] = np.random.randn(len(df['category'])) df['y'] = np.random.randn(len(df['category'])) app.layout = html.Div([ dcc.Dropdown( id='dropdown', options=[{'label': i, 'value': i} for i in df['category'].unique()], value='apples' ), html.Div([ html.Div(dcc.Graph(id='graph-1'), className="six columns"), html.Div(dcc.Graph(id='graph-2'), className="six columns"), ], className="row"), html.Div([ html.Div(dcc.Graph(id='graph-3'), className="six columns"), html.Div(dcc.Graph(id='graph-4'), className="six columns"), ], className="row"), # hidden signal value html.Div(id='signal', style={'display': 'none'}) ]) # perform expensive computations in this "global store" # these computations are cached in a globally available # redis memory store which is available across processes # and for all time. @cache.memoize() def global_store(value): # simulate expensive query print('Computing value with {}'.format(value)) time.sleep(5) return df[df['category'] == value] def generate_figure(value, figure): fig = copy.deepcopy(figure) filtered_dataframe = global_store(value) fig['data'][0]['x'] = filtered_dataframe['x'] fig['data'][0]['y'] = filtered_dataframe['y'] fig['layout'] = {'margin': {'l': 20, 'r': 10, 'b': 20, 't': 10}} return fig @app.callback(Output('signal', 'children'), Input('dropdown', 'value')) def compute_value(value): # compute value and send a signal when done global_store(value) return value @app.callback(Output('graph-1', 'figure'), Input('signal', 'children')) def update_graph_1(value): # generate_figure gets data from `global_store`. # the data in `global_store` has already been computed # by the `compute_value` callback and the result is stored # in the global redis cached return generate_figure(value, { 'data': [{ 'type': 'scatter', 'mode': 'markers', 'marker': { 'opacity': 0.5, 'size': 14, 'line': {'border': 'thin darkgrey solid'} } }] }) @app.callback(Output('graph-2', 'figure'), Input('signal', 'children')) def update_graph_2(value): return generate_figure(value, { 'data': [{ 'type': 'scatter', 'mode': 'lines', 'line': {'shape': 'spline', 'width': 0.5}, }] }) @app.callback(Output('graph-3', 'figure'), Input('signal', 'children')) def update_graph_3(value): return generate_figure(value, { 'data': [{ 'type': 'histogram2d', }] }) @app.callback(Output('graph-4', 'figure'), Input('signal', 'children')) def update_graph_4(value): return generate_figure(value, { 'data': [{ 'type': 'histogram2dcontour', }] }) if __name__ == '__main__': app.run_server(debug=True, processes=6)
+
+​
+
+예4. 서버 사용자 기반 세션 데이터
+
+import dash from dash.dependencies import Input, Output import dash_core_components as dcc import dash_html_components as html import datetime from flask_caching import Cache import os import pandas as pd import time import uuid external_stylesheets = [ # Dash CSS 'https://codepen.io/chriddyp/pen/bWLwgP.css', # Loading screen CSS 'https://codepen.io/chriddyp/pen/brPBPO.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) cache = Cache(app.server, config={ 'CACHE_TYPE': 'redis', # Note that filesystem cache doesn't work on systems with ephemeral # filesystems like Heroku. 'CACHE_TYPE': 'filesystem', 'CACHE_DIR': 'cache-directory', # should be equal to maximum number of users on the app at a single time # higher numbers will store more data in the filesystem / redis cache 'CACHE_THRESHOLD': 200 }) def get_dataframe(session_id): @cache.memoize() def query_and_serialize_data(session_id): # expensive or user/session-unique data processing step goes here # simulate a user/session-unique data processing step by generating # data that is dependent on time now = datetime.datetime.now() # simulate an expensive data processing task by sleeping time.sleep(5) df = pd.DataFrame({ 'time': [ str(now - datetime.timedelta(seconds=15)), str(now - datetime.timedelta(seconds=10)), str(now - datetime.timedelta(seconds=5)), str(now) ], 'values': ['a', 'b', 'a', 'c'] }) return df.to_json() return pd.read_json(query_and_serialize_data(session_id)) def serve_layout(): session_id = str(uuid.uuid4()) return html.Div([ html.Div(session_id, id='session-id', style={'display': 'none'}), html.Button('Get data', id='get-data-button'), html.Div(id='output-1'), html.Div(id='output-2') ]) app.layout = serve_layout @app.callback(Output('output-1', 'children'), Input('get-data-button', 'n_clicks'), Input('session-id', 'children')) def display_value_1(value, session_id): df = get_dataframe(session_id) return html.Div([ 'Output 1 - Button has been clicked {} times'.format(value), html.Pre(df.to_csv()) ]) @app.callback(Output('output-2', 'children'), Input('get-data-button', 'n_clicks'), Input('session-id', 'children')) def display_value_2(value, session_id): df = get_dataframe(session_id) return html.Div([ 'Output 2 - Button has been clicked {} times'.format(value), html.Pre(df.to_csv()) ]) if __name__ == '__main__': app.run_server(debug=True)
+
+​
+
+​
+
+​
+
+추가 공부가 필요합니다
+
+----
+
+Python dashboard 디자인 하기
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 8. 29. 16:04
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222487923527&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222487923527")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222487923527&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+안녕하세요 Ray 입니다.
+
+​
+
+최근에 저는 Python Dash App을 개발중에 있었습니다.
+
+데이터 분석을 하는데 Interactive 한 환경을 만들어 놓을 필요가 있었어요.
+
+​
+
+Spotfire 라는 툴을 쓰는 것도 가능하지만
+
+Spotfire 내에 있는 Table 데이터와 제가 가지고 있는 이미지 데이터를
+
+매칭해서 분석하는 상황이 필요했습니다.
+
+​
+
+상황설명이 길었지만 사실 이번 포스팅은
+
+위의 방법을 설명하는 포스팅이 아니에요
+
+​
+
+이미지를 연결하고보니 보기좋게 배열하는 방법이 필요했었고
+
+어떻게 html component 들을 배열 할 수 있을 지에 대한 포스팅입니다.
+
+​
+
+----------
+
+결론부터 요약하자면
+
+html.Div() 와 같은 component를 사용할 때
+
+className 의 값을 'row'로 묶어주거나
+
+className 의 값을 'two columns', 'three columns' 로 묶어 주어야 한다는 것입니다.
+
+​
+
+아래코드는 Dash Tutorial 에서 제공하는
+
+예시 코드인데, 그래프를 추가해서
+
+여려개의 그래프를 배치하는 방법을 살펴보겠습니다.
+
+​
+
+# -*- coding: utf-8 -*- # Run this app with `python app.py` and # visit http://127.0.0.1:8050/ in your web browser. import dash import dash_core_components as dcc import dash_html_components as html import plotly.express as px import pandas as pd external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) colors = { 'background': '#111111', 'text': '#7FDBFF' } # assume you have a "long-form" data frame # see https://plotly.com/python/px-arguments/ for more options df = pd.DataFrame({ "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"], "Amount": [4, 1, 2, 2, 4, 5], "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"] }) fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group") fig.update_layout( plot_bgcolor=colors['background'], paper_bgcolor=colors['background'], font_color=colors['text'] ) app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[ html.H1( children='Hello Dash', style={ 'textAlign': 'center', 'color': colors['text'] } ), html.Div(children='Dash: A web application framework for Python.', style={ 'textAlign': 'center', 'color': colors['text'] }), dcc.Graph( id='example-graph-a', figure=fig) ]) if __name__ == '__main__': app.run_server(debug=True)
+
+코드 출처 : [https://dash.plotly.com/layout](https://dash.plotly.com/layout)
+
+[](https://dash.plotly.com/layout)
+
+**Part 2. Layout | Dash for Python Documentation | Plotly**
+
+The Dash `layout` describes what your app will look like and is composed of a set of declarative Dash components.
+
+dash.plotly.com
+
+​
+
+![](https://postfiles.pstatic.net/MjAyMTA4MjlfMjU5/MDAxNjMwMjE4OTU0MTM4.X7JxDaJ4TGohjoOtC5P8DKFbiXIsgvEFOYGtnbltj4cg.a-_I0b4L6ylMUXkXu9Q5xjfEwWjCF95YH5lk9ZmFL7og.PNG.raymondjin_/image.png?type=w966)
+
+dash tutorial 제공
+
+----------
+
+그레프를 2개로 늘려보겠습니다.
+
+단순하게 dcc.Graph 를 추가하고
+
+Div 속성에 포함시키면 아래로 추가가 됩니다.
+
+​
+
+[#추가된](https://blog.naver.com/PostListByTagName.naver?blogId=raymondjin_&encodedTagName=%EC%B6%94%EA%B0%80%EB%90%9C) 부분
+
+을 확인해보세요~
+
+​
+
+# -*- coding: utf-8 -*- # Run this app with `python app.py` and # visit http://127.0.0.1:8050/ in your web browser. import dash import dash_core_components as dcc import dash_html_components as html import plotly.express as px import pandas as pd external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) colors = { 'background': '#111111', 'text': '#7FDBFF' } # assume you have a "long-form" data frame # see https://plotly.com/python/px-arguments/ for more options df = pd.DataFrame({ "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"], "Amount": [4, 1, 2, 2, 4, 5], "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"] }) fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group") fig.update_layout( plot_bgcolor=colors['background'], paper_bgcolor=colors['background'], font_color=colors['text'] ) app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[ html.H1( children='Hello Dash', style={ 'textAlign': 'center', 'color': colors['text'] } ), html.Div(children='Dash: A web application framework for Python.', style={ 'textAlign': 'center', 'color': colors['text'] }), dcc.Graph( id='example-graph-a', figure=fig), # 추가된 부분 dcc.Graph( id='example-graph-b', figure=fig) ]) if __name__ == '__main__': app.run_server(debug=True)
+
+![](https://postfiles.pstatic.net/MjAyMTA4MjlfMzAw/MDAxNjMwMjE5NDQ4ODE0.zOANXxN4DR1PWzu9A18JaFZiw1AzCB2JnNkKE9hcJXcg.BgT6zs7zGEnqf5427_t0SdEW-qTzJEtfgNy_Pbl7z7wg.PNG.raymondjin_/image.png?type=w966)
+
+아래로 추가된 그레프
+
+코드의 전체적인 구조를 보면
+
+html.Div([a, b,c, ... graph1, graph2]) 구조임을 알 수 있습니다.
+
+​
+
+이번에는
+
+그레프를 추가하고 가로로 배치해보도록 하겠습니다.
+
+배치를 할 때에는 어떤 식으로 배치를 할지에 대해서
+
+명확하게 className 에 지정해주어야하는데
+
+​
+
+1. 그래프 2개를 하나의 "행"(가로) 로 놓고
+
+2. 그래프 2개가 한 페이지에 가득 차도록 2"열"(세로) 로 배치해보겠습니다.
+
+예상 배치도는 아래와 같습니다.
+
+​
+
+className = 'row' 로하면
+
+행 방향으로 배치하고
+
+style ={'columnCount':2} 를 입력하여
+
+열 방향으로 2개의 Component를 배치하도록 합니다.
+
+![](https://postfiles.pstatic.net/MjAyMTA4MjlfMTI5/MDAxNjMwMjE5NzY2ODEx.9excGGrg0zMbnGQ8e_-KbXXaQ3Ac5Z47cEyfObtu8L4g.CQG3W5s9WoXCkRtmAie0U1tqkva0LtrbTQ5wYV1eutkg.PNG.raymondjin_/image.png?type=w966)
+
+Dash App Layout Design 하기
+
+# 수정된 부분 html.Div([ dcc.Graph( id='example-graph-a', figure=fig), dcc.Graph( id='example-graph-b', figure=fig) ], className='row', style={'columnCount': 2}),
+
+아래는 전체 코드와 화면입니다.
+
+# -*- coding: utf-8 -*- # Run this app with `python app.py` and # visit http://127.0.0.1:8050/ in your web browser. import dash import dash_core_components as dcc import dash_html_components as html import plotly.express as px import pandas as pd external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] app = dash.Dash(__name__, external_stylesheets=external_stylesheets) colors = { 'background': '#111111', 'text': '#7FDBFF' } # assume you have a "long-form" data frame # see https://plotly.com/python/px-arguments/ for more options df = pd.DataFrame({ "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"], "Amount": [4, 1, 2, 2, 4, 5], "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"] }) fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group") fig.update_layout( plot_bgcolor=colors['background'], paper_bgcolor=colors['background'], font_color=colors['text'] ) app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[ html.H1( children='Hello Dash', style={ 'textAlign': 'center', 'color': colors['text'] } ), html.Div(children='Dash: A web application framework for Python.', style={ 'textAlign': 'center', 'color': colors['text'] }), # 수정된 부분 html.Div([ dcc.Graph( id='example-graph-a', figure=fig), dcc.Graph( id='example-graph-b', figure=fig) ], className='row', style={'columnCount': 2}), ]) if __name__ == '__main__': app.run_server(debug=True)
+
+![](https://postfiles.pstatic.net/MjAyMTA4MjlfMjYg/MDAxNjMwMjIwMjY4NDY4.O13wwAUhKnD2Vb8JXgsly2CFwXvniWjXoXBNuEvEfakg.JH5oa1RbEdWovedkW07l6zse050h4aAZBtt2ELJPl2Qg.PNG.raymondjin_/image.png?type=w966)
+
+1개의 행, 2개의 열에 배치한 2개의 그레프
+
+----------
+
+위의 배치방식을 잘 이해한다면
+
+40개 이상의 Graph 를 1행에 5개씩 배열하는 방법에 대해서도 생각해볼 수 있습니다.
+
+더 나아가서 정해진 갯수가 아닌 Graph들을 1행에 5개씩 배열하는 방법도 생각해볼 수 있습니다.
+
+​
+
+className = 'row'
+
+style={'columnCount':number} 를 기반으로
+
+여러분들이 원하는 방식으로 레이아웃을 Design 해보시길 바랍니다.
+
+----
+
+[Dash](https://blog.naver.com/PostList.naver?blogId=raymondjin_&categoryNo=14&from=postList)
+
+Python Dash Input, Ouput, State, MATCH, ALL 개념
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 9. 5. 0:06
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222495163839&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222495163839")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222495163839&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+안녕하세요
+
+Ray 입니다.
+
+​
+
+Python Dash Module을 활용해서
+
+Interactive 하게 Widget 을 추가하는 방법을 살펴보면서
+
+dash.dependencies 에 있는
+
+Input, Output, State, MATCH, ALL 이 어떻게 쓰이는지 알아보겠습니다.
+
+​
+
+Spotfire 라는 데이터 분석 Tool을 사용해보면
+
+사용자가 버튼을 추가하거나, 그레프를 추가하는 등의 작업을 할 수 있는데
+
+이런 기능을 구현하는데 사용될 수 있습니다.
+
+​
+
+dash documentation 코드를 활용하였습니다.
+
+[https://dash.plotly.com/pattern-matching-callbacks](https://dash.plotly.com/pattern-matching-callbacks)
+
+[](https://dash.plotly.com/pattern-matching-callbacks)
+
+**Pattern-Matching Callbacks | Dash for Python Documentation | Plotly**
+
+The pattern-matching callback selectors `MATCH`, `ALL`, & `ALLSMALLER` allow you to write callbacks that respond to or update an arbitrary or dynamic number of components. New in Dash 1.11.0!
+
+dash.plotly.com
+
+----------
+
+**app.callback 의 기본 개념.**
+
+​
+
+callback 은 프로그래밍에서는
+
+call-after function 함수라고도 불립니다.
+
+**특정 동작을 실행할 때, 동시에 호출되는 함수**라고 이해하면 좋습니다.
+
+​
+
+callback 의 개념이 어디에 쓰이지?라는 생각이 들 수도 있지만
+
+Interactive 한 데이터 분석에 자주 사용되기에 딱 좋습니다.
+
+​
+
+callback 의 개념이 생소할 수도 있는데 그 이유는
+
+일반적으로 프로그램의 코드는 앞줄부터 차례대로 실행이 되기 때문이라고 생각합니다
+
+(반드시 그러한 것만은 아닙니다)
+
+​
+
+dash app의 layout 을 먼저 구현하고
+
+callback 기능을 살펴보는 방식으로 접근해보겠습니다.
+
+​
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output, State, MATCH, ALL app = dash.Dash(__name__) app.layout = html.Div([ html.Button('Add Filter', id='filter', n_clicks=0), html.Div(id='container', children=[]), html.Div(id='output') ]) if __name__ == '__main__': app.run_server(debug=True)
+
+위 코드를 보면
+
+하나의 웹 화면에 Div tag 안에
+
+Button tag, Div tag, Div tag가 있음을 확인할 수 있습니다.
+
+html code 와 화면의 구성요소를 대응시키면 아래와 같습니다.
+
+![](https://postfiles.pstatic.net/MjAyMTA5MDRfNiAg/MDAxNjMwNzY2NjgzNTI1.qFSGd4YU6WqWtE7mrLy57Kxgrf7P-sjVYdFmgP_1Z5Yg.FlgtSkU3-A3ZzMhYaRcnzYUds5Sfu_vXQekpj2gSpCsg.PNG.raymondjin_/image.png?type=w966)
+
+app layout html 분석
+
+​
+
+----------
+
+여기서 이제 Button 을 클릭할 때마다
+
+특정함수를 호출해서 dropdown widget을 추가해보겠습니다.
+
+widget 은 화면에 드러나는 버튼, 라디오버튼, 입력창과 같은 기능을 가진 객체입니다.
+
+​
+
+여기서 특정함수가 callback 함수역할을 하게 될텐데
+
+① Button (id='filter') 에서 몇 번 클릭했는지 값과 (Input)
+
+② 현재 추가된 Dropdown (id={'type':'dropdown','index':n_clicks} 들을 처리하여 (State)
+
+Div(id='output') 에 반영하겠습니다.
+
+​
+
+여기서 Input 의 개념은 직관적으로 이해가가지만 State 는 직관적이지 않을 수 있습니다.
+
+**State는 현재 웹 화면의 상태를 전달해주는 역할**을 하며
+
+상태를 전달해주기 때문에 **Input 처럼 데이터를 전달**해준다고 보면 좋습니다.
+
+​
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output, State, MATCH, ALL app = dash.Dash(__name__) app.layout = html.Div([ html.Button('Add Filter', id='filter', n_clicks=0), html.Div(id='container', children=[]), html.Div(id='output') ]) # 추가된 부분 @app.callback( Output('container','children'), Input('filter','n_clicks') State('container','children') ) def add_dropdown(n_clicks, children): new_dropdown = dcc.Dropdown( id={ 'type':'dropdown', 'index':n_clicks }, options=[{'label':i , 'value':i} for i in ['a','b','c','d']] ) children.append(new_dropdown) return children if __name__ == '__main__': app.run_server(debug=True)
+
+add_dropdown 함수는 callback 함수의 역할을 수행하게 되며
+
+Button(id='filter') 의 속성인 n_clicks 값과
+
+Div(id='container') 의 속성인 children 값을 처리하여
+
+처리된 children 값을 반환합니다.
+
+​
+
+조금 더 구체적으로는 dropdown 을 추가하여 children을 반환해 주는 기능을 합니다.
+
+​
+
+여기까지 구현한다면
+
+버튼을 클릭할 때마다
+
+Dropdown 이 추가되는 것 까지 구현한 것입니다.
+
+​
+
+**[callback함수를 활용하여 버튼을 누를 때 마다 Dropdown 추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222495163839&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수21_
+
+00:00  |  00:12
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+callback함수를 활용하여 버튼을 누를 때 마다 Dropdown 추가
+
+버튼을 누를 때 마다 Dropdown Widget 추가
+
+----------
+
+이제 각각의 dropdown 에서 입력된 값을
+
+가장 아래에 표현하는 callback 함수를 구현해보겠습니다.
+
+​
+
+Button 을 누를 때 마다
+
+dropdown widget을 추가하는 기능을 실행하는
+
+callback 함수와는 별개의 callback 함수입니다.
+
+​
+
+여기서 Input 의 인자로
+
+{'type':'dropdown', 'index':ALL}, 'value 가 들어가게 되는데
+
+dictionary 형태로 들어간 {'type':'dropdown', 'index':ALL} 이
+
+callback 함수가 반응할 모든 component를 지정해줍니다.
+
+​
+
+여기에서는 add_dropdown 함수가 실행될 때 마다
+
+추가되었던 Dropdown Widget 의 id에 반응하도록 합니다.
+
+​
+
+'index': ALL 로 지정하였기 때문에
+
+전달되는 데이터는 list 형태입니다.
+
+MATCH를 활용하면 단일 값이 전달됩니다.
+
+import dash import dash_core_components as dcc import dash_html_components as html from dash.dependencies import Input, Output, State, MATCH, ALL app = dash.Dash(__name__) app.layout = html.Div([ html.Button('Add Filter', id='filter', n_clicks=0), html.Div(id='container', children=[]), html.Div(id='output') ]) @app.callback( Output('container','children'), Input('filter','n_clicks'), State('container','children') ) def add_dropdown(n_clicks, children): new_dropdown = dcc.Dropdown( id={ 'type':'dropdown', 'index':n_clicks }, options=[{'label':i , 'value':i} for i in ['a','b','c','d']] ) children.append(new_dropdown) return children # 추가된 부분 @app.callback( Output('output', 'children'), Input({'type':'dropdown','index':ALL}, 'value') ) def display_outputs(values): print('type, values : ', type(values)) print('value : ', values) return html.Div( [html.Div(f"Dropdown {i+1} = {value}") for (i, value) in enumerate(values)] ) if __name__ == '__main__': app.run_server(debug=True)
+
+최종적으로 구현한 화면은 아래와 같습니다.
+
+버튼을 추가하는 callback 과
+
+Dropdown 값에 따라 반응하는 callback 이 있습니다.
+
+​
+
+**[DivCallback 구현](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222495163839&categoryNo=14&parentCategoryNo=&from=thumbnailList#)**
+
+_재생 수20_
+
+00:00  |  00:09
+
+화질 선택 옵션자동
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wccBTIrwFRftwAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAD0lEQVQoz2NgGAWjgAoAAAJJAAEMrHXpAAAAAElFTkSuQmCC)
+
+접기/펴기
+
+InteractiveDivElement 구현
+
+​
+----
+
+Plotly module 에서 Figures 객체의 개념
+
+ [![프로파일](https://blogpfthumb-phinf.pstatic.net/MjAyMTAxMDJfMTg0/MDAxNjA5NTYzMTA0MjE5.s_loqeIOgFsqvjnGvZ6Mk5IfFYiURUXeSpBlnbBsBS4g.gP0UT0dapudwK_t6TimabYdefoSsVEREp2aawlQmPEYg.JPEG.raymondjin_/Raymond.jpg?type=s1)](https://blog.naver.com/raymondjin_)  [Ray](https://blog.naver.com/raymondjin_) _・_ 2021. 11. 16. 22:23
+
+[URL 복사](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222570295962&categoryNo=14&parentCategoryNo=&from=thumbnailList# "https://blog.naver.com/raymondjin_/222570295962")  [이웃추가](https://blog.naver.com/PostView.naver?blogId=raymondjin_&logNo=222570295962&categoryNo=14&parentCategoryNo=&from=thumbnailList#)
+
+이 포스팅은 Plotly Documentation 을 번역하며 공부하는 글입니다.
+
+​
+
+**Python 에서 그림(figure)라는 데이터 구조**
+
+**Overview**
+
+​
+
+plotly 는 그래픽요소를 가진 그림 예컨대 차트, 그레프, 지도, 다이어그램)을 figures라는 데이터 구조를 통해서 표현하게 도와줍니다. 이때 Plotly.js 라는 자바스크립트 라이브러리를 활용하게 됩니다. 이때 라이브러리는 개발자가 자바스크립트에 대한 이해도가 높지 않아도 활용할 수 있게 해줍니다. 그림은 사전(dicts) 또는 그래프 액체의 그림(plotly.graph_objects.Figure) class 형태로 표현 할 수 있으며, JSON 형식으로 데이터 처리가 이루어집니다.
+
+​
+
+주의 : 가장 최근의 plotly 패키지는 높은 수준의 plotly.express 모듈을 사용합니다. 아래의 내용은 그림을 표현하는 데이터 구조에 대해서 설명합니다.
+
+​
+
+​
+
+그림을 이제부터 Figure라고 표현하겠습니다. Figure 의 구조를 이해하는데 있어서는 print(fig) 함수를 활용하면 좋습니다. Jupyterlabe 환경에서는 fig.show("json") 을 사용하는 것도 도움이 됩니다. Figures 객체는 fig.to_dict() 함수 또는 fig.to_json() 함수를 사용할 수 있습니다. print() 함수를 활용하면 종종 layout.template 에 대한 정보까지도 얻을 수 있습니다.
+
+​
+
+import plotly.express as px fig = px.line(x=['a','b','c'], y=[1,3,2], title='sample figure') print(fig) fig.show()
+
+Figure({ 'data': [{'hovertemplate': 'x=%{x}<br>y=%{y}<extra></extra>', 'legendgroup': '', 'line': {'color': '#636efa', 'dash': 'solid'}, 'mode': 'lines', 'name': '', 'orientation': 'v', 'showlegend': False, 'type': 'scatter', 'x': array(['a', 'b', 'c'], dtype=object), 'xaxis': 'x', 'y': array([1, 3, 2], dtype=int64), 'yaxis': 'y'}], 'layout': {'legend': {'tracegroupgap': 0}, 'template': '...', 'title': {'text': 'sample figure'}, 'xaxis': {'anchor': 'y', 'domain': [0.0, 1.0], 'title': {'text': 'x'}}, 'yaxis': {'anchor': 'x', 'domain': [0.0, 1.0], 'title': {'text': 'y'}}} }) Process finished with exit code 0
+
+![](https://postfiles.pstatic.net/MjAyMTExMTZfOTAg/MDAxNjM3MDY4OTkwMDQx.CI54XMQyn6zK_xwY5fpy_TQ5oqfqQPawRg5uytkos8Mg.cuvQ0xEDYyZXqPeLw4V_DvEQgSVR4pJHWgNmSDXMgLQg.PNG.raymondjin_/image.png?type=w966)
+
+​
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE4NTk3Mzc2MzEsMTMzODkxNDEyMCw3Mz
+A5OTgxMTZdfQ==
+-->

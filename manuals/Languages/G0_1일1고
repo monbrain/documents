@@ -1,0 +1,1118 @@
+
+
+
+> Written with [StackEdit](https://stackedit.io/).# [1일1GO/0001 Go 프로그래밍 환경구성](https://modu-print.tistory.com/279?category=863372)
+
+by 피로곰  2020. 4. 24.
+
+오래전부터 프로그래밍에 관심을 가지는 분들에게 강좌 같은 걸 해볼까 하고 고민을 하긴 했습니다만. 유튜브나 블로그등에 좋은 강좌들은 꽤 많은지라 원론적인 부분 빼고 2~3년 전부터 매우 애정하고 모두의 프린터, 모두의 자막, 모두의 플러그 등을 비롯 최근에 만든 많은 프로그램들의 개발 언어인 Go라는 언어를 가지고 특정 프로그램을 만들기 위한것 보다는 함수 하나, 기능 하나들 위주로  **"이러이러한 기능을 만들고 싶으면 요래 하면 됩니다!"** 그냥 따라 하거나 복붙 하거나 하면 되는 그 과정에서 필요한 지식을 전달하고 가능하면 C/C++, 자바 등의 다른 언어에 대한 이야기도 풀어 갈 수 있는 영상을 작업해보려 합니다.
+
+영상의 보조적 수단으로 블로그에 포스트도 작성해 올릴 예정입니다. 시작에 앞서 기본적으로 Go언어를 개발하기 위해
+
+필요한 프로그램들의 설치에 대한 글을 작성하도록 하겠습니다.
+
+> 개발과 관련된 자료의 검색은 네이버, 다음보다 구글을 통하시는 게 더 수월합니다.  
+> Go라는 단어가 일반적으로도 많이 사용하는 단어이다 보니 Go언어에 대한 검색은  
+> Go에 Language의 앞 4글자인 Lang을 붙여서 Golang이라고 보통 칭합니다.  
+> 검색 시에도 Golang이라 검색하시면 자료 찾기가 수월 합니다.
+
+다운로드할 프로그램은 총 3가지입니다. Go, Visual Studio Code, Git 당연히 Go 개발을 할 것이니 Go를 설치해야 하고Visual Studio Code는 MS에서 무료로 배포 중인 코드 편집기입니다 Go뿐 아니라 Html, 파이썬, Javascript 등 다양한 언어에 대한 추가 기능 등을 공격적으로 지원하고 있습니다. Jetbrain의 Goland 같은 좋은 IDE(통합개발 툴)도 존재하지만 유료이고 가격도 상당한 관계로 Visual Studio Code를 사용하겠습니다. 과거부터 존재해오던 Visual Studio와 Visual Studio Code는 다른 프로그램이며 일반적으로 Vs Code라고 칭하는 편입니다.
+
+마지막으로 Git은 Go언어도 파이썬, Node.js등과 같이 세상의 수많은 개발자들이 개발해 놓은 좋은 코드 패키지들을 손쉽게 내가 개발하는 프로젝트에 끌어와 사용 가능한 방법을 제공합니다. 그중 대다수의 코드들은 Github이라는 유명한
+
+오픈소스 버전 관리 커뮤니티(?)의 시스템을 통해 제공받습니다 그러한 이유로 Git이라는 프로그램이 설치되어야 해당 기능들을 제대로 사용이 가능합니다.
+
+## 1. Go 다운로드, 설치
+
+![](https://blog.kakaocdn.net/dn/EECZi/btqDF1g3eZ6/dbowN435tHS51wtHnbmvyK/img.png)
+
+구글에서 Golang으로 검색하셔도 됩니다만 편의상 링크를 바로 제공하겠습니다.
+
+[https://golang.org/](https://golang.org/)
+
+[](https://golang.org/)
+
+The Go Programming Language
+
+Download Go Binary distributions available for Linux, macOS, Windows, and more. // You can edit this code! // Click here and start typing. package main import "fmt" func main() { fmt.Println("Hello, 世界") } Hello, World! Conway's Game of Life Fibonacci Clos
+
+golang.org
+
+위 링크를 클릭하여 접속하시면 첫 페이지의 Go 마스코트 아래에 Download Go라고 링크 이미지가 존재합니다 클릭!
+
+![](https://blog.kakaocdn.net/dn/c3VAge/btqDGH99I8g/F3R2Hz8UYQKKFpoplNzMCK/img.png)
+
+Download Go를 클릭하시면 다운로드 페이지로 이동되며 최신 버전의 다운로드 링크를 아래 그림과 같이 확인 가능합니다.
+
+![](https://blog.kakaocdn.net/dn/dn5geY/btqDGhjBQga/VI7dlfMlrsf0QfKJXxA6E1/img.png)
+
+최근에는 대부분 64비트 CPU와 OS를 사용하는 편이지만 혹시나 32비트 CPU/OS를 사용 중이시라면
+
+![](https://blog.kakaocdn.net/dn/dQhTyq/btqDHtqnPf9/tHqCJtcVl3H0pfjbGKeunk/img.png)
+
+최신 Stable(안정) 버전의 x86용 Installer를 다운로드하시기 바랍니다. 다운로드한 설치 파일을 실행(열기)하십시오. 다음 설치 과정을 진행하시면 됩니다.
+
+![](https://blog.kakaocdn.net/dn/NxXWi/btqDFp3AShD/aVGFVxOmpfX4Xvnk1djtmk/img.png)
+
+Next!!
+
+![](https://blog.kakaocdn.net/dn/c2Uk3v/btqDE0JF9jn/iU6ogzaNSEhFO5KZUlpdK0/img.png)
+
+Next!!
+
+![](https://blog.kakaocdn.net/dn/TSql9/btqDEZxkht1/1CDsA5wsrx3UXF965TgvY1/img.png)
+
+필요하신 경우 설치경로를 변경하시고요 저는 기본 상태로 설치하겠습니다.
+
+Next!!
+
+![](https://blog.kakaocdn.net/dn/JpbN1/btqDIQZtoVx/VxVsOSK5aPyKHhaHxhuLf1/img.png)
+
+Install 버튼을 클릭하시면 설치가 시작됩니다!!
+
+![](https://blog.kakaocdn.net/dn/b4bbzW/btqDE0iCq4U/ZBu6eEFnPKBlKM4ubOyiDk/img.png)
+
+혹시 이런 거 뜨면 당연히 '예' 클릭해야 하는 거 아시죠?
+
+![](https://blog.kakaocdn.net/dn/EBMPm/btqDInDbdwQ/IlWoOiGE8TRljqAR78CzG0/img.png)
+
+설치가 진행됩니다. 잠시 기다리십시오..
+
+![](https://blog.kakaocdn.net/dn/cwkyGt/btqDHrTBpHv/1b6zX5URYUMmTKqEG0pWx0/img.png)
+
+설치가 완료되었습니다. Finish를 클릭하시면 됩니다. 제가 처음 Go를 접한 3년 전에는 설치 후에도 환경변수를
+
+설정하고 기타 부가적인 설정이 필요했는데 최근 버전은 그냥 설치만 한번 하면 될 정도로 많이 편해졌네요 ^^
+
+## 2. VS CODE(Visual Studio Code) 다운로드
+
+![](https://blog.kakaocdn.net/dn/duIQbn/btqDHsE6urT/kVVdGLkNxVeXkF2IpMeH6k/img.png)
+
+구글에서 vs code로 검색하셔도 됩니다만! 역시나 편의를 위해 링크를 투척합니다!
+
+[https://code.visualstudio.com/](https://code.visualstudio.com/)
+
+[](https://code.visualstudio.com/)
+
+Visual Studio Code - Code Editing. Redefined
+
+Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications. Visual Studio Code is free and available on your favorite platform - Linux, macOS, and Windows.
+
+code.visualstudio.com
+
+![](https://blog.kakaocdn.net/dn/qEuAZ/btqDDwVF6Cl/VkkKlRX5tepzyqhiGrtKpK/img.png)
+
+첫 페이지에 바로 보이는 Download for Windows (Stable Build)를 바로 클릭 마시고요!!! 동그라미 친 V 버튼을 클릭하신 다음에  Other downloads를 클릭하세요.이러는 이유는 Vs code가 User Installer와 System Installer로 2가지로 분류가 되어 있는데 메인 페이지서 바로 다운로드를 받을 경우 User Installer로 다운로드됩니다. 여러 다양한 개발을 할 것이고 매번 관리자 모드로 실행하거나 바로가기 설정을 변경하는 등 귀찮으니 System Installer를 다운로드하기 위해 Other Downlaods를 클릭해 주세요.
+
+![](https://blog.kakaocdn.net/dn/Dotba/btqDH0IerZo/rbMnBD4w2L2YvaqGCzLUqK/img.png)
+
+System Installer의 64 Bit을 클릭합니다. ( 32비트 OS/CPU 시면 32Bit를 클릭하세요 ) 파일을 다운로드하여 실행합니다.
+
+![](https://blog.kakaocdn.net/dn/1S3Jw/btqDGIBjDYS/mkLTOJ57TkjiRnJOdy9Qb1/img.png)
+
+다시 말하지만 "예" 하셔야 한다고요!
+
+![](https://blog.kakaocdn.net/dn/cClhbb/btqDH0VMbTd/gC8aDRBokbUB44AZyCkfBk/img.png)
+
+계약에 동의함(A) 체크 후 "다음(N) >" 클릭!
+
+![](https://blog.kakaocdn.net/dn/Q1QQM/btqDGJmGLBh/ZjWMYk0LbP0wjfIt4N239k/img.png)
+
+설치경로 변경이 필요하시면 변경하시고요 전 기본 경로로 설치하겠습니다.
+
+"다음(N) >" 클릭!
+
+![](https://blog.kakaocdn.net/dn/brigiQ/btqDFpbwtg6/HslHfaDnZapJzCqvcDyvRk/img.png)
+
+"다음(N) >" 클릭!
+
+![](https://blog.kakaocdn.net/dn/dDE0ek/btqDISwbD7M/uyuujF8pLqFIeG2fFBhTok/img.png)
+
+바탕 화면 바로 가기 만들기(D)는 필요하시면 체크하시고요 전 바탕화면 바로가기를 작업표시줄로 옮겨 사용하는 편이라 생성하도록 체크하였습니다.
+
+중요한 건 기타에서  붉은 동그라미 안의 2개 옵션을 꼭 체크해주세요. 이 2개를 체크하고 설치해야 마우스 오른 버튼의 메뉴에 Vs Code 관련 메뉴가 추가됩니다.
+
+![](https://blog.kakaocdn.net/dn/wqNse/btqDIQ6bMlW/mSlhKFpLWNZRbDBnfVwFKK/img.png)
+
+설치(I) 클릭!!
+
+![](https://blog.kakaocdn.net/dn/CoQpe/btqDFqnOHfm/waRBpYLJL51HkJodC6vxo1/img.png)
+
+설치 과정이 진행됩니다.
+
+![](https://blog.kakaocdn.net/dn/2GF5U/btqDF1g3RmI/aFq8NVpnWKPI0GqmVGzzs0/img.png)
+
+바로 실행할게 아니기 때문에 Visual Studio Code 시작의 체크는 푸시고 마침(F) 버튼을 클릭하세요
+
+## 3. Git 설치
+
+![](https://blog.kakaocdn.net/dn/c2l3YF/btqDJfEGnT5/AlZo3OxXOrafqAPohKPnjK/img.png)
+
+역시 구글에서 Git이라고 검색하면 되지만 편의상 링크 투척!
+
+[https://git-scm.com/downloads](https://git-scm.com/downloads)
+
+[](https://git-scm.com/downloads)
+
+Git - Downloads
+
+Downloads Mac OS X Windows Linux/Unix Older releases are available and the Git source repository is on GitHub. GUI Clients Git comes with built-in GUI tools (git-gui, gitk), but there are several third-party tools for users looking for a platform-specific
+
+git-scm.com
+
+![](https://blog.kakaocdn.net/dn/odcnp/btqDF1OUVwu/XTETsGr6SqdMc7NL3SYee1/img.png)
+
+Windows 클릭!
+
+기본적으로 현 시스템의 아키택처(32,64Bit)에 맞는 파일이 자동으로 다운로드되지만
+
+![](https://blog.kakaocdn.net/dn/CWGpg/btqDHrF64uZ/PxDLx43PkI4Gki3eDHNaVk/img.png)
+
+자동으로 진행되지 않을 경우에는 현재 OS 아키택처(32,64Bit)에 맞는 설치 파일을 수동으로 클릭해서 다운로드하으세요. 다운로드 후 실행(열기)하셔서 설치를 진행합니다.
+
+![](https://blog.kakaocdn.net/dn/014HC/btqDGf0tLDi/4KHLIaxFbktT3sUOioLFYK/img.png)
+
+3번째 말씀드리지만.. 예 하셔야 하는 거 아시죠?
+
+![](https://blog.kakaocdn.net/dn/cd8HyV/btqDISJILuh/KkUxNiOqkkpNtqm5Z6wW2k/img.png)
+
+Next> 클릭
+
+![](https://blog.kakaocdn.net/dn/moG7S/btqDGfTFxB4/V7vLtMCj6n6rstH5I0sk41/img.png)
+
+필요하시면 설치경로 변경하시고요 저는 기본대로 설치합니다.
+
+Next > 클릭!
+
+![](https://blog.kakaocdn.net/dn/E6jIj/btqDEZD0oEf/kn2bsQysoUDc8BrkLnKOZk/img.png)
+
+기본 상태로 설치 진행합니다.
+
+Next > 클릭!
+
+![](https://blog.kakaocdn.net/dn/bSCfAb/btqDGfTFyrB/b7SNpygZ8NekrMXlg60Hik/img.png)
+
+그냥 Next > 클릭!!
+
+![](https://blog.kakaocdn.net/dn/GHVZ3/btqDInwqd0j/sDyocktNZ6MxBuxas7YtAK/img.png)
+
+Vs code를 앞서 설치 했기 때문에 Git 관련 편집기로 Vs code 를 사용합니다. Use Visual Studio Code as Git's default editor를 선택 후
+
+Next > 클릭하여 넘어가세요!
+
+![](https://blog.kakaocdn.net/dn/Er2hg/btqDH2lKRyM/14hpX9LLWkTN8LoyGTn04k/img.png)
+
+위와 같이 기본대로 두시고
+
+Next > 클릭해서 다음으로 넘어갑니다.
+
+![](https://blog.kakaocdn.net/dn/SVHfY/btqDH0O1GtU/zAuKu8lLiy7UwYXIqEN8N0/img.png)
+
+역시 기본대로 Next > 클릭!
+
+![](https://blog.kakaocdn.net/dn/m3PNI/btqDInwqhU7/KASMNLGZpUmU1pEKsOy4L0/img.png)
+
+Next > 클릭!!
+
+![](https://blog.kakaocdn.net/dn/dmEeNu/btqDJfSdEzI/5rhiLZM1wkpgWZ79EzVbCk/img.png)
+
+Next > 클릭!!
+
+![](https://blog.kakaocdn.net/dn/rPTBW/btqDGI89UWy/mK6hhHsIyYTqakksyeukkK/img.png)
+
+마지막 화면입니다.
+
+Install 클릭!!
+
+![](https://blog.kakaocdn.net/dn/28VZX/btqDGI89XPq/WPOoivRjd6hks437VeTg3k/img.png)
+
+설치가 진행됩니다.
+
+![](https://blog.kakaocdn.net/dn/cPNcLj/btqDImEiZTf/HFLwcuusUewoVVT0wEX4HK/img.png)
+
+View Release Notes 체크는 푸시고
+
+Next > 클릭!!
+
+Git의 설치 과정이 완료됐습니다.
+
+이제 Go 개발을 위한 기본적인 모든 프로그램을 설치하였습니다.
+
+## 4. 기본 동작 확인 및 간단한 코드 작성, 실행
+
+적당한 곳에 TEST라고 폴더 하나를 만드신 후 해당 폴더를 마우스 오른 버튼으로 클릭하십시오.
+
+![](https://blog.kakaocdn.net/dn/crREVK/btqDF1g4vHS/mAVG79KjWMmxNXGM8BYkwK/img.png)
+
+Code(으)로 열기 선택!
+
+![](https://blog.kakaocdn.net/dn/ctJM7k/btqDF0CpH8y/ZvRoHar4eFKplDwXulzHrk/img.png)
+
+Vs code가 실행되면 위와 같이 TEST폴더가 열린 채로 창이 뜹니다. Vs code는 Visual Studio 등과 달리 솔루션이나 프로젝트 파일 등이 따로 없이 폴더 단위로 관리됩니다.
+
+폴더명 = 프로젝트명 = 만들어지는 실행 파일명
+
+그림과 같이 New File 아이콘을 클릭하시고
+
+![](https://blog.kakaocdn.net/dn/dRG1ER/btqDFpbxjN8/sopzzslI2CMrRe2KKX9130/img.png)
+
+파일명을 main.go라고 입력 후 엔터! Go의 소스코드 확장자는 *. go입니다. go파일을 하나 생성하면
+
+![](https://blog.kakaocdn.net/dn/ovg0e/btqDEYSJ8go/zK3tjVgHsqNfkJqXjeRO61/img.png)
+
+Vs code의 오른쪽 하단에 위와 같은 알림 창이 뜹니다. Vs code는 Go언어 말고 다른 언어도 개발이 가능하다 보니
+
+사용자가 특정 언어의 코드를 작성하려 하는 특정 시점에서 해당 언어에 권장되는 추가 기능(Extention)의 설치를 권장하는 알림 창을 출력합니다. 잘 보시고.. Install 누르세요.. 위 알림은 가장 기본적인 Go언어에 대한 지원사항을 포함하는 Extention에 대한 설치 알립니다. 꼭!! Install 눌러주세요.
+
+이후에도 비슷한 의미로 go로 시작회는 여러 추가 기능들에 대한 Install 권장 알림이 뜰 수 있습니다 다 설치하시길 권장드립니다. 다음으로는 View 탭을 화면에 추가하십시오.
+
+![](https://blog.kakaocdn.net/dn/LhiXH/btqDGJfVgLz/4rK8bpRwQdQdjxRtIkNFFK/img.png)
+
+이 4개 중 암거나 하나 선택하시면 됩니다.
+
+![](https://blog.kakaocdn.net/dn/8J3z1/btqDGIabcOf/GwOEznqcqKm0jtZRCuRWt0/img.png)
+
+저는 Terminal을 선택했습니다. 이 탭은 전 개인적으로 늘 열어둡니다. Terminal에는 Powershell이 존재하는 윈도 10의 경우 Powershell이 기본 콘솔일 것이고 xp나 윈도 7 구버전의 OS를 설마 아직 쓰고 계신다면 cmd.exe가 콘솔로 뜰 수 있습니다.
+
+이제 main.go 파일에 다음 코드를 입력한 후 저장하십시오. ( Ctrl + S )
+
+```
+package main
+
+import "fmt"
+
+func main(){
+	fmt.Println("Go 설정 끝!!")
+}
+
+
+
+```
+
+![](https://blog.kakaocdn.net/dn/c3JlUR/btqDH18d3Rj/kXllJezq5HIEBt2xRk54Mk/img.png)
+
+TERMINAL 탭을 선택하시고 명령 콘솔에서 **go build** 라고 입력하신 후 dir 명령어로 파일목록을 출력해보시면
+
+![](https://blog.kakaocdn.net/dn/ZeE2g/btqDHrTCu7Y/Z6Hu3Ue5Fd9xYWMYErng11/img.png)
+
+TEST.exe 가 생성된 것을 보실 수 있습니다. 앞서 말씀드렸듯이 Go는 실행파일을 만들 때(컴파일 시) 코드가 존재하는 폴더명으로 실행파일을 만들게 됩니다.
+
+폴더명 = 프로젝트명 = 실행 파일명
+
+물론 go build에 추가 옵션을 줘서 바꿀 수도 있지만 그거 입력하나 만들어진 파일명을 바꾸나 그게 그거라 ㅎㅎㅎ 우선은 넘어갑시다.
+
+![](https://blog.kakaocdn.net/dn/9JXmj/btqDGJtrvKM/kENwT39H2ahmySDoHPQay0/img.png)
+
+이제 만들어진 실행파일을 실행하면 코드에 작성한 대로 **Go 설정 끝!!** 이라는 메시지를 확인하실 수 있습니다. 이걸로 Go 개발을 위한 프로그램 설치 및 간단한 프로그램의 작성, 컴파일까지 진행해 보았습니다. 앞으로 가능하면 매일 최소 일주일에 2회 이상 진행할 수 있도록 노력해 보겠으나;;;
+
+저도 생업이 있는지라 ㅎㅎ 장담은 못하겠네요 ;;
+
+이상입니다!!
+
+----
+
+# [1일1GO/0002 모든 코드의 시작 package, import](https://modu-print.tistory.com/283?category=863372)
+
+by 피로곰  2020. 4. 26.
+
+[YouTube](https://youtu.be/6SA04HYP1iU)
+
+----
+
+# [1일1GO/0003 더 편리한 환경을 위한 추가 구성 MSYS2!](https://modu-print.tistory.com/284?category=863372)
+
+by 피로곰  2020. 4. 27.
+
+Go는 CGO라는 형식으로 C언어 코드를 직접적으로 Go코드와 함께 사용도 가능하고 C/C++를 비롯한 다른 언어로 개발된 라이브러리나 DLL등을 끌어다 쓰는 짓 등도 가능한 언어입니다. 근본적으로 윈도, 리눅스, MacOS 등을 비롯 다양한 OS에서 실행 가능한 프로그램을 개발 가능하고 더군다나!!
+
+윈도에서도 리눅스, MacOS 등 다른 OS용의 프로그램을 명령어 몇 줄만으로 같은 코드로 만들어 낼 수 있는 놈입니다! (캬~) 하지만 기본적으로 통합개발환경(IDE)을 공식적으로 제공하는 것이 아니기 때문에 윈도 프로그램에 사용되는
+
+MS의 Visual Studio 같은 개발 툴 하나로 대부분의 모든 것을 커버해주는 편리성은 좀 떨어지는 편입니다.
+
+여는 간에.. 그런 이유로 제 경우에는 리눅스 개발에서 사용하던 유용한 툴들을 접목시켜서 사용하는 편인데요 윈도에서도 리눅스의 명령어나 C언어 컴파일러인 gcc 등을 사용할 수 있도록 먼~옛날부터 해외의 여러 선지자들께서 MSYS라는 축복을 내려주셨습니다.
+
+각종 리눅스의 명령어들 때문에만 이걸 설치하는 건 아니고요 앞서 시간에 패키지(Package)에 대해서 안내하면서 다른 누군가가 만들어둔 유용한 것들을 가져다 사용할 수 있다 하였지요 그러한 것들 중에는 내부적으로 C언어로 개발된 C 코드를 같이 쓰는 경우가 존재합니다 이런 때에는 C 코드를 컴파일해줄 컴파일러가 추가적으로 시스템에 필요합니다.
+
+물론 복잡한 과정은 Go가 알아서 해주지만 앞으로 어떤 놈들을 끌어다 쓸지는 모르니 관련 프로그램은 설치해 두도록 합시다!
+
+[https://www.msys2.org/](https://www.msys2.org/)
+
+[](https://www.msys2.org/)
+
+MSYS2
+
+MSYS2 installer One click installer for msys2 msys2-x86_64-20190524.exe SHA256: 2dacadcc70cc122054e60914cbc6b689f685bef5713915a90f4185dd9da7954e msys2-i686-20190524.exe SHA256: c5a1881f7ac5a0449fe9b30d3140111a88072727f510c4a66bfa905f8c78e839 MSYS2 is a sof
+
+www.msys2.org
+
+MSYS2의 다운로드 사이트 링크입니다
+
+![](https://blog.kakaocdn.net/dn/oS1NO/btqDGIvrt24/JuzNSonlsgHJgI6AvDHiGk/img.png)
+
+최근에는 대부분 64비트 CPU에 64비트 OS를 사용하니 x86,64용 설치 파일을 다운로드하십시오. 만약 32비트 CPU... 이면... 아래 i686을 받으시면 되는데 ( 설마 64비트 CPU인데 32비트 윈도를 쓰시는 변태는 없으시겠죠? ) 32 비... 트 CPU라면 솔직히 그냥 컴퓨터부터 바꾸시기를 권장드립니다.
+
+![](https://blog.kakaocdn.net/dn/GUA8L/btqDKTIwxN0/eWKKWk7UAq0v4uSSE1MRd0/img.png)
+
+Next!! 클릭!!
+
+![](https://blog.kakaocdn.net/dn/4gJrn/btqDGglwatx/KGdQ9CtkkKgiVQPeGXqfzk/img.png)
+
+기본 설치경로는 C:\msys64입니다 전체 설치를 끝내면 2~4기가 정도 용량을 차지할 겁니다. C드라이브의 용량이 부족하시다면 다른 경로로 변경하셔도 됩니다. 저는 기본대로 설치하겠습니다.
+
+![](https://blog.kakaocdn.net/dn/bKvv6b/btqDJfFyfmJ/8i1iddZZwNqtVyPR5zL7Gk/img.png)
+
+시작 메뉴에 생기는 바로가기 이름과 관련된 건데 굳이 바꿀 이유 없으니 그대로 Next!!
+
+![](https://blog.kakaocdn.net/dn/LABHO/btqDJfyKzYc/yKA6bspmFRYWIvggcnmDW0/img.png)
+
+바로 설치 과정이 진행됩니다. 잠시 기다리세요~~
+
+![](https://blog.kakaocdn.net/dn/cSuU3d/btqDH1HX1rh/OQ6kk9QKW00p14jHqWk380/img.png)
+
+잠시 후 설치가 끝나면 위 화면이 나오는데요 Run MSYS2 64bit now를 꼭 체크하시고 ( 기본이 체크로 되어 있습니다만 혹시 모르니까 ) Finish 버튼을 클릭하십시오.
+
+![](https://blog.kakaocdn.net/dn/vv0t2/btqDKpnnf50/hyFEsfEFGsBijvuUxEFBLk/img.png)
+
+이런 MSYS 콘솔이 실행됩니다. 위 검은 콘솔 창에
+
+**pacman -Syu**
+
+라고 입력 후에 엔터!!
+
+![](https://blog.kakaocdn.net/dn/bFT5xy/btqDGJgL7LC/OKOWIUaX1x43R78twKneHk/img.png)
+
+설치를 진행하시겠습니까? [Y/n]에서
+
+Y입력 후 엔터!!
+
+![](https://blog.kakaocdn.net/dn/Y7cQ9/btqDH0WCMoD/ZxKKwplLFzeeiptJYTFhWk/img.png)
+
+이렇게 MSYS2의 업데이트가 진행됩니다
+
+![](https://blog.kakaocdn.net/dn/dK7tgp/btqDHrNF24p/pLsEHyniOOxSD4xmL7s770/img.png)
+
+여기까지 진행되었으면 이 창을 닫으십시오
+
+![](https://blog.kakaocdn.net/dn/bz9lbz/btqDH2mCjn5/JzT3Dfq2UWEjUqV8ws2df1/img.png)
+
+이런 메시지가 뜰 텐데요 상관없으니 OK 클릭하시면 됩니다
+
+![](https://blog.kakaocdn.net/dn/cvO5ZS/btqDJMiMjKV/F9qpc90fAJG8VnLw8k8EaK/img.png)
+
+이제 윈도 버튼을 누르시고
+
+**MSYS2 64Bit -> MSYS2 MinGW 64-Bit**을 실행하십시오.
+
+**pacman -Su**
+
+라고 입력 후 엔터!!
+
+![](https://blog.kakaocdn.net/dn/qmTcP/btqDH12hTdd/AVZdO6u9Z9KPXUj03V4H9k/img.png)
+
+![](https://blog.kakaocdn.net/dn/bG9WiJ/btqDInxifIJ/FhsttVFRyDhhKr4T28oxw0/img.png)
+
+설치를 진행하시겠습니까? [Y/n] 이 표시되시면
+
+Y입력 후 엔터!!
+
+![](https://blog.kakaocdn.net/dn/xVcgy/btqDGII5vkw/k2znktDRCjSNmf36iYRkjK/img.png)
+
+설치가 진행됩니다.
+
+![](https://blog.kakaocdn.net/dn/qlbP0/btqDKVsOrcU/uspUPxv8es0xywhA1ZkBGk/img.png)
+
+설치가 완료되면 입력 커서가 다시 활성화됩니다.
+
+이제 64Bit 개발 툴들을 설치하도록 하겠습니다.
+
+**pacman --needed -S git mingw-w64-x86_64-gcc base-devel**
+
+라고 입력 후 엔터! ( 복사 후 마우스 우클릭에 Paste를 통해 붙여 넣기 가능 )
+
+![](https://blog.kakaocdn.net/dn/beMpPl/btqDJgLdc3z/50pK6o0wHfxb0xkvzmHrb1/img.png)
+
+선택을 입력하십시오. (기본값=all):라고 나오면
+
+그냥 엔터!!!!
+
+![](https://blog.kakaocdn.net/dn/pGAJu/btqDJMb2f4A/PFDgt5an32fO8Hmx47Ok70/img.png)
+
+설치를 진행하시겠습니까? [Y/n] 이 나오면
+
+Y 입력 후 엔터!!
+
+![](https://blog.kakaocdn.net/dn/b39oTQ/btqDInxiuhp/uE4u33auGcW5QixuJ0Poi0/img.png)
+
+설치가 진행됩니다.. 대략 10분 이상 시간이 소요될 수 있습니다. 선택적으로 설치할 수도 있지만 일단 현재 상황에서 설치하는 이유와 설치하지 않는 이유를 다 나열하기엔 무리가 있으니까... 기본적인 건 다 깔도록 합니다.
+
+![](https://blog.kakaocdn.net/dn/ccpyAy/btqDH2fPUvA/uMVYFeTqvPokZXhuGmEdd1/img.png)
+
+64비트를 위한 것들의 설치가 끝났습니다. 우선 이 창은 닫으십시오.
+
+![](https://blog.kakaocdn.net/dn/xz5o2/btqDKqfvSjz/2kVmgEaxB0u2MSlNSYI6gk/img.png)
+
+윈도 버튼을 누르시고  **MSYS2 MinGW 32-Bit**를 실행하시면
+
+![](https://blog.kakaocdn.net/dn/bDHEi8/btqDJeUchYQ/IETgx5Zk3IngHfAJ3Zj8L0/img.png)
+
+이렇게 다시 또 콘솔 창이 뜹니다만 아까 창과 다른 점은 MINGW32라고 32비트용이 실행되었음을 알 수 있습니다
+
+**pacman --needed -S git mingw-w64-i686-gcc base-devel**
+
+위 내용을 입력 후 엔터!!
+
+![](https://blog.kakaocdn.net/dn/nRlMy/btqDKUUX85W/9Ut97JC16Zdt3p4ijwVrN0/img.png)
+
+앞서 64비트용 설치 시에 설치 또는 업데이트된 것들은 건너뛰게 되고요 32비트용으로 설치가 필요한 것들만 진행하게 됩니다 설치를 진행하시겠습니까? [Y/n] 이 뜨면 Y를 입력 후 엔터!!
+
+![](https://blog.kakaocdn.net/dn/4Jjos/btqDInD1Sdq/WxLoxKWu0QmnEiKrk7X5d0/img.png)
+
+설치가 진행됩니다
+
+![](https://blog.kakaocdn.net/dn/rdErd/btqDHtx2iy1/BRXKWBGDgW3VsOhbq3WY40/img.png)
+
+모든 설치가 끝났습니다. 32비트용 설치는 금방 끝날 겁니다.
+
+이제 윈도 환경변수 설정을 하도록 합니다.
+
+![](https://blog.kakaocdn.net/dn/yTAc5/btqDISKzPtZ/wBZJUZBYCgZDS5bKKepFwk/img.png)
+
+탐색기에서 내 PC에 마우스 우클릭을 한 후 속성을 엽니다
+
+![](https://blog.kakaocdn.net/dn/bAdF7b/btqDJLYuEnb/7GZoFVNXPUxfeC0MRUpI70/img.png)
+
+시스템 창에서 '고급 시스템 설정' 클릭
+
+![](https://blog.kakaocdn.net/dn/bzadUB/btqDJLRJ6XU/6cbGoPaLspsFm1Xv9y29Sk/img.png)
+
+환경변수(N) 클릭
+
+![](https://blog.kakaocdn.net/dn/My4nH/btqDHs0g4mj/88MDLio7HUcdGyfVtlulj1/img.png)
+
+시스템 변수 중에서
+
+Path를 찾아서 선택 후 편집 버튼을 클릭합니다
+
+![](https://blog.kakaocdn.net/dn/lWKGT/btqDH2tpxD7/wTOtOrGS9pd4cm8fz1JFH0/img.png)
+
+새로 만들기(N)을 클릭하면 맨 하단에
+
+새 항목의 입력창이 활성화됩니다.
+
+![](https://blog.kakaocdn.net/dn/7jpOk/btqDKTPiXPq/jvusoyK5fyBRvzpxLMycp0/img.png)
+
+![](https://blog.kakaocdn.net/dn/cXPcma/btqDIopqTqi/6nhsIpz2MHi8G4tkwxR7sk/img.png)
+
+이렇게 MSYS2의 설치경로와 usr\bin을 Path에 추가합니다.
+
+제 경우 기본 경로에 설치하였으므로
+
+**C:\msys64**
+
+**C:\msys64\usr\bin**
+
+이렇게 2개를 추가하였습니다.
+
+![](https://blog.kakaocdn.net/dn/bDqlVl/btqDJgYQuUD/kanCv4izchyVKJhk5Fqoxk/img.png)
+
+이렇게 추가한 후 '확인' 버튼을 클릭하시고
+
+떠있는 속성 창들은 다 닫으셔도 됩니다
+
+![](https://blog.kakaocdn.net/dn/zzoW6/btqDKqfwefk/dTtVIMJlCmKv07Veh6JAu1/img.png)
+
+윈도 아이콘에 마우스 우클릭한 후  **Window Powershell**을 선택해 실행합니다
+
+![](https://blog.kakaocdn.net/dn/b5kPFZ/btqDJgxHl5V/NuXFPKL2akIj5syKcvgOsk/img.png)
+
+Powershell 이 뜨면 make라고 입력 후 엔터!
+
+위와 같이
+
+**make: *** No targets specified and no makefile found. Stop.**
+
+라고 오류가 뜨면 정상입니다.
+
+이제 Go프로그래밍을 하면서 Makefile을 통해 좀 더 편리한 컴파일 및 자동화(?)를 위한 기본적인 환경 구성이 마무리되었습니다. 다음 시간에는 직접 뭔가를 만들어 볼 예정입니다. 길고 복잡 한글 읽으시느라 고생하셨습니다.
+
+----
+# [1일1GO/0004 # 4번째 웹서버 만들기](https://www.youtube.com/watch?v=SrfAnaQRGHA&list=PLm769nmu3JRCgWB5jjykA5kD4AVBeFK-P&index=7)
+
+[1일1GO/0004 # 4번째 웹서버 만들기](https://www.youtube.com/watch?v=SrfAnaQRGHA&list=PLm769nmu3JRCgWB5jjykA5kD4AVBeFK-P&index=7)
+
+
+----
+
+# [1일1GO/0005 Make를 하자 GO!](https://modu-print.tistory.com/289?category=863372)
+
+by 피로곰  2020. 5. 3.
+
+[YouTube](https://youtu.be/cc7YOeYdSog)
+
+
+----
+
+# [1일1GO/0006 관련 자료 링크 및 파일들](https://modu-print.tistory.com/290?category=863372)
+
+by 피로곰  2020. 5. 4.
+
+영상중 설치한 rsrc 패키지의 깃헙 링크는 다음과 같습니다
+
+[https://github.com/akavel/rsrc](https://github.com/akavel/rsrc)
+
+[](https://github.com/akavel/rsrc)
+
+akavel/rsrc
+
+Tool for embedding .ico & manifest resources in Go programs for Windows. ⛺ - akavel/rsrc
+
+github.com
+
+콘솔에서
+
+```
+go get github.com/akavel/rsrc
+```
+
+위 명령을 치시면 됩니다. ( 아무 메시지 없이 넘어가면 성공한겁니다 )
+
+[](https://blog.kakaocdn.net/dn/bwmU5S/btqDTFcNpcQ/hlJDcGB72M36UN2hv91ZmK/BASEAPP.manifest?attach=1&knm=tfile.manifest)
+
+BASEAPP.manifest
+
+0.00MB
+
+[](https://blog.kakaocdn.net/dn/mzJ5r/btqDQ8UZL3E/HXBy7rm0b0iMkwbWd3RUxK/BASEAPP_ADMIN.manifest?attach=1&knm=tfile.manifest)
+
+BASEAPP_ADMIN.manifest
+
+0.00MB
+
+[](https://blog.kakaocdn.net/dn/644SA/btqDTk0YOK6/drPpSqNbTkKDaIQhNjJDLK/Makefile?attach=1&knm=tfile.dat)
+
+Makefile
+
+0.00MB
+
+영상에서 작성한 매니페스트 파일들과 Makefile 입니다.
+
+----
+
+# [1일1GO/0007 영상관련 자료](https://modu-print.tistory.com/292?category=863372)
+
+by 피로곰  2020. 5. 9.
+
+[](https://blog.kakaocdn.net/dn/bcJtIM/btqDZOWwGeQ/GlTaYiMLIczJOc2JbsDTE1/main.go?attach=1&knm=tfile.go)
+
+main.go
+
+0.00MB
+
+[](https://blog.kakaocdn.net/dn/cRCloY/btqD0iW6AQo/vBXdGipXoaCWQOlEQejw8k/utils.go?attach=1&knm=tfile.go)
+
+utils.go
+
+0.00MB
+
+[](https://blog.kakaocdn.net/dn/vbSIB/btqDZZQX3eL/DIp67lSNKwTGKYv5bzuCuK/webserv.go?attach=1&knm=tfile.go)
+
+webserv.go
+
+0.00MB
+
+----
+
+# [1일1GO/0008 크롬을 싹다 죽여보자GO!!](https://modu-print.tistory.com/299?category=863372)
+
+by 피로곰  2020. 5. 14.
+
+피로곰과 함께하는 Go프로그래밍 1일1GO!
+
+8번째 영상에서 만든 프로그램의 소스코드입니다.
+
+컴파일된 실행파일도 같이 들어 있으니
+
+실행파일만 필요하신 분도 받아서 사용하심 되겠습니다.
+
+[](https://blog.kakaocdn.net/dn/7b7zg/btqEalZm2Y4/ZlP6NtIgOLcc4sGgMKpHY0/KillChrome.zip?attach=1&knm=tfile.zip)
+
+KillChrome.zip
+
+0.61MB
+
+
+----
+# [1일1GO/0009 윈도 트레이 메뉴를 추가하자GO!](https://modu-print.tistory.com/302?category=863372)
+
+by 피로곰  2020. 5. 17.
+
+9번째 시간 윈도 트레이 메뉴(아이콘)을 추가하는
+
+방법에 대한 영상입니다.
+
+사용된 패키지의 github 주소 입니다
+
+[https://github.com/tadvi/systray](https://github.com/tadvi/systray)
+
+[](https://github.com/tadvi/systray)
+
+tadvi/systray
+
+Go package for Windows Systray icon, menu and notifications - tadvi/systray
+
+github.com
+
+```
+go get github.com/tadvi/systray
+```
+
+콘솔에서 위 명령으로 시스템에 추가 가능합니다.
+
+[](https://blog.kakaocdn.net/dn/dGVlQj/btqEdwzKaxk/DpLj8tvYq5WPxs4CyuonRk/BASEAPP_0009.zip?attach=1&knm=tfile.zip)
+
+BASEAPP_0009.zip
+
+0.00MB
+
+이번 편 까지 작성된 전체 코드의 압축파일입니다.
+
+----
+
+# [1일1GO/0010 프로그램 아이콘을 변경하자GO!](https://modu-print.tistory.com/313?category=863372)
+
+by 피로곰  2020. 5. 30.
+
+[](https://blog.kakaocdn.net/dn/y72NN/btqEwSvT6hR/UuvsZKmvXziqpUT3wgnoC0/BASEAPP_0010.zip?attach=1&knm=tfile.zip)
+
+BASEAPP_0010.zip
+
+0.10MB
+
+1일1GO 10번째 시간에서 작업한 프로젝트 파일은
+
+위 압축파일을 다운로드 받으시면 됩니다.
+
+추가된 파일은
+
+baseapp.png
+
+baseapp_icon.ico
+
+수정된 파일은
+
+Makefile
+
+main.go
+
+입니다.
+
+영상중 png 이미지를 ico 파일로 변경하는데 사용한
+
+사이트 링크입니다.
+
+[https://icoconvert.com/](https://icoconvert.com/)
+
+[](https://icoconvert.com/)
+
+ICO Convert - Create Icons From PNG & JPG Images Online
+
+ICO Convert is a free online icon maker and favicon generator, with it you can make icons from png or jpg images, just upload a photo of yourself, resize and crop it, convert to a shape you like, add borders and shadows, and save it as a PNG image or Windo
+
+icoconvert.com
+
+영상 중 컴파일된 실행파일의 리소스 정보를
+
+확인하는데 사용한 리소스해커(Resource Hacker)의 사이트 링크입니다.
+
+[http://www.angusj.com/resourcehacker/](http://www.angusj.com/resourcehacker/)
+
+[](http://www.angusj.com/resourcehacker/)
+
+Resource Hacker
+
+-action action to be performed on the opened file add - add a resource, but fails if it already exists addoverwrite - add a resource, and overwriting if it already exists addskip - add a resource, but skipping if it already exists compile - compiles a re
+
+www.angusj.com
+
+
+----
+
+# [Go로 웹크롤러 만들기 #1](https://modu-print.tistory.com/444?category=863372)
+
+by 피로곰  2020. 11. 17.
+
+원래 유튭 영상으로만 어떻게 해보려고 몇 번 녹화도 해보고 라이브도 진행해보고 했으나.. 영상보단 글로써 전달하는 게 효율적이란 생각이 들어서 .. 영상 대본 등을 이용해서 먼저 글을 올립니다. 영상은 포스트 작성후 이 글의 내용에 대해 간단히 설명하는 정도로 넘어가도록 하겠습니다.
+
+유튜브 피로곰TV채널의 구독자와 시청시간이 충족돼서 광고도 달수 있게 되고 커뮤니티 기능도 사용 가능해지면서 전부터 생각하던 대리코딩과 관련한 글을 작성했고 한분께서 크롤링과 관련된 문의를 하셨습니다. 솔직히 별로 하고 싶지 않은 류의 프로그램이라 대리코딩 콘텐츠를 할까 말까 고민한 가장 큰 이유 중 하나가 이놈 때문인데 그래도 요청이 왔으니 진행을 해보겠습니다.
+
+크롤러를 별로 하고 싶지 않았던 이유를 짧게 말해보자면.. 크롤러가 요구되는 기술의 수준이 높은건 아닌데 그 종류와 양이 좀 방대하고 끝없이 계속 무언가를 해줘야만 유지가 되는 류의 프로그램이어서 그리 개발을 선호하지도 누군가에게 알려주는것도 탐탁지 않아하는 편이긴 합니다만.. 여하튼 시작은 해보겠습니다.
+
+![](https://blog.kakaocdn.net/dn/dC4YEt/btqNwwlheW3/zAFd9U9ADUtW3r8YM6wMvk/img.png)
+
+첫 요청을 하신 YOY님은 경제나 부동산, 해외뉴스  같은 정보를 크롤링하는 프로그램을 만들고 싶다 하셨고, 컴퓨터 사용 수준은 초급, 프로그래밍 수준은 학원에서 자바를 뗐다는 거 보니 자바 과정을 마치셨다? 정도로 이해하면 될 것 같습니다. 웹개발기준이라 하시는 걸 보니 웹과 관련된 Spring 이라던지 그런류의 것들을 배우는 과정을 수료하신 듯합니다.
+
+WSJ면 월스트릿 저널?이겠죠? CNBC는 방송사일 테고 블룸버그는 증권 관련한 뭐 그쪽 회사인 걸로 알고 있고, 그런 사이트들에서 어떤 정보를 크롤링을 통해 취합하고 싶다, 그걸 위한 프로그래밍을 하고 싶으시다는 겁니다..
+
+그 외에는 어떤 언어를 사용해야 하는가에 대한 고민이 있으시고, 자바가 무겁다는 의견이 있어서 파이썬이나 C++로 해야 하나를 고민 중이며. 인터넷에서 구할 수 있는 소스코드들을 가지고 이런저런 시도는 해보셨으나 고생 중이시다 정도로 이해하겠습니다.
+
+두 번째로는 뭐 어찌됐든 동작하는 코드? 같은걸 구하신 듯한데.. 그걸 통해 외국 뉴스 사이트 같은 데를 크롤링을 시도를 하고 있는데 되지 않는다 사이트에서 막는 것 같다.
+
+마지막으로 개발자 경력직들이 어떤 식으로 코딩을 해 나가느냐에 대한 부분을 물으셨습니다. 이분 같은 경우에는 우선.. 무언가 목적한 프로그램은 있고 프로그래밍에 조금 발은 담가 보았으나 뭔가 안 되는 것들만 하나 가득인 그런 상황이신 건데요 원래 프로그래밍이 늘 그렇습니다 경력이 있던 없던 처음 해보는 프로그램의 개발과정은 누구나 같습니다 30년을 했어도 그렇습니다.
+
+단지 넘어온 고난의 수와 크기가 다르기에 얼마나 빨리 적응하고 해결점을 찾느냐에 대한 노하우가 다른 뿐이지요.. 우선 언어의 선택이나 개발 방법 그런 걸 논하기 전에 경력이 일정 수준 이상 되는 프로그래머들 물론 제가 모든 개발자들의 머릿속을 아는 건 아니지만 최소한 저나 제가 키운(?) 개발자들은 적어도 이런 과정을 거치는 편이니 몇 가지 집고 넘어가겠습니다.
+
+최근의 컴퓨터나 모바일 환경에서 세상에 전혀 존재하지 않는 기술들로만 한마디로 쌩으로 하나부터 열까지 모든 기능을 전부 다 만들어야 하는 프로그램은 거의 없습니다. 그런 관계로 만들려고 하는 프로그램에 사용되는 기반 기술들 흔히들 말하는 프로토콜이나 정해진 표준이나 그러한 것들을 포함하는 프로그램을 만들려 하는 경우에는 어떤 것들을 포함시킬지에 대해 우선 리스트업을 하고, 알고서 시작을 해야 합니다.
+
+이번 시간에 다루는 것은  크롤러에 대한 내용이니 크롤러를 예를 들자면 크롤러를 만들어 보겠다는 사람들조차 그저 인터넷 상의 데이터를 수집하는 프로그램이다라는 정도만 생각하지 그 크롤러가 어떤 기능들이 모여져서 동작하게 되는지 까지는 생각해보지 않은 상태로 막연히 크롤링을 해야 하는데 어떻게 만들어야 하나요? 라는 질문만을 하시는 분들이 많이 계십니다.
+
+사실 크롤러뿐 아니라 모든 프로그램을 만들 때는 고려해야 할 사항이긴 합니다만.. 기본적으로 크롤링을 하는 프로그램에 포함되는 기술? 기능들을 보자면 우선 인터넷에 존재하는 데이터를 취급할 테니 네트워크 통신에 대한 부분이 돼야겠지요? 일반적으로 프로그래밍으로 네트워크를 하는 데 사용되는 것은 Socket 프로그래밍 입니다. 그리하여 기본적으로 Socket API 프로그래밍을 통한 TCP/IP 프로그래밍이 가능해야겠지요. 그래야 어딘가 접속을 하고 데이터를 요청하고 수신을 받을 수 있으니까요.
+
+[](https://en.wikipedia.org/wiki/Berkeley_sockets)
+
+Berkeley sockets - Wikipedia
+
+Berkeley sockets is an application programming interface (API) for Internet sockets and Unix domain sockets, used for inter-process communication (IPC). It is commonly implemented as a library of linkable modules. It originated with the 4.2BSD Unix operati
+
+en.wikipedia.org
+
+위키 등에서 관련 정보를 쉽게 찾아볼 수 있습니다. 참고만 하세요 ㅎㅎ 인터넷을 통해 데이터를 주고받게 되고 나면 주고받을 데이터의 형태를 규정한 프로토콜이 필요해지겠지요. 보통 크롤링은 웹사이트를 대상으로 하니까 우선 HTTP(Hyper Text Transfer Protocol) 는 기본적으로 가능해야 하고.. 최근에는 통신 구간을 암호화 하는 HTTPS(HTTP Secure) 에 대해서도 구성이 필요할것이고 HTTP프로토콜에 암호화를 추가하기위한 SSL 이나 TLS 같은 암호화 기술에 대해서도 처리가 필요해집니다.
+
+[](https://ko.wikipedia.org/wiki/HTTP)
+
+HTTP - 위키백과, 우리 모두의 백과사전
+
+위키백과, 우리 모두의 백과사전. HTTP(HyperText Transfer Protocol, 문화어: 초본문전송규약, 하이퍼본문전송규약)는 W3 상에서 정보를 주고받을 수 있는 프로토콜이다. 주로 HTML 문서를 주고받는 데에
+
+ko.wikipedia.org
+
+[](https://ko.wikipedia.org/wiki/HTTPS)
+
+HTTPS - 위키백과, 우리 모두의 백과사전
+
+위키백과, 우리 모두의 백과사전. HTTPS(HyperText Transfer Protocol over Secure Socket Layer, HTTP over TLS,[1][2] HTTP over SSL,[3] HTTP Secure[4][5])는 월드 와이드 웹 통신 프로토콜인 HTTP의 보안이 강화된 버전이다. HTTP
+
+ko.wikipedia.org
+
+[](https://ko.wikipedia.org/wiki/%EC%A0%84%EC%86%A1_%EA%B3%84%EC%B8%B5_%EB%B3%B4%EC%95%88)
+
+전송 계층 보안 - 위키백과, 우리 모두의 백과사전
+
+위키백과, 우리 모두의 백과사전. 전송 계층 보안(영어: Transport Layer Security, TLS, 과거 명칭: 보안 소켓 레이어/Secure Sockets Layer, SSL)[1]는 컴퓨터 네트워크에 통신 보안을 제공하기 위해 설계된 암호
+
+ko.wikipedia.org
+
+이제 통신도 가능해지고 프로토콜도 처리가 되었다면 수신된 데이터를 해석을 해야 하겠지요 웹페이지는 보통 HTML(Hyper Text Markup Language)를 사용합니다.
+
+[](https://ko.wikipedia.org/wiki/HTML)
+
+HTML - 위키백과, 우리 모두의 백과사전
+
+위키백과, 우리 모두의 백과사전. 최신 HTML 버전인 HTML5의 로고이다. 하이퍼텍스트 마크업 언어(HyperText Markup Language, HTML, 문화어: 초본문표식달기언어, 하이퍼본문표식달기언어)는 웹 페이지를
+
+ko.wikipedia.org
+
+하지만 어떤 프로그래밍 언어나 스크립트도 결국 컴퓨터가 알아먹는 구조로 만들어진 경우라
+
+![](https://blog.kakaocdn.net/dn/wCv8i/btqNF9Pb44M/1QjPyPFFvv4lUmCXiZOsU1/img.png)
+
+이런 HTML내용중 내가 필요한 정보만을 추출을 하기 위해선 HTML을 프로그래밍적으로 수월하게 접근하기 위해 손을 좀 대줘야 합니다. 파싱(Pasing)을 한다 하고 이런 짓을 해주는 프로그램들을 파서(Parser)라고 합니다.
+
+[](https://ko.wikipedia.org/wiki/%EA%B5%AC%EB%AC%B8_%EB%B6%84%EC%84%9D)
+
+구문 분석 - 위키백과, 우리 모두의 백과사전
+
+위키백과, 우리 모두의 백과사전.
+
+ko.wikipedia.org
+
+HTML 과 연관된 기술들로는 Java Script 나 Stylesheet(CSS), 그리고 자바스크립트에서 사용되는 Json 이라는 데이터 포맷에 대한 것들도 그냥 같이 한 몸이라고 생각하시면 되겠고요. 이러한 기능들의 나열을 사전조사라고 볼 수 있는데 이 사전 조사된 필요사항들에서 계속 세부 내역들이 가지를 쳐가면서 빈 곳이 채워져 가는 것이 프로그램의 개발이라고 할 수 있습니다.
+
+방법론 적인 것은 사람마다 많은 차이가 있을 수 있습니다. 경력이 오래되고 많이 해본 개발자일수록 위의 과정들이 그냥 머릿속에 가지고 있는 것만 가지고 바로 코드만 작성하면 될 수도 있고 사람에 따라서는 늘 어떤 문서나 플로우 차트 같은 것을 만들기 좋아하는 사람이 있을 수도 있고요 정말 가끔 전통적인 순서도 같은 것을 작성하거나 작성을 강요하는
+
+변태들도 존재하긴 합니다. 개인적으로 요즘 같은 환경이 정말 개발자에게는 축복받은 환경이라고 생각하거든요 인터넷엔 수많은 예제와 레퍼런스들이 존재하고 있으니까요.
+
+현대의 개발은 자료의 수집이 40% 실질 개발이 60% 정도라 생각합니다. 언어에 따라서는 자료수집, 검색이 80%가 넘는 경우도 있을 수 있지요. 그만큼 레거시한 개발의 경우에는 엄청난 생산성을 보여줄 수 있는 시대니 까요. 기본적으로 필요한 것들이 나열이 되었으면 어떤 언어로 개발을 해야 할 것인지를 선택하기에 앞서 고려할 것이 있습니다.
+
+1.  프로그램이 나 혼자 쓸 것이냐 배포를 목적으로 할 것이냐
+2.  어떤 OS를 대상으로 할 것이냐(윈도, 리눅스, 맥OS등 )
+3.  UI(User Interface)를 어떤 방향으로 구성할 것이냐
+
+우선 프로그램을 나혼자 쓸 거냐 배포를 목적으로 하느냐는 기본적으로 모든 것을 혼자서 다 만드는 게 아니라 세상에 존재하는 수많은 오픈소스의 버프를 받아 개발을 해나가는 요즘의 개발환경에서 라이선스라는 족쇄에 얼마나 자유로울 수 있느냐 때문에 중요합니다.
+
+물론 만든 코드를 전부 공개하겠다 마음먹으신다면야 별로 신경 쓸 것은 아니지만, 간혹 라이선스 생각 안 하고  AGPL이나 GPL같은 강력한 정책이 포함된 오픈소스를 끌어다 쓰고 낭패를 보시는 경우들도 많이 있습니다. 배포를 목적으로 개발을 할 때에는 그만큼 내가 끌어다 쓰려하는 오픈소스들의 라이선스를 꼼꼼히 확인해야 할 필요성이 있기 때문에 중요하고요.
+
+다른 면으로는 타인의 컴퓨터에서 동작하는 프로그램을 만든다는 건 상태를 알 수 없는 환경에 대응을 해줘야 한다는 말이 됩니다. 개인적으로 혼자 쓰는 프로그램은 멋대로 편한 대로 만들어 쓰면 되고 내 컴퓨터에서 정상 동작한다면 그만이지만 배포를 하게 된 순간 알 수 없는 수많은 문제들에 대응하여 어디서나 동작 가능한 프로그램을 만들어야 한다는 게 됩니다.
+
+두 번째 어떤 OS를 대상으로 하느냐는 개발언어 시장에는 일반적으로 애초에 다양한 플랫폼에서의 사용을 고려하여 개발된 언어들이 있으며, 특정 OS에서만 사용되는 언어들도 존재합니다. 대표적으로 파이썬이나 Go, Node.js, Java 같은 언어들은 현존하는 대부분의  OS들에서 사용 가능한 패키지를 제공하고 있고요.
+
+맥OS의 Xcode를 통한 맥, 아이폰, 아이패드등의  전용 프로그램들 이라던지, MS의 Visual Studio의 윈도 API나 MFC, C# 같은 놈들은 MS의 윈도에서 동작하는 전용 프로그램을 위해 사용된다고 보면 됩니다. 실상 윈도 API, MFC이런것들은  언어라기보다는 도구의 입장이지만 어떤 것을 선택하느냐에 따라서 붙여 쓸 수 있는 오픈소스들이 차이가 있으니까요. 어떤 언어와 도구를 가지고 개발을 할지에 대한 선택에 있어서 가장 중요한 것이  OS의 선택이라 언급하고 넘어갑니다.
+
+마지막으로 UI(User Interface)에 대한 부분은 어쩌면 두번째 OS와도 연관이 있을 수 있습니다만. 그것보다는 크게 나누자면 일반 윈도 프로그램들과 같은 형태의 프로그램을 원한다면 윈도API 또는 MFC, C# 을  선택해야 하고, 웹기술을  사용하려 한다면 코도바(Cordova)나 일렉트론(Eletron) 같은 플랫폼을 이용하여 하이브리드 앱 형태로 진행을 해야 할 것입니다.
+
+[](https://ko.wikipedia.org/wiki/%EC%95%84%ED%8C%8C%EC%B9%98_%EC%BD%94%EB%8F%84%EB%B0%94)
+
+아파치 코도바 - 위키백과, 우리 모두의 백과사전
+
+위키백과, 우리 모두의 백과사전. 아파치 코도바Apache Cordova원저자Joe Bowser, Michael Brooks, Rob Ellis, Dave Johnson, Anis Kadri, Brian Leroux, Jesse MacFadyen, Filip Maj, Eric Oesterle, Brock Whitten, Herman Wong, Shazron Abdullah개
+
+ko.wikipedia.org
+
+[](https://ko.wikipedia.org/wiki/%EC%9D%BC%EB%A0%89%ED%8A%B8%EB%A1%A0_(%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4_%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC))
+
+일렉트론 (소프트웨어 프레임워크) - 위키백과, 우리 모두의 백과사전
+
+위키백과, 우리 모두의 백과사전. 일렉트론(Electron, 과거 명칭: 아톰 셸/Atom Shell[4])은 청자오(Cheng Zhao)가 개발한 오픈 소스 프레임워크의 하나로, 지금은 깃허브에 의해 개발되고 있다.[5] 원래 웹
+
+ko.wikipedia.org
+
+창형태를 가지지만 MFC나 API나 C# 같은건  싫다 하면 Qt나 Gtk 같은 리눅스에서 파생된 또 다른 형태의 UI개발을 하실 수도 있고, 간혹 윈도 따윈 모르겠고 게임만 개발해봤다는 고인 물 변태들중에는 OpenGL이나  SDL 같은걸로  게임 만들듯이 UI까지 직접 다 그려주겠어!라는 변태들도 분명 존재합니다만.
+
+전 여러분들이 그래도 정상인의 범위에 계시길 바라기에  여튼간에!그런 이유로 언급을 하고 넘어갑니다. 우선 배포용 프로그램에 대한 것은 갈길이 머니까..**개인이 혼자 쓸 것을 기준**으로 하고요
+
+어떤 OS를 대상으로 하느냐는.. **가장 친숙한 윈도를 기준**으로 하겠습니다. 마지막으로 UI에 대한 부분은 .. YOY님이 자바와 웹 쪽에 대해 그나마 좀 지식을 가지셨다 하시고 크롤링은 일반적으로 UI가 크게 필요한 편은 아니니  **우선 UI필요 없이 기능 구성에 대한 것을 기본으로 진행**하고  UI적인 요소들이 필요한 경우  HTML을 통한 하이브리드 앱 같은 형태로 구성하도록 하겠습니다.
+
+자 이제 어떤 언어를 선택할 것인가를 놓고 보자면 크롤링에서 선호하는 언어는 보통 Managed 언어들이 대부분입니다흔히 말하는 파이썬, Java, Java Script, Go 같은 것들이겠지요 대리코딩 요청시 YOY 님이 말씀하신 Java가 무거워서 .. 라는 부분은 일정 부분은 맞고 일정부분은 틀리지만 솔직히 개인적으론  Java를 써야만 하는 회사에 취업을 목적을 하시는 게 아니라면 자바를 권장하진 않습니다.
+
+그러면 질문하신 것에서 남는 것이 C++ 로 갈 거냐 그 외의 것으로 갈 것이냐 인데.. **크롤링에 C++는 권장할 수 없겠네요.** 가장 큰 이유로는 일반적으로 웹에서 사용되는 텍스트 인코딩은 UTF-8이 주류입니다만 C나 C++에서의 유니코드 처리가 조금 짜증 나거든요. 애초에 C/C++ 가 태동한 시절에는 유니코드라는 개념 자체가 없었기 때문에 좀 자잘하게
+
+신경 쓸 것들이 많아집니다.
+
+그리고 C/C++로 개발을 하실 경우 직접 모든 걸 다 짜실게 아니면  Socket, Http, Https를 비롯한 여러 가지를 하나하나 다 공개된 코드를 찾아서 포함시켜야 하는데 그러한 작업 과정에서 경험 없는 초보 개발자들은 수많은 링크 오류나 기타 컴파일 환경에 따른 수많은 조정사항들에 치여서 포기합니다.
+
+30년을 개발한 저 같은 사람도 남이 개발한 코드를 내 코드에 포함시키는 과정은 그리 즐거운 과정은 아니니까요.. 그러한것을  단 하나만 끌어다 포함시키려고 해도 할 일이 태산인데 여러 가지를 다 가져다 합친다? 쉽지 않습니다.
+
+그런 이유로 언어는 제가 애정해 마지않는 Go를 기준으로 진행하겠습니다. 좋아하기도 하지만 기존에 1일1Go에서 진행해놓은 자료들이 있어서 환경 구성이나 그런 거에 시간을 할애하지 않아도 되고 제 기준으로도 이 언어를 가지고 수많은 것들을 만들어 왔기에 추천하는 입장으로 Go로 진행하겠습니다.  ( 모두의 프린터, 모두의 플러그, 모두의 자막.. 모두 Go로 만들었습니다 )
+
+옛날 그 언젠가는 자신이 하는 언어가 최고라며 쌈질하던 부류의 사람들이 참 많던 시절도 있었지만..  ( 지금도 일부 그런 성향의 개발자들이 있긴 하지만 .. ) 자연스럽게 일정 수준 이상의 경력을 가지게 되면 하나 이상의 언어를 사용하고
+
+만들려고 하는 목적한 프로그램이 무엇이냐에 따라 좀 더 편한? 생산성이 높은? 유지관리에 이점이 있는 언어를 선택해서 만드는 편입니다.
+
+Go환경 설정이나 코드 편집을 위한 vscode 설치와 관련된 건 피로곰TV 1일1Go영상과 제 블로그의 1일1Go 카테고리의 글들을 참고하시기 바랍니다.
+
+[](https://modu-print.tistory.com/279?category=863372)
+
+[1일1GO/0001] Go 프로그래밍 환경구성
+
+오래전부터 프로그래밍에 관심을 가지는 분들에게 강좌 같은 걸 해볼까 하고 고민을 하긴 했습니다만. 유튜브나 블로그등에 좋은 강좌들은 꽤 많은지라 원론적인 부분 빼고 2~3년 전부터 매우
+
+modu-print.tistory.com
+
+다음 편부터 실질 코드 작성에 대한 글을 진행하겠습니다.
+
+----
+
+# [Go로 웹크롤러 만들기 #2](https://modu-print.tistory.com/449?category=863372)
+
+by 피로곰  2020. 11. 24.
+
+[modu-print.tistory.com/44](https://modu-print.tistory.com/444)
+
+[](https://modu-print.tistory.com/444)
+
+Go로 웹크롤러 만들기 #1
+
+원래 유튭 영상으로만 어떻게 해보려고 몇 번 녹화도 해보고 라이브도 진행해보고 했으나.. 영상보단 글로써 전달하는 게 효율적이란 생각이 들어서 .. 영상 대본 등을 이용해서 먼저 글을 올립
+
+modu-print.tistory.com
+
+1편에 이어서 진행해 보겠습니다. 우선 적당한 위치에 폴더하나를 만드시구요. 저는 GOWEB이라고 만들었습니다.
+
+![](https://blog.kakaocdn.net/dn/ogYFa/btqN2UMPKgS/va9HrQuFxd8AC4nH8Bekf1/img.png)
+
+생성한 폴더를 선택후 우클릭 -> Code(으)로 열기하여 VSCode로 프로젝트를 엽니다.
+
+![](https://blog.kakaocdn.net/dn/bbeuOZ/btqN8Y8jtpf/XG6qAqbzGa1nJBCs8KEbI0/img.png)
+
+![](https://blog.kakaocdn.net/dn/d2W1j2/btqN8d5HTkF/fZlg3DGsQKovbpBKwkReZ1/img.png)
+
+main.go 파일을 하나 생성 하십시요.
+
+```
+package main
+
+func main(){
+
+}
+```
+
+import 용 패키지가 아닌 실행파일을 만들 예정이니 첫줄은 닥치고  **package main!** 빈 main 함수도 미리 하나 만들어 두시구요.
+
+앞서 1편에서 크롤러에 필요한 여러 기술들에 대해서 나열을 했습니다만. 보통 HTML 데이터를 수신받아서 파싱(Parsing)해주는 역할을 하는 패키지들은 대부분 http나 https를 통한 데이터 수신까지 한번에 해주기도 합니다.
+
+다양한 종류의 HTML 파서가 존재 하는데요 제가 즐겨 쓰는것은 goquery 라는 놈을 즐겨 사용합니다. 흔히 자바스크립트로 웹코딩시 많이 사용하던 jqeury 의 seletor 문법을 Go에서 사용하여 DOM Element에 대한 객체처리가 가능한 놈입니다. 파이썬에서 많이 사용하는 BeautifulSoup? 그런류의 것이라 생각 하심 됩니다.
+
+[github.com/PuerkitoBio/goquery](https://github.com/PuerkitoBio/goquery)
+
+[](https://github.com/PuerkitoBio/goquery)
+
+PuerkitoBio/goquery
+
+A little like that j-thing, only in Go. Contribute to PuerkitoBio/goquery development by creating an account on GitHub.
+
+github.com
+
+[godoc.org/github.com/PuerkitoBio/goquery](https://godoc.org/github.com/PuerkitoBio/goquery)
+
+[](https://godoc.org/github.com/PuerkitoBio/goquery)
+
+Package goquery
+
+Package goquery implements features similar to jQuery, including the chainable syntax, to manipulate and query an HTML document.
+
+godoc.org
+
+깃헙이나 레퍼런스는 위 주소에서 참고하시기 바라구요.. 일단 ㅋㅋ 저것들이 중요한것은 아니니까 .. 지금 이순간 중요한건 뭐다?  **패.키.지.설.치!**
+
+![](https://blog.kakaocdn.net/dn/byx5dV/btqObZexpBp/okaQN6PQ2SgJqBk5WybiKk/img.png)
+
+터미널을 하나 띄우시구요.
+
+![](https://blog.kakaocdn.net/dn/L7hKL/btqN6TGEsqj/diaASfryl9Myqfkm5pnnU1/img.png)
+
+**go get  github.com/PuerkitoBio/goquery**
+
+라고 터미널 창에 입력후 엔터를 치시면 goquery 패키지가 Go언어 경로에 설치가 됩니다. ( 원래 Go는 ;; 설치가 잘 되면 아무말 없;;; ) 자 goquery 를 이용해 웹페이지의 특정 값을 파싱하여 가져오는 가장 기본적인 구조를 해봅시다.
+
+![](https://blog.kakaocdn.net/dn/dRqwe2/btqN7SHsZNe/L9trX1z8tzGk7XfJKOTsK0/img.png)
+
+우선 모두의 프린터의 저 버전 값을 가져와 보도록 하겠습니다. 크롤러를 만들때 가장 먼저 익숙해져야 할것은 웹브라우저의 개발자도구입니다. 개인적으론 크롬의 개발자도구를 가장 선호하기 때문에 크롬을 기준으로 설명 드리겠습니다. 개발자도구를 켜는 법은  **F12**키를 누르시거나
+
+![](https://blog.kakaocdn.net/dn/6bRFY/btqObXOyJi8/EkpRvUKkJ5yJho0WSMUk6K/img.png)
+
+메뉴를 통해 켜실수도 있습니다. 과거에는 이런 좋은 도구들이 제공되지 않아서 HTML 소스 자체를 하나하나 다 분석해가면서 DOM 구조를 파악하고 id 나 class 값을 따내고 하는 등의 노가다가 극심했는데 ㅎㅎ 세상 많이 좋아졌네요 ㅎㅎ
+
+![](https://blog.kakaocdn.net/dn/bJfbrw/btqN5f4dEfy/AswwE3KUJm0Y3vLKmjyWz1/img.png)
+
+크롤링에 필요한 값을 따기 위해 웹브라우저에 보여지는 객체위에 마우스커서를 가져가신후 우클릭 -> 검사를 선택합니다
+
+![](https://blog.kakaocdn.net/dn/bcQZzC/btqOcRtM3oe/4Ke6uhswpAZB57EkgUHvRK/img.png)
+
+그러면 개발자 도구의 Elements 탭에 선택한 객체의 HTML 코드내용이 위와같이 선택(반전)되서 표시됩니다. 모두의 프린터의 관리페이지의 버전값을 표시해주는 저 객체는 Button 태그에 btn, btn-sm 이라는 클래스를 사용중이고 mop-title 이라는 id 값을 가지고 있네요.
+
+자 그럼 이놈을 goquery 로 값을 가져와 보도록 합시다. 우선 goquery 라는 놈이 jqeury의 selector 형식으로 객체를 다룰수 있다고 말씀드렸는데요. 원하는 객체의 DOM Seletor 경로를 얻는 방법은
+
+![](https://blog.kakaocdn.net/dn/bwJuvF/btqN9Mftwr3/aTkoOtvRMakCQcx5HTTbKk/img.png)
+
+위와 같이 Elements에서 원하는 객체의 HTML 구문을 선택 후 마우스 우클릭 -> Copy -> Copy selector 를 선택하시면클립보드에 복사가 됩니다.
+
+**#mop-title**
+
+이렇게 복사가 될겁니다. 이 정보들을 가지고 간단히 데이터를 얻어보도록 하겠습니다.
+
+```
+package main
+
+import (
+	"fmt"
+
+	"github.com/PuerkitoBio/goquery"
+)
+
+func basic1() {
+
+	// 모프 관리페이지 URL은 실행시마다 다름
+	doc, docErr := goquery.NewDocument("http://127.0.0.1:13399/")
+
+	// goquery 에러 처리
+	if docErr != nil {
+		fmt.Println(docErr.Error())
+		return
+	}
+
+	// id 값 mop-title 찾기
+	mopTitle := doc.Find("#mop-title")
+
+	// 객체가 있으면
+	if mopTitle != nil {
+		fmt.Println(mopTitle.Text()) // inner-text
+		fmt.Println(mopTitle.Html()) // inner-html
+	}
+}
+
+func main() {
+	basic1()
+}
+
+```
+
+이렇게 입력후에 실행을 해보시면 되는데.. 간단히 코드에 대한 설명을 하자면..
+
+```
+	// 모프 관리페이지 URL은 실행시마다 다름
+	doc, docErr := goquery.NewDocument("http://127.0.0.1:9200/")
+```
+
+goquery 패키지에는 http, https 프로토콜을 통해 URL만 전달하면 알아서 웹페이지의 HTML을 가져다 파싱해주는 함수가 존재합니다. 위와 같이 NewDocument 함수에 URL만 전달하면 .. 파싱한 데이터를 배터내지요.
+
+```
+	// goquery 에러 처리
+	if docErr != nil {
+		fmt.Println(docErr.Error())
+		return
+	}
+```
+
+예외처리는 습관적으로 하시는게 좋습니다. 귀찮고 불필요해 보여도 언제나 .. 삽질을 줄여주는 고마운 놈이지요. goquery 의 NewDocument 함수가 동작중에 오류가 발생할경우 오류의 원인을 출력하고 basic1 함수는 종료됩니다.
+
+```
+	// id 값 mop-title 찾기
+	mopTitle := doc.Find("#mop-title")
+
+	// 객체가 있으면
+	if mopTitle != nil {
+		fmt.Println(mopTitle.Text()) // inner-text
+		fmt.Println(mopTitle.Html()) // inner-html
+	}
+```
+
+마지막으로 .. doc 변수에 파싱(Parsing)되어 저장된 데이터를 가지고 지지고 볶아야 하는데.. 앞서 설명했듯이 mop-title 이라는 id 값을 가진 객체를 찾으려 합니다.. jquery 에서 많이 볼수 있지요.. id 값을 검색할땐 #로 시작.. class 값을 검색할때는 .으로 시작.. 이런걸 selector 라고 하지요 mop-title 이라는 id 값을 가진 객체를 검색할꺼니..
+
+```
+	// id 값 mop-title 찾기
+	mopTitle := doc.Find("#mop-title")
+```
+
+이렇게 검색을 합니다. 만약 Find함수에 전달된 selector 조건에 해당하는 객체가 없는 경우에는 doc.Find함수의 결과값은 비어(nil : 보통 말하는 null의 go표현)있습니다.
+
+```
+	// 객체가 있으면
+	if mopTitle != nil {
+		fmt.Println(mopTitle.Text()) // inner-text
+		fmt.Println(mopTitle.Html()) // inner-html
+	}
+```
+
+doc.Find 의 결과인 mopTitle 변수가 nil 아니라면 객체가 찾아진 것이니 해당 객체의 값을 출력하고 종료됩니다. 이제 실행을 해볼텐데요
+
+![](https://blog.kakaocdn.net/dn/bgv3kn/btqOdMTsIA5/P1nZ5S6YbpmL5Tb13Ayqqk/img.png)
+
+이렇게 go build 명령을 사용해서 실행파일을 만든후에 GOWEB.exe 파일을 실행해보는 방법도 있구요. ( 기본적으로 폴더명이 실행파일명이 됨 ) 개발과정에선 디버깅모드로 실행해 버릇하는게 좋긴 하니까 ..
+
+**F5**를 눌러서 실행하세요.. 근데 프로젝트 폴더를 처음 만든경우에는  **F5**  키를 눌러 실행하려는경우
+
+![](https://blog.kakaocdn.net/dn/s35qr/btqN6U0eSeR/L6RdOBfyKIV8RJebJRwSc0/img.png)
+
+이런식으로 매번 어떤 언어를 위한 디버깅을 할거냐 라고 매번 귀찮게 묻게 됩니다. 귀찮은거 좋아하시면 Go를 매번 선택해서 실행하시구요.. 제가 권장드리는건 ..
+
+![](https://blog.kakaocdn.net/dn/b7E50y/btqN8fixYkG/8xGXz4RlaxxocK5QI6RImK/img.png)
+
+좌측 사이드의 아이콘중에 벌레가 그려진 플레이 버튼 같은 4번째 사이드 탭을 클릭하시고 ..  **create a launch.json file**  을 클릭
+
+![](https://blog.kakaocdn.net/dn/bjwqZe/btqN8ZmdBTG/hS1JGDbBR0KJmOIXo5mIUk/img.png)
+
+Go 선택
+
+![](https://blog.kakaocdn.net/dn/bPHo55/btqN7SBaF8D/Hr901vVWybgQgdIFmTKbx1/img.png)
+
+이렇게 디버깅시 실행옵션등을 담은  **launch.json**  파일이 생성됩니다. 이후로는 ..  **F5**만 누르시면 바로 디버깅 모드로 실행됩니다.
+
+![](https://blog.kakaocdn.net/dn/bu9M9u/btqOeA6jRss/cPK8hJS8EnHUQzbfuqasqK/img.png)
+
+실행을 하면 위와 같이 .. DEBUG CONSOLE에 크롤링한 내용이 출력됩니다.
+
+.Text와 .Html 의 차이는 선택된 Tag 안에 존재하는 텍스트만을 추출할지 HTML Tag까지 포함하여 추출할지를 필요에 따라 사용가능합니다. 데이터를 가져오고 객체를 찾아 값을 출력하는 가장 기본적인 내용을 다뤄 보았습니다. 크롤링과 관련된 다양한 예제를 앞으로 계속 진행해 보도록 하겠습니다.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTc4NDg1ODAxNiwtNDE1MDM4NDMyLC00MT
+UwNzM5NDIsLTE2NjYyOTMzNDksLTI1NTEzMDExNiwxMDAzODY3
+NjAwLDczMDk5ODExNl19
+-->

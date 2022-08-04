@@ -1,0 +1,1353 @@
+
+[Oracle Cloud Infrastructure](https://thekoguryo.github.io/oci/)
+
+[Oracle Cloud Free Tier 만들기 가이드](https://sonhc.tistory.com/906?category=1050343)
+
+# [오라클 클라우드 가입하는 방법](https://www.wsgvet.com/cloud/1?sca=오라클)
+
+### 작성자 정보
+
+-    [![회원사진](https://www.wsgvet.com/data/member_image/ad/admin.gif)  우성짱](https://www.wsgvet.com/bbs/profile.php?mb_id=admin "우성짱 자기소개")작성
+-   작성일2020.11.10 23:52
+
+### 컨텐츠 정보
+
+-   26,020조회
+-   **23**댓글
+-   [목록](https://www.wsgvet.com/cloud "목록")게시물 옵션
+
+### 본문
+
+[![](https://cdn.wsgvet.com/data/file/cloud/3232235777_IEg9eMYC_a81df9eb18486c1134c00b5adf6ca5ec6d1440fd.png)](https://www.wsgvet.com/bbs/view_image.php?bo_table=cloud&fn=3232235777_IEg9eMYC_a81df9eb18486c1134c00b5adf6ca5ec6d1440fd.png)
+
+현재 이 블로그의 이미지와 동영상, 움짤 트래픽을 대신해주고 있는 오라클 클라우드에 대해 알려드리겠습니다.
+
+**2개의 인스턴스, 1GB RAM, 100GB HDD, 10TB/월 트래픽, 서울 또는 춘천 서버 이용 가능**
+
+오라클 클라우드 무료 티어의 매력은 5가지 특장점으로 요약할 수 있습니다.
+
+이 글에서는 오라클 클라우드에 가입하는 방법을 진행하겠습니다.
+
+**1. 오라클 클라우드 접속하기**
+
+[https://www.oracle.com/kr/cloud/free/](https://www.oracle.com/kr/cloud/free/)
+
+위 링크에 들어갑니다.
+
+![894e3ea257882924c2c528881b835575_1605016682_0941.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605016682_0941.png)
+
+위와 같이  **무료로 시작하기**를 누릅니다.
+
+**2. 계정 정보 입력하기**
+
+![894e3ea257882924c2c528881b835575_1605016682_1232.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605016682_1232.png "894e3ea257882924c2c528881b835575_1605016682_1232.png")
+
+위와 같이 나오는데요. 국가/지역에  **대한민국**을 넣고 나머지 칸에는 자신의 정보를 입력합니다.
+
+밑에 생기는 내용을 확인하고 모두 체크해주시구요.
+
+그리고  **Verify my email**을 클릭합니다.
+
+**3. 메일 인증하기**
+
+![894e3ea257882924c2c528881b835575_1605016681_863.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605016681_863.png)
+
+메일함에 가면 위와 같이 이메일을 인증하라고 나옵니다. URL을 누르면 다시 오라클 클라우드 가입 페이지로 넘어갑니다.
+
+**4. 비밀번호, ID, 리전(서버 위치) 선택하기**
+
+![894e3ea257882924c2c528881b835575_1605016681_9318.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605016681_9318.png "894e3ea257882924c2c528881b835575_1605016681_9318.png")
+
+위와 같이  **비밀번호**를 똑같이 입력합니다.
+
+회사이름은 옵션이므로 입력하지 않아도 됩니다.
+
+**클라우드 계정 이름**은 정말 중요합니다.
+
+로그인할 때 필요한 ID라고 보시면 됩니다. 원하는 ID를 넣으시구요.
+
+**홈 영역**을 눌러서
+
+![894e3ea257882924c2c528881b835575_1605016681_9654.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605016681_9654.png "894e3ea257882924c2c528881b835575_1605016681_9654.png")
+
+위와 같이  **South Korea Central(Seoul)**과  **South Korea North(Chuncheon)**  중 원하는 곳을 선택하시면 됩니다.
+
+참고로 무료 계정의 경우 홈 영역(리전)을 변경할 수 없으므로 신중하게 선택해야 합니다
+
+우리나라에서는 서울이나 춘천 둘다 접속 속도가 매우 빠르니 원하시는 곳으로 선택하면 됩니다.
+
+**VPN**  등의 목적으로 특정 지역이 필요하다면 다른 곳으로 선택하셔도 됩니다.
+
+**5. 주소 입력하기**
+
+그리고 주소입력 하는 부분이 나오는데요. 저는 영문으로 주소를 입력해줬습니다.
+
+![894e3ea257882924c2c528881b835575_1605016681_9891.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605016681_9891.png "894e3ea257882924c2c528881b835575_1605016681_9891.png")
+
+네이버에서  **영문주소**를 검색하면 바로 검색할 수 있습니다.
+
+![894e3ea257882924c2c528881b835575_1605016682_0086.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605016682_0086.png "894e3ea257882924c2c528881b835575_1605016682_0086.png")
+
+위와 같이 입력해주고  **Continue**를 클릭합니다.
+
+**6. 휴대폰 인증하기**
+
+![894e3ea257882924c2c528881b835575_1605017747_1944.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605017747_1944.png "894e3ea257882924c2c528881b835575_1605017747_1944.png")
+
+위와 같이 휴대폰 인증하기가 나옵니다. 중요한 부분은 위와 같이  **+82**  다음에  **010**이 아닌  **10**으로 시작해야한다는 것입니다.
+
+번호를 제대로 입력 후  **Text me a code**  를 클릭합니다.
+
+![894e3ea257882924c2c528881b835575_1605017892_0111.jpg](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605017892_0111.jpg "894e3ea257882924c2c528881b835575_1605017892_0111.jpg")
+
+위와 같이 국외발신으로 문자가 옵니다. 코드를 입력해주면 됩니다.
+
+**7. 신용(체크)카드 인증 받기**
+
+여기가 오라클 클라우드에서 가장 힘든 부분입니다.
+
+반드시 해외결제가 가능한 신용카드 또는 체크카드가 필요합니다. 체크카드의 경우 연계된 계좌에 잔액이 있어야 합니다.
+
+저는 카카오페이 신한체크카드(비자)로 성공했습니다.
+
+![894e3ea257882924c2c528881b835575_1605016682_0489.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605016682_0489.png "894e3ea257882924c2c528881b835575_1605016682_0489.png")
+
+위와 같이  **지급 확인 방법 추가**를 클릭합니다.
+
+![894e3ea257882924c2c528881b835575_1605016682_07.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605016682_07.png "894e3ea257882924c2c528881b835575_1605016682_07.png")
+
+그리고  **Credit Card**를 클릭합니다.
+
+![894e3ea257882924c2c528881b835575_1605018168_7322.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605018168_7322.png "894e3ea257882924c2c528881b835575_1605018168_7322.png")
+
+위와 같이  **Payment Details**에 카드 정보를 입력해줍니다.
+
+![894e3ea257882924c2c528881b835575_1605018651_5449.jpg](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605018651_5449.jpg "894e3ea257882924c2c528881b835575_1605018651_5449.jpg")
+
+위와 같이 문자가 옵니다.
+
+대략 1170원 정도 결제됐다가 바로 취소됐습니다.
+
+![894e3ea257882924c2c528881b835575_1605018168_757.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605018168_757.png "894e3ea257882924c2c528881b835575_1605018168_757.png")
+
+결제 인증이 성공하면 위와 같이  **Thank you!**가 나옵니다.
+
+하지만 아직 안심할 때가 아닙니다 ^^;;
+
+![894e3ea257882924c2c528881b835575_1605018168_6378.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605018168_6378.png "894e3ea257882924c2c528881b835575_1605018168_6378.png")
+
+위와 같이  **Start my free trial**을 눌렀을 때
+
+![894e3ea257882924c2c528881b835575_1605018168_6708.jpg](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605018168_6708.jpg "894e3ea257882924c2c528881b835575_1605018168_6708.jpg")
+
+위와 같이 나와야 성공하는 것입니다. 위 화면에서는 15분 정도 소요된다고 하는데요. 저는  **대략 2일**이나 소요되었습니다.
+
+만약에 다른 메세지가 나온다면 다른 카드로 휴대폰이나 다른 컴퓨터에서 시도해보시길 바랍니다.
+
+**8. 승인 메일 받기**
+
+2일 뒤 이런 메일이 오면 최종 승인된 것입니다.
+
+![894e3ea257882924c2c528881b835575_1605018168_6982.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605018168_6982.png "894e3ea257882924c2c528881b835575_1605018168_6982.png")
+
+위와 같이  **Cloud Account**와  **Username**을 알려줍니다.
+
+**Sign In to Oracle Cloud**  를 클릭합니다.
+
+**9. 오라클 클라우드 로그인하기**
+
+이메일에 있는 링크로 들어오면 바로 이 화면이 나옵니다.
+
+![894e3ea257882924c2c528881b835575_1605019234_3881.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605019234_3881.png "894e3ea257882924c2c528881b835575_1605019234_3881.png")
+
+위와 같이 뜨면  **사용자 이름 또는 전자메일**에 자신의 이메일을 넣으면 됩니다.  **비밀번호**는 지정한 비밀번호를 넣으시구요.
+
+사인인을 클릭합니다.
+
+또는 [https://www.oracle.com/kr/cloud/free/](https://www.oracle.com/kr/cloud/free/)  링크에 들어가서  **Oracle cloud에 로그인**을 클릭해도 됩니다.
+
+이렇게 들어가는 경우 **Cloud Account Name**을 물어보는데요.
+
+이메일에 온  **Cloud Account**  접속 ID를 넣으면 바로 위에 스샷의 화면이 나옵니다. 그리고  **사인인(로그인)**하면 됩니다.
+
+![894e3ea257882924c2c528881b835575_1605019528_8311.png](https://cdn.wsgvet.com/data/editor/2011/894e3ea257882924c2c528881b835575_1605019528_8311.png "894e3ea257882924c2c528881b835575_1605019528_8311.png")
+
+위와 같이 나오면 성공입니다!
+
+다음 글은 구획 및 네크워크 생성 등에 대해 알려드리겠습니다.
+
+----
+
+# [오라클 클라우드 구획, 가상 네트워크, 방화벽, 공용IP 설정하기](https://www.wsgvet.com/cloud/4?sca=오라클)
+
+### 작성자 정보
+
+-    [![회원사진](https://www.wsgvet.com/data/member_image/ad/admin.gif)  우성짱](https://www.wsgvet.com/bbs/profile.php?mb_id=admin "우성짱 자기소개")작성
+-   작성일2020.11.11 23:36
+
+### 컨텐츠 정보
+
+-   16,367조회
+-   **21**댓글
+-   [목록](https://www.wsgvet.com/cloud "목록")게시물 옵션
+
+### 본문
+
+[![](https://cdn.wsgvet.com/data/file/cloud/3232235777_dwZ1s6lt_2b656cd92d1e0d22b08c30bbe40326b9edce5562.png)](https://www.wsgvet.com/bbs/view_image.php?bo_table=cloud&fn=3232235777_dwZ1s6lt_2b656cd92d1e0d22b08c30bbe40326b9edce5562.png)
+
+오라클 클라우드를 시작할 때 가장 먼저 해야할 것들을 소개해드립니다.
+
+**1. 구획 생성하기**
+
+![43395f87d7dac051380835fde65a97b1_1605104677_676.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104677_676.png "43395f87d7dac051380835fde65a97b1_1605104677_676.png")
+
+위와 같이 왼쪽 위의 오라클 클라우드 로고 왼쪽에 메뉴버튼(햄버거 모양)을 눌러 밑에 보면
+
+**거버넌스 및 관리**가 있습니다. 거기에  **ID**  밑에 있는  **구획**을 클릭합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605104723_6394.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104723_6394.png "43395f87d7dac051380835fde65a97b1_1605104723_6394.png")
+
+구획에는 위와 같이 클라우드 계정(root)으로 생성되어 있을 것입니다.
+
+하지만 우리는 인스턴스를 2개 생성할 것이므로 완전히 독립적으로 구성할 수 있도록 구획를 2개 새로 생성할 것입니다.
+
+구획 생성 버튼을 클릭합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605104761_6003.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104761_6003.png "43395f87d7dac051380835fde65a97b1_1605104761_6003.png")
+
+위와 같이 이름과 설명에 원하는 내용을 넣고 구획 생성 버튼을 클릭합니다.
+
+구획을 하나 더 생성합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605104779_19.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104779_19.png "43395f87d7dac051380835fde65a97b1_1605104779_19.png")
+
+저는 위와 같이  **First-ID**와  **Second-ID**로 만들어줬습니다.
+
+**2. 가상 네트워크 생성하기**
+
+![43395f87d7dac051380835fde65a97b1_1605104792_5418.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104792_5418.png "43395f87d7dac051380835fde65a97b1_1605104792_5418.png")
+
+위와 같이  **메뉴**  ->  **코어 인프라**  ->  **네트워킹**  ->  **가상 클라우드 네트워크**로 들어갑니다.
+
+![43395f87d7dac051380835fde65a97b1_1605104814_3985.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104814_3985.png "43395f87d7dac051380835fde65a97b1_1605104814_3985.png")
+
+위와 같이 왼쪽 밑에  **목록 범위**  ->  **구획**  ->  **구획 검색**을 눌러  **First-ID**를 클릭해줍니다. (자신이 만든 구획 ID를 선택하면 됩니다.)
+
+![43395f87d7dac051380835fde65a97b1_1605104829_4987.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104829_4987.png "43395f87d7dac051380835fde65a97b1_1605104829_4987.png")
+
+위와 같이  **First-ID**  구획으로 변경되었습니다. 이제  **VCN 마법사 시작**을 클릭합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605104895_9774.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104895_9774.png "43395f87d7dac051380835fde65a97b1_1605104895_9774.png")
+
+위와 같이  **인터넷 접속을 통한 VCN**을 선택하고  **VCN 마법사 시작**을 클릭합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605104927_2084.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104927_2084.png "43395f87d7dac051380835fde65a97b1_1605104927_2084.png")
+
+위와 같이 VCN 이름에 원하는 이름을 넣고  **다음**을 누릅니다. 구획과 비슷한 이름이면 구분하기 편하겠죠?
+
+![43395f87d7dac051380835fde65a97b1_1605104943_2721.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104943_2721.png "43395f87d7dac051380835fde65a97b1_1605104943_2721.png")
+
+위와 같이 나옵니다. 생성을 클릭하세요.
+
+![43395f87d7dac051380835fde65a97b1_1605104964_2871.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104964_2871.png "43395f87d7dac051380835fde65a97b1_1605104964_2871.png")
+
+저는 위와 같이 오류가 발생하더라구요. 그래서  **프로비전 재시도**를 클릭해주니
+
+![43395f87d7dac051380835fde65a97b1_1605104977_6343.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104977_6343.png "43395f87d7dac051380835fde65a97b1_1605104977_6343.png")
+
+위와 같이 생성 완료된 것을 볼 수 있습니다.
+
+그리고  **가상 클라우드 네트워크 보기**를 클릭해줍니다.
+
+![43395f87d7dac051380835fde65a97b1_1605104991_9042.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605104991_9042.png "43395f87d7dac051380835fde65a97b1_1605104991_9042.png")
+
+위와 같이  **First-ID**라는 구획 안에  **First-VCN**이라는 가상 네트워크가 생성되었습니다.
+
+같은 방법으로  **Second-ID**라는 구획 안에  **Second-VCN**  가상 네트워크도 생성해주면 됩니다.
+
+새로운 가상 네트워크 생성은  **첫번째 인스턴스를 생성한 후**  작업해주는 것이 좋습니다.
+
+구획이 바뀌면 인스턴스 생성할 때 번거로운 부분이 있기 때문입니다.
+
+**3. 방화벽 설정하기**
+
+이제 가장 중요한  **방화벽**을 설정해줍니다.
+
+주로 쓰이는 포트인  **80, 443**을 여기서 열어줄 수 있습니다. (여기서 열지 않으면 http나 https로 접속이 안됩니다...)
+
+![43395f87d7dac051380835fde65a97b1_1605105032_7121.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605105032_7121.png "43395f87d7dac051380835fde65a97b1_1605105032_7121.png")
+
+위와 같이  **보안 목록(2개)**  ->  **Default Security List for First-VCN**  을 클릭합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605105055_3088.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605105055_3088.png "43395f87d7dac051380835fde65a97b1_1605105055_3088.png")
+
+위와 같이  **22**번 포트의 TCP만 열려있는 것을 볼 수 있습니다.
+
+**수신 규칙 추가**를 클릭합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605105077_9311.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605105077_9311.png "43395f87d7dac051380835fde65a97b1_1605105077_9311.png")
+
+위와 같이  **소스 CIDR**에  **0.0.0.0/0**  을 넣고,  **대상 포트 범위**에  **80,443**  을 넣고, 설명에 관련된 내용을 넣은 후
+
+**수신 규칙 추가**를 클릭합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605105112_8038.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605105112_8038.png "43395f87d7dac051380835fde65a97b1_1605105112_8038.png")
+
+위와 같이 80, 443 포트가 열린 것을 볼 수 있습니다.
+
+같은 방법으로 메일 발송에 필요한 25번 포트 등을 추가할 수 있습니다.
+
+물론 우분투나 센토스에 따라서 iptables나 firewall 관련된 명령어도 같이 써줘야 방화벽이 완벽하게 열립니다.
+
+해당 운영체제에 맞는 방화벽 여는 방법은 다음 글에서 알려드리겠습니다.
+
+**4. 공용 IP 생성하기**
+
+인스턴스를 생성하기 전에 미리 **공용(외부) IP**를 생성해줍니다.
+
+![43395f87d7dac051380835fde65a97b1_1605105209_7489.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605105209_7489.png "43395f87d7dac051380835fde65a97b1_1605105209_7489.png")
+
+위와 같이  **메뉴**  버튼 ->  **코어 인프라**  ->  **네트워킹**  ->  **IP 관리**를 클릭합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605105264_3535.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605105264_3535.png "43395f87d7dac051380835fde65a97b1_1605105264_3535.png")
+
+위와 같이  **First-ID**  구획 내에서  **공용 IP**를 관리할 수 있습니다.
+
+**예약된 공용 IP 주소**를 클릭합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605105285_0289.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605105285_0289.png "43395f87d7dac051380835fde65a97b1_1605105285_0289.png")
+
+위와 같이  **예약된 공용 IP 주소 이름**에  **First-IP**와 같이 구획과 관련된 이름을 넣어주고  **예약된 공용 IP 주소**를 클릭합니다.
+
+![43395f87d7dac051380835fde65a97b1_1605105309_9034.png](https://cdn.wsgvet.com/data/editor/2011/43395f87d7dac051380835fde65a97b1_1605105309_9034.png "43395f87d7dac051380835fde65a97b1_1605105309_9034.png")
+
+위와 같이  **예약된 공용 IP 주소**가 생긴 것을 볼 수 있습니다.
+
+다음에는  **SSH 키**  및  **인스턴스**를 생성하고, 운영체제에서  **방화벽**을 열어주는 방법을 알려드리겠습니다.
+
+----
+
+# [오라클 클라우드 인스턴스 생성 및 SSH 접속하기](https://www.wsgvet.com/cloud/5?sca=오라클)
+
+### 작성자 정보
+
+-    [![회원사진](https://www.wsgvet.com/data/member_image/ad/admin.gif)  우성짱](https://www.wsgvet.com/bbs/profile.php?mb_id=admin "우성짱 자기소개")작성
+-   작성일2020.11.12 23:25
+
+### 컨텐츠 정보
+
+-   24,208조회
+-   **20**댓글
+-   [목록](https://www.wsgvet.com/cloud "목록")게시물 옵션
+
+### 본문
+
+[![](https://cdn.wsgvet.com/data/file/cloud/3232235777_Be603tmf_ef91cda1bae91a953f9e1874610af6fb86d81c7c.png)](https://www.wsgvet.com/bbs/view_image.php?bo_table=cloud&fn=3232235777_Be603tmf_ef91cda1bae91a953f9e1874610af6fb86d81c7c.png)
+
+**1. VM 인스턴스 생성하기**
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190340_0096.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190340_0096.png "53c08c5cb0d224231f3b260eedbd9a68_1605190340_0096.png")
+
+위와 같이 왼쪽 위의 ORACLE Cloud 글자를 클릭하면 홈으로 돌아옵니다.
+
+그 후  **VM 인스턴스 생성**을 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190355_6417.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190355_6417.png "53c08c5cb0d224231f3b260eedbd9a68_1605190355_6417.png")
+
+위와 같이 매우 설정할 것이 많아 보입니다. 하지만 실제로는 그렇게 어렵지 않습니다.
+
+하나하나 설명해드리겠습니다.
+
+**(1) 이름**
+
+원하는 이름을 넣을 수 있습니다. 저는 구분하기 편하게  **First-Instance**라고 지정해줬습니다.
+
+**(2) 구획**
+
+구획은 처음에 생성한  **First-ID**로 잘 되어 있는 것을 볼 수 있습니다.
+
+**(3) 배치 및 하드웨어 구성**
+
+여기서는 표시해둔  **이미지**만 수정할 것입니다.  **편집**을 클릭하면
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190397_9915.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190397_9915.png "53c08c5cb0d224231f3b260eedbd9a68_1605190397_9915.png")
+
+위와 같이 나옵니다.
+
+가용성 도메인과 구성은 항상 무료 적격으로 이미 표시가 되어있어 수정할 부분이 없습니다.
+
+**이미지 변경**을 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190415_1395.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190415_1395.png "53c08c5cb0d224231f3b260eedbd9a68_1605190415_1395.png")
+
+위와 같이  **Canonical Ubuntu 20.04**  를 클릭합니다. 바로 밑에  **Minimal**  이미지도 있는데, 빠진 패키지가 많기 때문에  추천하지 않습니다.
+
+선택을 잘 하셨다면  **이미지 선택**을 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190464_8998.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190464_8998.png "53c08c5cb0d224231f3b260eedbd9a68_1605190464_8998.png")
+
+위와 같이  **Canonical Ubuntu 20.04**로 표시되면 됩니다.
+
+**(4) 네트워킹 구성**
+
+네트워킹은 현재 구성하고 있는 첫번째 구획과 관련된 내용이 들어가 있으면 됩니다.
+
+수정할 부분이 없습니다.
+
+**(5) SSH 키 추가**
+
+인스턴스 생성에서 가장 중요한 부분입니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190485_7523.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190485_7523.png "53c08c5cb0d224231f3b260eedbd9a68_1605190485_7523.png")
+
+추천드리는 방식은  **공용 키 붙여넣기**  입니다.
+
+PuttyGen이나 기타 방식으로 공용 키와 전용 키(개인 키)를 생성하여 붙여넣으면 됩니다.
+
+장점은 비밀번호를 지정할 수 있어, 개인 키가 유출되더라도 비밀번호를 모르면 접속이 불가능하여 보안에 좋다는 것입니다.
+
+PuttyGen을 다운 받아서 공용 키와 개인 키를 생성합니다.
+
+[1] 32bit 용 PuttyGen 다운 받기
+
+[https://the.earth.li/~sgtatham/putty/latest/w32/puttygen.exe](https://the.earth.li/~sgtatham/putty/latest/w32/puttygen.exe)
+
+[2] 64bit 용 PuttyGen 다운 받기
+
+[https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe](https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe)
+
+자신의 컴퓨터에 맞는 bit를 선택해서 다운 받으면 됩니다.
+
+puttygen.exe를 실행하면
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190509_3466.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190509_3466.png "53c08c5cb0d224231f3b260eedbd9a68_1605190509_3466.png")
+
+위와 같이 나오는데요.
+
+**Generate**를 누릅니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190520_6454.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190520_6454.png "53c08c5cb0d224231f3b260eedbd9a68_1605190520_6454.png")
+
+위와 같이 진행사항이 업데이트가 되는데, 마우스 커서를 빨간 공간 안에서 흔들어 줘야 합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190529_4744.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190529_4744.png "53c08c5cb0d224231f3b260eedbd9a68_1605190529_4744.png")
+
+그러면 위와 같이  **Key**가 생성됩니다. 위에 나오는 많은 글자들이  **공용 Key**입니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190548_6725.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190548_6725.png "53c08c5cb0d224231f3b260eedbd9a68_1605190548_6725.png")
+
+위와 같이  **Key comment**에 아이디를 넣을 수 있지만 오라클 클라우드에서는 이미 지정된 ID를 쓸 것이므로 의미는 없습니다.
+
+따라서 그대로 놔둬도 됩니다.  **SSH에 접속할 때 필요한 아이디**는 인스턴스가 생성되면 알려줍니다.
+
+**Key passphrase**  에 원하는 비밀번호를 입력합니다.
+
+비밀번호를 넣지 않으면 SSH 접속할 때 비번없이 바로 접속 가능합니다. 그만큼 보안에는 취약합니다. 비밀번호를 넣는 것을 추천합니다.
+
+**Confirm passphrase**  에 비밀번호를 똑같이 입력합니다.
+
+다 입력했으면  **Save private key**를 눌러서  **ppk 파일**을 다운받습니다.
+
+Putty에서 로그인할 때  **반드시**  필요한 파일입니다. 안전한 곳에 저장하세요.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190609_2787.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190609_2787.png "53c08c5cb0d224231f3b260eedbd9a68_1605190609_2787.png")
+
+그리고 위와 같이 빨간 박스에 있는 내용물들을 모두 긁어서 복사합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190630_07.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190630_07.png "53c08c5cb0d224231f3b260eedbd9a68_1605190630_07.png")
+
+위와 같이  **공용 키 붙여넣기**를 클릭 후 해당 내용을 붙여넣어줍니다.
+
+SSH 작업은 끝났습니다.
+
+**(6) 부트 볼륨 구성**
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190655_0035.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190655_0035.png "53c08c5cb0d224231f3b260eedbd9a68_1605190655_0035.png")
+
+위와 같이 사용자정의 부트 볼륨 크기 지정에 체크하면 HDD 크기를 수정할 수 있습니다.
+
+최소 크기는 46.6GB입니다. 최대 100GB까지 지정 가능합니다.
+
+우리는 2개의 인스턴스를 생성할 것이므로  **50**으로 지정합니다.
+
+그리고  **생성**을 클릭합니다.
+
+**2. 공용 IP 수정하기**
+
+[![53c08c5cb0d224231f3b260eedbd9a68_1605190681_7165.png](https://cdn.wsgvet.com/data/editor/2011/thumb-53c08c5cb0d224231f3b260eedbd9a68_1605190681_7165_980x995.png)](https://www.wsgvet.com/bbs/view_image.php?fn=%2Fdata%2Feditor%2F2011%2F53c08c5cb0d224231f3b260eedbd9a68_1605190681_7165.png)
+
+현재 위와 같이  **IP**가 지정되어 있습니다. 하지만 임시 IP이므로 예약한 공용 IP로 수정할 것입니다.
+
+참고로 사용자 이름이  **ubuntu**로 지정되어 있는 것을 볼 수 있습니다. SSH 접속할 때 필요한 ID입니다.
+
+왼쪽 밑에 있는  **연결된 VNIC**를 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190730_068.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190730_068.png "53c08c5cb0d224231f3b260eedbd9a68_1605190730_068.png")
+
+위와 같이  **First-Instance**를 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190745_4328.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190745_4328.png "53c08c5cb0d224231f3b260eedbd9a68_1605190745_4328.png")
+
+위와 같이 왼쪽 밑에 있는  **IP 주소**를 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190792_6458.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190792_6458.png "53c08c5cb0d224231f3b260eedbd9a68_1605190792_6458.png")
+
+위와 같이 오른쪽 밑에 있는  **점 3개**를 클릭 후  **편집**을 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190811_2102.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190811_2102.png "53c08c5cb0d224231f3b260eedbd9a68_1605190811_2102.png")
+
+위와 같이  **공용 IP 없음**을 클릭 후  **업데이트**를 클릭합니다. 기존에 배정된 임시 공용 IP를 제거하는 과정입니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190841_423.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190841_423.png "53c08c5cb0d224231f3b260eedbd9a68_1605190841_423.png")
+
+위와 같이 공용 IP 주소가 지정되지 않은 것을 확인할 수 있습니다.
+
+다시  **점 3개**를 클릭 후  **편집**을 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190858_0688.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190858_0688.png "53c08c5cb0d224231f3b260eedbd9a68_1605190858_0688.png")
+
+위와 같이  **예약된 공용 IP**를 클릭할 수 있습니다. 그리고 밑에  **값 선택**을 클릭하면 예약해둔  **IP**가 표시됩니다.
+
+**IP**를 클릭 후  **업데이트**를 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190893_9629.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190893_9629.png "53c08c5cb0d224231f3b260eedbd9a68_1605190893_9629.png")
+
+위와 같이  **예약된 공용 IP**  지정까지 성공했습니다.
+
+**3. PuTTY로 SSH 접속하기**
+
+**PuTTY**를 설치합니다.
+
+(1) 32bit 용 프로그램 다운 받기
+
+[https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe)
+
+(2) 64bit 용 프로그램 다운 받기
+
+[https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe)
+
+PuTTY를 실행합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190918_6695.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190918_6695.png "53c08c5cb0d224231f3b260eedbd9a68_1605190918_6695.png")
+
+위와 같이  **Host Name (or IP address)**에  **예약한 공용 IP 주소**를 입력해줍니다.
+
+그리고  **Saved Sessions**에 해당하는 이름을 넣어주고  **Save**를 클릭합니다.
+
+그러면 IP주소가 PuTTY에 저장되어, 다음에 접속할 때 해당 이름을 클릭 후 Load를 클릭하면 자동으로 IP가 입력됩니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190950_372.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190950_372.png "53c08c5cb0d224231f3b260eedbd9a68_1605190950_372.png")
+
+저는 위와 같이 저장해줬습니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605190961_8498.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605190961_8498.png "53c08c5cb0d224231f3b260eedbd9a68_1605190961_8498.png")
+
+이제 개인 키 위치를 지정해줄 차례입니다.
+
+위와 같이  **SSH**  왼쪽에 있는  **+**를 클릭 후 나오는  **Auth**를 클릭합니다.
+
+그리고  **Browser**를 클릭하여  **puttygen.exe**으로 생성했었던  **ppk 개인키 파일**을 지정해줍니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605191000_2321.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605191000_2321.png "53c08c5cb0d224231f3b260eedbd9a68_1605191000_2321.png")
+
+위와 같이 Open을 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605191009_0317.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605191009_0317.png "53c08c5cb0d224231f3b260eedbd9a68_1605191009_0317.png")
+
+위와 같이 경고가 뜨는데 예를 클릭합니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605191018_7251.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605191018_7251.png "53c08c5cb0d224231f3b260eedbd9a68_1605191018_7251.png")
+
+위와 같이  **login as**에  **ubuntu**를 입력하고 엔터를 누릅니다.
+
+비밀번호를 지정했다면 비밀번호를 입력하면 됩니다.
+
+비밀번호는 입력해도 표시가 되지 않으므로 당황하지 않으셔도 됩니다.
+
+![53c08c5cb0d224231f3b260eedbd9a68_1605191043_5602.png](https://cdn.wsgvet.com/data/editor/2011/53c08c5cb0d224231f3b260eedbd9a68_1605191043_5602.png "53c08c5cb0d224231f3b260eedbd9a68_1605191043_5602.png")
+
+위와 같은 화면이 뜨면  **Ubuntu 20.04에 SSH로 접속**이 성공한 것입니다.
+
+다음에는 기본적인 시간 설정, Swap 메모리 적용에 대해 알려드리겠습니다.
+
+----
+
+# [오라클 클라우드 Ubuntu 20.04 인스턴스 기본 설정하기](https://www.wsgvet.com/cloud/6?sca=오라클)
+
+### 작성자 정보
+
+-    [![회원사진](https://www.wsgvet.com/data/member_image/ad/admin.gif)  우성짱](https://www.wsgvet.com/bbs/profile.php?mb_id=admin "우성짱 자기소개")작성
+-   작성일2020.11.14 20:59
+
+### 컨텐츠 정보
+
+-   10,750조회
+-   **26**댓글
+-   [목록](https://www.wsgvet.com/cloud "목록")게시물 옵션
+
+### 본문
+
+[![](https://cdn.wsgvet.com/data/file/cloud/3232235777_9i6xqaph_f52a81f67c9d29fd7a6e635d884fe4b4bc13d999.png)](https://www.wsgvet.com/bbs/view_image.php?bo_table=cloud&fn=3232235777_9i6xqaph_f52a81f67c9d29fd7a6e635d884fe4b4bc13d999.png)
+
+**1. 기본 패키지 업데이트하기**
+
+우분투는 지속적으로 패키지(프로그램)가 업데이트되므로 최신 버전을 유지하는 것이 좋습니다.
+
+SSH로 접속한 후
+
+```bash
+sudo apt update && sudo apt -y upgrade & sudo apt install -y nano
+```
+
+Copy
+
+위 명령어를 내려주면, 현재 설치된 패키지들의 최신버전을 확인한 후 업그레이드합니다.
+
+앞에 sudo는 관리자 권한을 사용할 것이라는 것이고, apt는 우분투의 패키지 관련 명령어입니다.
+
+참고로 위 명령어를 복사 후 Putty에 마우스 우클릭하면 붙여넣기가 됩니다.
+
+컨트롤 + v로 붙여넣기가 안되니 당황하지 마세요.
+
+**2. SWAP 공간 생성하기**
+
+오라클 클라우드 무료 인스턴스의 RAM은 1GB 밖에 안되기 때문에 Docker나 웹서버를 돌리기엔 약간 빡빡합니다.
+
+그래서 하드의 일부분을 램 공간으로 쓰는 스왑 파티션을 설정하는 것이 좋습니다.
+
+램이 2GB 미만이면, 현재 RAM의 2배를 추천합니다.
+
+그래서 넉넉하게 2GB를 주겠습니다.
+
+```bash
+sudo fallocate -l 2G /swapfile
+```
+
+Copy
+
+위 명령어로 2GB의 스왑 공간이 생겼습니다.
+
+```bash
+sudo chmod 600 /swapfile
+```
+
+Copy
+
+위 명령어로 권한을 조정합니다.
+
+```bash
+sudo mkswap /swapfile
+```
+
+Copy
+
+위 명령어로 스왑파일을 생성합니다.
+
+```bash
+Setting up swapspace version 1, size = 2 GiB (2147479552 bytes)
+no label, UUID=71432f3c-95eb-4c80-af06-dc0af6848c1b
+```
+
+Copy
+
+위와 같은 내용이 나올 것입니다.
+
+```bash
+sudo swapon /swapfile
+```
+
+Copy
+
+위 명령어로 이제 스왑 공간을 사용할 수 있게 됩니다.
+
+```bash
+sudo swapon --show
+```
+
+Copy
+
+위 명령어를 내리면
+
+```bash
+NAME      TYPE SIZE USED PRIO
+/swapfile file   2G   0B   -2
+```
+
+Copy
+
+위와 같이 스왑공간이 생긴 것을 확인할 수 있습니다.
+
+```bash
+free -h
+```
+
+Copy
+
+위 명령어를 내리면
+
+```bash
+~$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:          976Mi       292Mi       178Mi       1.0Mi       505Mi       524Mi
+Swap:         2.0Gi          0B       2.0Gi
+```
+
+Copy
+
+위와 같이 현재 메모리의 상태 및 스왑공간까지 확인할 수 있습니다.
+
+그런데 이 상태로는 재부팅시 스왑공간이 없어집니다.
+
+스왑공간이 재부팅시에도 살아있게 셋팅해줍니다.
+
+```bash
+sudo nano /etc/fstab
+```
+
+Copy
+
+위 명령어를 넣으면
+
+```bash
+LABEL=cloudimg-rootfs   /        ext4   defaults        0 0
+LABEL=UEFI      /boot/efi       vfat    defaults        0 0
+```
+
+Copy
+
+위와 같이 뜨는데요.
+
+```bash
+/swapfile swap swap defaults 0 0
+```
+
+Copy
+
+그 밑에 위 내용을 넣어주면 됩니다.
+
+컨트롤 + O, 엔터, 컨트롤 + X를 누르면 저장 후 나가집니다.
+
+이제 스왑공간은 생성이 끝났습니다.
+
+**3. 스왑 공간 삭제하는 방법**
+
+그럴리는 없겠지만 혹시 스왑공간을 삭제하고 싶다면 (**삭제할 필요는 없습니다.**)
+
+```bash
+sudo swapoff -v /swapfile
+sudo rm /swapfile
+```
+
+Copy
+
+위 두 명령어를 내려주고
+
+```bash
+sudo nano /etc/fstab
+```
+
+Copy
+
+위 명령어를 넣은 후 추가한 부분을 삭제 후 저장 후 나가면 됩니다.
+
+**4. 시간 설정하기**
+
+Ubuntu 20.04에서는 UTC+0으로 시간 셋팅이 되어 있습니다.
+
+우리나라는 UTC+9(KST)이므로 바꿔줘야 합니다.
+
+하나의 명령어로 서울 시간으로 바꿀 수 있습니다.
+
+```bash
+sudo timedatectl set-timezone Asia/Seoul
+```
+
+Copy
+
+이제 서버의 시간이 서울로 바뀌었습니다.
+
+잘 바뀌었는지 확인하려면
+
+```bash
+timedatectl
+```
+
+Copy
+
+위 명령어만 내리면 바로 확인 가능합니다.
+
+```bash
+# timedatectl
+               Local time: Sat 2020-11-14 20:55:17 KST
+           Universal time: Sat 2020-11-14 11:55:17 UTC
+                 RTC time: Sat 2020-11-14 11:55:18
+                Time zone: Asia/Seoul (KST, +0900)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+```
+
+Copy
+
+위와 같이 KST, +0900와 서울로 표시되는 것을 확인할 수 있습니다.
+
+이제 기본 셋팅이 끝났습니다.
+
+----
+
+# [오라클 클라우드 인스턴스와 도메인 연결하기](https://www.wsgvet.com/cloud/12?sca=오라클)
+
+### 작성자 정보
+
+-    [![회원사진](https://www.wsgvet.com/data/member_image/ad/admin.gif)  우성짱](https://www.wsgvet.com/bbs/profile.php?mb_id=admin "우성짱 자기소개")작성
+-   작성일2020.11.17 01:27
+
+### 컨텐츠 정보
+
+-   8,089조회
+-   **18**댓글
+-   [목록](https://www.wsgvet.com/cloud "목록")게시물 옵션
+
+### 본문
+
+[![](https://cdn.wsgvet.com/data/file/cloud/3232235777_B6GnQ7Rr_1af8c991ab5bc0cc4f78ada0339ca4b20bd23bec.png)](https://www.wsgvet.com/bbs/view_image.php?bo_table=cloud&fn=3232235777_B6GnQ7Rr_1af8c991ab5bc0cc4f78ada0339ca4b20bd23bec.png)
+
+워드프레스, 그누보드, 라이믹스 같은 홈페이지를 운영하거나,
+
+VMess 또는 Trojan-Go 같은 기술을 이용하여 Websocket 방식으로 중국의 황금방패를 우회하려면 도메인(홈페이지 주소)이 필요합니다.
+
+먼저 도메인을 사거나 받은 뒤, 도메인이 오라클 클라우드 인스턴스의 IP를 가리키게 해야합니다.
+
+즉 IP를 기억하지 않아도 도메인만 사용해도 되는거죠.
+
+**1. 무료 홈페이지 주소 받기**
+
+[https://blog.wsgvet.com/free-homepage-address-freenom/](https://blog.wsgvet.com/free-homepage-address-freenom/)
+
+도메인을 직접 구입하는 것이 제일 좋지만 테스트로 무료 홈페이지 주소를 추천드립니다.
+
+한번 써본 후 정상적인 도메인을 구입하는 것이 좋습니다.
+
+**2. 클라우드 플레어 가입 및 네임서버 변경하기**
+
+[https://blog.wsgvet.com/cloudflare-sign-in-and-change-nameserver/](https://blog.wsgvet.com/cloudflare-sign-in-and-change-nameserver/)
+
+프리넘이나 도메인 업체의 네임서버는 기능이 부족하고 전파 속도가 느립니다.
+
+따라서 클라우드플레어를 사용하여 더 유연하게 대처할 수 있습니다.
+
+도메인의 네임서버를 클라우드플레어로 지정했다면, 이제 오라클 클라우드 인스턴스와 도메인을 연결할 수 있습니다.
+
+**3. 도메인과 공용 IP 연결하기**
+
+[https://www.cloudflare.com/](https://www.cloudflare.com/)
+
+위 링크로 클라우드플레어에 접속 후
+
+![b0e5e39ee44aac32255b196266eb27c8_1605543970_5972.png](https://cdn.wsgvet.com/data/editor/2011/b0e5e39ee44aac32255b196266eb27c8_1605543970_5972.png "b0e5e39ee44aac32255b196266eb27c8_1605543970_5972.png")
+
+위와 같이 추가한 도메인 주소가 뜰겁니다. 혹시  **이메일 인증**  안하셨으면 꼭 하시구요.
+
+해당 주소를 클릭하면 설정 화면으로 넘어갑니다.
+
+![b0e5e39ee44aac32255b196266eb27c8_1605543987_5236.png](https://cdn.wsgvet.com/data/editor/2011/b0e5e39ee44aac32255b196266eb27c8_1605543987_5236.png "b0e5e39ee44aac32255b196266eb27c8_1605543987_5236.png")
+
+위와 같이  **DNS**를 누릅니다. 그리고  **+Add record**를 눌러줍니다.
+
+![2081152a0d158d839fa403fa6b337014_1605629805_7397.png](https://cdn.wsgvet.com/data/editor/2011/2081152a0d158d839fa403fa6b337014_1605629805_7397.png "2081152a0d158d839fa403fa6b337014_1605629805_7397.png")
+
+위와 같이  **Type**에는  **A**
+
+**Name**  에는  **@**
+
+**IPv4 address**에는 오라클 클라우드 인스턴스의  **공용 IP**를 넣어주면 됩니다.
+
+![2081152a0d158d839fa403fa6b337014_1605629824_0183.png](https://cdn.wsgvet.com/data/editor/2011/2081152a0d158d839fa403fa6b337014_1605629824_0183.png "2081152a0d158d839fa403fa6b337014_1605629824_0183.png")
+
+Proxy status 에는  **공용 IP**가 노출되어도 되는 환경(홈페이지 등)에서는 **DNS only**로 변경하고,
+
+**중국 황금방패**를 우회하거나, 공용 IP를  **숨기고**  싶은 서비스를 하고 싶다면  **Proxied**로 변경 후 Save를 클릭하면 됩니다.
+
+참고로  **Proxied**  상태로 변경시  **웹서비스**의 경우 클라우드플레어의 미국 LA서버, 일본 KIX서버 등으로 경유되므로 속도가 매우 느립니다.
+
+다만  **VMess**나  **Trojan-go**  같은  **Websocket**을 이용하는 경우 직접 접속이 되므로 업다운로드 속도 걱정은 안하셔도 됩니다. 다만 지연율(Ping)은 높아집니다.
+
+ping은 DNS Only 상태에서는 50~60ms 정도 나오고, Proxied 상태에서는 300~500ms 정도 나옵니다.
+
+클라우드플레어 서버가 미국 LA나 일본 나리타에서 연결되는 경우가 많기 때문에 그렇습니다.
+
+이제 공용IP는 기억할 필요가 없습니다. 도메인이 곧 IP이기 때문입니다.
+
+![2081152a0d158d839fa403fa6b337014_1605629284_2738.png](https://cdn.wsgvet.com/data/editor/2011/2081152a0d158d839fa403fa6b337014_1605629284_2738.png "2081152a0d158d839fa403fa6b337014_1605629284_2738.png")
+
+**VMess**의  **Websocket**으로 접속하기 위해 위와 같이  **SSL/TLS**  탭에 들어가서 **3번째 Full** 또는 **4번째 Full (strict)**로 변경해주세요.
+
+**Trojan-go**의 경우 클라우드플레어 자체 인증서를 이용하는 것이 편하므로  **3번째 Full**로 선택하면 됩니다.
+
+다음에는 Caddy와 Web Socket, TLS를 이용하여 VMess로 접속해보겠습니다.
+
+
+----
+
+소소한 개발
+
+## 개인 블로그 만들기(1) : [서버구축] Oracle Cloud 인스턴스 생성
+
+JinCode  2021. 9. 2. 16:09
+
+*** 기록용입니다.**
+
+* 오라클 클라우드의 회원가입은 생략하겠습니다.
+
+* 무료 프론티어를 사용하고 있습니다.
+
+----------
+
+**1. 오라클 클라우드를 로그인 한 뒤, 컴퓨터 인스턴트를 생성합니다.**
+
+[https://cloud.oracle.com/compute/instances](https://cloud.oracle.com/compute/instances)
+
+![](https://blog.kakaocdn.net/dn/bbCMUH/btq9I313rbV/NtBkgnfcUidU8P1inlL060/img.png)
+
+| 기본적인 이미지는 Oracle Linux로 되어 있을 텐데 필자는 Ubuntu 20.04버전으로 변경했습니다.
+
+해당 이미지는 무료 프론티어도 사용가능합니다.
+
+**2. SSH 키 저장 및 인스턴스 생성**
+
+![](https://blog.kakaocdn.net/dn/nzQ3S/btq9E57Eshs/7vxLqvrgMZFIzi5T4NM51k/img.png)
+
+![](https://blog.kakaocdn.net/dn/bTgTq9/btq9IEnUYd5/OpZAKWwkFKlKVk5HvgZtk1/img.png)
+
+| 전용 키를 저장해서 SSH 터미널에서 접속할 때 사용합니다.
+
+필자같은 경우에는 노트북 및 외부에서 사용할 수 있도록 개인 클라우드에 저장해 두었습니다.
+
+이후 별다른 설정은 필요 없으며 생성 버튼을 누른 뒤 조금 기다려줍니다.
+
+**3. 생성된 인스턴스 확인**
+
+![](https://blog.kakaocdn.net/dn/mxwJ1/btq9I3OBRky/tKnIGVLA6swS8EO68FVA41/img.png)
+
+| 조금 기다리면 인스턴스가 실행 중으로 표시가 되는데 해당 인스턴스에 SSH로 접속하려면 공용 IP 주소가 필요합니다.
+
+만약 잘못 만들었다면 '작업 더 보기 - 종료'하면 해당 인트턴스는 '삭제'가 됩니다.
+
+**4. 인스턴스 SSH 접속**
+
+![](https://blog.kakaocdn.net/dn/bWGlz8/btq9Ix3bgGm/2TtWm50oJ4J8g918qFcJPk/img.png)
+
+| 필자같은 경우에는 MobaXterm을 사용하고 있습니다. SSH 접속 방법은 다른 Client를 사용하도 동일합니다.
+
+Remote host에 공용 IP 주소를 입력하고, Use pricate key에 인스턴스 생성할 때 '전용 키 저장'누르면 다운로드 되는 key를 넣고 OK를 누릅니다.
+
+인스턴스에 접속 후 login as가 뜨면 성공!
+
+**5. Oracle Cloud 인스턴스, SSH 접속**
+
+```
+login as: ubuntu
+```
+
+![](https://blog.kakaocdn.net/dn/bgvvYb/btq9Kl83afN/Rhmeyjl7YgsNeshb9IJEf1/img.png)
+
+| 사진처럼 Welcome이 뜨면 접속 성공입니다. 이제부터 Oracle Cloud의 서버를 사용할 수 있습니다.
+
+현재 해당 인스턴스는 아무런 설정이 되어 있지 않기 때문에 root 계정 설정부터 하는것을 추천드립니다.
+
+----
+
+
+## [개인 블로그 만들기(2) : [서버구축] Oracle Cloud Ubuntu 20.04 설정](https://adg0609.tistory.com/48)
+
+JinCode  2021. 9. 2. 16:09
+
+*** 기록용입니다.**
+
+* 무료 프론티어를 사용하고 있습니다.
+
+----------
+
+**1. root 계정 활성화 및 비밀번호 생성**
+
+```
+ubuntu@instance-20210716-1410:~$ sudo passwd root
+New password:
+Retype new password:
+passwd: password updated successfully
+```
+
+| sudo passwd root 명령어를 통해 root 계정의 비밀번호를 생성해 줍니다.
+
+**2. 패키지 최신화 및 업데이트**
+
+```
+sudo apt update
+sudo apt upgrade -y
+```
+
+**3. 시스템 시간 설정(system timezone)**
+
+![](https://blog.kakaocdn.net/dn/byX915/btq9GlvisKC/YCStn7KJfbHyj40GdxGD3k/img.png)
+
+```
+ubuntu@instance-20210716-1410:~$ date
+Fri Jul 16 06:04:36 UTC 2021
+ubuntu@instance-20210716-1410:~$ timedatectl
+               Local time: Fri 2021-07-16 06:04:46 UTC
+           Universal time: Fri 2021-07-16 06:04:46 UTC
+                 RTC time: Fri 2021-07-16 06:04:47
+                Time zone: Etc/UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+```
+
+| 현재 시간 및 설정되어있는 timezone을 확인합니다.
+
+> timedatectl 명령어를 통해 Etc/UTC로 설정되어 있는 것을 확인할 수 있습니다.
+
+이제 Aisa/Seoul로 변경해봅니다.
+
+```
+sudo timedatectl set-timezone Asia/Seoul
+```
+
+| 위 명령어를 통해 변경할 수 있습니다.
+
+다시 date / timedatectl 명령어를 통해 확인해보면 Asia/Seoul로 변경되어 있는 것을 확인할 수 있습니다.
+
+----
+
+## [개인 블로그 만들기(3) : [서버구축] Oracle Cloud Ubuntu 20.04 Docker설치](https://adg0609.tistory.com/49)
+
+JinCode  2021. 9. 2. 16:09
+
+*** 기록용입니다.**
+
+* Ubuntu 버전은 20.04 입니다.
+
+* 무료 프론티어를 사용하고 있습니다.
+
+----------
+
+> Docker 공식 홈페이지에 있는 설치 방법으로 따라했습니다.
+
+[https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
+
+[](https://docs.docker.com/engine/install/ubuntu/)
+
+Install Docker Engine on Ubuntu
+
+docs.docker.com
+
+----------
+
+**1. 패키지 업데이트 및 설치**
+
+![](https://blog.kakaocdn.net/dn/Nou7t/btq9NXzsLks/2lMlGlupbyJM4AFfnk0mTK/img.png)
+
+```
+sudo apt-get update
+```
+
+```
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+(한줄)
+sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release
+```
+
+**2. Docker와 암호화 통신을 위한 GPG 설정**
+
+![](https://blog.kakaocdn.net/dn/IAfmk/btq9I32eiag/AE8KlpEkgG0Fnju4TM6dn1/img.png)
+
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+
+**3. OS 설치정보 확인 및  stable Repository 설치**
+
+![](https://blog.kakaocdn.net/dn/9hMJc/btq9HMGHRnY/lKFPBBvQk72DgwyKGGYX5K/img.png)
+
+| 서버의 OS 설치 정보를 알아야 하는데 모른다면 아래 명령어를 통해 확인할 수 있다.
+
+필자같은 경우 amd64로 확인되었다.
+
+```
+dpkg -s libc6 | grep Arch
+
+혹은
+
+uname -a
+```
+
+![](https://blog.kakaocdn.net/dn/dxdWoC/btq9NR0nOfi/2FLXw3GZWh66hrhTn6MDb1/img.png)
+
+```
+x86_64 / amd64 일 경우
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+armhf 일 경우
+echo "deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+arm64 일 경우
+echo "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+**4. Docker Install**
+
+![](https://blog.kakaocdn.net/dn/VjB2R/btq9ME1wqbD/5wWYj7m7zvk8diB6M3WMP0/img.png)
+
+```
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+(특정버전 설치시, 5:18.09.1~3-0~ubuntu-xenial)
+sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
+
+## BUG: **Package 'docker-ce' has no installation candidate**
+## SOL
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" sudo apt-get update sudo apt-get install docker-ce
+```
+
+| 다시한번 update 후 apt-get install을 통해 docker을 설치한다.
+
+위 방법은 최신 docker 버전을 설치할 때 명령어이며, 필요시 버전을 명시해 특정 버전을 설치할 수도 있습니다.
+
+**5. 도커 설치 확인 및 버전 확인**
+
+![](https://blog.kakaocdn.net/dn/Uu2i3/btq9GtADqXr/P5ONbUZRWw3FaKKfjk7ST1/img.png)
+
+```
+ sudo docker version
+```
+
+| 성공적으로 Docker 설치를 완료했습니다. 생각보다 Docker 설치가 쉬웠는데요.
+
+2021-07-16일 기준으로 Docker 버전은 20.10.7이 설치되었습니다.
+
+----
+
+소소한 개발
+
+## 개인 블로그 만들기(4) : [서버구축] Oracle Cloud Docker MariaDB 구축 (docker-compose.yml 사용)
+
+JinCode  2021. 9. 2. 16:09
+
+### **개인 블로그 만들기(4) : [서버구축] Oracle Cloud Docker MariaDB 구축 (docker-compose.yml 사용)**
+
+*** 기록용입니다.**
+
+* Ubuntu 버전은 20.04 입니다.
+
+* 무료 프론티어를 사용하고 있습니다.
+
+Docker Mariadb Image :  [https://hub.docker.com/_/mariadb](https://hub.docker.com/_/mariadb)
+
+----------
+
+**1. 오라클 VPS 방화벽 오픈**
+
+![](https://blog.kakaocdn.net/dn/czMJIq/btq9MEnd1uO/Kf7fQ0WggPCnUFMTl9AMkk/img.png)
+
+| 오라클 클라우드의 인스턴스에 들어가서 서브넷을 클릭합니다.
+
+![](https://blog.kakaocdn.net/dn/AKXVe/btq9NQOff7u/pZ9Ke2eK5CpFraeXUimV31/img.png)
+
+| 처음 보이는 Default_ 규칙을 클릭합니다. 해당 규칙은 인스턴스를 생성할때 자동으로 생기는 규칙입니다.
+
+![](https://blog.kakaocdn.net/dn/rrpfx/btq9JODSkar/4pCuhbNobJfqDsmFRHugm0/img.png)
+
+| 수신 규칙 추가 버튼을 누른 뒤 값을 세팅해줍니다.
+
+소스 CIDR : 0.0.0.0/0
+
+대상포트범위 : 3306
+
+설명 : MariaDB
+
+수신 규칙 추가를 누르면 아래 수신 규칙 List에 3306 포트에 대한 내용이 추가된 것을 볼 수 있습니다.
+
+**2. Ubuntu iptables 사용 중지**
+
+```
+# 방화벽 사용 중지
+sudo iptables -F
+
+# 방화벽 상태 확인
+sudo iptables -L
+```
+
+**3. MariaDB 설치**
+
+![](https://blog.kakaocdn.net/dn/ehoLDw/btq9OICp94g/uus4XsAOJyb2tfIJls2k50/img.png)
+
+```
+sudo docker pull mariadb
+```
+
+**3.1 docker-compose 설치 및 작성**
+
+```
+sudo apt-get install docker-compose
+```
+
+| docker에 이미지를 올리고 컨테이너를 실행, 정지, 재시작등 일일히 명령어를 작성하는 것 보다는 간단한 명령어로 손쉽게 컨테이너 동작을 실행시킬 수 있기 때문에 docker-compose를 사용한다.
+
+굳이 필요 없으면 사용하지 않아도 된다.
+
+```
+$ vi docker-compose.yml
+
+(docker-compose.yml 내용)
+version: '3.1'
+
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb # 컨테이너 이름 설정
+    restart: always
+    ports:
+     - 3306:3306 # 외부포트:Docker포트
+    volumes:
+     - /home/ubuntu/mariadb/data:/var/lib/mysql # Docker가 삭제되어도 데이터 유지를 위한 Docker 외부로 데이터 백업
+     - /home/ubuntu/mariadb/conf.d:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: maria7
+    command:
+      - --character-set-server=utf8mb4 # 인코딩
+      - --collation-server=utf8mb4_unicode_ci
+      
+      
+$ docker-compose up -d
+
+## BUG!
+## SOL
+ERROR: Couldn't connect to Docker daemon at http+docker://localhost - is it running?
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
+
+$ sudo docker-compose up -d
+
+## 참고: https://forums.docker.com/t/couldnt-connect-to-docker-daemon-at-http-docker-localhost-is-it-running/87257
+
+1. Add user to docker group (if not already added)
+sudo usermod -aG docker $USER
+2. create a symbolic link to /usr/bin using the following command
+$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+3. Restart docker service
+$ sudo service docker restart
+```
+
+| docker-compose 내용을 작성해줍니다.
+
+ports에는 (외부포트):(docker 내부포트)이며 MYSQL_ROOT_PASSWORD에는 root에 대한 비밀번호를 적어주시면 됩니다.
+
+![](https://blog.kakaocdn.net/dn/IoWaP/btq9XbTMj52/aGfSsJ7c7icqzmFxYktkcK/img.png)
+
+| wq로 docker-compose.yml을 저장 한 뒤, $docker-compose up -d 명령어를 통해 해당 컨테이너를 실행합니다.
+
+PORTS에 0.0.0.0:3306->3306/tcp라고 되어 있으면 오라클 외부 3306포트와, Docker 내부포트 3306이 연결되었습니다.
+
+이제 해당 DB를 관리하기 편하게 외부DB Toll에서 접속해 봅시다.
+
+**4. DBeaver (Database Toll) 접속**
+
+![](https://blog.kakaocdn.net/dn/bfEoXB/btq92wJb8I7/fKzKnDysWzxk4hrQkhHdSK/img.png)
+
+| 저같은 경우 DB Tool로 무료인 DBeaver을 사용하고 있습니다.
+
+Server Host : 오라클 인스턴스 공용 Ip주소
+
+Username : root
+
+Password : 1234  _(MYSQL_ROOT_PASSWORD: 1234)_
+
+이렇게만 적은 다음, Test Connection 버튼을 클릭해서 연결이 되었는지 확인합니다. 잘 따라오셨다면 문제없이 연결이 되었을 겁니다. 완료를 눌러서 Database를 정보를 저장합니다.
+
+![](https://blog.kakaocdn.net/dn/c3s4uO/btq92xg7mOi/4rNkd7TwcfJssXXulL6n10/img.png)
+
+| 데이터베이스에 접속 후 기본 DB, Table에 Select문을 날려보면 조회가 가능한 것을 확인할 수 있습니다.
+
+이제 오라클 클라우드의 인스턴스, Docker에 접속하지 않아도 외부에서 접속할 수 있습니다.
+
+
+
+------
+
+
+## [개인 블로그 만들기(2) : [서버구축] Oracle Cloud Ubuntu 20.04 설정](https://adg0609.tistory.com/48)
+
+JinCode  2021. 9. 2. 16:09
+
+*** 기록용입니다.**
+
+* 무료 프론티어를 사용하고 있습니다.
+
+----------
+
+**1. root 계정 활성화 및 비밀번호 생성**
+
+```
+ubuntu@instance-20210716-1410:~$ sudo passwd root
+New password:
+Retype new password:
+passwd: password updated successfully
+```
+
+| sudo passwd root 명령어를 통해 root 계정의 비밀번호를 생성해 줍니다.
+
+**2. 패키지 최신화 및 업데이트**
+
+```
+sudo apt update
+sudo apt upgrade -y
+```
+
+**3. 시스템 시간 설정(system timezone)**
+
+![](https://blog.kakaocdn.net/dn/byX915/btq9GlvisKC/YCStn7KJfbHyj40GdxGD3k/img.png)
+
+```
+ubuntu@instance-20210716-1410:~$ date
+Fri Jul 16 06:04:36 UTC 2021
+ubuntu@instance-20210716-1410:~$ timedatectl
+               Local time: Fri 2021-07-16 06:04:46 UTC
+           Universal time: Fri 2021-07-16 06:04:46 UTC
+                 RTC time: Fri 2021-07-16 06:04:47
+                Time zone: Etc/UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+```
+
+| 현재 시간 및 설정되어있는 timezone을 확인합니다.
+
+> timedatectl 명령어를 통해 Etc/UTC로 설정되어 있는것을 확인할 수 있습니다.
+
+이제 Aisa/Seoul로 변경해봅니다.
+
+```
+sudo timedatectl set-timezone Asia/Seoul
+```
+
+| 위 명령어를 통해 변경할 수 있습니다.
+
+다시 date / timedatectl 명령어를 통해 확인해보면 Asia/Seoul로 변경되어 있는 것을 확인할 수 있습니다.
+
+----
+
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE1ODg1ODIxNjksMTM3MTA1ODM5NiwyMD
+U1MDk5Nzk3LDE1MDIxMDA5ODUsLTQxMzcwNDQ4MSwyMDU0MTQ0
+MDk2LDEwNDI1MDc5ODMsMTY0NDA5NDI0MSwtNDc1OTA1NzA2LC
+0zMDcyNzIxMDYsLTE5MjA4Njk3MDUsMTA0NjU4NTczNCwxNjQ5
+NTUzMzg3LDYxOTExNTExMywtODE3NDEzNTYxLDczMDk5ODExNl
+19
+-->

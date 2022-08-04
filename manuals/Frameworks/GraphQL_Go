@@ -1,0 +1,142 @@
+
+
+# [gqlgen: Build a faster GraphQL server](https://blog.logrocket.com/gqlgen-build-faster-graphql-server/)
+
+> Written with [StackEdit](https://stackedit.io/[![](https://blog.logrocket.com/wp-content/uploads/2021/07/7D1BB823-5BC3-40E9-AF0C-ABE25780213F-150x150.jpg?crop=1)](https://blog.logrocket.com/author/alexmerced/)
+
+[Alex Merced  Follow](https://blog.logrocket.com/author/alexmerced/)I am a developer, educator, and founder of devNursery.com.
+
+January 6, 2022  5 min read
+
+![Gqlgen Faster GraphQL Server](https://blog.logrocket.com/wp-content/uploads/2022/01/gqlgen-golang-graphql.png)
+
+GraphQL is a query language and runtime created by Facebook as an alternative to using REST APIs. Go is a lower-level, compiled programming language created by Google that has become quite popular for creating fast-running APIs.
+
+GraphQL and Go each offer unique advantages when writing APIs. In this article, we’ll explore  [gqlgen](https://gqlgen.com/getting-started/), which helps you to easily write GraphQL APIs using Go, combining the best of both technologies.
+
+First, we’ll look into the advantages of using a tool like gqlgen, covering the beneficial features of both GraphQL and Go. Then, we’ll learn how to get started with gqlgen by building a simple to-do list application. Let’s get started!
+
+## Inner workings of GraphQL and Go
+
+In GraphQL, instead of making requests with different HTTP verbs to different URLs, all requests are made as  `POST`  requests to a single URL. In the  `POST`  request, a string is sent in the body expressing what query or mutation to run and what properties to return.
+
+GraphQL APIs are self-documenting, so when using  [tools like GraphQL or GraphQL Playground](https://blog.logrocket.com/complete-guide-to-graphql-playground/), you can easily see all the details of the API, almost like Swagger for REST APIs, but built-in.
+
+On the other hand, Go can provide faster performance than higher-level languages like JavaScript, Python, and Ruby, as well as an easier syntax and toolchain than using C or C++.
+
+## Getting started with gqlgen
+
+To follow along with this tutorial, you’ll need to have Go installed. At the time of writing, I am running Go v1.17.4.
+
+Open up VS Code or your preferred IDE to an empty folder, then open up the terminal. Create a new Go module. I named mine  `my/graphql/api`, but you can use any name you wish:
+
+go mod init my/graphql/api
+
+To install gqlgen as a dependency, run the following two commands:
+
+go get github.com/99designs/gqlgen
+
+go run github.com/99designs/gqlgen init
+
+The code above will generate the following file structure:
+
+├── go.mod ├── go.sum ├── gqlgen.yml -  For  Configuration  ├── graph │  ├── generated -  The  Generated  Runtime  │  │  └── generated.go │  ├── model -  For any models and database connections │  │  └── models_gen.go │  ├── resolver.go -  Write all your resolvers here │  ├── schema.graphqls -  Your  Schema  │  └── schema.resolvers.go - the resolver implementation for schema.graphql └── server.go -  The entry point to your app.  Customize it however you see fit
+
+## Setting up our to-do list
+
+In  `schema.graphqls`, you’ll see the default code below, which contains an example to-do list:
+
+# GraphQL schema example  #  # https://gqlgen.com/getting-started/ type Todo  { id: ID! text:  String!  done:  Boolean! user:  User!  } type User  { id: ID! name:  String!  } type Query  { todos:  [Todo!]!  } input NewTodo  { text:  String! userId:  String!  } type Mutation  { createTodo(input:  NewTodo!):  Todo!  }
+
+Let’s break this down. Each data type in your API should get type annotations like the following:
+
+type Todo  { id: ID! text:  String!  done:  Boolean! user:  User!  }
+
+The exclamation points notate fields that are required. You can also create  `input`  types that are used as arguments to your resolvers. In a REST API, these are the equivalent to controller action functions. An  `input`  type looks like the code below, which we can then use in our resolver types:
+
+input NewTodo  { text:  String! userId:  String!  }
+
+We also must declare all resolvers, which fall into two categories:
+
+-   `query`: Used for getting information, equivalent to REST API  `GET`  routes
+-   `mutations`: Used for creating, updating, and deleting data, equivalent to  `REST`,  `POST`, and  `PUT`
+
+type Query  { todos:  [Todo!]!  } type Mutation  { createTodo(input:  NewTodo!):  Todo!  }
+
+We’ll declare all possible queries in the  `Query`  type, and the mutations will go in the  `Mutation`  type. Essentially,  `Query`  and  `Mutation`  are two lists of function signatures. Notice that we need to provide an input to the  `createTodo`  resolver in the form of an argument called  `input`, which must match the  `NewTodo`  input type.
+
+By defining the schema in this manner, GraphQL is self-documenting, knowing which functions to run when different requests come in. However, we do need to define resolver functions to go with the resolver declarations that will be found in  `schema.resolvers.go`:
+
+package graph // This file will be automatically regenerated based on the schema, any resolver implementations  // will be copied through when generating and any unknown code will be moved to the end.  import  (  "context"  "fmt"  "my/graphql/api/graph/generated"  "my/graphql/api/graph/model"  ) func (r *mutationResolver)  CreateTodo(ctx context.Context, input model.NewTodo)  (*model.Todo, error)  { panic(fmt.Errorf("not implemented"))  } func (r *queryResolver)  Todos(ctx context.Context)  ([]*model.Todo, error)  { panic(fmt.Errorf("not implemented"))  }  // Mutation returns generated.MutationResolver implementation. func (r *Resolver)  Mutation() generated.MutationResolver  {  return  &mutationResolver{r}  }  // Query returns generated.QueryResolver implementation. func (r *Resolver)  Query() generated.QueryResolver  {  return  &queryResolver{r}  } type mutationResolver struct{  *Resolver  } type queryResolver struct{  *Resolver  }
+
+Notice that the resolver functions already exist, which is one of gqlgen’s highlights. Once you’ve written your schemas, you can just add the corresponding models in the  `models_gen.go`  file as follows:
+
+// Code generated by github.com/99designs/gqlgen, DO NOT EDIT.  package model
+
+type NewTodo  struct  {  Text  string  `json:"text"`  UserID  string  `json:"userId"`  } type Todo  struct  { ID string  `json:"id"`  Text  string  `json:"text"`  Done  bool  `json:"done"`  User  *User  `json:"user"`  } type User  struct  { ID string  `json:"id"`  Name  string  `json:"name"`  }
+
+When you run the command  `go run github.com/99designs/gqlgen generate`, it uses these two inputs to generate the boilerplate for the resolvers, so you can focus on the implementation.
+
+In the  `resolver.go`  file, we can add properties to the  `Resolver`  struct, which becomes available via the resolver instance represented by  `r`. We’ll add a property that is an array of to-do items, which we can use to track the to-do items that have been created:
+
+package graph import  "my/graphql/api/graph/model"  // This file will not be regenerated automatically.  //  // It serves as dependency injection for your app, add any dependencies you require here. type Resolver  struct{ todos []*model.Todo  }
+
+Now, let’s implement those resolver functions in  `schema.resolvers.go`:
+
+package graph // This file will be automatically regenerated based on the schema, any resolver implementations  // will be copied through when generating and any unknown code will be moved to the end.  import  (  "context"  "my/graphql/api/graph/generated"  "my/graphql/api/graph/model"  "strconv"  ) func (r *mutationResolver)  CreateTodo(ctx context.Context, input model.NewTodo)  (*model.Todo, error)  { id := strconv.Itoa(len(r.todos))  // CREATE A NEW TODO todo :=  &model.Todo{  Text: input.Text, ID: id,  User:  &model.User{ID: input.UserID,  Name:  "user "  + input.UserID},  }  // ADD THE TODO TO THE TODOS ARRAY r.todos = append(r.todos, todo)  // RETURN THE TODO  return todo,  nil  } func (r *queryResolver)  Todos(ctx context.Context)  ([]*model.Todo, error)  {  // RETURN ALL THE TODOS  return r.todos,  nil  }  // Mutation returns generated.MutationResolver implementation. func (r *Resolver)  Mutation() generated.MutationResolver  {  return  &mutationResolver{r}  }  // Query returns generated.QueryResolver implementation. func (r *Resolver)  Query() generated.QueryResolver  {  return  &queryResolver{r}  } type mutationResolver struct{  *Resolver  } type queryResolver struct{  *Resolver  }
+
+You may be wondering about the following code:
+
+// Mutation returns generated.MutationResolver implementation. func (r *Resolver)  Mutation() generated.MutationResolver  {  return  &mutationResolver{r}  }  // Query returns generated.QueryResolver implementation. func (r *Resolver)  Query() generated.QueryResolver  {  return  &queryResolver{r}  } type mutationResolver struct{  *Resolver  } type queryResolver struct{  *Resolver  }
+
+Essentially, the code above creates an instance of  `queryResolver`  and  `mutationResolver`. Both inherit from the  `Resolver`  struct we saw earlier, making the array available to all the resolvers. Our resolvers become methods for these structs. In short, a single instance of  `Resolver`  is created, which is then passed to an instance of  `queryResolver`  and  `mutationResolver`.
+
+## Testing our API
+
+Now, let’s test our API. Run the server with the command below:
+
+go run server.go
+
+Go to  `localhost:8080`, and you’ll be able to access GraphQL Playground, a tool for testing GraphQL APIs. Click on  **docs**  to see the self-documentation I mentioned earlier.
+
+The following query will bring up our to-do items, which are empty at the moment:
+
+{ todos{ id
+    text done  }  }
+
+An interesting feature of GraphQL is that you don’t have to receive every field; you can specify which fields you want in the query. Below is an example of a mutation that will add a to-do item:
+
+# I Specify that it's a mutation mutation {  # I invoke the createTodo mutation and pass it the input createTodo(input:  { text:  "This is a new todo" userId:  "alex"  })  # Specify which properties I want from the return value  { id
+    text done  }  }
+
+Go ahead and add a few to-do items, then try again to get those items with the query.
+
+### Testing gqlgen  `generate`
+
+Next, let’s test out the generation feature by adding a model and seeing it auto-generate all the necessary code. Go ahead and update your schema as follows:
+
+# GraphQL schema example  #  # https://gqlgen.com/getting-started/ type Todo  { id: ID! text:  String!  done:  Boolean! user:  User!  } type Dog  { id: ID! name:  String  } type User  { id: ID! name:  String!  } type Query  { todos:  [Todo!]! dogs:  [Dog!]!  } input NewTodo  { text:  String! userId:  String!  } input NewDog  { name:  String!  } type Mutation  { createTodo(input:  NewTodo!):  Todo! createDog(input:  NewDog!):  Dog  }
+
+Then, run the command below:
+
+go run github.com/99designs/gqlgen generate
+
+You’ll notice that the models and resolvers have been auto-generated. gqlgen can help you roll out a lot of the boilerplate if you just write out your schema. How awesome is that!
+
+## Conclusion
+
+In this article, we covered creating GraphQL APIs with gqlgen, which allows us to seamlessly write a GraphQL API using Go without writing excessive boilerplate code.
+
+By combining the benefits of GraphQL, like self-documentation, with the speed and straightforward syntax of Go, we’ve built a faster and more performant application. I hope you enjoyed this article!
+
+## Monitor failed and slow GraphQL requests in production
+
+While GraphQL has some features for debugging requests and responses, making sure GraphQL reliably serves resources to your production app is where things get tougher. If you’re interested in ensuring network requests to the backend or third party services are successful,  [try LogRocket](https://logrocket.com/signup).[![](https://files.readme.io/69aa835-Image_2019-11-09_at_1.28.05_PM.png)![LogRocket Dashboard Free Trial Banner](https://blog.logrocket.com/wp-content/uploads/2017/03/1d0cd-1s_rmyo6nbrasp-xtvbaxfg.png)](https://logrocket.com/signup)[https://logrocket.com/signup/](https://logrocket.com/signup/)
+
+[LogRocket](https://logrocket.com/signup)  is like a DVR for web and mobile apps, recording literally everything that happens on your site. Instead of guessing why problems happen, you can aggregate and report on problematic GraphQL requests to quickly understand the root cause. In addition, you can track Apollo client state and inspect GraphQL queries' key-value pairs.
+
+LogRocket instruments your app to record baseline performance timings such as page load time, time to first byte, slow network requests, and also logs Redux, NgRx, and Vuex actions/state.  [Start monitoring for free](https://logrocket.com/signup).
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE2OTExOTYwNTgsLTgyNjI0OTE3Miw3Mz
+A5OTgxMTZdfQ==
+-->

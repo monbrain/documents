@@ -1,0 +1,107 @@
+## [Manim을 설치해보자](https://bright-ocean.tistory.com/137)
+
+전공공부를 하면서 다양한 모델링과 시뮬레이션을 하다보니,
+
+무엇이든 수학적인 내용을 시각적으로 설명할 수 있는 툴들에 관심이 많다.
+
+상황이 이러다보니, Youtube를 둘러보다가 정말 잘 만들어진 영상들을 보면
+
+와 이걸 어떻게 만들었을까? 컴퓨터 그래픽스를 공부한 사람들이랑 함께 제작한 것일까? 이런 생각들을 하곤 했다.
+
+자주 보는 Youtube 영상시리즈 중 하나는 3Blue1Brown 이라는 채널인데,
+
+![](https://blog.kakaocdn.net/dn/bZ0hnP/btraixgzfhr/tacOtvKwAb2mxRQmvdjckK/img.png)
+
+영상미가 너무 좋아서 단순히 수학을 설명하는 채널임에도 불구하고... 구독자가 382명에 육박한다.
+
+최근에 이 채널의 영상들이 Python 패키지를 통해 만들어지고 있음을 알게되었다.
+
+나는 Python 프로그래밍은 어느정도 능숙해진 상황이라 최근부터 Manim이라는 패키지를 설치하여 이것저것 공부해보고 있다.
+
+앞으로 [Manim] 이 붙은 포스팅들은 Manim을 공부하고 영상을 만드는 과정들을 국문으로 기록해 두어
+
+추후에 Manim을 쓰고 싶으나 영어문서는 읽기 귀찮은 사람들에게 도움이 되고자 한다.
+
+우선 설치부터 하자.
+
+필자는 맥을 사용해 본적이 없기 때문에 Windows 설치만을 기록하기로 한다
+
+(추후에 노트북 OS를 리눅스로 바꿀 예정인데, 그렇게 된다면 리눅스 설치도 올리도록 하겠다)
+
+아래의 과정은 파이썬이 정상적으로 동작하고 있음을 가정한다. 파이썬이 없다면 파이썬부터 다운받아 주자!!
+
+[https://www.manim.community/](https://www.manim.community/)
+
+[](https://www.manim.community/)
+
+Manim Community
+
+Manim is a community-maintained Python library for creating mathematical animations.
+
+www.manim.community
+
+링크를 타고 Manim Community에 들어가 Documentation을 눌러보자
+
+![](https://blog.kakaocdn.net/dn/bLEVsx/btrai7vcs5X/EPL16dDyUUaEw39kknkvBk/img.png)
+
+오늘은 설치를 진행할 예정이니 밑부분에 보이는 Installation을 선택하자
+
+![](https://blog.kakaocdn.net/dn/DOclg/btrai7op0d2/ySMoTTkUXqertDvM3g5tPk/img.png)
+
+우리의 목표는 윈도우즈 OS에 Manim을 설치하는 것이다. 윈도우즈를 냅다 클릭해 주자.
+
+![](https://blog.kakaocdn.net/dn/b9nkd4/btraiFZSHHi/RUTUZUlMBTud58koaiKA0k/img.png)
+
+이제 Manim의 실행에 필요한 주변 프로그램들(FFmpeg, Miktex)을 설치를 해줄 것인데, 이것들은 Scoop이라는 패키지 매니저를 사용하여 설치를 해보자.
+
+사실 나도 이번에 처음 Scoop이라는 것을 써봤는데, 진짜 쉽게 프로그램들을 설치되는 것을 보고... 놀라웠다.
+
+명령어 한 줄로 금새 다운받아진다. 아주 쉽다. 아주 좋다.
+
+Scoop을 다운받기 위해 위의 캡쳐 본 중간 쯤에 보이는  this link 이 링크를 누르면 Scoop 설치 설명이 나오지만 결국
+
+```
+iwr -useb get.scoop.sh | iex
+```
+
+이 한 줄을 Windows powershell에 넣으라는 얘기다. 화면 왼쪽 아래의 윈도우 옆 검색에서 powershell을 치면 Windows PowerShell을 찾을 수 있다.
+
+![](https://blog.kakaocdn.net/dn/bnY11j/btragMypilh/2NOF0c8M1RoIJtpSdW4PXk/img.png)
+
+자 이제 명령어를 복사 붙여넣기 해서 입력해보자
+
+![](https://blog.kakaocdn.net/dn/TER7M/btraibrkrTC/tbWdAgRGGSkFp3tHFrPo71/img.png)
+
+나는 이미 설치를 완료한 상태이기 때문에 완료가 되었다고 뜬다. 제대로 설치가 완료되었으면 scoop이라는 명령어를 입력했을 때 아래와 같은 결과가 나온다
+
+![](https://blog.kakaocdn.net/dn/bQgKVA/btrafMFzops/TTLiXDYAFsFCFTBZergeJK/img.png)
+
+Scoop 의 설치가 끝났으면 반 이상은 다 된 것이다. 이제 ffmpeg 와 MikTex 설치를 위해 powershell 에서 아래의 명령어를 한줄씩 입력해 프로그램들을 각각 설치해보자
+
+```
+scoop bucket add extras
+scoop bucket add r-bucket https://github.com/cderv/r-bucket.git
+
+scoop install ffmpeg
+
+scoop install latex
+```
+
+주변 프로그램들이 다 설치되었다면 이제 Manim을 설치할 차례이다.
+
+Manim은 pip를 이용해 쉽게 설치가 가능하다.
+
+```
+pip install manim
+```
+
+여기까지 진행이 되었다면. Manim 이 설치가 완료된 것이다. Powershell에서 manim 을 입력하여 아래와 같이 명령어가
+
+잘 먹힌다면. 잘 설치가 된 것이다.
+
+![](https://blog.kakaocdn.net/dn/zAXh4/btradJCbRp8/y6NPzlm55VF8iChzbWsJFk/img.png)
+
+다음 포스팅에서는 코딩을 진행할 개발 환경을 구축하는 것에 대하여 진행해 보겠다.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTkzNTM2ODAzNSw3MzA5OTgxMTZdfQ==
+-->

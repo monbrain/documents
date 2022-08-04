@@ -1,0 +1,756 @@
+
+## [Python 정규표현 모듈 re 사용법 (match, search, sub등)](https://engineer-mole.tistory.com/189)
+
+
+두더지 개발자  2021. 5. 12. 21:03
+
+Python에서는 정규표현 처리를 하기 위해 표준 라이브러리인 re 모듈을 사용한다. 정규표현 패턴를 이용한 문자열의 추출이나, 치환, 분할 등이 가능하다.
+
+이번 포스팅에서는 먼저 re모듈의 함수나 메소드에 대해서 설명한다.
+
+- 정규 표현 패턴의 컴파일  compile()
+
+- 매치 오브젝트
+
+- 문자열의 앞 부분이 매치되는가를 체크, 추출  match()
+
+- 선두에 한해서 매치하는지를 체크, 추출  search()
+
+- 문자열 전부가 매치되는가를 체크  fullmatch()
+
+- 매치된 부분 모두 리스트로 취득  findall()
+
+- 매치된 부분 모두 이터레이터(iterator)로 취득  finditer()
+
+- 매치된 부분을 치환  sub()  subn()
+
+- 정규표현 패턴으로 문자열을 분할  spilt()
+
+그 다음에는 re모듈로 사용할 수 있는 정규표현의 패턴 문자(특수 문자), 특수 시퀀스에 대해서 설명한다. 기본적으로 표준적으로 정규표현의 구문(신택스)이지만, 플래그의 설정 (특히, re.ASCII)는 주의할 필요가 있다.
+
+- Python에서의 정규표현의 메타 문자, 특수 시퀀스와 주의점
+
+- 플래그의 설정
+
+-   ASCII문자열에 한정  re.ASCII
+-   대문자소문자를 구별하지 않는다  re.IGNORECASE
+-   각행의 선두, 말미에 매치  re.MULTILINE
+-   여러 개의 플래그를 설정
+
+-  greedy match 와 비(非)greedy match
+
+## **정규 표현 패턴을 컴파일 compile()**
+
+----------
+
+re모듈로 정규표현의 처리를 실행하는 방법으로는 두 가지가 있다.
+
+### **함수로 실행**
+
+첫 번째 방법은 함수이다. re.match(), re.sub()와 같은 정규표현 패턴을 이용한 추출이나 치환등의 처리를 실시하는 함수가 준비되어 있다.
+
+함수의 상세에 대해서는 후술하겠지만, 첫 번째 인수로 정규표현 패턴의 문자열을 지정하고, 그 뒤에 처리할 문자열 등을 지정하도록 되어있다. 예를 들어, 치환을 실시하는  re.sub()에서는 두 번째 인수에 치환 문자열, 세 번째 인수로는 처리 대상의 문자열을 지정한다.
+
+```
+import re
+
+s = 'aaa@xxx.com, bbb@yyy.com, ccc@zzz.net'
+
+m = re.match(r'([a-z]+)@([a-z]+)\.com', s)
+print(m)
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+
+result = re.sub(r'([a-z]+)@([a-z]+)\.com', 'new-address', s)
+print(result)
+# new-address, new-address, ccc@zzz.net
+```
+
+참고로, 이 예의 정규표현 패턴의  [a-z]는 a부터 z까지의 어느 문자(＝알파벳의 소문자), ⁺는 직전의 패턴(여기서는  [a-z])를 1회이상 반복한다는 의미이다.  [a-z]⁺는 어느 소문자의 알파벳이 한 개의 문자열이상 반복되는 문자열에 매치된다.
+
+. 은 메타문자(특별한 의미를 가진 문자) 이므로  \(백슬래쉬)로 에스케이프할 필요가 있다.
+
+정규표현 패턴의 문자열은 백슬래쉬  \를 이용하는 경우가 많으므로 예와 같이 raw문자열을 사용하면 편리하다.
+
+### **정규표현 패턴 오브젝트의 메소드로 실행**
+
+re모듈로 정규표현의 처리를 실시하는 두 번째 방법은 정규표현 패턴의 메소드를 사용하는 것이다.
+
+re.compile()를 사용하면, 정규표현 패턴 문자열을 컴파일하여 정규표현 패턴 오브젝트를 작성할 수 있다.
+
+```
+p = re.compile(r'([a-z]+)@([a-z]+)\.com')
+
+print(p)
+# re.compile('([a-z]+)@([a-z]+)\\.com')
+
+print(type(p))
+# <class 're.Pattern'>
+```
+
+re.match(), re.sub()등의 함수와 같은 처리가 정규표현 객체의 메소드 match(), sub()로써 실행할 수 있다.
+
+```
+m = p.match(s)
+print(m)
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+
+result = p.sub('new-address', s)
+print(result)
+# new-address, new-address, ccc@zzz.net
+```
+
+지금부터 설명할 re.xxx()의 함수는 모두 정규표현 객체의 메소드로써도 제공되어 있다.
+
+동일 패턴을 사용한 처리를 반복해서 실행하는 경우는 re.complie()로 정규표현 객체를 생성하여 반복해서 사용하는 것이 효율적이다.
+
+이후의 샘플 코드에서는 편의상 컴파일하지 않고 함수를 사용하고 있지만, 동일 패턴을 반복하여 사용하는 경우는, 컴파일해서 정규 표현 오브젝트의 메소드로 실행하는 것을 추천한다.
+
+## **매치 오브젝트**
+
+----------
+
+match()나 search()등은 매치 오브젝트를 리턴한다.
+
+```
+s = 'aaa@xxx.com'
+
+m = re.match(r'[a-z]+@[a-z]+\.[a-z]+', s)
+print(m)
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+
+print(type(m))
+# <class 're.Match'>
+```
+
+매치된 문자열이나 위치는 매치 오브젝트의 이하의 메소드를 사용하여 취득한다.
+
+-   매치된 위치를 취득  start(),  end(),  span()
+-   매치된 문자열을 취득  group()
+-   각 그룹의 문자열을 취득  groups()
+
+매치된 부분의 위치는  start(),  end(),  span(), 문자열은  group().
+
+```
+print(m.start())
+# 0
+
+print(m.end())
+# 11
+
+print(m.span())
+# (0, 11)
+
+print(m.group())
+# aaa@xxx.com
+```
+
+정규표현 패턴의 문자열 내의 부분을 괄호()로 묶으면, 그 부분이 그룹으로써 처리된다. 이때의 groups()로 각 그룹에 매치된 부분의 문자열이 튜플로써 취득된다.
+
+```
+m = re.match(r'([a-z]+)@([a-z]+)\.([a-z]+)', s)
+print(m)
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+
+print(m.groups())
+# ('aaa', 'xxx', 'com')
+```
+
+그룹에 이름을 지정한 경우의 동작이나, if문을 이용하는 방법 등, 매치 오브젝트의 상세한 설명은 이  [링크(일본어 자료)](https://note.nkmk.me/python-re-match-object-span-group/)를 참조하길 바란다.
+
+## **매치하는지를 체크, 추출 match()**
+
+----------
+
+match()는 문자열의 선두가 패턴에 매치되면 매치 오브젝트를 반환한다. 위에서 언급한 것과 같이, 매치 오브젝트를 사용하여 매치된 부분 문자열을 추출하거나, 단순히 매치됐는지 아닌지를 체크하는 것이 가능하다.
+
+match()가 알아보는 것은 어디까지나 앞 부분뿐이다. 선두에 매치되는 문자열이 없는 경우에는 None이 반환된다.
+
+```
+s = 'aaa@xxx.com, bbb@yyy.com, ccc@zzz.net'
+
+m = re.match(r'[a-z]+@[a-z]+\.com', s)
+print(m)
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+
+m = re.match(r'[a-z]+@[a-z]+\.net', s)
+print(m)
+# None
+```
+
+## **선두에 한해서 매치하는지를 체크, 추출 search()**
+
+----------
+
+search()는 문자열 모두를 검색 대상으로하여 앞의 문자열이 아닌 것도 매치된다.  match()와 동일하게, 매치된 경우는 매치 오브젝트가 반환된다.
+
+매치될 부분은 여러 개있는 경우는, 처음 매치되는 부분만 리턴된다.
+
+```
+s = 'aaa@xxx.com, bbb@yyy.com, ccc@zzz.net'
+
+m = re.search(r'[a-z]+@[a-z]+\.net', s)
+print(m)
+# <re.Match object; span=(26, 37), match='ccc@zzz.net'>
+
+m = re.search(r'[a-z]+@[a-z]+\.com', s)
+print(m)
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+```
+
+매치되는 부분을 모두 얻어내고 싶은 경우에는 뒤에서 설명할  findall()  혹은  finditer()를 사용한다.
+
+## **문자열 전체가 매치되는지를 체크 fullmatch()**
+
+----------
+
+문자열 전체가 정규표현 패턴에 매치되는지 아닌지를 확인하고 싶은 경우에는 fullmatch()를 사용한다. 예를 들어, 어떤 문자열이 메일 주소로써 유효한지를 체크하는 경우에 사용하면 편리하다.
+
+문자열 전체가 매치되고 있으면 매치 객체가 리턴된다.
+
+```
+s = 'aaa@xxx.com'
+
+m = re.fullmatch(r'[a-z]+@[a-z]+\.com', s)
+print(m)
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+```
+
+일치되지 않는 부분이 있다면(일부가 일치하지 않거나 전부 일치하지 않다면), None이 반환된다.
+
+```
+s = '!!!aaa@xxx.com!!!'
+
+m = re.fullmatch(r'[a-z]+@[a-z]+\.com', s)
+print(m)
+# None
+```
+
+fullmatch()는 Python3.4에서 추가됐다. 이전의 버전에서는 동일한 처리를 실현하기 위해서는 match()와 긑에 일치하는 메타 문자열 $를 같이 이용했다. 맨 앞 부분부터 끝까지 문자열 전체가 일치하지 않으면 None을 리턴한다.
+
+```
+s = '!!!aaa@xxx.com!!!'
+
+m = re.match(r'[a-z]+@[a-z]+\.com$', s)
+print(m)
+# None
+```
+
+## **매치된 부분 모두 리스트로 취득 findall()**
+
+----------
+
+findall()은 매치된 모든 부분 문자열을 리스트 형식으로 리턴한다. 리스트의 요소는 매치 오브젝트가 아닌 문자열이므로, 이 부분을 주의하자.
+
+```
+s = 'aaa@xxx.com, bbb@yyy.com, ccc@zzz.net'
+
+result = re.findall(r'[a-z]+@[a-z]+\.[a-z]+', s)
+print(result)
+# ['aaa@xxx.com', 'bbb@yyy.com', 'ccc@zzz.net']
+```
+
+일치된 부분이 몇 개있는지는, 리스트의 요소 갯수를 리턴하는 함수  len()을 사용하면 확인할 수 있다.
+
+```
+print(len(result))
+# 3
+```
+
+정규표현 패턴은 괄호  ()를 사용하여 그룹핑하면, 각 그룹의 문자열을 요소로 하는 튜프 (멀티 오브젝트의  groups()에 상당)의 리스트가 리턴된다.
+
+```
+result = re.findall(r'([a-z]+)@([a-z]+)\.([a-z]+)', s)
+print(result)
+# [('aaa', 'xxx', 'com'), ('bbb', 'yyy', 'com'), ('ccc', 'zzz', 'net')]
+```
+
+다음과 같이  그룹의 괄호  ()로 구분된 매치 전체를 합쳐서 출력할 수 있다.
+
+```
+result = re.findall(r'(([a-z]+)@([a-z]+)\.([a-z]+))', s)
+print(result)
+# [('aaa@xxx.com', 'aaa', 'xxx', 'com'), ('bbb@yyy.com', 'bbb', 'yyy', 'com'), ('ccc@zzz.net', 'ccc', 'zzz', 'net')]
+```
+
+일치되지 않으면 빈 튜플이 반환된다.
+
+```
+result = re.findall('[0-9]+', s)
+print(result)
+# []
+```
+
+## **매치된 부분 모두 이터레이터로 취득 finditer()**
+
+----------
+
+finditer()은 매치되는 모든 부분을 이터레이터로 리턴한다. 이 요소는 findall()과 같이 문자열이 아닌 매치 오브젝트이므로 매치된 부분의 위치(인덱스)등도 얻어낼 수 있다.
+
+이터레이터는 그 자체를 print()로 출력하면 그 내용을 확인할 수 없다. 내장함수 next()나 for문을 사용하여 내용물을 하나 하나 확인할 수 있다.
+
+```
+s = 'aaa@xxx.com, bbb@yyy.com, ccc@zzz.net'
+
+result = re.finditer(r'[a-z]+@[a-z]+\.[a-z]+', s)
+print(result)
+# <callable_iterator object at 0x10b0efa90>
+
+print(type(result))
+# <class 'callable_iterator'>
+
+for m in result:
+    print(m)
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+# <re.Match object; span=(13, 24), match='bbb@yyy.com'>
+# <re.Match object; span=(26, 37), match='ccc@zzz.net'>
+```
+
+list() 를 이용하여 리스트로 변환하는 것도 가능하다.
+
+```
+l = list(re.finditer(r'[a-z]+@[a-z]+\.[a-z]+', s))
+print(l)
+# [<re.Match object; span=(0, 11), match='aaa@xxx.com'>, <re.Match object; span=(13, 24), match='bbb@yyy.com'>, <re.Match object; span=(26, 37), match='ccc@zzz.net'>]
+
+print(l[0])
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+
+print(type(l[0]))
+# <class 're.Match'>
+
+print(l[0].span())
+# (0, 11)
+```
+
+매치된 모든 부분의 위치를 알고 싶은 경우는 list()보다도 리스트 내부표기가 편리하다.
+
+```
+print([m.span() for m in re.finditer(r'[a-z]+@[a-z]+\.[a-z]+', s)])
+# [(0, 11), (13, 24), (26, 37)]
+```
+
+이터레이터는 순서대로 요소를 꺼낸다. 마지막에 도달한 후에 더욱 요소를 취득하려고 하면 무엇도 남지않은 상태가 되므로 주의하자.
+
+```
+result = re.finditer(r'[a-z]+@[a-z]+\.[a-z]+', s)
+
+for m in result:
+    print(m)
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+# <re.Match object; span=(13, 24), match='bbb@yyy.com'>
+# <re.Match object; span=(26, 37), match='ccc@zzz.net'>
+
+print(list(result))
+# []
+```
+
+## **매치된 부분을 치환 sub() subn()**
+
+----------
+
+sub()를 사용하면, 매치된 부분을 다른 문자열로 치환할 수 있다. 치환처리된 문자열이 반환된다.
+
+```
+s = 'aaa@xxx.com, bbb@yyy.com, ccc@zzz.net'
+
+result = re.sub(r'[a-z]+@[a-z]+\.com', 'new-address', s)
+print(result)
+# new-address, new-address, ccc@zzz.net
+
+print(type(result))
+# <class 'str'>
+```
+
+괄호 ()로 그룹핑한 경우, 치환 후의 문자열의 안에 매치된 문자열을 사용할 수 있다.
+
+기본적으로는  \1, \2, \3  ... 가, 각각의 첫 번째의 (), 두 번째의 (), 세 번째의 ()...에 매치된 부분에 대응되고 있다.  raw문자열이 아닌 보통의 문자열이라면  '\\1'과 같이  \를 에스케이프할 필요가 있다는 것을 주의하자.
+
+```
+result = re.sub(r'([a-z]+)@([a-z]+)\.com', r'\1@\2.net', s)
+print(result)
+# aaa@xxx.net, bbb@yyy.net, ccc@zzz.net
+```
+
+정규표현 패턴의 () 앞머리에  ?P<xxx>를 기재하여 그룹에 이름을 붙이면,  \1와 같은 번호가 아닌  \g<xxx>과 같은 이름을 사용하여 지정할 수 도 있다.
+
+```
+result = re.sub(r'(?P<local>[a-z]+)@(?P<SLD>[a-z]+)\.com', r'\g<local>@\g<SLD>.net', s)
+print(result)
+# aaa@xxx.net, bbb@yyy.net, ccc@zzz.net
+```
+
+인수 count로 최대 치환 횟수(갯수)를 지정할 수 있다. 왼쪽부터 count개의 부분만 치환된다.
+
+```
+result = re.sub(r'[a-z]+@[a-z]+\.com', 'new-address', s, count=1)
+print(result)
+# new-address, bbb@yyy.com, ccc@zzz.net
+```
+
+subn()는 치환처리된 문자열 (sub()의 반복값과 동일)과 치환된 부분의 갯수 (패턴에 매치된 갯수)의 튜플을 반환한다.
+
+```
+result = re.subn(r'[a-z]+@[a-z]+\.com', 'new-address', s)
+print(result)
+# ('new-address, new-address, ccc@zzz.net', 2)
+```
+
+인수의 지정방법 등은  sub()와 동일하다.  ()로 그룹핑한 부분을 사용하거나, 인수  count를 지정하는 등의 조작이 가능하다.
+
+```
+result = re.subn(r'(?P<local>[a-z]+)@(?P<SLD>[a-z]+)\.com', r'\g<local>@\g<SLD>.net', s)
+print(result)
+# ('aaa@xxx.net, bbb@yyy.net, ccc@zzz.net', 2)
+
+result = re.subn(r'[a-z]+@[a-z]+\.com', 'new-address', s, count=1)
+print(result)
+# ('new-address, bbb@yyy.com, ccc@zzz.net', 1)
+```
+
+문자열의 치환에 대해서는  [링크(일본어 자료)](https://note.nkmk.me/python-str-replace-translate-re-sub/)를 참고하길 바란다.
+
+## **정규표현 패턴으로 문자열을 분할 spilt()**
+
+----------
+
+split()은 패턴에 매치되는 부분으로 문자열을 분할하여 리스트로 반환하는 메소드이다.
+
+앞 부분, 끝 부분에 매치될 경우, 결과의 리스트의 맨 처음과 맨 끝에 빈 문자열 ''이 포함되게 되므로 주의하자.
+
+```
+s = '111aaa222bbb333'
+
+result = re.split('[a-z]+', s)
+print(result)
+# ['111', '222', '333']
+
+result = re.split('[0-9]+', s)
+print(result)
+# ['', 'aaa', 'bbb', '']
+```
+
+인수  maxsplit으로 최대 분할 횟수(갯수)를 지정할 수 있다. 왼쪽으로부터  count개의 부분으로만 분할된다.
+
+```
+result = re.split('[a-z]+', s, 1)
+print(result)
+# ['111', '222bbb333']
+```
+
+문자열의 분활에 대한 상세한 설명은  [링크(일본어 자료)](https://note.nkmk.me/python-split-rsplit-splitlines-re/)를 참고하길 바란다.
+
+## **Python 정규표현의 메타 문자, 특수 시퀀스와 주의점**
+
+----------
+
+Python3의 re모듈으로 사용할 수 있는 정규표현의 주요 메타 문자(특수 문자), 특수 시퀀스는 아래와 가다.
+
+**메타문자**
+
+**내용**
+
+**.**
+
+개행 이외의 임의의 1개 문자열 (DOTALL플래그를 이용한 개행도 포함)
+
+**^**
+
+문자열의 앞 부분(MULTILINE플래그로 개행한 앞 부분도 매치)
+
+**$**
+
+문자열의 끝 부분(MULTILINE플래그로 개행한 끝 부분도 매치)
+
+*****
+
+직전의 패턴을 0회 이상 반복
+
+**+**
+
+직전의 패턴을 1회 이상 반복
+
+**?**
+
+직전의 패턴을 0회 혹은 1회 반복
+
+**{m}**
+
+직전의 패턴을 m회 반복
+
+**{m, n}**
+
+직전의 패턴을 m회부터 n회까지 반복
+
+**[]**
+
+문자의 결합 - []내의 어느 1개의 문자에 매치
+
+**|  
+**
+
+OR(혹은) - A|B로 A 혹은 B 어느 패턴에 매치
+
+**특수 시퀀스**
+
+내용
+
+**\d**
+
+유니코드 10진수(ASCII플래그로 ASCII의 숫자에 한정)
+
+**\D**
+
+\d의 대응(\d이외)
+
+**\s**
+
+유니코드 공백 문자(ASCII플래그로 ASCII의 공백 문자열에 한정)
+
+**\S**
+
+\s의 대응(\s이외)
+
+**\w**
+
+유니코드 단어 문자와 _(ASCII플래그로 ASCII의 영어와  _에 한정)
+
+**\W**
+
+\w의 대응(\w이외)
+
+## **플래그의 설정**
+
+----------
+
+위의 표에 적혀있듯, 메타 정보, 특수 시퀀스 중에는 플래그에 의해 바뀌는 경우가 있다.
+
+### **ASCII문자열에 한정 re.ASCII**
+
+Python3의 문자열에 대해서는  \w는 기본으로 전각의 일본어나 영숫자등에도 매치된다. 표준 정규표현과 달리  \w와  [a-zA-Z0-9_]는 동등하지 않다.
+
+```
+m = re.match(r'\w+', 'あいう漢字ＡＢＣ１２３')
+print(m)
+# <re.Match object; span=(0, 11), match='あいう漢字ＡＢＣ１２３'>
+
+m = re.match('[a-zA-Z0-9_]+', 'あいう漢字ＡＢＣ１２３')
+print(m)
+# None
+```
+
+각 함수로 인수 flags에 re.ASCII를 지정하던가 정규표현 해턴의 문자열의 앞 머리에 인라인 플래그(?a)를 붙이면, ASCII문자열에만 매치되게 된다 (전각의 일본어나 영숫자등에는 매치되지 않는다). 이 경우는  \w는  [a-zA-Z0-9_]가 동등하다.
+
+```
+m = re.match(r'\w+', 'あいう漢字ＡＢＣ１２３', flags=re.ASCII)
+print(m)
+# None
+
+m = re.match(r'(?a)\w+', 'あいう漢字ＡＢＣ１２３')
+print(m)
+# None
+
+```
+
+re.compile()로 컴파일할 경우도 동일하다. 인수 flags가 인라인플래그 (?a)를 사용한다.
+
+```
+p = re.compile(r'\w+', flags=re.ASCII)
+print(p)
+# re.compile('\\w+', re.ASCII)
+
+print(p.match('あいう漢字ＡＢＣ１２３'))
+# None
+
+p = re.compile(r'(?a)\w+')
+print(p)
+# re.compile('(?a)\\w+', re.ASCII)
+
+print(p.match('あいう漢字ＡＢＣ１２３'))
+# None
+```
+
+또한 re.ASCII는 단축형 re.A로써도 제공되어 있다. 어느쪽도 사용할 수 있다.
+
+```
+print(re.ASCII is re.A)
+# True
+```
+
+\w과 대응되는 표시  \W도 re.ASCIIs나 (?a)의 영향을 받는다.
+
+```
+m = re.match(r'\W+', 'あいう漢字ＡＢＣ１２３')
+print(m)
+# None
+
+m = re.match(r'\W+', 'あいう漢字ＡＢＣ１２３', flags=re.ASCII)
+print(m)
+# <re.Match object; span=(0, 11), match='あいう漢字ＡＢＣ１２３'>
+```
+
+\w과 동일하게, 숫자에 매치하는  \d, 공백에 매치하는  \s도, 기본으로 반각에도 전각에도 매치된다. re.ASCII나 (?a)를 지정하면 반각에만 한정되게 된다.
+
+```
+m = re.match(r'\d+', '123')
+print(m)
+# <re.Match object; span=(0, 3), match='123'>
+
+m = re.match(r'\d+', '１２３')
+print(m)
+# <re.Match object; span=(0, 3), match='１２３'>
+
+m = re.match(r'\d+', '123', flags=re.ASCII)
+print(m)
+# <re.Match object; span=(0, 3), match='123'>
+
+m = re.match(r'\d+', '１２３', flags=re.ASCII)
+print(m)
+# None
+
+m = re.match(r'\s+', '　')  # 全角スペース
+print(m)
+# <re.Match object; span=(0, 1), match='\u3000'>
+
+m = re.match(r'\s+', '　', flags=re.ASCII)
+print(m)
+# None
+```
+
+이러한 것과의 대응,  \D,  \S도 re.ASCII나 (?a)의 영향을 받는다.
+
+### **대문자소문자를 구별하지 않는다 re.IGNORECASE**
+
+기본적으로는 대문자 소문자가 구별된다. 양쪽에 매치되도록 하기위해서는 대문자와 소문자 양쪽을 패턴에 넣어둘 필요가 있다.
+
+re.IGNORECAS를 지정하면 대문자 소문자를 구별하지 않고 매치한다. 표준적으로 정규 표현의 i플래그에 상응한다.
+
+```
+m = re.match('[a-zA-Z]+', 'abcABC')
+print(m)
+# <re.Match object; span=(0, 6), match='abcABC'>
+
+m = re.match('[a-z]+', 'abcABC', flags=re.IGNORECASE)
+print(m)
+# <re.Match object; span=(0, 6), match='abcABC'>
+
+m = re.match('[A-Z]+', 'abcABC', flags=re.IGNORECASE)
+print(m)
+# <re.Match object; span=(0, 6), match='abcABC'>
+```
+
+인라인 플래그(?i), 혹은 단축형의  re.I도 사용가능하다.
+
+### **각 행의 선두, 말미에 매치 re.MULTILINE**
+
+정규표현의 메타 정보 ^는 문자열의 앞 머리에 매치된다.
+
+기본적으로는 문자열 전체의 앞머리만 매치하지만, re.MULTILINE을 지정하면 각 행의 선두에도 매치되도록 할 수 있다. 표준적인 정규문자의 m플래그에 상응한다.
+
+```
+s = '''aaa-xxx
+bbb-yyy
+ccc-zzz'''
+
+print(s)
+# aaa-xxx
+# bbb-yyy
+# ccc-zzz
+
+result = re.findall('[a-z]+', s)
+print(result)
+# ['aaa', 'xxx', 'bbb', 'yyy', 'ccc', 'zzz']
+
+result = re.findall('^[a-z]+', s)
+print(result)
+# ['aaa']
+
+result = re.findall('^[a-z]+', s, flags=re.MULTILINE)
+print(result)
+# ['aaa', 'bbb', 'ccc']
+
+```
+
+끝에 매치되는 $도 동일하다. 기본적으로는 문자열 전체의 단말에만 매치되지만, re.MULTILINE을 지정하면 각 행의 끝 부분 매치되도록 할 수 있다.
+
+```
+result = re.findall('[a-z]+$', s)
+print(result)
+# ['zzz']
+
+result = re.findall('[a-z]+$', s, flags=re.MULTILINE)
+print(result)
+# ['xxx', 'yyy', 'zzz']
+```
+
+인라인 플래그 (?m), 혹은 단축형의 re.M도 가능하다.
+
+### **여러 개의 플래그를 설정**
+
+여러 개의 플래그를 동시에 유효로 하고 싶은 경우는 ❘를 사용한다. 인라인 플래의 경우는 (?am)과 같이 각 문자열을 계속해서 기술한다.
+
+```
+s = '''aaa-xxx
+あああ-んんん
+bbb-zzz'''
+
+print(s)
+# aaa-xxx
+# あああ-んんん
+# bbb-zzz
+
+result = re.findall(r'^\w+', s, flags=re.M)
+print(result)
+# ['aaa', 'あああ', 'bbb']
+
+result = re.findall(r'^\w+', s, flags=re.M | re.A)
+print(result)
+# ['aaa', 'bbb']
+
+result = re.findall(r'(?am)^\w+', s)
+print(result)
+# ['aaa', 'bbb']
+```
+
+## **greedy match 와 비(非)greedy match**
+
+----------
+
+이것은 정규표현의 일반적인 문제로 Python만의 문제가 아니지만, 이 문제에 빠지기 쉬워서 적어둔다.
+
+기본적으로는  *, +, ?는 greedy match로, 가능한 긴 문자열으로 매치된다.
+
+```
+s = 'aaa@xxx.com, bbb@yyy.com'
+
+m = re.match(r'.+com', s)
+print(m)
+# <re.Match object; span=(0, 24), match='aaa@xxx.com, bbb@yyy.com'>
+
+print(m.group())
+# aaa@xxx.com, bbb@yyy.com
+```
+
+?  를 뒤에 붙이면 (*?, +?, ??)와, non-greedy, minimal(최소)의 매치가 되므로, 최대한 짧은 문자열에 매치된다.
+
+```
+m = re.match(r'.+?com', s)
+print(m)
+# <re.Match object; span=(0, 11), match='aaa@xxx.com'>
+
+print(m.group())
+# aaa@xxx.com
+```
+
+디폴트로는 greedy match라고 생각하지 못한 문자열에 매치되는 경우가 많으므로 주의가 필요하다.
+
+----------
+
+참고자료
+
+[note.nkmk.me/python-re-match-search-findall-etc/](https://note.nkmk.me/python-re-match-search-findall-etc/)
+
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMzc1MzA0MjQ2LC01MjU5MTM4NTYsNzMwOT
+k4MTE2XX0=
+-->

@@ -1,0 +1,97 @@
+## 문서
+
+### 공식
+- [go home](https://go.dev/)
+- [go doc](https://go.dev/doc/)
+- [go blog](https://go.dev/blog/)
+
+###  전체
+[github Tucker의 Go 언어 프로그래밍](https://github.com/tuckersGo/musthaveGo)
+
+[예제로 배우는 Go 프로그래밍 GO 기초](http://golang.site/go/basics)
+[예제로 배우는 Go 프로그래밍 GO 활용](http://golang.site/go/applications)
+[예제로 배우는 Go 프로그래밍 GO 팁](http://golang.site/go/tips)
+[예제로 배우는 Go 프로그래밍 GO 퀴즈](http://golang.site/quiz/tests)
+
+[An Introduction to Programming in GO](https://www.golang-book.com/books/intro)
+
+[go programming language wiki](https://zchee.github.io/golang-wiki/)
+
+- [가장 빨리 만나는 Go 언어 - 목차](https://pyrasis.com/go.html)
+- [github 가장 빨리 만나는 Go 언어 예제 소스](https://github.com/pyrasis/golangbook)
+- [Use Environment Variable in your next Golang Project](https://towardsdatascience.com/use-environment-variable-in-your-next-golang-project-39e17c3aaa66)
+
+[1일1고](https://modu-print.tistory.com/category/1%EC%9D%BC1%EA%B3%A0%28111GO%29)
+
+[# 1일1GO/0003 더 편리한 환경을 위한 추가 구성 MSYS2!](https://modu-print.tistory.com/284?category=863372)
+
+
+### network
+[How to dynamically parse request body in go fiber?](https://stackoverflow.com/questions/71396974/how-to-dynamically-parse-request-body-in-go-fiber)
+[Golang의 Http 패키지 잘 사용하기](https://medium.com/sentbe/golang의-http-패키지-잘-사용하기-4fc752e56048)
+
+
+### dll
+- [syscall](https://pkg.go.dev/syscall)
+- [dll_windows](https://go.dev/src/syscall/dll_windows.go)
+
+- [golang calls dll](https://intrepidgeeks.com/tutorial/gao-lang-calls-dll)
+
+- [](https://golang.hotexamples.com/examples/syscall/-/NewLazyDLL/golang-newlazydll-function-examples.html)
+
+
+[golang blog](https://streamls.tistory.com/category/Programming/GOLANG)
+
+
+[Go 언어 웹 프로그래밍 철저 입문](https://thebook.io/006806/)
+
+## Generic
+
+[생각하는 Go 언어 프로그래밍 : Go 제네릭의 이해](https://goldenrabbit.co.kr/2022/01/28/생각하는-go-언어-프로그래밍-go-제네릭의-이해/)
+[Go generic](https://velog.io/@excellent/Tutorial-Getting-started-with-generics)
+[Go 제네릭](https://meetup.toast.com/posts/320)
+
+
+
+### mysql
+[Go로 만드는 웹 (1): MySQL 연동](https://j1mmyson.github.io/posts/WebInGo(1)/)
+
+### gRPC
+[Golang gRPC server 구축하기 (1) - gRPC란 무엇인가?](https://devjin-blog.com/golang-grpc-server-1/)
+
+
+## 동영상
+
+[Tucker의 Go 언어 프로그래밍](https://www.youtube.com/watch?v=KBdz5c-0t1w&list=PLy-g2fnSzUTBHwuXkWQ834QHDZwLx6v6j)
+
+
+
+[Go Bootcamp: Master Golang with 1000+ Exercises and Projects](https://www.udemy.com/course/learn-go-the-complete-bootcamp-course-golang/)
+
+
+xing_dll
+
+golang component object model
+component object model get clsid iid
+
+https://github.com/fyne-io/fyne
+
+go env -w GO111MODULE=auto
+
+go mod init inGo/gui_walk
+go get github.com/lxn/walk
+go get github.com/akavel/rsrc
+rsrc -manifest test.manifest -o rsrc.syso
+'rsrc'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다.
+
+
+[go언어 윈도우즈용 실행파일 아이콘 만들기-리소스해커](https://streamls.tistory.com/72)
+
+[go blog](https://streamls.tistory.com/category/Programming/GOLANG?page=4)
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTMzOTg3NDAyMSw5MTkxNzkyMDMsMTM0ND
+Y4ODgzLC0zNzE0NzU4MTAsLTExNjA2NTE5MDYsLTUwMzk0MTIz
+NiwtMTE3NjMyMzY1MywtMTAwNDQ3NDMzMywyNzc2OTQwMjIsMT
+EzNjMwMjM5OCw3MDIxMDMzMjEsLTY0NTU4MDQ4OSw3MzA5OTgx
+MTZdfQ==
+-->

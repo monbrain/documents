@@ -1,0 +1,297 @@
+
+
+
+> Written with [StackEdit](https://stackedit.io/).## [docker 기본 명령어 (ps, stop, start, rm, logs, exec, images, network)](https://darrengwon.tistory.com/791)
+
+2년 전  by  DarrenKwonDev
+
+### **컨테이너 레벨 명령어**
+
+**🐳 docker ps**
+
+ps는 process status의 약자입니다.
+
+```
+// 현재 실행 중인 도커 컨테이너 
+docker ps
+
+// a옵션을 주게 된 경우 stop된 컨테이너도 확인할 수 있습니다.
+docker ps -a
+```
+
+docker ps를 실행해보면 다음과 같이 실행중인  **컨테이너**가 뜹니다. names는 직접 --name 옵션을 준 경우에는 해당 이름으로 뜨지만 생략한 경우 랜덤한 이름이 부여됩니다. 아래 출력에서는 borring_mahavirra, bold_heisenberg가 떴네요.
+
+그밖에 사용하고 있는 포트가 어디인지, 언제 생성되었는지, 무슨 명령어를 수행 중인지 등의 정보도 알려줍니다.
+
+![](https://blog.kakaocdn.net/dn/JnKON/btqHUaT4bWR/eJqSv5SDFdPSPKJgCCTk7K/img.png)
+
+원하는 부분만 보고 싶다면 다음과 같이 작성하면됩니다. \는 가독성을 높이기 위해 테이블을 tab으로 띄워놓기 위한 것입니다.
+
+```
+docker ps --format 'table{{.Image}}\table{{.Names}}'
+```
+
+🚨 도커의 라이프사이클
+
+docker create나 start는 잘 사용하지 않고 run을 자주 씁니다만, 굳이 구분하다면 다음과 같습니다.
+
+![](https://blog.kakaocdn.net/dn/b6mnjb/btqHUb0Tcya/1XNW5mqAEohK8Tk5fSakl0/img.png)
+
+**🐳 docker stop /  **🐳 docker kill****
+
+[https://docs.docker.com/engine/reference/commandline/stop/](https://docs.docker.com/engine/reference/commandline/stop/)
+
+```
+docker stop [OPTIONS] CONTAINER [CONTAINER...]
+
+```
+
+컨테이너 ID를 입력해 docker를  **중지**할 수 있습니다. 여러 개를 중지하고 싶은 경우 컨테이너 ID를 띄어쓰기로 구별하면 됩니다.
+
+docker stop은 Gracefully(우아)하게 작업을 중지시킵니다. 이 뜻은, 하고 있는 작업을 마친 후에 컨테이너를 중지한다는 것입니다.
+
+docker kill 또한  컨테이너를  **중지**합니다. (중지 및 삭제의 숏컷이 아닙니다! 주의하세요!) docker stop과의 차이점은 stop이 gracefully하게 컨테이너를 중지시키는 반면 kill은 어떠한 작업도 기다리지 않고 즉각 중지합니다.
+
+```
+docker kill [OPTIONS] CONTAINER [CONTAINER...]
+
+```
+
+**🐳 docker rm  / docker container prune**
+
+[https://docs.docker.com/engine/reference/commandline/rm/](https://docs.docker.com/engine/reference/commandline/rm/)
+
+```
+docker rm [OPTIONS] CONTAINER [CONTAINER...]
+
+```
+
+docker를 삭제합니다. 중지와 삭제는 다릅니다. 이미지 run시 --rm 속성을 주었다면 프로세스 종료시 자동 삭제되지만 지정하지 않은 경우 직접 삭제해줘야 합니다.  여러 개를 삭제하고 싶은 경우 컨테이너 ID를 띄어쓰기로 구별하면 됩니다.
+
+tip!) 만약  **정지 중인**  docker 컨테이너 전부를 삭제하고 싶다면
+
+```
+docker container prune 
+```
+
+tip!) 이미지, 정지 중인 컨테이너, 네트워크  **모두**  다 지워버리고 싶다면
+
+```
+docker system prune
+```
+
+![](https://blog.kakaocdn.net/dn/bw0cSe/btqHT1DM9Am/L55pIo42oTSiulECbJdI6K/img.png)
+
+**🐳 docker (re)start**
+
+EC2 인스턴스를 끄는 등 서버를 정지하면 docker 컨테이너들이 전부 정지됩니다. 다시 시작하기 위해서는
+
+docker start 명령어를 이용하면 됩니다.
+
+```
+docker start [OPTIONS] CONTAINER [CONTAINER...]
+
+```
+
+이미 실행하고 있는 컨테이너를 다시 실행하기 위해서는 docker restart를 이용하시면 됩니다.
+
+**🐳 docker logs**
+
+```
+docker logs [OPTIONS] CONTAINER
+
+```
+
+options은 아래와 같습니다.
+
+--details
+
+Show extra details provided to logs
+
+--follow ,  **-f**
+
+Follow log output (한번 출력하고 마는 것이 아니라 계속 watch함)
+
+--since
+
+Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+
+**--tail**
+
+all
+
+Number of lines to show from the end of the logs (몇 줄 출력할건지)
+
+--timestamps , -t
+
+Show timestamps
+
+--until
+
+[API 1.35+](https://docs.docker.com/engine/api/v1.35/)  
+Show logs before a timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+
+**🐳 docker exec**
+
+이미 실행중인 컨테이너에 명령어를 전달하고 싶은 경우 사용합니다.
+
+```
+docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+```
+
+![](https://blog.kakaocdn.net/dn/KUgft/btqH2c5ezw7/J6qwRm137SshmsPlZ7NnP1/img.png)
+
+위와 같이 이미 돌고있는 컨테이너에서 추가적으로 명령어를 입력하고자 하면 다음과 같이 합니다.
+
+```
+docker exec b810550e80e3 ls
+```
+
+```
+docker exec -it c878a4949ba8 redis-cli
+```
+
+### **이미지 레벨 명령어**
+
+**🐳 docker images / docker pull / docker rmi**
+
+```
+docker images [OPTIONS] [REPOSITORY[:TAG]]
+
+```
+
+말 그대로 다운로드한 이미지들을 볼 수 있습니다. docker run을 할 때 먼저 로컬에서 이미지를 찾는다고 했는데 여기 목록에 없으면 자동으로 다운로드(pull)합니다.
+
+REPOSITORY TAG IMAGE ID CREATED SIZE  
+redis latest 41de2cc0b30e 17 hours ago 104MB  
+wordpress latest 6158ccbb8924 18 hours ago 546MB  
+ubuntu 20.04 4e2eef94cd6b 13 days ago 73.9MB  
+centos 8 0d120b6ccaa8 3 weeks ago 215MB  
+mysql 5.7 718a6da099d8 4 weeks ago 448MB  
+hashicorp/http-echo latest a6838e9a6ff6 3 years ago 3.97MB
+
+docker pull은 이미지를 다운로드 받습니다. 사실 run을 돌려서 없으면 자동으로 pull하기 때문에 굳이 수동으로 pull을 먼저해 줄 필요는 없습니다.
+
+```
+docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+```
+
+```
+docker pull mongo
+```
+
+이미지를 삭제할 때는 docker rmi를 이용하면 됩니다. 단 컨테이너가 이용하는 중인 이미지는 삭제되지 않습니다.
+
+지우려고 하면 에러를 냅니다.
+
+conflict: unable to delete 6158ccbb8924 (cannot be forced) - image is being used by running container ee4a38b07889
+
+```
+docker rmi [OPTIONS] IMAGE [IMAGE...]
+
+```
+
+```
+docker rmi 409c3f937574
+```
+
+**🐳 docker inspect [name]**
+
+특정 이미지의 내부 정보를 볼 수 있습니다.
+
+docker inspect nginx로 nginx 이미지 내부를 까보면 여러 정보를 확인할 수 있습니다.
+
+중요한 정보가 많지만 Env와 Cmd가 눈에 먼저 뜨입니다. (심화된 수준에선 layer도 보고 하시던데 아직 저는...)
+
+cmd는 이미지가 실행되자마자 실행되는 command이고
+
+env은 기본값으로 설정된 값들입니다.
+
+```
+ "Env": [
+	"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+	"NGINX_VERSION=1.19.8",
+	"NJS_VERSION=0.5.2",
+	"PKG_RELEASE=1~buster"
+   ],
+  "Cmd": [
+	"/bin/sh",
+	"-c",
+	"#(nop) ",
+	"CMD [\"nginx\" \"-g\" \"daemon off;\"]"
+   ],
+```
+
+**🐳 docker image prune**
+
+[docs.docker.com/engine/reference/commandline/image_prune/](https://docs.docker.com/engine/reference/commandline/image_prune/)
+
+prune이라는 단어에서 알 수 있듯 모조리 지워버리는 것입니다.
+
+복수형인 images 가 아니라 단수형인 image인 것에 주의합시다.
+
+```
+docker image prune [OPTIONS]
+
+```
+
+--all , -a
+
+Remove all unused images, not just dangling ones
+
+--filter
+
+Provide filter values (e.g. ‘until=')
+
+--force , -f
+
+Do not prompt for confirmation
+
+### **도커 네****크워크**
+
+**🐳** docker network create/connect/option
+
+**도커 네트워크**란 컨테이너끼리 통신할 수 있는 가상의 네트워크를 말합니다. 도커의 컨테이너는 각각 격리된 상태이므로 통신하기 위해서는 네트워크를 만들어줘야 합니다.
+
+docker network create 를 통해 app-network라는 이름의 네트워크를 만들어줬습니다.
+
+```
+docker network create [OPTIONS] NETWORK
+
+```
+
+```
+docker network create app-network
+```
+
+app-network라는 이름의 네트워크에 현재 있는 mysql 이란 이름의 컨테이너를 연결해보았습니다.
+
+docker network connect를 사용하면 됩니다.
+
+[https://docs.docker.com/engine/reference/commandline/network_connect/](https://docs.docker.com/engine/reference/commandline/network_connect/)
+
+```
+docker network connect [OPTIONS] NETWORK CONTAINER
+
+```
+
+```
+docker network connect app-network mysql
+```
+
+이후 wordpress 이미지를 run할 때 --network 옵션을 통해 어떤 네트워크를 사용할 것인지 명시할 수 있습니다.
+
+```
+docker run -d -p 8080:80 --network=app-network 
+-e WORDPRESS_DB_HOST=mysql
+-e WORDPRESS_DB_NAME=wp
+-e WORDPRESS_DB_USER=wp 
+-e WORDPRESS_DB_PASSWORD=wp
+wordpress
+
+```
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE2MDc0MTEwMzIsNzMwOTk4MTE2XX0=
+-->

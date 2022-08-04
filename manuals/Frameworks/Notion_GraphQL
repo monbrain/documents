@@ -1,0 +1,302 @@
+
+
+
+# [Creating a GraphQL API for Notion with Hasura Actions](https://hasura.io/blog/creating-a-graphql-api-for-notion-with-hasura-actions/)
+
+21 MAY, 2021  |  5 MIN READ
+
+Notion launched their  [REST API](https://developers.notion.com/)  recently letting you connect your pages and databases with any tool to create powerful workflows. In this post, we will leverage the Notion API to create a  [GraphQL](https://hasura.io/graphql/)  wrapper for their pages API endpoint. This will use Hasura Actions to define GraphQL types and we will be writing an Action webhook handler that will make the call to Notion's API.
+
+![Convert Notion REST API to GraphQL API using Hasura Actions](https://hasura.io/blog/content/images/2021/05/notion-twitter-share.png)
+
+Convert Notion REST API to GraphQL API using Hasura Actions
+
+Let's get started by setting up things on Notion's side for the API integration.
+
+## Create a workspace in Notion
+
+You need to be an admin of a workspace to be able to use the APIs. If you are an admin in an existing workspace, you can skip this step.
+
+Let's get started by creating a new personal workspace by following the docs on  [Creating a personal workspace](https://www.notion.so/Create-join-switch-workspaces-3b9be78982a940a7a27ce712ca6bdcf5#9332861c775543d0965f918924448a6d).
+
+## Create a new integration in Notion
+
+The next step is to create an integration. Head to  [My integrations](https://www.notion.com/my-integrations)  and create a new integration with relevant name and workspace.
+
+![Create a new integration on Notion](https://hasura.io/blog/content/images/2021/05/create-notion-integration.png)
+
+Create a new integration on Notion
+
+After submitting the above form, note down the Internal Integration secret. This will be used during the API integration. The integration type will be internal. There's also the option of making it external so that the API is public and can be used by anyone. For this example, we will stick to internal since the Hasura Action will be used only for one private workspace.
+
+## Sharing a page / database
+
+According to Notion docs,
+
+> Integrations don't have access to any pages (or databases) in the workspace at first.  **A user must share specific pages with an integration in order for those pages to be accessed using the API**
+
+This means, the API can be used only for those pages that already exist and has the right permissions (sharing) added to be used by the API.
+
+![Share a page with Integration](https://hasura.io/blog/content/images/2021/05/notion-share-page-with-integration.png)
+
+Share a page with Integration
+
+Note that, you need to create a database as a full page to be able to use the API. You can do this by typing in  `/database`  and selecting  `Table - Full Page`.
+
+Head to Share on the top menu and click on  `Copy link`. Paste this somewhere to identify the ID of the newly created database.
+
+For example, it will look something along the lines of
+
+```
+https://www.notion.so/0664caf380ec482d92b74b01730480f9?v=8b0f9cba5e72499380fcb251369f5b4b
+```
+
+where the database ID is the one before the query parameter. Note down the database ID because we will reference that in the API request for making changes.
+
+## Deploy Hasura to get a GraphQL API
+
+1.  Click on the following button to deploy GraphQL engine on Hasura Cloud.
+
+[![Deploy to Hasura Cloud](https://graphql-engine-cdn.hasura.io/img/deploy_to_hasura.png)](https://cloud.hasura.io/)
+
+2. Open the Hasura console by clicking on the button "Launch console".
+
+3. Head to the Data tab and click on  `Create Heroku Database`  to create a new Postgres database. Note that this is an optional step. We will not use the database in this example since we are writing an Action to create a GraphQL wrapper over Notion.
+
+![Create Heroku Database](https://hasura.io/blog/content/images/2021/05/create-heroku-database.png)
+
+Create Heroku Database
+
+4. Now let's create an Action. Head to  `Actions`  tab from the top menu and click on  `Create`  to create a new action.
+
+5. We will add a custom mutation to add a new item to the DB.
+
+The mutation type would look something like this:
+
+```graphql
+type Mutation {
+  addNotionItem (
+    databaseId: String!
+    properties: jsonb!
+    children: jsonb
+  ): ItemOutput
+}
+```
+
+GraphQL
+
+Copy
+
+and the output type for  `ItemOutput`  would look something like this:
+
+```graphql
+type ItemOutput {
+  id : String!
+  object : String!
+  created_time : timestamptz!
+  last_edited_time : timestamptz!
+}
+```
+
+GraphQL
+
+Copy
+
+_Note: You can modify the above type defintions to include more fields as required or return a more generic JSON so that everything from Notion's response can be returned back as output._
+
+Leave the other inputs as it is and we will come back to modifying the handler URL later.
+
+![Action Types](https://hasura.io/blog/content/images/2021/05/action-types.png)
+
+Action Types
+
+## Notion API to add item to DB
+
+[Notion's API reference](https://developers.notion.com/reference/intro)  gives the various endpoints and the request body that can be sent to make changes.
+
+To add an item to the DB, we can make use of the following API
+
+-   API Endpoint -  [https://api.notion.com/v1/pages](https://api.notion.com/v1/pages)
+-   Headers -  `Authorization: Bearer <integration_token>`
+-   Request Body
+
+```json
+{
+    "parent": { "database_id": <database_id> },
+    "properties": {
+      "Name": {
+        "title": [
+          {
+            "text": {
+              "content": "iPhone 12"
+            }
+          }
+        ]
+      }
+    }
+  }
+```
+
+JSON
+
+Copy
+
+The above request body assumes you have the default  `Name`  field in your table.
+
+## Writing and Deploying Action Code
+
+Once the Action is created with the above types, head to the Codegen tab and click on  `Try on glitch`. This will create an app on Glitch platform with the Node.js boilerplate. We need to add an  `env`  variable in the  `.env`  file. Add the env  `NOTION_TOKEN`  and paste the Integration token that we obtained at the beginning of this post.
+
+Here's the code for the new endpoint that you can paste in the Glitch app source code under src/server.js.
+
+```javascript
+app.post('/addNotionItem', async (req, res) => {
+
+  // get request input
+  const { databaseId, properties, children } = req.body.input;
+
+  // run some business logic
+  const NOTION_TOKEN = process.env.NOTION_TOKEN;
+  const NOTION_PAGES_ENDPOINT = "https://api.notion.com/v1/pages";
+  const headers = {
+    "Authorization": `Bearer ${NOTION_TOKEN}`,
+    "Content-Type": "application/json"
+  };
+  
+  const reqBody = {
+    "parent": { "database_id": databaseId },
+    "properties": properties
+  }
+  
+  if(children) {
+    reqBody["children"] = children;
+  }
+  
+  const options = {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(reqBody)
+  }
+  
+  const fetchResponse = await fetch(NOTION_PAGES_ENDPOINT, options);
+  const responseJson = await fetchResponse.json();
+  
+  console.log(responseJson);
+
+  /*
+  // In case of errors:
+  return res.status(400).json({
+    message: "error happened"
+  })
+  */
+
+  // success
+  return res.json({
+    id: responseJson.id,
+    object: responseJson.object,
+    created_time: responseJson.created_time,
+    last_edited_time: responseJson.last_edited_time
+  })
+
+});
+
+```
+
+JavaScript
+
+Copy
+
+Hasura Action Handler Code
+
+Once this Action code is updated on the Glitch app, copy the Glitch app URL and add the  `/addNotionItem`  to that and modify the Action URL to point to the glitch endpoint.
+
+An example glitch endpoint would look something like this  `[https://lovely-bustling-environment.glitch.me/addNotionItem](https://lovely-bustling-environment.glitch.me/addNotionItem)`
+
+![Action Handler URL](https://hasura.io/blog/content/images/2021/05/action-handler-url.png)
+
+Action Handler URL
+
+## Test the GraphQL API
+
+Head to Hasura Console API Explorer and make the following GraphQL mutation:
+
+```graphql
+mutation addNotionItem ($databaseId: String!, $properties: jsonb!) {
+  addNotionItem(databaseId: $databaseId, properties: $properties) {
+    id
+    object
+    created_time
+    last_edited_time
+  }
+}
+```
+
+GraphQL
+
+Copy
+
+With the following variables:
+
+```json
+{
+  "databaseId": "<database_id>",
+  "properties": {
+    "Name": {
+        "title": [
+          {
+            "text": {
+              "content": "iPhone 12"
+            }
+          }
+        ]
+      }
+  }
+}
+```
+
+JSON
+
+Copy
+
+Replace the  `<database_id>`  with your own database ID.
+
+![GraphiQL](https://hasura.io/blog/content/images/2021/05/GraphiQL.png)
+
+GraphiQL
+
+You should get a response which looks something like:
+
+```json
+{
+  "data": {
+    "addNotionItem": {
+      "id": "4bf24dc3-8a98-4247-856c-ba15500082cc",
+      "object": "page",
+      "created_time": "2021-05-21T12:57:46.751Z",
+      "last_edited_time": "2021-05-21T12:57:46.751Z"
+    }
+  }
+}
+```
+
+JSON
+
+Copy
+
+GraphQL Response for Notion Mutation
+
+## Adding Permissions
+
+You can also define permissions for this Action so that you can restrict or allow access only to certain roles.
+
+Head to the  `Permissions`  tab of the created Action and allow access for specific roles.
+
+![Permission for Actions](https://hasura.io/blog/content/images/2021/05/action-permission.png)
+
+Permission for Actions
+
+We have written a GraphQL wrapper for Notion's  `Create a page`  API. Now of course you can repeat this for any of the Notion's REST API by defining custom types appropriately and writing the webhook handler.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE4ODAzMzI5MTIsLTgxNjg2MDcwMCw3Mz
+A5OTgxMTZdfQ==
+-->

@@ -1,0 +1,87 @@
+
+국가/지역: 대한민국
+사용자 이름: 은지 고
+124, Cheongneung-daero, Yeonsu-gu, Incheon, Republic of Korea	21967
+moonitdev@gmail.com	moonitdev	A********1!
+카드: 현대카드	4032-****-****-****
+
+클라우드 계정 이름
+moonitdev
+홈 영역
+South Korea Central (Seoul)
+
+
+80, 443, 3306 : http, https, mysql
+
+SSH키 쌍 생성 > 전용키 저장/복사
+C:\Users\user\.ssh\oracle_3
+
+C:\Users\user\.ssh\config 수정
+
+
+# NAS
+Host NAS_ex
+  HostName 59.17.233.36
+  User admin
+  Port 2223
+
+Host NAS_in
+  HostName 192.168.0.2
+  User admin
+  Port 2223
+
+# Oracle Cloud
+# Oracle Cloud(문정삼) Ubuntu
+# https://cloud.oracle.com/?region=us-sanjose-1&tenant=monblue
+Host oracle_1
+    HostName 152.67.230.230
+    User ubuntu
+    PreferredAuthentications publickey
+    IdentityFile C:/Users/user/.ssh/oracle_1
+
+# 사용안함
+# Oracle Cloud(문정삼) Ubuntu
+Host oracle_2
+    HostName 192.18.132.127
+    User ubuntu
+    PreferredAuthentications publickey
+    IdentityFile C:/Users/user/.ssh/oracle_2
+
+# Oracle Cloud(고은지) Ubuntu
+# https://cloud.oracle.com/?region=ap-seoul-1&tenant=moonitdev
+Host oracle_3
+    HostName 129.154.210.61
+    User ubuntu
+    PreferredAuthentications publickey
+    IdentityFile C:/Users/user/.ssh/oracle_3
+
+# Oracle Cloud(고은지) CentOS 8 Stream
+Host oracle_4
+    HostName 146.56.180.75
+    User opc
+    PreferredAuthentications publickey
+    IdentityFile C:/Users/user/.ssh/oracle_4
+
+
+# MacMini
+Host 59.17.233.36
+  HostName 59.17.233.36
+  User user
+  Port 3322
+
+Host 192.168.0.12
+  HostName 192.168.0.12
+  User macmini
+
+# tradermoon
+Host https://github.com/tradermoon
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_tradermoon
+
+
+> ritten ith tackdit(https://stackedit.io/.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEwOTI1MzcwNzIsNDQ4NDQzODgxLDczMD
+k5ODExNl19
+-->

@@ -1,0 +1,1938 @@
+# 1 Hello World
+
+전통적인 Hello World 프로그램의 소스 코드이다.
+
+```
+// 이는 주석이고, 컴파일러가 무시할 것이다.
+
+// "Run" 버튼을 클릭하면 이 코드를 테스트 할 수 있다.->
+
+// 키보드로는 "Ctrl + Enter" 단축키를 누르면 된다.
+
+// 이 코드는 수정 가능하니, 자유롭게 수정해봐라!
+
+// 항상 "Reset" 버튼을 클릭하면 원래 코드로 돌아간다.->
+
+// 이는 main 함수이다.
+
+fn main() {
+
+// 컴파일된 바이너리가 실행되면 이곳에 있는 코드들이 수행되게 될 것이다.
+
+// 문자열을 출력한다.
+
+println!("Hello World!");
+
+}
+```
+
+`println!`  은  [_macro_](https://hanbum.gitbooks.io/rustbyexample/content/macros.html)  로 문자열을 콘솔에 출력한다.
+
+바이너리는 Rust 컴파일러를 통해 생성된다:  `rustc`.
+
+```
+$ rustc hello.rs
+
+```
+
+`rustc`  는 실행할 수 있는  `hello`  바이너리를 생성할 것이다.
+
+```
+$ ./hello
+Hello World!
+
+```
+
+### Activity
+
+앞서 'Run'을 클릭해 예상했던 결과를 봐라. 다음으로, 두 번째  `println!`  매크로를 사용하는 줄을 추가하여 다음과 같이 출력해보라:
+
+```
+Hello World!
+I'm a Rustacean!
+```
+
+## 1.1 Comments
+
+모든 프로그램이 필요로 하는 주석을 Rust는 몇 가지 다양한 방식으로 지원한다:
+
+-   _일반적인 주석_  은 컴파일러에게 무시된다:
+    -   `// 줄 주석은 라인 끝까지 포함`
+    -   `/* 블록 주석은 구분자가 끝날 때까지 포함 */`
+-   _문서 주석_  은 HTML 라이브러리  [문서](https://hanbum.gitbooks.io/rustbyexample/content/meta/doc.html)로 번역된다.
+    -   `/// 해당 아이템에 대한 라이브러리 문서를 생성.`
+    -   `//! 둘러싼 아이템을 위한 라이브러리 문서를 생성
+-   _Regular comments_  which are ignored by the compiler:
+    -   `// Line comments which go to the end of the line.`
+    -   `/* Block comments which go to the closing delimiter. */`
+-   _Doc comments_  which are parsed into HTML library  [documentation](https://hanbum.gitbooks.io/rustbyexample/content/meta/doc.html):
+    -   `/// Generate library docs for the following item.`
+    -   `//! Generate library docs for the enclosing item.`
+
+RunReset
+
+```
+fn main() {
+
+// 줄 주석의 예제
+
+// 줄의 시작 부분에 두개의 슬래쉬들을 주목하라
+
+// 여기에 쓰인 내용은 컴파일러가 읽지 않는다
+
+// println!("Hello, world!");
+
+// 실행해봐라. 결과를 봤으면 두 슬래쉬를 지우고 다시 실행해보도록.
+
+/*
+
+* 이번에는 다른 형식인 블럭 커멘트이다. 일반적으로
+
+* 줄 주석이 추천하는 방식이지만 블록 주석은
+
+* 임시적으로 많은 양의 코드를 비활성화 할 때
+
+* 유용하게 사용된다. /* 블록 주석은 /* 중첩 사용이 가능하고, */  */
+
+* 그래서 단 몇 키 입력으로 모든 라인을 주석 처리 할 수 있다.
+
+* 이 main() 함수에서 /*/*/* 시험해봐라! */*/*/
+
+*/
+
+/*
+
+참고, 이전 문단에서 '*'은 그저 스타일을 위해서 사용한 것.
+
+실제로는 필요하지 않다.
+
+*/
+
+// 블록 주석을 통해 쉽게 표현을 조작할 수 있음을 보라.
+
+// 줄 주석으론 못함. 주석 식별자를 제거하면
+
+// 결과가 달라질 것이다:
+
+let x = 5 + /* 90 + */ 5;
+
+println!("Is `x` 10 or 100? x = {}", x);
+
+}
+```
+
+### See also:
+
+[Library documentation](https://hanbum.gitbooks.io/rustbyexample/content/meta/doc.html)
+
+
+## 1.2 Formatted print
+
+출력은  [`macros`](https://hanbum.gitbooks.io/rustbyexample/content/macros.html)  들을  [`std::fmt`](http://doc.rust-lang.org/std/fmt/)  에 정의하여 사용하는데 그 중 몇개를 보자:
+
+-   `format!`: 텍스트를 형식에 맞춰  [`String`](https://hanbum.gitbooks.io/rustbyexample/content/std/str.html)으로 작성[`String`]
+-   `print!`:  `format!`과 같으며 콘솔로 출력.
+-   `println!`:  `print!`과 같으며 새 줄 추가.
+-   `format!`: write formatted text to  [`String`](https://hanbum.gitbooks.io/rustbyexample/content/std/str.html)
+-   `print!`: same as  `format!`  but the text is printed to the console.
+-   `println!`: same as  `print!`  but a newline is appended.
+
+모든 텍스트의 분석은 같은 방식을 따른다. 추가하자면 형식화 방식의 적합성은 컴파일 시에 검증된다.
+
+RunReset
+```
+fn main() {
+
+// 일반적으로 `{}`는 인자에 따라 자동으로 변환된다.
+
+// 다음은 String으로 변환될 것이다.
+
+println!("{} days", 31);
+
+// 접미사가 없으면, 31은 i31이 된다.
+
+// 접미사를 추가해 31의 type을 변경할 수 있다.
+
+// 출력을 위한 다양한 옵션들이 있다.
+
+// 위치지정 인자도 사용될 수 있다.
+
+println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob");
+
+// 이름을 인자로 사용할 수 있다.
+
+println!("{subject} {verb} {object}",
+
+object="the lazy dog",
+
+subject="the quick brown fox",
+
+verb="jumps over");
+
+// `:`; 뒤에 특수 형식 지정자를 사용할 수 있다..
+
+println!("{} of {:b} people know binary, the other half don't", 1, 2);
+
+// 넓이를 지정하여 오른쪽 정렬을 사용할 수 있다. 이는 다음과 같이 출력될 것이다.
+
+// " 1". 5칸의 공백과 "1".
+
+println!("{number:>width$}", number=1, width=6);
+
+// 여분의 공간을 0으로 채운 숫자도 사용할 수 있다. 이는 "000001"을 출력할 것.
+
+println!("{number:>0width$}", number=1, width=6);
+
+// 위치지정 인자 사용시 정확한 수의 인자들이 왔는데 검증받게 될 것이다.
+
+println!("My name is {0}, {1} {0}", "Bond");
+
+// FIXME ^ 다음의 인자를 추가해서 버그를 수정해보세요 : "James"
+
+// `i32` 내장한 구조체를 만들자. 그리고 `Structure`라고 이름지었다.
+
+#[allow(dead_code)]
+
+struct Structure(i32);
+
+// 하지만, Structure와 같이 당신이 만든 형태는 좀더 복잡해진다.
+
+// 다음 문장은 실행되지 않을 것이다.
+
+println!("This struct `{}` won't print...", Structure(3));
+
+// FIXME ^ 이 줄을 주석처리 해주세요.
+
+}
+```
+
+[`std:fmt`](http://doc.rust-lang.org/std/fmt/)는 많은  [`traits`](https://hanbum.gitbooks.io/rustbyexample/content/trait.html)를 통해 텍스트를 출력한다. 두 중요한 기본형은 다음 항목들이다:
+
+-   `fmt::Debug`:  `{:?}`  표시자로 사용된다. 디버깅을 위한 의도의 형식문자.
+-   `fmt::Display`:  `{}`  표시자로 사용된다. 좀 더 수려하고, 사용자 친화적 형식문자.
+
+여기서,  `fmt::Display`가 사용될 수 있는 이유는 표준 라이브러리에 타입을 위해 구현되어 있기 때문이다. 임의 타입을 출력하고자 한다면, 조금 더 해야할 작업이 있다.
+
+### Activities
+
+-   위의 두 문제를 수정하여 에러 없이 출력해보세요. (FIXME를 찾으세요)
+-   `let pi = 3.141592`로 pi를 선언하고  `Pi is roughly 3.142`를 출력하는  `println!`  문을 추가해보세요. (힌트 :  [`std::fmt`](http://doc.rust-lang.org/std/fmt/)를 참고해서 숫자를 형식에 맞춰 출력하는 법을 참고하세요.)
+
+### See also
+
+[`std::fmt`](http://doc.rust-lang.org/std/fmt/),  [`macros`](https://hanbum.gitbooks.io/rustbyexample/content/macros.html),  [`struct`](https://hanbum.gitbooks.io/rustbyexample/content/custom_types/structs.html), and  [`traits`](https://hanbum.gitbooks.io/rustbyexample/content/trait.html)
+
+
+### 1.2.1 Debug
+
+`std::fmt`  형식화  `trait`을 사용하고자 하는 모든 타입들은 출력하기 위해 구현이 요구된다.  `std`  라이브러리에 있는 타입들처럼 단지 자동 구현이 제공된다. 모든 다른 것들은  _반드시_  어떻게 할지 수동으로 구현되어야 한다. All types which want to use  `std::fmt`  formatting  `traits`  require an implementation to be printable. Automatic implementations are only provided for types such as in the  `std`  library. All others  _must_  be manually implemented somehow.
+
+`fmt::Debug`  `trait`이 이의 복잡함을 많이 경감해준다.  _모든_  타입들은  `fmt::Debug`  구현을  `파생(drive)`할 수 있다(자동으로 생성). 이는  `fmt::Display`로는 적합하지 않고 반드시 수동으로 구현되야 한다. The  `fmt::Debug`  `trait`  makes this very straightforward.  _All_  types can  `derive`  (automatically create) the  `fmt::Debug`  implementation. This is not true for  `fmt::Display`  which must be manually implemented.
+
+```
+/ 이 구조체는 `fmt::Display`나 `fmt::Debug`로는 출력되지 않는다.
+// This structure cannot be printed either with `fmt::Display` or
+// with `fmt::Debug`
+struct UnPrintable(i32);
+
+// `derive` 속성으로 이 `struct`를 `fmt::Debug`로 출력 가능하도록 자동 구현한다.
+// The `derive` attribute automatically creates the implementation
+// required to make this `struct` printable with `fmt::Debug`.
+#[derive(Debug)]
+struct DebugPrintable(i32);
+```
+
+모든  `std`  라이브러리 타입들도 자동으로  `{:?}`를 통해 출력 가능하다: All  `std`  library types automatically are printable with  `{:?}`  too:
+
+RunReset
+```
+// Derive the `fmt::Debug` implementation for `Structure`. `Structure`
+
+// is a structure which contains a single `i32`.
+
+#[derive(Debug)]
+
+struct Structure(i32);
+
+// Put a `Structure` inside of the structure `Deep`. Make it printable
+
+// also.
+
+#[derive(Debug)]
+
+struct Deep(Structure);
+
+fn main() {
+
+// Printing with `{:?}` is similar to with `{}`.
+
+println!("{:?} months in a year.", 12);
+
+println!("{1:?} {0:?} is the {actor:?} name.",
+
+"Slater",
+
+"Christian",
+
+actor="actor's");
+
+// `Structure` is printable!
+
+println!("Now {:?} will print!", Structure(3));
+
+// The problem with `derive` is there is no control over how
+
+// the results look. What if I want this to just show a `7`?
+
+println!("Now {:?} will print!", Deep(Structure(7)));
+
+}
+```
+
+So  `fmt::Debug`  definitely makes this printable but sacrifices some elegance. Manually implementing  `fmt::Display`  will fix that.
+
+### See also
+
+[attributes](http://doc.rust-lang.org/reference.html#attributes),  [`derive`](https://hanbum.gitbooks.io/rustbyexample/content/trait/derive.html),  [`std::fmt`](http://doc.rust-lang.org/std/fmt/), and  [`struct`](https://hanbum.gitbooks.io/rustbyexample/content/custom_types/structs.html)
+
+
+### 1.2.2 Display
+
+`fmt::Debug`는 간결하고 깨끗하게 보긴 어렵기에 출력 형태를 사용자 정의 하는게 많은 장점을 갖는다. 이는 수작업으로  `{}`를 출력 기호로 사용하는  `fmt::Display`를 구현하여 작업한다. 구현은 아래와 같다:  `fmt::Debug`  hardly looks compact and clean, so it is often advantageous to customize the output appearance. This is done by manually implementing  [`fmt::Display`](http://doc.rust-lang.org/std/fmt/), which uses the  `{}`  print marker. Implementing it looks like this:
+
+```
+// (`use`를 통해) `fmt` module을 import해 사용할 수 있게 한다.
+// Import (via `use`) the `fmt` module to make it available.
+use std::fmt;
+
+// `fmt::Display` 구조체를 정의하여 이를 구현할 수 있게 한다. 
+// 여기서는 간단하게 `i32`를 포함하는 튜플 구조로 `Structure`란 이름으로 바인드한다.
+// Define a structure which `fmt::Display` will be implemented for. This is simply
+// a tuple struct containing an `i32` bound to the name `Structure`.
+struct Structure(i32);
+
+// `{}` 기호를 사용하기 위해서, `fmt::Display`가 타입에 대해 반드시 구현되어야 한다.
+// In order to use the `{}` marker, the trait `fmt::Display` must be implemented
+// manually for the type.
+impl fmt::Display for Structure {
+    // This trait requires `fmt` with this exact signature.
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        // Write strictly the first element into the supplied output
+        // stream: `f`. Returns `fmt::Result` which indicates whether the
+        // operation succeeded or failed. Note that `write!` uses syntax which
+        // is very similar to `println!`.
+        write!(f, "{}", self.0)
+    }
+}
+
+```
+
+`fmt::Display`는  `fmt::Debug`보다 깨끗할지는 모르겠지만 이는  `std`라이브러리에 적용하긴 문제가 있다. 어떻게 모호한 타입도 출력되도록 할 수 있을까? 예를 들어,  `std`라이브러리가 모든  `Vec<T>`를 하나의 스타일을 구현한다고 하면, 다음 둘에 대해 어떤 스타일이 적용되야 할까?  `fmt::Display`  may be cleaner than  `fmt::Debug`  but this presents a problem for the  `std`  library. How should ambiguous types be displayed? For example, if the  `std`  library implemented a single style for all  `Vec<T>`, what style should it be? Either of these two?
+
+-   `Vec<path>`:  `/:/etc:/home/username:/bin`  (split on  `:`)
+-   `Vec<number>`:  `1,2,3`  (split on  `,`)
+
+놉, 모든 카입을 위한 이상적인 스타일은 존재하지 않고  `std`  라이브러리는 하나로 규정될거라 가정하지 않는다.  `fmt::Display`는  `Vec<T>`나 모든 다른 제네릭 컨테이너에는 구현되지 않는다.  `fmt::Debug`가 이런 제네릭 경우에 사용될 수 있다. No, because there is no ideal style for all types and the  `std`  library doesn't presume to dictate one.  `fmt::Display`  is not implemented for  `Vec<T>`  or for any other generic containers.  `fmt::Debug`  must then be used for these generic cases.
+
+이런 문제는  _비_  제네릭  _컨테이너_에는 문제가 아니고  `fmt::Dispaly`를 구현할 수 있다. This is not a problem though because for any new  _container_  type which is  _not_  generic,`fmt::Display`  can be implemented.
+
+RunReset
+```
+use std::fmt; // Import `fmt`
+
+// 구조체는 두 숫자를 보관한다. `Debug`가 파생되어 `Display`의 결과와 대조된다.
+
+// A structure holding two numbers. `Debug` will be derived so the results can
+
+// be contrasted with `Display`.
+
+#[derive(Debug)]
+
+struct MinMax(i64, i64);
+
+// `Display`를 `MinMax`에 구현한다.
+
+// Implement `Display` for `MinMax`.
+
+impl fmt::Display for MinMax {
+
+fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+
+// Use `self.number` to refer to each positional data point.
+
+write!(f, "({}, {})", self.0, self.1)
+
+}
+
+}
+
+// 비교용으로 필드가 이름을 갖는 구조체를 정의한다.
+
+// Define a structure where the fields are nameable for comparison.
+
+#[derive(Debug)]
+
+struct Point2 {
+
+x: f64,
+
+y: f64,
+
+}
+
+// 비슷하게 Point2를 위해 구현한다.
+
+// Similarly, implement for Point2
+
+impl fmt::Display for Point2 {
+
+fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+
+// 사용자 정의를 통해 `x`와 `y`만 표시되도록 한다.
+
+// Customize so only `x` and `y` are denoted.
+
+write!(f, "x: {}, y: {}", self.x, self.y)
+
+}
+
+}
+
+fn main() {
+
+let minmax = MinMax(0, 14);
+
+println!("Compare structures:");
+
+println!("Display: {}", minmax);
+
+println!("Debug: {:?}", minmax);
+
+let big_range = MinMax(-300, 300);
+
+let small_range = MinMax(-3, 3);
+
+println!("The big range is {big} and the small is {small}",
+
+small = small_range,
+
+big = big_range);
+
+let point = Point2 { x: 3.3, y: 7.2 };
+
+println!("Compare points:");
+
+println!("Display: {}", point);
+
+println!("Debug: {:?}", point);
+
+// 에러. `Debug`와 `Display` 둘이 구현되었지만 `{:b}`는
+
+// `fmt::Binary`의 구현이 요구된다. 이는 동작하지 않는다.
+
+// Error. Both `Debug` and `Display` were implemented but `{:b}`
+
+// requires `fmt::Binary` to be implemented. This will not work.
+
+// println!("What does Point2D look like in binary: {:b}?", point);
+
+}
+```
+그래서,  `fmt::Display`는 구현되었지만  `fmt::Binary`는 아니라면, 사용할 수 없다.  `std::fmt`는 이런  [`traits`](https://hanbum.gitbooks.io/rustbyexample/content/trait.html)을 많이 보유하고 있으며 이들은 각자 그 자신의 구현을 요구한다. 여기  [`std::fmt`](http://doc.rust-lang.org/std/fmt/)에 더 상세한 내용이 있다. So,  `fmt::Display`  has been implemented but  `fmt::Binary`  has not, and therefore cannot be used.  `std::fmt`  has many such  [`traits`](https://hanbum.gitbooks.io/rustbyexample/content/trait.html)  and each requires its own implementation. This is detailed further in  [`std::fmt`](http://doc.rust-lang.org/std/fmt/).
+
+### Activity
+
+상기 예제의 출력을 확인한 후에,  `Point2`  구조체를 견본으로 삼아 Complex 구조체를 예제에 추가해보자. 동일한 방식으로 출력하면, 출력은 아래와 같이 나오게 될 것이다: After checking the output of the above example, use the  `Point2`  struct as guide to add a Complex struct to the example. When printed in the same way, the output should be:
+
+```
+Display: 3.3 + 7.2i
+Debug: Complex { real: 3.3, imag: 7.2 }
+
+```
+
+### See also
+
+[`derive`](https://hanbum.gitbooks.io/rustbyexample/content/trait/derive.html),  [`std::fmt`](http://doc.rust-lang.org/std/fmt/),  [macros](https://hanbum.gitbooks.io/rustbyexample/content/macros.html),  [`struct`](https://hanbum.gitbooks.io/rustbyexample/content/custom_types/structs.html),  [`trait`](https://hanbum.gitbooks.io/rustbyexample/content/trait.html), and  [use](https://hanbum.gitbooks.io/rustbyexample/content/mod/use.html)
+
+
+#### 1.2.2.1 Testcase: List
+
+`fmt::Display`를 구조체에 구현하여 요소가 반드시 각기 순서대로 처리되는 것은 까다로운 일이다. 문제는 각  `write!`마다  `fmt::Result`를 생성한다는 점이다. 이에 따라  _모든_  Result에 대해 적합한 처리가 요구된다. Rust가 제공하는  `try!`  매크로가 정확히 이런 용도이다. Implementing  `fmt::Display`  for a structure where the elements must each be handled sequentially is tricky. The problem is that each  `write!`  generates a  `fmt::Result`. Proper handling of this requires dealing with  _all_  the results. Rust provides the  `try!`  macro for exactly this purpose.
+
+`try!`를  `write!`에 다음처럼 사용했다: Using  `try!`  on  `write!`  looks like this:
+
+```
+// `wrtie!`를 시도해 그게 에러인지 식별. 만약 에러라면 
+// 에러를 반환하고 다른 경우는 계속.
+// Try `write!` to see if it errors. If it errors, return
+// the error. Otherwise continue.
+try!(write!(f, "{}", value));
+
+```
+
+`try!`를 유용하게 사용하면,  `fmt::Display`를  `Vec`에 구현하는게 복잡하지 않다. With  `try!`  available, implementing  `fmt::Display`  for a  `Vec`  is straightforward:
+
+RunReset
+```
+use std::fmt; // Import the `fmt` module.
+
+// `Vec`를 보관하는 `List`란 이름의 구조체를 정의
+
+// Define a structure named `List` containing a `Vec`.
+
+struct List(Vec<i32>);
+
+impl fmt::Display for List {
+
+fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+
+// `self`를 역참조하고, 역구조화를 통해 vec에 대한 참조를 생성.
+
+// Dereference `self` and create a reference to `vec`
+
+// via destructuring.
+
+let List(ref vec) = *self;
+
+try!(write!(f, "["));
+
+// `vec`을 `v`로 반복 순차를 `count`로 반복 수행한다.
+
+// Iterate over `vec` in `v` while enumerating the iteration
+
+// count in `count`.
+
+for (count, v) in vec.iter().enumerate() {
+
+// For every element except the first, add a comma
+
+// before calling `write!`. Use `try!` to return on errors.
+
+if count != 0 { try!(write!(f, ", ")); }
+
+try!(write!(f, "{}", v));
+
+}
+
+// 열린 괄호를 닫고 fmt::Result 값을 반환.
+
+// Close the opened bracket and return a fmt::Result value
+
+write!(f, "]")
+
+}
+
+}
+
+fn main() {
+
+let v = List(vec![1, 2, 3]);
+
+println!("{}", v);
+
+}
+```
+
+### Activity
+
+프로그램을 수정하여 각 벡터의 요소에 대한 순번을 함께 출력해보자. 출력은 다음과 같이 나올 것이다: Try changing the program so that the index of each element in the vector is also printed. The new output should look like this:
+
+```
+[0: 1, 1: 2, 2: 3]
+
+```
+
+### See also
+
+[`for`](https://hanbum.gitbooks.io/rustbyexample/content/flow_control/for.html),  [`ref`](https://hanbum.gitbooks.io/rustbyexample/content/scope/borrow/ref.html),  [`Result`](https://hanbum.gitbooks.io/rustbyexample/content/std/result.html),  [`struct`](https://hanbum.gitbooks.io/rustbyexample/content/custom_types/structs.html),  [`try!`](https://hanbum.gitbooks.io/rustbyexample/content/std/result/try.html), and  [`vec!`](https://hanbum.gitbooks.io/rustbyexample/content/std/vec.html)
+
+### 1.2.3 Formatting
+
+_형식 문자_  에 의해 형식이 지정되는 것을 보았었다. We've seen that formatting is specified via a  _format string_:
+
+-   `format!("{}", foo)`  ->  `"3735928559"`
+-   `format!("0x{:X}", foo)`  ->  [`"0xDEADBEEF"`](https://en.wikipedia.org/wiki/Deadbeef#Magic_debug_values)
+-   `format!("0o{:o}", foo)`  ->  `"0o33653337357"`
+
+동일한 변수(`foo`)는 사용되는  _인자 타입_:  `X`  vs  `o`  vs  _무기입_  에 따라 다른 형식을 갖을 수 있다. The same variable (`foo`) can be formatted differently depending on which  _argument type_  is used:  `X`  vs  `o`  vs  _unspecified_.
+
+이런 형식 기능은 trait으로 구현되고 각 인자 타입마다 하나의 trait이 존재한다. 가장 범용적인 형식화 trait은  `Display`으로 이는 왼편이 무기재된:  `{}`처럼 경우를 처리한다. This formatting functionality is implemented via traits, and there is one trait for each argument type. The most common formatting trait is  `Display`, which handles cases where the argument type is left unspecified:  `{}`  for instance.
+
+RunReset
+
+```
+use std::fmt::{self, Formatter, Display};
+
+struct City {
+
+name: &'static str,
+
+// 위도
+
+lat: f32,
+
+// 경도
+
+lon: f32,
+
+}
+
+impl Display for City {
+
+// `f`는 버퍼로 이 메소드는 반드시 여기에 형식화된 문자를 써야한다.
+
+// `f` is a buffer, this method must write the formatted string into it
+
+fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+
+let lat_c = if self.lat >= 0.0 { 'N' } else { 'S' };
+
+let lon_c = if self.lon >= 0.0 { 'E' } else { 'W' };
+
+// `write!`는 `format!`과 유사하지만 버퍼(첫번째 인수)에 형식화 문자를 쓴다.
+
+// `write!` is like `format!`, but it will write the formatted string
+
+// into a buffer (the first argument)
+
+write!(f, "{}: {:.3}°{} {:.3}°{}",
+
+self.name, self.lat.abs(), lat_c, self.lon.abs(), lon_c)
+
+}
+
+}
+
+#[derive(Debug)]
+
+struct Color {
+
+red: u8,
+
+green: u8,
+
+blue: u8,
+
+}
+
+fn main() {
+
+for city in [
+
+City { name: "Dublin", lat: 53.347778, lon: -6.259722 },
+
+City { name: "Oslo", lat: 59.95, lon: 10.75 },
+
+City { name: "Vancouver", lat: 49.25, lon: -123.1 },
+
+].iter() {
+
+println!("{}", *city);
+
+}
+
+for color in [
+
+Color { red: 128, green: 255, blue: 90 },
+
+Color { red: 0, green: 3, blue: 254 },
+
+Color { red: 0, green: 0, blue: 0 },
+
+].iter() {
+
+// Switch this to use {} once you've added an implementation
+
+// for fmt::Display
+
+println!("{:?}", *color)
+
+}
+
+}
+```
+
+여기서 [모든 형식화 trait 목록][fmt tratis]을 볼 수 있고 이들의 인자 타입들은  [`std::fmt`](http://doc.rust-lang.org/std/fmt/)  문서에 있다. You can view a  [full list of formatting traits](http://doc.rust-lang.org/std/fmt/#formatting-traits)  and their argument types in the  [`std::fmt`](http://doc.rust-lang.org/std/fmt/)  documentation.
+
+### Activity
+
+`fmt::Display`  trait을 상기  `Color`  구조체에 대해 구현해 다음과 같은 출력을 보라: Add an implementation of the  `fmt::Display`  trait for the  `Color`  struct above so that the output displays as:
+
+```
+RGB (128, 255, 90) 0x80FF5A
+RGB (0, 3, 254) 0x0003FE
+RGB (0, 0, 0) 0x000000
+
+```
+
+막힐 때를 위한 두 힌트:
+
+-   [각 Color를 한번 이상 목록을 볼 필요](http://doc.rust-lang.org/std/fmt/#argument-types)
+-   [2의 넓이를 갖는 0의 여백](http://doc.rust-lang.org/std/fmt/#width)을  `:02`로 사용할 수 있다.
+-   You can  [pad with zeros to a width of 2](http://doc.rust-lang.org/std/fmt/#width)  with  `:02`. Two hints if you get stuck:
+-   You  [may need to list each color more than once](http://doc.rust-lang.org/std/fmt/#argument-types),
+-   You can  [pad with zeros to a width of 2](http://doc.rust-lang.org/std/fmt/#width)  with  `:02`.
+
+### See also
+
+[`std::fmt`](http://doc.rust-lang.org/std/fmt/)
+
+
+
+# 2 Primitives 기본형들
+
+Rust는 폭 넓게 사용할 수 있는 다양한  `기본형`들을 제공한다. 포함되는 예들:
+
+-   부호 있는 정수형:  `i8`,  `i16`,  `i32`,  `i64`  and  `isize`  (포인터 크기)
+-   부호 없는 정수형:  `u8`,  `u16`,  `u32`,  `u64`  and  `usize`  (포인터 크기)
+-   부동 소수 형:  `f32`,  `f64`
+-   `char`  형:  `'a'`,  `'α'`  같은  `'∞'`  유니코드 스칼라 값(각각 4 바이트)
+-   `bool`  형:  `true`  혹은  `false`
+-   유닛 타입  `()`, 취할 수 있는 값도 오직  `()`
+-   `[1, 2, 3]`  같은 배열
+-   `(1, true)`  같은 tuple(집합)형
+
+변수들은 항상  _타입 주해_가 달려있을 것이다. 숫자는  _접미사_  혹은  _기본형_으로 주해가 추가된다. 정수형은 기본적으로  `i32`  이고 부동형은  `f64`이다.
+
+RunReset
+
+```
+fn main() {
+
+// 변수는 타입 주해가 달릴 수 있다.
+
+let logical: bool = true;
+
+let a_float: f64 = 1.0; // 일반적인 주해
+
+let an_integer = 5i32; // 접미사 주해
+
+// 아니면 기본형이 사용될 것이다.
+
+let default_float = 3.0; // `f64`
+
+let default_integer = 7; // `i32`
+
+let mut mutable = 12; // 가변형 `i32`.
+
+// 에러! 변수의 형은 변경될 수 없다!
+
+mutable = true;
+
+}
+```
+
+### See also:
+
+[the  `std`  library](http://doc.rust-lang.org/std/)
+
+
+## 2.1 Literals and operators
+
+정수형  `1`, 부동형  `1.2`, 문자형  `'a'`, 문자열  `"abc"`, boolean형  `true`  그리고  `()`  같은 유닛 형이 리터럴로 표현될 수 있다.
+
+정수형은  `0x`,  `0o`,  `0b`  같은 접두사를 사용하여 16진수, 8진수 혹은 2진수로 표현될 수 있다.
+
+숫자 리터럴은 밑줄을 통해 가독성을 향상시킬 수 있다, 예  `1_000`은  `1000`과 같고,  `0.000_001`은  `0.000001`과 같다.
+
+우리는 컴파일러에게 우리가 사용하는 리터럴의 타입을 알려줄 필요가 있다. 여기서  `u32`는 접미어로 사용되어 부호 없는 32-비트 정수를 나타내고,  `i32`  접미어는 부호 있는 32-비트 정수형을 나타낸다.
+
+연산자의 허용과 우선 순위는  [Rust](http://doc.rust-lang.org/reference.html#operator-precedence)에 따르며  [C-like languages](https://en.wikipedia.org/wiki/Operator_precedence#Programming_languages)  와 유사하다.
+
+RunReset
+
+```
+fn main() {
+    // 정수 더하기
+    println!("1 + 2 = {}", 1u32 + 2);
+
+    // 정수 빼기 
+    println!("1 - 2 = {}", 1i32 - 2);
+    // TODO ^ `1i32`를 `1u32`로 변경하여 왜 타입이 중요한지 알아보세요.
+
+    // 짧은 boolean 논리 연산 
+    println!("true AND false is {}", true && false);
+    println!("true OR false is {}", true || false);
+    println!("NOT true is {}", !true);
+
+    // 비트 연산
+    println!("0011 AND 0101 is {:04b}", 0b0011u32 & 0b0101);
+    println!("0011 OR 0101 is {:04b}", 0b0011u32 | 0b0101);
+    println!("0011 XOR 0101 is {:04b}", 0b0011u32 ^ 0b0101);
+    println!("1 << 5 is {}", 1u32 << 5);
+    println!("0x80 >> 2 is 0x{:x}", 0x80u32 >> 2);
+
+    // 밑줄을 사용하여 가독성 올려버리기~
+    println!("One million is written as {}", 1_000_000u32);
+}
+```
+
+## 2.2 Tuples
+
+튜플은 서로 다른 타입의 값들의 집합체이다. 튜플은 괄호  `()`를 사용해 생성되고, 각 튜플 자신은 타입 선언이 되어 있는 값(T1, T2, ...)으로 T1, T2는 그의 멤버의 타입이다. 함수가 튜플을 다양한 값을 반환할 때 사용할 수 있고, 튜플은 몇 개든 값을 보관할 수 있다.
+
+RunReset
+
+```
+// 튜플은 함수 인자로도 반환 값으로도 사용될 수 있다.
+
+fn reverse(pair: (i32, bool)) -> (bool, i32) {
+
+// `let`은 튜플의 멤버를 변수에 바인드 할 때 사용된다.
+
+let (integer, boolean) = pair;
+
+(boolean, integer)
+
+}
+
+// 다음 구조체는 activity 용.
+
+#[derive(Debug)]
+
+struct Matrix(f32, f32, f32, f32);
+
+fn main() {
+
+// 서로 다른 타입 무리의 튜플
+
+let long_tuple = (1u8, 2u16, 3u32, 4u64,
+
+-1i8, -2i16, -3i32, -4i64,
+
+0.1f32, 0.2f64,
+
+'a', true);
+
+// tuple에서 색인으로 값을 추출 할 수 있다.
+
+println!("long tuple first value: {}", long_tuple.0);
+
+println!("long tuple second value: {}", long_tuple.1);
+
+// 튜플이 튜플의 멤버가 될 수 있다.
+
+let tuple_of_tuples = ((1u8, 2u16, 2u32), (4u64, -1i8), -2i16);
+
+// 튜플은 출력 가능
+
+println!("tuple of tuples: {:?}", tuple_of_tuples);
+
+let pair = (1, true);
+
+println!("pair is {:?}", pair);
+
+println!("the reversed pair is {:?}", reverse(pair));
+
+// 하나의 요소인 튜플을 만드려면, 괄호와는 별도로 쉼표를 통해 알리는게 필요하다.
+
+println!("one element tuple: {:?}", (5u32,));
+
+println!("just an integer: {:?}", (5u32));
+
+// 튜플은 바인딩을 생성해서 역구조화 할 수 있다.
+
+//tuples can be destructured to create bindings
+
+let tuple = (1, "hello", 4.5, true);
+
+let (a, b, c, d) = tuple;
+
+println!("{:?}, {:?}, {:?}, {:?}", a, b, c, d);
+
+let matrix = Matrix(1.1, 1.2, 2.1, 2.2);
+
+println!("{:?}", matrix)
+
+}
+```
+
+### Activity
+
+1.  _반복_:  `fmt::Display`  trait을 상기 예제의 Matrix  `구조체`에 추가하여 디버그 형식  `{:?}`에서 표시 형식  `{}`로 변경했을 때, 다음과 같은 출력이 되도록 해보자:
+    
+    ```
+    ( 1.1 1.2 )
+    ( 2.1 2.2 )
+    
+    ```
+    
+    [print display](https://hanbum.gitbooks.io/rustbyexample/content/hello/print/print_display.html)  예제를 참고.
+    
+2.  `transpose`을  `reverse`함수를 뼈대로 추가하며 matrix를 인자로 허용해 두 요소가 교환된 matrix를 반환하도록 하자. 예:
+    
+
+```
+println!("Matrix:\n{}", matrix);
+println!("Transpose:\n{}", transpose(matrix));
+
+```
+
+결과는 다음과 같이 출력된다:
+
+```
+Matrix:
+( 1.1 1.2 )
+( 2.1 2.2 )
+Transpose:
+( 1.1 2.1 )
+( 1.2 2.2 )
+```
+
+## 2.3 Arrays and Slices
+
+배열은 같은 타입  `T`의 개체의 집합이고, 메모리 상에 연속하여 저장된다. 배열은  `[]`  괄호를 사용하여 생성하고, 컴파일 시에 알아야 하는 그 크기는  `[T; size]`  형식의 타입 선언 부로 이뤄진다.
+
+조각들(Slices)은 배열과 유사하지만, 그들의 크기는 컴파일 시에 알 수가 없다. 대신, 조각은 두-단어 개체이고, 첫 단어는 데이터를 지칭하고 두 번째 단어는 조각의 크기이다. 조각은 타입 선언  `&[T]`을 통해 배열의 구획을 대여해 사용할 수 있다.
+
+RunReset
+
+```
+use std::mem;
+
+// 이 함수는 slice를 대여한다.
+fn analyze_slice(slice: &[i32]) {
+    println!("first element of the slice: {}", slice[0]);
+    println!("the slice has {} elements", slice.len());
+}
+
+fn main() {
+    // 고정된 크기의 배열 (타입 선언은 불필요하다.)
+    let xs: [i32; 5] = [1, 2, 3, 4, 5];
+
+    // 모든 요소들이 같은 값으로 초기화 될 수 있다.
+    let ys: [i32; 500] = [0; 500];
+
+    // 색인은 0부터 시작한다.
+    println!("first element of the array: {}", xs[0]);
+    println!("second element of the array: {}", xs[1]);
+
+    // `len` 배열의 길이를 반환한다.
+    println!("array size: {}", xs.len());
+
+    // 배열은 스택에 할당된다.
+    println!("array occupies {} bytes", mem::size_of_val(&xs));
+
+    // 배열은 자동적으로 조각으로 변환하여 대여할 수 있다.
+    println!("borrow the whole array as a slice");
+    analyze_slice(&xs);
+
+    // 조각들은 배열의 부분을 가르킬 수 있다. 
+    println!("borrow a section of the array as a slice");
+    analyze_slice(&ys[1 .. 4]);
+
+    // 색인이 범위를 넘어가면 panic으로 넘어간다. 
+    println!("{}", xs[5]);
+}
+```
+
+
+# 3 Custom types
+
+Rust 사용자 정의 데이터 타입은 주로 두 키워드를 통해 형성된다.
+
+-   `struct`: 구조체를 정의한다..
+-   `enum`: 열거형을 정의한다.
+
+상수들은  `const`혹은  `static`  키워드로 생성할 수 있다.
+
+## 3.1 Structures
+
+세 타입의 구조체를  `struct`  키워드를 사용해서 생성할 수 있다.
+
+-   일반적으로 튜플(집합)이라 이름 지어진 집합 구조체
+-   전통적인  [C 구조체들](http://en.wikipedia.org/wiki/Struct_(C_programming_language))
+-   필드를 갖지 않는 단위 구조체, 제네릭에 유용하다.
+
+RunReset
+
+```
+// 유닛 구조체
+
+struct Nil;
+
+// 튜플 구조체
+
+struct Pair(i32, f32);
+
+// 두 필드를 갖는 구조체
+
+struct Point {
+
+x: f32,
+
+y: f32,
+
+}
+
+// 구조체는 다른 구조체의 필드로 사용될 수 있다.
+
+#[allow(dead_code)]
+
+struct Rectangle {
+
+p1: Point,
+
+p2: Point,
+
+}
+
+fn main() {
+
+// `Point` 초기화;
+
+let point: Point = Point { x: 0.3, y: 0.4 };
+
+// 포인트의 필드에 접근하는 방식.
+
+println!("point coordinates: ({}, {})", point.x, point.y);
+
+// `let` 바인딩을 통해 재구조화.
+
+let Point { x: my_x, y: my_y } = point;
+
+let _rectangle = Rectangle {
+
+// 구조체 초기화는 표현문이기도 하다.
+
+p1: Point { x: my_y, y: my_x },
+
+p2: point,
+
+};
+
+// 단위 구조체 초기화
+
+let _nil = Nil;
+
+// 튜플 구조체 초기화
+
+let pair = Pair(1, 0.1);
+
+// 튜플 구조체에 접근하는 방식.
+
+println!("pair contains {:?} and {:?}", pair.0, pair.1);
+
+// 튜플 구조체의 재구조화
+
+let Pair(integer, decimal) = pair;
+
+println!("pair contains {:?} and {:?}", integer, decimal);
+
+}
+```
+
+### Activity
+
+1.  `rect_area`  함수를 추가하여 직사각형의 면적을 계산해보자. (중첩 역구조화를 시도해보자.)
+2.  `square`  함수를 추가하는데  `Point`와  `f32`를 인자로 받게 하고,  `Rectangle`을 반환할 때 가장 낮은 왼쪽 코너 point와 폭과 넓이는  `f32`로 해라.
+    
+3.  Add a function  `rect_area`  which calculates the area of a rectangle (try using nested destructuring).
+    
+4.  Add a function  `square`  which takes a  `Point`  and a  `f32`  as arguments, and returns a  `Rectangle`  with its lower left corner on the point, and a width and height corresponding to the  `f32`.
+
+### See also:
+
+[`attributes`](https://hanbum.gitbooks.io/rustbyexample/content/attribute.html)  and  [destructuring](https://hanbum.gitbooks.io/rustbyexample/content/flow_control/match/destructuring.html)
+
+
+## 3.2 Enums
+
+`enum`  키워드는 하나 혹은 몇 가지 서로 다른 변수형들로 이루어진 타입를 생성할 수 있게 한다.  `struct`로서 유효한 변수형은  `enum`으로도 유효하다.
+
+RunReset
+
+```
+// 사용하지 않는 코드 때문에 생성되는 경고를 숨기는 속성.
+
+#![allow(dead_code)]
+
+// `enum`을 누군가에게 설명하기 위해 만들어보자.
+
+// 주목할 점은, 변수에 이름과 타입 정보를 함께 기재하는 방식이다.:
+
+// `Engineer != Scientist` 그리고 `Height(i32) != Weight(i32)`.
+
+// 각각은 다르고 독립적이다.
+
+enum Person {
+
+// `enum` 는 `unit-like` 일 수 있다,
+
+Engineer,
+
+Scientist,
+
+// 튜플 구조체처럼,
+
+Height(i32),
+
+Weight(i32),
+
+// 혹은 구조체처럼.
+
+Info { name: String, height: i32 }
+
+}
+
+// `Person` enum을 인자로 받고 아무것도 반환하지 않는 함수.
+
+fn inspect(p: Person) {
+
+// `enum`의 모든 케이스를 만족하는 사용법. (반박불가)
+
+// 그래서 `match` 를 통해 나눠 살펴보자.
+
+match p {
+
+Person::Engineer => println!("Is an engineer!"),
+
+Person::Scientist => println!("Is a scientist!"),
+
+// `enum` 내부를 통해 `i` 역구조화.
+
+Person::Height(i) => println!("Has a height of {}.", i),
+
+Person::Weight(i) => println!("Has a weight of {}.", i),
+
+// `Info`를 `name` 과 `height`으로 `Info` 역구조화.
+
+Person::Info { name, height } => {
+
+println!("{} is {} tall!", name, height);
+
+},
+
+}
+
+}
+
+fn main() {
+
+let person = Person::Height(18);
+
+let amira = Person::Weight(10);
+
+// `to_owned()` string 조각에서 독립된 `String`를 만든다.
+
+let dave = Person::Info { name: "Dave".to_owned(), height: 72 };
+
+let rebecca = Person::Scientist;
+
+let rohan = Person::Engineer;
+
+inspect(person);
+
+inspect(amira);
+
+inspect(dave);
+
+inspect(rebecca);
+
+inspect(rohan);
+
+}
+```
+
+### See also:
+
+[`attributes`](https://hanbum.gitbooks.io/rustbyexample/content/attribute.html),  [`match`](https://hanbum.gitbooks.io/rustbyexample/content/flow_control/match.html),  [`fn`](https://hanbum.gitbooks.io/rustbyexample/content/fn.html), and  [`String`](https://hanbum.gitbooks.io/rustbyexample/content/std/str.html)
+
+### 3.2.1 use
+
+`use`  선언은 범위 지정이 없이 사용할 수 있다.
+
+RunReset
+
+```
+// An attribute to hide warnings for unused code.
+
+#![allow(dead_code)]
+
+enum Status {
+
+Rich,
+
+Poor,
+
+}
+
+enum Work {
+
+Civilian,
+
+Soldier,
+
+}
+
+fn main() {
+
+// `use`를 명시적으로 이름마다 사용하기에 범위 지정없이 사용 가능하다.
+
+use Status::{Poor, Rich};
+
+// `Work` 내부의 각 이름마다 자동으로 `use` 된다.
+
+use Work::*;
+
+// `Status::Poor`와 동일.
+
+let status = Poor;
+
+// `Work::Civilian`와 동일.
+
+let work = Civilian;
+
+match status {
+
+// 앞에서 명시한 `use` 으로 인해 범위에 빈 틈이 있다.
+
+Rich => println!("The rich have lots of money!"),
+
+Poor => println!("The poor have no money..."),
+
+}
+
+match work {
+
+// 범위에 빈 틈을 다시 한번 보자.
+
+Civilian => println!("Civilians work!"),
+
+Soldier => println!("Soldiers fight!"),
+
+}
+
+}
+```
+
+### See also:
+
+[`match`](https://hanbum.gitbooks.io/rustbyexample/content/flow_control/match.html)  and  [`use`](https://hanbum.gitbooks.io/rustbyexample/content/mod/use.html)
+
+### 3.2.2 C-like
+
+`enum`은 C의 enum과 유사하게 사용될 수 있다.
+
+RunReset
+
+```
+// An attribute to hide warnings for unused code.
+
+#![allow(dead_code)]
+
+// 암시적으로 식별되는 enum (0에서 시작)
+
+enum Number {
+
+Zero,
+
+One,
+
+Two,
+
+}
+
+// 명시적으로 식별 가능한 enum
+
+enum Color {
+
+Red = 0xff0000,
+
+Green = 0x00ff00,
+
+Blue = 0x0000ff,
+
+}
+
+fn main() {
+
+// `enums` 은 정수형으로 변환 사용 가능.
+
+println!("zero is {}", Number::Zero as i32);
+
+println!("one is {}", Number::One as i32);
+
+println!("roses are #{:06x}", Color::Red as i32);
+
+println!("violets are #{:06x}", Color::Blue as i32);
+
+}
+```
+
+### See also:
+
+[casting](https://hanbum.gitbooks.io/rustbyexample/content/cast.html)
+
+### 3.2.3 Testcase: linked-list
+
+`enums`는 linked-list를 만드는데 범용적으로 사용된다.
+
+RunReset
+
+```
+use List::*;
+
+enum List {
+
+// Cons: 튜플 구조체로 보관하는 것은 요소와 다음 노드 포인터
+
+Cons(u32, Box<List>),
+
+// Nil: 노드로 linked list의 끝을 식별
+
+Nil,
+
+}
+
+// 메소드는 enum에 접목될 수 있다.
+
+impl List {
+
+// 빈 리스트를 생성.
+
+fn new() -> List {
+
+// `Nil`는 `List` 타입
+
+Nil
+
+}
+
+// list를 취하고 동일 list와 새 요소를 전면에 추가해 반환.
+
+fn prepend(self, elem: u32) -> List {
+
+// `Cons` 또한 List 타입을 갖는다.
+
+Cons(elem, Box::new(self))
+
+}
+
+// list의 길이 반환.
+
+fn len(&self) -> u32 {
+
+// `self`가 일치해야 되는 이유는 이 메소드의 행위가
+
+// `self`의 변수형에 달려있기 때문이다.
+
+// `self`는 `&List`타입이고, `*self`는 `List`타입이고,
+
+// 정확한 타입 `T`이 참조 `&T`보다 match에서 선호된다
+
+match *self {
+
+// 꼬리에 대한 소유권을 얻을 수 없는 이유는 `self`가 대여중이기 때문이다;
+
+// 대신 꼬리에 대한 참조를 빌리자.
+
+Cons(_, ref tail) => 1 + tail.len(),
+
+// 기본 상태: 빈 list는 0의 길이를 갖는다.
+
+Nil => 0
+
+}
+
+}
+
+// 반환하는 것은 list를 string으로 표현한 것(heap 할당된).
+
+fn stringify(&self) -> String {
+
+match *self {
+
+Cons(head, ref tail) => {
+
+// `format!`은 `print!`와 유사하지만,
+
+// 반환하는 것은 콘솔 출력 대신 힙에 할당된 string이다.
+
+// `format!` is similar to `print!`, but returns a heap
+
+// allocated string instead of printing to the console
+
+format!("{}, {}", head, tail.stringify())
+
+},
+
+Nil => {
+
+format!("Nil")
+
+},
+
+}
+
+}
+
+}
+
+fn main() {
+
+// 빈 linked list를 만든다.
+
+let mut list = List::new();
+
+// 요소 몇 개를 추가한다.
+
+list = list.prepend(1);
+
+list = list.prepend(2);
+
+list = list.prepend(3);
+
+// list의 마지막 상태를 보여준다.
+
+println!("linked list has length: {}", list.len());
+
+println!("{}", list.stringify());
+
+}
+```
+
+### See also:
+
+[`Box`](https://hanbum.gitbooks.io/rustbyexample/content/std/box.html)  and  [methods](https://hanbum.gitbooks.io/rustbyexample/content/fn/methods.html)
+
+
+## 3.3 constants
+
+Rust는 두 다른 타입의 상수를 가졌는데 선언 시 글로벌을 포함해 모든 범위로 선언 가능하다. 양 쪽 다 명시적인 타입 주해가 필요하다.
+
+-   `const`: 변경 불가능한 값 (일반적으로).
+-   `static`:  [`'static`](https://hanbum.gitbooks.io/rustbyexample/content/scope/lifetime/static_lifetime.html)의 생명주기에 따라 가변적 변수.
+
+하나 특별한 경우는  `"string"`  리터럴이다. 직접적인 할당이  `static`  변수에 수정 없이 이뤄질 수 있는 이유는 그 타입 선언 때문이다:`&'static str`이 요구하는 생명주기는  `'static`이다. 다른 모든 참조 타입은 반드시 분명히 주해를 달아야 이들이  `'static`의 생명주기를 수행한다. 이 사항이 사소해 보이는 이유는 명시적 주해의 요구가 구분을 은닉하기 때문이다.
+
+RunReset
+
+```
+// 글로벌은 모든 다른 범위 외부에서 선언된다.
+
+static LANGUAGE: &'static str = "Rust";
+
+const THRESHOLD: i32 = 10;
+
+fn is_big(n: i32) -> bool {
+
+// 상수에 접근하는 몇 함수.
+
+n > THRESHOLD
+
+}
+
+fn main() {
+
+let n = 16;
+
+// 메인 쓰레드에서 상수에 접근
+
+println!("This is {}", LANGUAGE);
+
+println!("The threshold is {}", THRESHOLD);
+
+println!("{} is {}", n, if is_big(n) { "big" } else { "small" });
+
+// 에러! `const`는 수정될 수 없음.
+
+THRESHOLD = 5;
+
+// FIXME ^ 이 줄을 주석처리 하세요.
+
+}
+```
+
+### See also:
+
+[The  `const`/`static`  RFC](https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md),  [`'static`  lifetime](https://hanbum.gitbooks.io/rustbyexample/content/scope/lifetime/static_lifetime.html)
+
+
+
+
+
+# 14 Traits
+
+`trait`은 메소드의 모음으로 알 수 없는 타입에 정의된다:`Self`. 이들은 동일 trait에 선언된 다른 메소드에 접근할 수 있다.
+
+Trait은 모든 데이터 타입에 구현될 수 있다. 아래 예제에서, 우리는  `Animal`을 정의하고, 메소드의 그룹을 만든다.  `Animal`  `trait`이  `Sheep`  데이터 타입으로 구현되어,  `Sheep`으로서  `Animal`의 메소드를 사용할 수 있게 해준다.
+
+RunReset
+
+```
+struct Sheep { naked: bool, name: &'static str }
+
+trait Animal {
+
+// 정적 메소드 선언; `Self`는 구현자 타입을 참조한다.
+
+fn new(name: &'static str) -> Self;
+
+// 동적 메소드 선언; 이들은 string을 반환 할 것이다.
+
+fn name(&self) -> &'static str;
+
+fn noise(&self) -> &'static str;
+
+// Trait은 메소드의 기본 정의를 제공할 수 있다.
+
+fn talk(&self) {
+
+println!("{} says {}", self.name(), self.noise());
+
+}
+
+}
+
+impl Sheep {
+
+fn is_naked(&self) -> bool {
+
+self.naked
+
+}
+
+fn shear(&mut self) {
+
+if self.is_naked() {
+
+// 구현자 메소드는 구현자의 trait 메소드를 사용할 수 있다.
+
+println!("{} is already naked...", self.name());
+
+} else {
+
+println!("{} gets a haircut!", self.name);
+
+self.naked = true;
+
+}
+
+}
+
+}
+
+// `Animal` trait을 `Sheep`에 구현.
+
+impl Animal for Sheep {
+
+// `Self`는 구현자 타입 : `Sheep`
+
+fn new(name: &'static str) -> Sheep {
+
+Sheep { name: name, naked: false }
+
+}
+
+fn name(&self) -> &'static str {
+
+self.name
+
+}
+
+fn noise(&self) -> &'static str {
+
+if self.is_naked() {
+
+"baaaaah?"
+
+} else {
+
+"baaaaah!"
+
+}
+
+}
+
+// 기본 trait 메소드는 재정의 될 수 있다.
+
+fn talk(&self) {
+
+// For example, we can add some quiet contemplation.
+
+println!("{} pauses briefly... {}", self.name, self.noise());
+
+}
+
+}
+
+fn main() {
+
+// 이 경우에는 타입 주해가 필요하다.
+
+let mut dolly: Sheep = Animal::new("Dolly");
+
+// TODO ^ 타입 주해를 제거해보세요.
+
+dolly.talk();
+
+dolly.shear();
+
+dolly.talk();
+
+}
+```
+
+[  
+](https://hanbum.gitbooks.io/rustbyexample/content/scope/lifetime/elision.html)
+
+
+## 14.1 Derive
+
+컴파일러는  `#[derive]`  [속성(attribute)](https://hanbum.gitbooks.io/rustbyexample/content/attribute.html)를 통해 몇 trait를 위한 기본적인 구현을 제공할 수 있다. 이들 trait들은 더 복잡한 동작이 요구될 때 수동으로 구현될 수 있다.
+
+다음 목록들은 derive 가능한 traits이다:
+
+-   trait 비교자:  [`Eq`](http://doc.rust-lang.org/std/cmp/trait.Eq.html),  [`PartialEq`](http://doc.rust-lang.org/std/cmp/trait.PartialEq.html),  [`Ord`](http://doc.rust-lang.org/std/cmp/trait.Ord.html),  [`PartialOrd`](http://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
+-   [`Clone`](http://doc.rust-lang.org/std/clone/trait.Clone.html),  `&T`를 복사하여  `T`  생성하려면.
+-   [`Copy`][copy], 'move 의미문' 대신 'copy 의미문' 타입으로 주려면.
+-   [`Hash`](http://doc.rust-lang.org/std/hash/trait.Hash.html),  `&T`에서 해시를 계산하려면.
+-   [`Default`](http://doc.rust-lang.org/std/default/trait.Default.html), 데이터 타입의 빈 인스턴스를 만드려면.
+-   `Zero`, 숫자 데이터 타입의 빈 인스턴스를 만드려면.
+-   [`Debug`](http://doc.rust-lang.org/std/fmt/trait.Debug.html),  `{:?}`  형식자를 사용해 값을 형식화하려면.
+
+RunReset
+
+```
+// 비교할 수 있는 튜플 구조체 `Centimeters`
+
+#[derive(PartialEq, PartialOrd)]
+
+struct Centimeters(f64);
+
+// 출력할 수 있는 튜플 구조체 `Inches`
+
+#[derive(Debug)]
+
+struct Inches(i32);
+
+impl Inches {
+
+fn to_centimeters(&self) -> Centimeters {
+
+let &Inches(inches) = self;
+
+Centimeters(inches as f64 * 2.54)
+
+}
+
+}
+
+// 추가 속성이 없는 튜플 구조체 `Seconds`
+
+struct Seconds(i32);
+
+fn main() {
+
+let _one_second = Seconds(1);
+
+// 에러: `Seconds`는 출력될 수 없다. `Debug` trait이 구현되지 않았다.
+
+//println!("One second looks like: {:?}", _one_second);
+
+// TODO ^ 해당 라인의 주석을 제거해보세요.
+
+// 에러: `Seconds`는 비교될 수 없다. `PartialEq` trait이 구현되지 않았다.
+
+//let _this_is_true = (_one_second == _one_second);
+
+// TODO ^ 해당 라인의 주석을 제거해보세요.
+
+let foot = Inches(12);
+
+println!("One foot equals {:?}", foot);
+
+let meter = Centimeters(100.0);
+
+let cmp =
+
+if foot.to_centimeters() < meter {
+
+"smaller"
+
+} else {
+
+"bigger"
+
+};
+
+println!("One foot is {} than one meter.", cmp);
+
+}
+```
+
+### See also:
+
+[`derive`](https://doc.rust-lang.org/reference.html#derive)
+
+[copy]:
+
+
+## 14.2 Operator Overloading
+
+Rust에서, 많은 연산자들이 trait을 통해 오버로드 될 수 있다. 즉, 일부 연산자들은 그들의 입력 인수에 맞춰 다른 작업을 수행할 수 있게 된다. 이게 가능한 이유는 연산자가 메소드 호출하는 문법적 (개)꿀이라서다. 예를 들어,  `+`  연산자가  `a + b`에선  `add`메소드 (`a.add(b)`처럼)를 호출한다.
+
+`Add`  같은 오버로드 연산자 trait 목록은  [여기](http://doc.rust-lang.org/core/ops/)에서 확인할 수 있다.
+
+RunReset
+
+```
+use std::ops;
+
+struct Foo;
+
+struct Bar;
+
+#[derive(Debug)]
+
+struct FooBar;
+
+#[derive(Debug)]
+
+struct BarFoo;
+
+// `std::ops::Add` trait은 `+`의 기능을 지정하는데 사용된다.
+
+// 여기서 우리는 `Bar` 타입인 RHS를 가진 trait을 추가해 `Add`를 만든다.
+
+// 다음에 오는 블럭이 구현하는 연산: Foo + Bar = FooBar
+
+impl ops::Add<Bar> for Foo {
+
+type Output = FooBar;
+
+fn add(self, _rhs: Bar) -> FooBar {
+
+println!("> Foo.add(Bar) was called");
+
+FooBar
+
+}
+
+}
+
+// 타입을 뒤바꿔서 교환 없이 구현의 추가를 끝냈다.
+
+// 여기서 우리는 `Foo` 타입인 RHS를 가진 trait을 추가해 `Add`를 만든다.
+
+// 이 블럭이 구현하는 연산: Bar + Foo = BarFoo
+
+impl ops::Add<Foo> for Bar {
+
+type Output = BarFoo;
+
+fn add(self, _rhs: Foo) -> BarFoo {
+
+println!("> Bar.add(Foo) was called");
+
+BarFoo
+
+}
+
+}
+
+fn main() {
+
+println!("Foo + Bar = {:?}", Foo + Bar);
+
+println!("Bar + Foo = {:?}", Bar + Foo);
+
+}
+```
+
+### See Also
+
+[Add](http://doc.rust-lang.org/core/ops/trait.Add.html),  [Syntax Index](https://doc.rust-lang.org/book/syntax-index.html)
+
+
+## 14.3 Drop
+
+[`Drop`](https://doc.rust-lang.org/std/ops/trait.Drop.html)  trait는 딱 하나의 메소드  `drop`만 있고, 이는 객체가 범위에서 벗어날 때 자동으로 호출된다.  `Drop`  trait의 주 사용 목적은 인스턴스 자체에 구현된 자원을 해제하는 것이다.
+
+`Box`,  `Vec`,  `String`,  `File`  그리고  `Process`  들이 일부 예로  `Drop`  trait을 자원 해제를 위해 구현하는 타입이다.  `Drop`  trait 또한 수작업으로 구현되어 모든 사용자 정의 타입에 사용될 수 있다.
+
+다음 예제는  `drop`  함수에 콘솔 출력을 추가하여 호출될 때 알 수 있게 한다.
+
+RunReset
+
+```
+struct Droppable {
+    name: &'static str,
+}
+
+// `drop`의 간단한 구현을 추가하여 콘솔에 출력한다.
+impl Drop for Droppable {
+    fn drop(&mut self) {
+        println!("> Dropping {}", self.name);
+    }
+}
+
+fn main() {
+    let _a = Droppable { name: "a" };
+
+    // block A
+    {
+        let _b = Droppable { name: "b" };
+
+        // block B
+        {
+            let _c = Droppable { name: "c" };
+            let _d = Droppable { name: "d" };
+
+            println!("Exiting block B");
+        }
+        println!("Just exited block B");
+
+        println!("Exiting block A");
+    }
+    println!("Just exited block A");
+
+    // 변수는 `drop`함수를 사용하여 수동으로 삭제될 수 있다.
+    drop(_a);
+    // TODO ^ 해당 라인을 주석 처리해보세요.
+
+    println!("end of the main function");
+
+    // `_a`는 이미 `drop`(수동으로)되었으므로 여기서 다시 `drop`되지 *않을 것*이다.
+}
+```
+
+## 14.4 Iterators
+
+`Iterator`  trait은 배열과 같은 콜렉션에 반복자를 구현하기 위해 사용된다.
+
+trait은  `next`  요소를 정의하는 메소드만 필요하며, 이는 수동으로  `impl`  블록을 정의되거나 자동으로 정의된다 (배열이나 범위들처럼).
+
+편의성을 주 관점으로 일반적 상황에서,  `for`  구문은 어떤 콜렉션을 반복자로 변환할 때  [`.into_iterator()`](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html)  메소드를 사용한다.
+
+아래 예제에서 보여주는 것 외에  `Iterator`  trait을 사용하여 접근할 수 있는 메소드는  [여기](http://doc.rust-lang.org/core/iter/trait.Iterator.html)에서 찾을 수 있다.
+
+RunReset
+
+```
+struct Fibonacci {
+
+curr: u32,
+
+next: u32,
+
+}
+
+// `Fibonacci`에 대한 `Iterator` 구현
+
+// `Iterator` trait은 `next`요소를 정의하는 메소드만 필요.
+
+impl Iterator for Fibonacci {
+
+type Item = u32;
+
+// 여기서 `.curr`과 `.next`를 사용하여 시퀀스를 정의한다.
+
+// 반환 타입은 `Option`이다:
+
+// *`Iterator`가 끝나면 `None`이 반환된다.
+
+// *그렇지 않으면, 다음 값은 `Some`으로 포장되어 반환된다.
+
+fn next(&mut self) -> Option<u32> {
+
+let new_next = self.curr + self.next;
+
+self.curr = self.next;
+
+self.next = new_next;
+
+// 피보나치 연속은 끝나지 않으므로
+
+// `None`은 절대 반환되지 않고 `Some`이 늘 반환된다.
+
+Some(self.curr)
+
+}
+
+}
+
+// 피보나치 반복 생성자를 반환.
+
+fn fibonacci() -> Fibonacci {
+
+Fibonacci { curr: 1, next: 1 }
+
+}
+
+fn main() {
+
+// `0...3`은 0, 1, 그리고 2를 생성하는 `Iterator`이다.
+
+let mut sequence = 0..3;
+
+println!("Four consecutive `next` calls on 0..3");
+
+println!("> {:?}", sequence.next());
+
+println!("> {:?}", sequence.next());
+
+println!("> {:?}", sequence.next());
+
+println!("> {:?}", sequence.next());
+
+// `for`는 `None`을 반환 할 때까지 `Iterator`를 통해 동작한다.
+
+// 각 `Some`값은 포장을 벗겨 변수에 바인드한다(여기서는, `i`).
+
+println!("Iterate through 0..3 using `for`");
+
+for i in 0..3 {
+
+println!("> {}", i);
+
+}
+
+// `take(n)`메소드는 `Iterator`를 `n`번째 항까지로 경감한다.
+
+println!("The first four terms of the Fibonacci sequence are: ");
+
+for i in fibonacci().take(4) {
+
+println!("> {}", i);
+
+}
+
+// `skip(n)`메소드는 처음부터 `n`항까지 버려서 `Iterator`를 단축한다.
+
+println!("The next four terms of the Fibonacci sequence are: ");
+
+for i in fibonacci().skip(4).take(4) {
+
+println!("> {}", i);
+
+}
+
+let array = [1u32, 3, 3, 7];
+
+// `iter`메소드는 배열/조각의 `Iterator`를 생성한다.
+
+println!("Iterate the following array {:?}", &array);
+
+for i in array.iter() {
+
+println!("> {}", i);
+
+}
+
+}
+```
+
+[  
+](https://hanbum.gitbooks.io/rustbyexample/content/trait/drop.html)
+
+
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEzMzM1OTQyMDYsMTQyNjQ4ODQ5LDMyMT
+YwNzkyLC01MDE4Mjk2MTAsLTIwMTcyNTc3NTYsLTcwOTgxNDUy
+OCwxMzkxMjAyMTMwLDE4ODkwMzA1MiwtMTY2NTMzMzQzOSw1Mj
+UzOTIzMzIsMTg0MDQ3ODI0MCwtMTU3Mzg1NDI1MiwxMTYwODMy
+MjIxLDczMDk5ODExNl19
+-->

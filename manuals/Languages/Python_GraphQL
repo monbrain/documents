@@ -1,0 +1,1339 @@
+# [Integrate GraphQL into Python using Ariadne](https://blog.logrocket.com/integrate-graphql-python-using-ariadne/)
+
+August 4, 2021  7 min read
+
+![](https://blog.logrocket.com/wp-content/uploads/2021/08/integrate-graphql-python-ariadne.png)
+
+As a frontend developer and a long-time Jamstacker, I’ve had more than enough time to be frustrated with how we use APIs. The REST protocol seemed like a step in the right direction (and it was), but I still ungratefully complained about its limitations despite the improvement.
+
+So when I heard about GraphQL, I was blown away.
+
+The idea is simple: the API itself defines what kind of data it can understand and exposes a single endpoint to the user. Then the user provides a query to that endpoint that looks similar to JSON without all the pesky values, quotes, and commas.
+
+The API returns a JSON version of that query with the values filled out with all the data you asked for. It’s an incredibly simple idea, but it solves practically every problem that I’ve ever had with APIs.
+
+## What is Ariadne?
+
+Usually, GraphQL APIs are created with JavaScript, but my first love is Python, which is why I looked at Ariadne.  [Ariadne](https://ariadnegraphql.org/)  is a Python library that helps you create a GraphQL API without the extra weight.
+
+In this article, I’ll document the process of making an Ariadne GraphQL API in Python 3.8, which will give the user access to a single simple array/dictionary structure.
+
+## Getting started with Ariadne
+
+I’m going to assume that  [you already have Python set up on your computer](https://www.python.org/downloads/)  and that you’ve already installed Ariadne with  `pip3 install ariadne`.
+
+I want to give you a little notice here, though: stick with a single data source (like one database, one layer of business logic, or one Python dict). When I first heard about GraphQL, my first thought was that I could use it to combine all the other APIs I’m using into a single endpoint — that I could get rid of all the inconsistencies of REST and SOAP APIs and get all the data and functionality I needed without any trouble.
+
+This is possible, but it’s way more trouble than it’s worth to roll your own. This concept is called an API Mesh, and it was pioneered by the folks at  [TakeShape.io](http://takeshape.io/). If you’re interested in learning more about TakeShape, feel free to check out their  [new docs page](https://app.takeshape.io/docs/), but I’m going to stick with exposing a single data source here for simplicity.
+
+## How Ariadne works
+
+Now that the boilerplate is out of the way, let’s see how Ariadne works. You can  [follow along with their quick-start guide](https://ariadnegraphql.org/docs/intro), but I’m going to simplify it. It goes something like this:
+
+First, use GraphQL’s special schema definition language to define a type. It’s similar to a TypeScript interface, where you define the keys of an object and the types of the values of each key.
+
+Every app in Ariadne needs a type called  `Query`, as that’s going to be compared against the input of the program, so let’s make that now. It’ll look something like this:
+
+type Query  { hello:  String!  }
+
+That’s a really basic definition. Simply put, we define a type called  `Query`. It has one key, called  `hello`, which will always be a string. And here’s a bonus: the  `!`at the end of that line means that  `hello`  will always be in an object if the object conforms to this type. If you left out the exclamation point, then  `hello`  would be optional.
+
+Now, in our Python file (I’m going to call it  `endpoint.py`), we’re going to stick that type definition into a string and pass it into the  `gql`  function of Ariadne. So far, our file looks like this:
+
+from ariadne import gql
+
+typedefs =  """
+     type Query {
+           hello: String!
+     }
+""" typedefs = gql(type_defs)
+
+That’s going to validate our type definition and throw an error if we didn’t write it correctly.
+
+Next, Ariadne wants us to create an instance of the  `ObjectType`  class and pass in the name of our type. In short, this will be the Python representation of the type we’re making.
+
+We’re also going to add some boilerplate at the end and move our type definition in there. Now  `endpoint.py`  looks like this:
+
+from ariadne import  ObjectType, gql, make_executable_schema from ariadne.asgi import  GraphQL basetype =  ObjectType("Query")  # there is a shortcut for this, but explicit is better than implicit type_defs =  """
+     type Query {
+           hello: String!
+     }
+""" app =  GraphQL( make_executable_schema( gql(type_defs), basetype ), debug=True  )
+
+Ariadne’s main purpose is to scan over the input query, and, for each key, run a resolver function to get the value of that key. It does this with decorators, a cool Pythonic way of giving your function to Ariadne without more boilerplate. Here’s our  `endpoint.py`  with a resolver function for our  `hello`  key:
+
+from ariadne import  ObjectType, gql, make_executable_schema from ariadne.asgi import  GraphQL basetype =  ObjectType("Query") type_defs =  """
+      type Query {
+            hello: String!
+      }
+"""  @basetype.field("hello")  def resolve_hello(obj, info):  return  "Hello world!" app =  GraphQL( makeexecutableschema( gql(type_defs), basetype ), debug=True  )
+
+That’s pretty much it. Ariadne has many fascinating and useful features (seriously,  [ruffle through their docs](https://ariadnegraphql.org/docs/intro)), but that’s all you need to get started and to understand how it works. If you’re interested in testing this, though, it needs to go on a server.
+
+You can temporarily make your local machine into one using  [Uvicorn](https://www.uvicorn.org/). In short, you’d want to install with  `pip install uvicorn`,  `cd`  to the folder where your  `endpoint.py is`, and run  `uvicorn endpoint:app.`  Then, visit  `127.0.0.1:8000`, where you’ll see Ariadne’s GraphQL interface. It looks cool:
+
+![Ariadne GraphQL Uvicorn Integration](https://blog.logrocket.com/wp-content/uploads/2021/08/image1.png)
+
+There’s just one caveat: the intro doc page that I roughly followed here makes a good point about halfway through. “Real-world resolvers are rarely that simple: they usually read data from some source such as a database, process inputs, or resolve value (sic) in the context of a parent object.”
+
+Translation into simple English? “Our API does absolutely nothing useful. You give it a query and it tells you,  `Hello world!`, which is neither funny nor helpful. The resolver function we created needs to take input, get data from somewhere, and return a result to be worth much.”
+
+Well, now that we’ve got our boilerplate, let’s try to make this API worth its weight in salt by accessing a rudimentary database made out of Python arrays and dictionaries.
+
+## Building a sample GraphQL API
+
+Hmm… what shall we build? Here’s what I’m thinking:
+
+-   The input query should take the slugged name of one of my favorite sitcoms as a parameter
+-   The query will return a  `Sitcom`  type, which should have fields for the name (which would be a string),  `number_of_seasons`  (Int), and characters (an array of characters)
+-   The character type will have`first_name`,  `last_name`, and  `actor_name`  fields, all of them strings
+
+This sounds doable! We’ll only have two types (`sitcom`  and  `character`), and the data that we’re exposing can easily be stored in a Python dictionary structure. Here are the dicts I’ll be using:
+
+characters =  {  "jeff-winger":  {  "first_name":  "Jeffrey",  "last_name":  "Winger",  "actor_name":  "Joel McHale"  },  "michael-scott":  {  "first_name":  "Michael",  "last_name":  "Scott",  "actor_name":  "Steve Carell"  },  ...  } sitcoms =  {  "office":  {  "name":  "The Office (US)",  "number_of_seasons":  9,  # but let's be real, 7  "characters":  [  "michael-scott",  "jim-halpert",  "pam-beesly",  "dwight-schrute",  ...  ]  },  "community":  {  "name":  "Community",  "number_of_seasons":  6,  #sixseasonsandamovie  "characters":  [  "jeff-winger",  "britta-perry",  "abed-nadir",  "ben-chang",  ...  ]  },  ...  }
+
+We’ll want to define our types just like we did earlier with our  `query`  type. Let’s try this:
+
+query =  ObjectType("Query") sitcom =  ObjectType("Sitcom") character =  ObjectType("Character") type_defs =  """
+    type Query {
+        result(name: String!): Sitcom
+    }
+
+    type Sitcom {
+        name: String!
+        number_of_seasons: Int!
+        characters: [Character!]!
+    }
+
+    type Character {
+        first_name: String!
+        last_name: String!
+        actor_name: String!
+    }
+""" app =  GraphQL( make_executable_schema( gql(type_defs), query, sitcom, character ), debug=True  )
+
+In parentheses is the  `query`  type, which is an argument. We’re passing in a name (which will always be a string) to the`result`  key of the  `query`  type, and that’s going to be sent to our resolver. I’ll jump into this a bit more in a second.
+
+In case you’re wondering about that  `[Character!]!`  bit, that just means that the array is required, as well as the characters inside of it. In practice, the array must be present and must have characters in it.
+
+Also, in the boilerplate at the end, we’re passing in all three types to the  `make_executable_schema`  function. That tells Ariadne that it can start using them both. In fact, we could add as many types as we want there.
+
+So, here’s how this will work. The client will send a request that looks something like this:
+
+<code>{
+      result(name:"community")
+}</code>
+
+The server is going to take that, send  `"community"`  to the resolver for the result field, and return not just any sitcom, but the right sitcom. Let’s build those resolvers now.
+
+Here’s our full  `endpoint.py`:
+
+from ariadne import  ObjectType, gql, make_executable_schema from ariadne.asgi import  GraphQL  import json with open('sitcoms.json')  as sitcom_file: sitcom_list = json.loads(sitcom_file.read())  with open('characters.json')  as character_file: character_list = json.loads(character_file.read()) query =  ObjectType("Query") sitcom =  ObjectType("Sitcom") character =  ObjectType("Character") type_defs =  """
+    type Query {
+        result(name: String!): Sitcom
+    }
+
+    type Sitcom {
+        name: String!
+        number_of_seasons: Int!
+        characters: [Character!]!
+    }
+
+    type Character {
+        first_name: String!
+        last_name: String!
+        actor_name: String!
+    }
+"""  @query.field("result")  def getSitcom(*_, name):  return sitcom_list[name]  if name in sitcom_list else  None  @sitcom.field("characters")  def getCharacters(sitcom, _): characters =  []  for name in sitcom["characters"]: characters.append(character_list[name]  if name in character_list else  None)  return characters
+
+app =  GraphQL( make_executable_schema( gql(type_defs), query, sitcom, character ), debug=True  )
+
+That’s the whole program! We’re using the data in the JSON files to fill out responses to the input GraphQL queries.
+
+## Additional benefits to using Ariadne
+
+We don’t have to be done though! Here are some ideas off the top of my head about what to do next.
+
+We were just using a rudimentary JSON data storage structure, which is bad practice but reasonable for a sample application like this one. For anything larger than this toy app, we’d want to use a more rugged data source like a proper database.
+
+We could have a MySQL database with a table each for sitcoms and characters, and fetch that data in the resolver functions. Also, queries themselves are only half of what we can do with GraphQL and Ariadne. Mutations are the other half. They let you update existing records, add new ones, or potentially delete rows.  [These are fairly easy to set up in Ariadne](https://ariadnegraphql.org/docs/mutations).
+
+Of course, creating an API to keep track of sitcoms and characters is a bit pointless, but it’s a fun experiment. This all could be used more productively if we built a GraphQL service like this around more useful data. Say you’re running an existing REST API — why not serve that data with GraphQL?
+
+Finally, when we create a GraphQL API, it’s often tempting to try to fetch data from a database of our own and merge in data from an external source, such as some third-party API. You can do this by making requests to those external APIs over HTTP in the resolvers, but that’ll significantly reduce your program and leave you to worry about edge cases and error handling yourself.
+
+Believe me, it’s more trouble than it’s worth. However, to take this project further, you could make your Ariadne app fetch data from your internal database, plug the API you just created into an API mesh (like TakeShape), and then combine it with some other third-party service there.
+
+That way, all the difficult merging stuff is the mesh’s problem, not yours. I’ve done this several times and it’s gratifying to see it all come together.
+
+## Conclusion
+
+There’s not much to this. I tried to explain as much detail as I could just in case you want to branch off and explore any of those points more, but the technique is rather simple.
+
+You can build pretty much anything you can dream up. You’ll probably run into some roadblocks, but  [Ariadne has a wonderful community on GitHub ready to help](https://github.com/mirumee/ariadne/discussions/). I wish you the very best on your Ariadne adventures!
+
+## Monitor failed and slow GraphQL requests in production
+
+While GraphQL has some features for debugging requests and responses, making sure GraphQL reliably serves resources to your production app is where things get tougher. If you’re interested in ensuring network requests to the backend or third party services are successful,  [try LogRocket](https://logrocket.com/signup).[![](https://files.readme.io/69aa835-Image_2019-11-09_at_1.28.05_PM.png)![LogRocket Dashboard Free Trial Banner](https://blog.logrocket.com/wp-content/uploads/2017/03/1d0cd-1s_rmyo6nbrasp-xtvbaxfg.png)](https://logrocket.com/signup)[https://logrocket.com/signup/](https://logrocket.com/signup/)
+
+[LogRocket](https://logrocket.com/signup)  is like a DVR for web and mobile apps, recording literally everything that happens on your site. Instead of guessing why problems happen, you can aggregate and report on problematic GraphQL requests to quickly understand the root cause. In addition, you can track Apollo client state and inspect GraphQL queries' key-value pairs.
+
+LogRocket instruments your app to record baseline performance timings such as page load time, time to first byte, slow network requests, and also logs Redux, NgRx, and Vuex actions/state.  [Start monitoring for free](https://logrocket.com/signup).
+----
+
+
+# [Using GraphQL with Python – A Complete Guide](https://www.apollographql.com/blog/graphql/python/complete-api-guide/)
+
+[![](https://www.apollographql.com/blog/static/shadid_profile-ac5d142dee70afd284888e760b1b0cf9.jpg)](https://www.apollographql.com/blog/author/shadidhaque)
+
+##### Shadid Haque
+
+[BACKEND](https://www.apollographql.com/blog/backend/1)[HOW-TO](https://www.apollographql.com/blog/how-to/1)[PYTHON](https://www.apollographql.com/blog/graphql/python/1)
+
+![](https://www.apollographql.com/blog/static/using-graphql-python-guide-1-c1c26682f80f8f80cc749174f9820bd4.png)
+
+LAST UPDATED  AUGUST 12, 2021
+
+Known for its ease of use and simplicity, Python is one of the most beloved general-purpose programming languages. And GraphQL, a declarative query language for APIs and server runtimes, pairs quite nicely with Python. Unfortunately, there are very few comprehensive learning materials out there that give you a step-by-step breakdown of how to use GraphQL with Python. This article will go over everything you need to know to get up and running with GraphQL API using Python, Flask, and Ariadne.
+
+> You can find the complete code for this post  [on GitHub](https://github.com/Shadid12/flask-graphql).
+
+## Learning objectives
+
+By the end of the article, you should know how to:
+
+-   Set up a Python web server with Flask
+-   Use the Ariadne library to implement GraphQL
+-   Compose a GraphQL Schema
+-   Perform queries and mutations against a Python GraphQL API
+
+> **GraphQL vs REST: What problem does GraphQL solve?** If you are completely new to GraphQL and want to know how it differs from a traditional REST API, I recommend reading “[What is GraphQL? GraphQL introduction](https://www.apollographql.com/blog/what-is-graphql-graphql-introduction/)“.
+
+## Setting up GraphQL with Python (Flask)
+
+​​Let’s dive into creating our very own GraphQL API with Python. For this demo, we will be using the Flask​ web server. If you are more accustomed to other frameworks such as Django,​ you can adapt this codebase to your framework. The basic concepts of GraphQL and Python are more or less the same across various frameworks.
+
+### **Creating a new python virtual environment**
+
+​​First of all, let’s create a new project and change the directory to the project folder.
+
+```bash
+mkdir graphql-python-api
+cd graphql-python-api
+```
+
+In Python, best practices are to use a  _virtual environment_. We can create a new virtual environment by running the following command.
+
+```bash
+python3 -m venv myapp
+```
+
+Next, we have to activate the virtual environment. If you are on a Linux or Mac machine you can run the  `source`  command with the path of the activate script like shown below.
+
+```bash
+source myapp/bin/activate
+```
+
+And if you’re on a windows machine, you can run the following command to activate the virtual environment.
+
+```bash
+myapp/bin/activate.bat
+```
+
+### Installing dependencies
+
+Our application relies on the following dependencies:
+
+-   Flask — this is the web server that we’ll use
+-   Flask-SQLAlchemy — an ORM that makes it easier for us to communicate with our SQL database
+-   Ariadne — a library for GraphQL python integration
+-   Flask-Cors — an extension for Cross Origin Resource Sharing
+
+You can install them all using a single command:
+
+```bash
+pip install flask ariadne flask-sqlalchemy flask-cors
+```
+
+## Up and running with a simple Flask app
+
+We will make the following directory structure. The first file we’ll start working with is the  `api/__init__.py`  file, which will hold all the API-related configuration code.
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620109018224_image.png)
+
+For now, let’s populate the  `api/__init__.py`  with the following code.
+
+```python
+from flask import Flask
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/')
+def hello():
+    return 'My First API !!'
+```
+
+Our  `app.py`  file is what’s responsible for actually starting the flask app. Let’s import the flask API instance using the following code:
+
+```python
+from api import app
+```
+
+Next, we tell Flask to start the application by looking at our  `app.py`  file. In the command line, we can accomplish this by setting the  `FLASK_APP`  environment variable.
+
+```bash
+export FLASK_APP=app.py
+```
+
+Finally, we run the app by running the  `flask run`  command.
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620109389909_image.png)
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620109539044_image.png)
+
+Great! We can see our Flask app up and running. Before we enable it to use GraphQL, lets hook up a database and define some tables.
+
+### Adding a database
+
+For this example, we are going to be using a Postgres DB instance. I like [ElephantSQL](https://www.elephantsql.com/), a hosted SQL database, but you can use any SQL database you like.
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620516579496_image.png)
+
+In ElephantSQL, once the instance is provisioned on the cloud, we can see the database server information. If you’re using ElephantSQL, copy the DB URL as shown below, otherwise, copy the URL to where your SQL database is – whether it’s running locally on your machine or with another hosted SQL database service.
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620516927458_image.png)
+
+We can now add this database url to the __**init__**.py as shown below.
+
+```python
+
+from flask import Flask
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+CORS(app)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://mycreds.db.elephantsql.com:5432/ngimluxm"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(app)
+
+@app.route('/')
+def hello():
+    return 'My First API !!'
+```
+
+Restart the server and make sure everything is working as usual.
+
+### Creating a model
+
+Next, let’s create our first model.
+
+In our database, we are going to have a  `Post`  table. A  `Post`  will have a unique  `id`, a  `title`,  `description`, and the  `date`  it was created.
+
+Create an  `api/models.py`  file and a new class called  `Post`  as shown below.
+
+```python
+from app import db
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    description = db.Column(db.String)
+    created_at = db.Column(db.Date)
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "created_at": str(self.created_at.strftime('%d-%m-%Y'))
+        }
+```
+
+We can update our  `app.py`  file to include the current models and database settings.
+
+```python
+from api import app, db
+from api import models
+```
+
+At this point, we can use the Python interactive terminal to create our table and add some records to it. Let’s do that.
+
+First, let’s open the Python terminal by running the following command.
+
+```bash
+python
+```
+
+Once inside the Python terminal, run the following command to create our table.
+
+```python
+>>> from app import db
+>>> db.create_all()
+```
+
+On the first line, we import the database instance and on the second, we run the  `create_all()`  method to create related tables based on the model we specified earlier.
+
+> Troubleshoot: If you are using Mac for development, you might run into an issue where python can not find  `psycopg`. To resolve this, run  `pip install psycopg2-binary`  within your virtual environment.
+
+To verify whether the table got created or not, hop into the  `psql`  database console and run the following  `SQL`  query to get the name of all available tables.
+
+```sql
+SELECT table_name
+  FROM information_schema.tables
+ WHERE table_schema='public'
+   AND table_type='BASE TABLE';
+```
+
+Let’s add a few posts to the  `Post`  table directly from Python command prompt.
+
+```python
+>>> from datetime import datetime
+>>> from api.models import Post
+>>> current_date = datetime.today().date()
+>>> new_post = Post(title="A new morning", description="A new morning details", created_at=current_date)
+>>> db.session.add(new_post)
+>>> db.session.commit()
+```
+
+With a working web API connected to the database, we’re ready to integrate GraphQL into the server.
+
+## Writing the GraphQL Schema
+
+A schema in GraphQL describes the shape of our data graph. It is the core of any GraphQL server implementation. It defines the functionality available to the client applications that consumes the API. GraphQL has its own language (GraphQL Schema Definition Language) that is used to write the schema. The schema determines what resources the clients can query and update.
+
+> [Learn more about GraphQL schemas in the “Schema basics” section from the docs.](https://www.apollographql.com/docs/apollo-server/schema/schema/)
+
+Let’s go ahead and create a new file called  `schema.graphql`  in our root directory. Copy and paste the following code in the file.
+
+```graphql
+schema {
+    query: Query
+}
+
+type Post {
+    id: ID!
+    title: String!
+    description: String!
+    created_at: String!
+}
+
+type PostResult {
+    success: Boolean!
+    errors: [String]
+    post: Post
+}
+
+type PostsResult {
+    success: Boolean!
+    errors: [String]
+    post: [Post]
+}
+
+type Query {
+    listPosts: PostsResult!
+    getPost(id: ID!): PostResult!
+}
+```
+
+First of all, we have a schema type defined in the top. This determines what type of operations clients can perform. For now, clients can only perform  `Query`  operations.
+
+Next, observe the  `Post`  type. You will notice that the structure of the  `Post`  type is identical to our  `Post`  model that we defined earlier. The  `PostsResult`  type defines the structure of the response object when we query for all the posts in the database.
+
+Similarly,  `PostResult`  represents the response when we query for one post in the database.
+
+Finally, we have the type  `Query.`  This type defines the query operations that our clients can perform. Currently, we have two queries: a  `listPosts`  query to grab all the posts from the database, and a  `getPost`  query to get a particular post by its  `id`.
+
+## Wiring up Flask server and GraphQL with Ariadne library
+
+Thus far, we have our Flask server up and running, we connected to a database, and we’ve created our first GraphQL schema. Next, we need to wire up our server with GraphQL, so that we can start using the queries/mutations defined in the schema. We will be using the  [Ariadne](https://ariadnegraphql.org/)  library to do this.
+
+Ariadne is a lightweight Python library that lets you get up and running with GraphQL quickly. Ariadne is framework agnostic (which means you can use it with Flask, Django, or any other framework of your choice) and it uses a  **_schema first_** approach to GraphQL API development. In this approach, we define our schema first (as we did for this demo app) and write the business logic based on our schema.
+
+> Another popular pattern is to use a  **_code first approach_** while designing GraphQL APIs ([Graphene](https://graphene-python.org/)  is a popular library that does this). If you’re interested in learning more about this approach, I recommend you give  [this article](https://blog.logrocket.com/code-first-vs-schema-first-development-graphql/)  a read.
+
+Let’s go and make the following changes in our  `app.py`  file.
+
+```python
+from api import app, db
+from ariadne import load_schema_from_path, make_executable_schema, \
+    graphql_sync, snake_case_fallback_resolvers, ObjectType
+from ariadne.constants import PLAYGROUND_HTML
+from flask import request, jsonify
+
+type_defs = load_schema_from_path("schema.graphql")
+schema = make_executable_schema(
+    type_defs, snake_case_fallback_resolvers
+)
+
+@app.route("/graphql", methods=["GET"])
+def graphql_playground():
+    return PLAYGROUND_HTML, 200
+
+@app.route("/graphql", methods=["POST"])
+def graphql_server():
+    data = request.get_json()
+    success, result = graphql_sync(
+        schema,
+        data,
+        context_value=request,
+        debug=app.debug
+    )
+    status_code = 200 if success else 400
+    return jsonify(result), status_code
+```
+
+On lines 2 ~ 4, we import a couple functions from the Ariadne library. On line 7, we import the types from our GraphQL schema. Then, we call the  `make_executable_schema`  method from Ariadne. We pass the type definitions as the first argument. The second argument  `snake_case_fallback_resolvers`  is a  [Bindable](https://ariadnegraphql.org/docs/0.4.0/bindables); these are special types from Ariadne library that is used to bind python methods to GraphQL schema.
+
+> [Learn more about Bindables](https://ariadnegraphql.org/docs/0.4.0/bindables).
+
+Next, we have two methods. The first method will load up the GraphQL user interface for us. The second method is a  `POST`  method. This endpoint is will be used by our clients to run queries and mutations.
+
+## Testing our server
+
+We can run the application by running  `flask run`.
+
+```bash
+flask run
+```
+
+Next, we need a GraphQL IDE to build our queries, explore the schema, and test the API functionality. The  [Apollo Explorer](https://www.apollographql.com/docs/studio/explorer/)  is a  **_free to use_**  GraphQL IDE built specifically for GraphQL developers working on GraphQL APIs. It comes with a lot of powerful features like one-click query building, intelligent search, and a multitude of other productivity features.
+
+To get started, head over to  [studio.apollographql.com/dev](http://studio.apollographql.com/dev?utm_source=blog&utm_cta=inline)  and create an account (using either GitHub or your email). Choose a name for our graph, and select the  `development`  option as the graph type.
+
+We will add our localhost endpoint  `http://localhost:5000/graphql`  in the endpoint field and click create graph.
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620521378011_image.png)
+
+Once the setup is done, we will see that the GraphQL IDE will load up in our browser.
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620521849208_image.png)
+
+### **Query all posts**
+
+We are still not able to run queries. Let’s change that. We will write our first query resolver that will return all the posts in the database.
+
+### Writing our first Resolver
+
+We can create a new file called  `api/queries.py`  and write the following resolver method as shown below.
+
+```python
+from .models import Post
+def listPosts_resolver(obj, info):
+    try:
+        posts = [post.to_dict() for post in Post.query.all()]
+        print(posts)
+        payload = {
+            "success": True,
+            "posts": posts
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload
+```
+
+This resolver method is very self explanatory. We are trying to query all the Posts from the database and return them as a Payload dictionary. We have to reference this resolver in our  `app.py`  file. Let’s make the following changes to  `app.py`  file.
+
+```python
+from api import app, db
+from ariadne import load_schema_from_path, make_executable_schema, \
+    graphql_sync, snake_case_fallback_resolvers, ObjectType
+from ariadne.constants import PLAYGROUND_HTML
+from flask import request, jsonify
+from api.queries import listPosts_resolver
+
+query = ObjectType("Query")
+query.set_field("listPosts", listPosts_resolver)
+
+type_defs = load_schema_from_path("schema.graphql")
+schema = make_executable_schema(
+    type_defs, query, snake_case_fallback_resolvers
+)
+@app.route("/graphql", methods=["GET"])
+def graphql_playground():
+    return PLAYGROUND_HTML, 200
+
+@app.route("/graphql", methods=["POST"])
+def graphql_server():
+    data = request.get_json()
+    success, result = graphql_sync(
+        schema,
+        data,
+        context_value=request,
+        debug=app.debug
+    )
+    status_code = 200 if success else 400
+    return jsonify(result), status_code
+```
+
+On line 6, we are importing the resolver. We are then creating a query instance and specifying the query field and the corresponding resolver (line 9). Finally, we are adding the query instance to the make_executable_schema method call as a parameter. Restart the server, go back to the GraphQL playground and you will be able to run the following query.
+
+```graphql
+query AllPosts {
+  listPosts {
+    success
+    errors
+    posts {
+      id
+      title 
+      description
+      created_at
+    }
+  }
+}
+```
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620521987652_image.png)
+
+### Querying a single post by id
+
+Next, we will take a look at how we can query a single item by a property. For this example, we will query a  `Post`  by its id.
+
+We will create a new resolver method inside our  `queries.py`  file.
+
+```python
+from ariadne import convert_kwargs_to_snake_case
+...
+
+@convert_kwargs_to_snake_case
+def getPost_resolver(obj, info, id):
+    try:
+        post = Post.query.get(id)
+        payload = {
+            "success": True,
+            "post": post.to_dict()
+        }
+    except AttributeError:  # todo not found
+        payload = {
+            "success": False,
+            "errors": ["Post item matching {id} not found"]
+        }
+    return payload
+```
+
+We imported a decorator called  `convert_kwargs_to_snake_case`  from Ariadne. This decorator converts the method arguments from camel case to snake case. Let’s update the  `app.py`  file to include the latest resolver
+
+```python
+...
+from api.queries import listPosts_resolver, getPost_resolver
+query = ObjectType("Query")
+query.set_field("listPosts", listPosts_resolver)
+query.set_field("getPost", getPost_resolver)
+...
+```
+
+We can run the query and verify if everything is working as expected.
+
+```graphql
+query GetPost {
+  getPost(id: "1") {
+    post {
+      id
+      title
+      description
+    }
+    success
+    errors
+  }
+}
+```
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620522136463_image.png)
+
+## Mutation
+
+Mutations are used to create, update or delete records from the database. Let’s set up our first mutation.
+
+### Creating a new post
+
+First of all, in our schema, we need to define the type of mutation we are trying to add. In our case, we want to create a new post. Therefore, we will make a mutation called createPost.
+
+```graphql
+// schema.graphql
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Mutation {
+    createPost(title: String!, description: String!, created_at: String): PostResult!
+}
+...
+```
+
+We updated our schema.graphql file accordingly as shown above. We add a new  **Mutation**  type. We specify the mutation name, required parameters and finally update schema type to include Mutation type. Updating the schema itself will not do much. We need a resolver to correspond to the  `createPost`  mutation in the schema.
+
+We will create a new file called  `api/mutations.py`. All our mutation resolvers will live in this file.
+
+```python
+
+# mutations.py
+from datetime import date
+from ariadne import convert_kwargs_to_snake_case
+from api import db
+from api.models import Post
+
+@convert_kwargs_to_snake_case
+def create_post_resolver(obj, info, title, description):
+    try:
+        today = date.today()
+        post = Post(
+            title=title, description=description, created_at=today.strftime("%b-%d-%Y")
+        )
+        db.session.add(post)
+        db.session.commit()
+        payload = {
+            "success": True,
+            "post": post.to_dict()
+        }
+    except ValueError:  # date format errors
+        payload = {
+            "success": False,
+            "errors": [f"Incorrect date format provided. Date should be in "
+                       f"the format dd-mm-yyyy"]
+        }
+    return payload
+```
+
+The resolver method is pretty self-explanatory. We are here trying to create and save a new instance of a  `Post`. On success, we return the post. We also need to bind this new mutation resolver in our app.py.
+
+```python
+...
+from api.queries import listPosts_resolver, getPost_resolver
+from api.mutations import create_post_resolver
+query = ObjectType("Query")
+mutation = ObjectType("Mutation")
+query.set_field("listPosts", listPosts_resolver)
+query.set_field("getPost", getPost_resolver)
+mutation.set_field("createPost", create_post_resolver)
+
+type_defs = load_schema_from_path("schema.graphql")
+schema = make_executable_schema(
+    type_defs, query, mutation, snake_case_fallback_resolvers
+)
+..
+```
+
+As you can see from the code example above, importing and binding the mutation follows the same pattern as importing and binding queries that we have done previously. we can now hop into the GraphQL playground and try to execute this new mutation.
+
+```graphql
+mutation CreateNewPost {
+  createPost(
+    title: "New Blog Post", 
+    description:"Some Description") {
+    post {
+      id
+      title
+      description
+      created_at
+    }
+    success
+    errors
+  }
+}
+```
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620522668844_image.png)
+
+### Updating a post
+
+Next, we will be looking at updating a post. To do so we will follow the same pattern. First, we will update the schema and add a new mutation called  `updatePost`.
+
+```graphql
+type Mutation {
+    createPost(title: String!, description: String!, created_at: String): PostResult!
+    updatePost(id: ID!, title: String, description: String): PostResult!
+}
+```
+
+`updatePost`  takes in a mandatory parameter id and optional parameters title and description. Now we can create a resolver for this mutation.
+
+```python
+# mutations.py 
+...
+@convert_kwargs_to_snake_case
+def update_post_resolver(obj, info, id, title, description):
+    try:
+        post = Post.query.get(id)
+        if post:
+            post.title = title
+            post.description = description
+        db.session.add(post)
+        db.session.commit()
+        payload = {
+            "success": True,
+            "post": post.to_dict()
+        }
+    except AttributeError:  # todo not found
+        payload = {
+            "success": False,
+            "errors": ["item matching id {id} not found"]
+        }
+    return payload
+```
+
+In this method, we are querying the post by id and updating the title and description of the post. We can wire this new resolver up in  `app.py`  like the previous one.
+
+```python
+...
+from api.mutations import create_post_resolver, update_post_resolver
+
+mutation = ObjectType("Mutation")
+
+mutation.set_field("createPost", create_post_resolver)
+mutation.set_field("updatePost", update_post_resolver)
+```
+
+That’s it. We can restart the server and run the  `updatePost`  mutation now.
+
+```graphql
+mutation UpdatePost {
+  updatePost(id:"2", title:"Hello title", description:"updated description") {
+    post {
+      id
+      title
+      description
+    }
+    success
+    errors
+  }
+}
+```
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620522491679_image.png)
+
+### Deleting a post
+
+Finally, let’s take a look how we can delete a post. We are going to exactly the same thing as we did with updatePost mutation. We will first create the deletePost mutation in the schema.
+
+```graphql
+type Mutation {
+    createPost(title: String!, description: String!, created_at: String): PostResult!
+    updatePost(id: ID!, title: String, description: String): PostResult!
+    deletePost(id: ID): PostResult!
+}
+```
+
+Once that is done we can create a new resolver for it and reference it in the app.py file.
+
+```python
+# mutations.py
+...
+@convert_kwargs_to_snake_case
+def delete_post_resolver(obj, info, id):
+    try:
+        post = Post.query.get(id)
+        db.session.delete(post)
+        db.session.commit()
+        payload = {"success": True, "post": post.to_dict()}
+    except AttributeError:
+        payload = {
+            "success": False,
+            "errors": ["Not found"]
+        }
+    return payload
+
+```
+
+```python
+# app.py
+...
+from api.mutations import create_post_resolver, update_post_resolver, delete_post_resolver
+...
+mutation.set_field("deletePost", delete_post_resolver)
+```
+
+Let’s test the functionality.
+
+![](https://paper-attachments.dropbox.com/s_EA97983148A602EA5834D427CC2608BC8BB2085BFEFE14AF7C04A52A162E68A7_1620522833382_image.png)
+
+Awesome, we now have our GraphQL and Python API up and running.
+
+## Final thoughts
+
+The main intention of this article was to get you up and running with GraphQL and Python, as well as introduce some widely used patterns and best practices. I hope you found this article informative.
+
+This is just the start. I suggest checking out some of the other posts on the Apollo blog on topics like caching,  [GraphQL security](https://www.apollographql.com/blog/why-you-should-disable-graphql-introspection-in-production-graphql-security/), and if you’re really into Python, checking out the rest of the  [Ariadne documentation](https://ariadnegraphql.org/docs/intro).
+
+That’s a wrap! Happy hacking and see you next time.
+
+
+-----
+
+# [Getting Started with GraphQL in Python using FastapI and Ariadne](https://intrepidgeeks.com/tutorial/start-pythons-graphql-using-fastapi-and-ariadne)
+
+36855 words[fastapi](https://intrepidgeeks.com/tags/fastapi)[graphql](https://intrepidgeeks.com/tags/graphql)[python](https://intrepidgeeks.com/tags/python)
+
+Fast API is a high-performance framework for building web APIs using Python. Because of its simple and intuitive nature, you can quickly develop robust web APIs with very little sample code. This paper introduces fastAPI and introduces Graphene and Ariadne. I will show you how to set up a GraphQL server using  
+According to the official documentation, building web applications using the Fast API can reduce the errors encountered by about 40 percent of developers. This was done using Python 3.6-style statements. Building web applications in Python with all the features, including the automatic generation of interactive API documentation, has never been easy.  
+
+## application settings
+
+  
+Before you begin, make sure you have Python 3.7+ installed by running the following command in your terminal:  
+
+```
+python --version
+
+```
+
+Note: If you haven't installed it , see [here](https://www.python.org/downloads/) .-     
+    The following Python packages are required to build the project.
+-     
+    [FastAPI](https://fastapi.tiangolo.com/) - A fast, modern and flexible framework used to build web APIs using Python.
+-     
+    [Ariadne](https://ariadnegraphql.org/) - Python library to implement a GraphQL server in a mod-first way.
+Continue to install these packages into your virtual environment.  
+
+```
+fastapi[uvicorn]
+ariadne
+
+```
+
+We install uvicorn using the 'standard' option. This is because we have brought in additional features to choose from. For example websocket support.  
+
+### Asynchronous Server in Python
+
+  
+ASGI is an emerging standard used in Python to build asynchronous services that support HTTP/2 and WebSockets. Web frameworks like Flask and Pyramid are examples of WSGI-based frameworks, while ASGI is not supported. Django has been around for a long time in WSGI. It was a framework based on it, but introduced ASGI support in version 3.1.-     
+    ASGI is
+-   Protocol Server: Processes the low-level details of a socket and converts it into a connection for the application
+sent to-   Application: A callable program that handles transport requests. There are several ASGI frameworks that can simplify building applications.
+As an application developer, you can work primarily at the application and framework level.  
+Examples of ASGI servers include Uvicorn, Daphne, and Hypercorn. Examples of ASGI frameworks include Starlette, Django Channel, FastapI, and Quart.  
+No ASGI framework is required as Ariadne provides GraphQL classes for ASGI applications. We will use the uvicorn server to run our programs.  
+Note: I understand the difference between ASGI and WSGI [Blog by Raoof Naushad](https://medium.com/analytics-vidhya/difference-between-wsgi-and-asgi-807158ed1d4c) .  
+
+### Doing asynchronously in Python using Asyncio
+
+  
+Added async support to Python in the asyncio library. To declare a function asynchronously, add the keyword async before the function definition, like this:  
+
+```
+async def hello_world():
+    return "Hello world"
+
+```
+
+-   uses `await`, and calls the async function like this:  
+    
+
+```
+obytes = await hello_world()
+
+```
+
+### Writing GraphQL mode
+
+-   Create a file called schema in graphql.GraphQL we will use to define the mode.
+
+#### Custom Type:
+
+  
+Our model will contain five user-defined types:  
+
+```
+type User {
+    id: ID! // This is the id of the user
+    email: String! // This is the email of the user
+    password: String! // This is the password of the user
+}
+
+type blog {
+    id: ID! // This is the id of the blog
+    title: String! // This is the title of the blog
+    description: String! // This is the description of the blog
+    completed: Boolean! // This is the completed status of the blog
+    ownerId: ID! // This is the id of the owner of the blog
+}
+
+type blogResult {
+    errors: [String] // This is the list of errors
+    blog: blog // This is the blog
+}
+
+type blogsResult {
+    errors: [String]
+    blogs: [blog] // This is the list of blogs
+}
+
+type InsertResult {
+    errors: [String]
+    id: ID // This is the id of the inserted blog
+}
+
+type TokenResult {
+    errors: [String]
+    token: String // This is the token
+}
+
+```
+
+-   After the definition model, add queries, mutations, subscriptions and type definitions.  
+    
+
+```
+schema {
+    query: Query // This is the query type
+    mutation: Mutation // This is the mutation type
+    subscription: Subscription // This is the subscription type
+}
+
+type Query {
+    blogs: blogsResult! // This is the list of blogs
+    blog(blogId: ID!): blogResult! // This is the blog
+}
+
+type Mutation {
+    createblog(title: String!, description: String!): InsertResult! // This is the blog
+    createUser(email: String!, password: String!): InsertResult! // This is the user
+    createToken(email: String!, password: String!): TokenResult! // This is the token
+}
+
+type Subscription {
+    reviewblog(token:String!): InsertResult! // This is the blog
+}
+
+```
+
+### Create a project
+
+`app.py`Create a file named , and add the following code to it.  
+
+```
+from ariadne import QueryType, make_executable_schema, load_schema_from_path
+from ariadne.asgi import GraphQL
+
+type_defs = load_schema_from_path("schema.graphql")
+
+query = QueryType()
+
+
+@query.field("hello")
+def resolve_hello(*_):
+    return "Hello world!"
+
+
+schema = make_executable_schema(type_defs, query)
+app = GraphQL(schema, debug=True)
+
+```
+
+We `schema.graphql`read the pattern defined in the file and added a simple search term Hello. We will use it to check if the server is running. Our server can now accept requests.-   starts the server by running the following command:  
+    
+
+```
+uvicorn app:app --reload
+
+```
+
+-   [Visit http://localhost:8000](http://localhost:8000/) to open the GraphQL playground. Paste the following Hello query and click the Play button.  
+    
+
+```
+query {
+  hello
+}
+
+```
+
+Congratulations. The GraphQL server is running🥳!  
+After verifying that the server is working normally , you can delete `resolve_hello`the `app.py`function from and `schema.graphql`the Hello lookup from the type lookup part of .  
+
+### Save users and blogs
+
+  
+Since the GraphQL operations discussed in this article are subscription-centric, we will skip the database component entirely and store the data in memory. We use two variables:-   user:python dictionary. The key is the username and the value is the detailed information of the user.
+-   Blogs: A python list that stores all blogs Create a file that  
+    initializes users, blogs, and queues to an empty list .`store.py.`  
+    
+    ```
+    users = {}
+    blog = []
+    queues = []
+    
+    ```
+    
+    ## API and GraphQL Definition
+    
+      
+    [![](https://s1.md5.ltd/image/889190bb39976586e0706242f9fa1bcd.gif)](https://intrepidgeeks.com/tutorial/start-pythons-graphql-using-fastapi-and-ariadne#!)  
+    
+    ### definition mutation
+    
+      
+    Adds resolution to the mutants defined in the mod. These will live in a document called mutants.  
+    First `createUser`add resolution to the mutant.  
+    
+    ```
+    from ariadne import ObjectType, convert_kwargs_to_snake_case
+    
+    from store import users, blogs
+    
+    mutation = ObjectType("Mutation")
+    
+    
+    @mutation.field("createUser")
+    @convert_kwargs_to_snake_case
+    async def resolve_create_user(obj, info, email, password):
+        try:
+            if not users.get(username):
+                user = {
+                    "id": len(users) + 1,
+                    "email": email,
+                    "password": password,
+                }
+                users[username] = user
+                return {
+                    "success": True,
+                    "user": user
+                }
+            return {
+                "success": False,
+                "errors": ["Username is taken"]
+            }
+    
+        except Exception as error:
+            return {
+                "success": False,
+                "errors": [str(error)]
+            }
+    
+    ```
+    
+    We import `ObjectType`and `convert_kwargs_to_snake_case`from Ariadne Packaging. `ObjectType`is used to define the mutation interpreter, and converts `convert_kwargs_to_snake_case`the case of the parameter `camelCase`from to . We also introduce users and blogs in the store.py, as this is the variable we store users and blogs in.`snake_case`  
+      
+    
+    ```
+    @mutation.field("createblog")
+    @convert_kwargs_to_snake_case
+    async def resolve_create_blog(obj, info, content, title, description, completed, ownerId):
+        try:
+            blog = {
+                "ID": id,
+                "title": title,
+                "description": description
+                "completed": completed,
+                "ownerId": ownerId
+            }
+            blogs.append(blog)
+            return {
+                "success": True,
+                "blog": blog
+            }
+        except Exception as error:
+            return {
+                "success": False,
+                "errors": [str(error)]
+            }
+    
+    ```
+    
+    `resolve_create_blog`In , we created a dictionary to store the blog properties. We add it to the list of blogs and return it to the created blog. If successful, we set success to True, and return success and the created blog destination. If it happens, set Success to False and return to the success and error blog.  
+    Since we now have two interpreters, we can point Ariadners to them. For our application we change it to: py:  
+    to get the mutations from the top of the file.  
+    
+    ```
+    from mutations import mutation
+    
+    ```
+    
+    And `make_executable_schema`add a mutation to the list of parameters passed to .  
+    
+    ```
+    schema = make_executable_schema(type_defs, query, mutation)
+    
+    ```
+    
+    [![](https://s1.md5.ltd/image/3439d1b3efa5c34825223e6fdd0644e2.gif)](https://intrepidgeeks.com/tutorial/start-pythons-graphql-using-fastapi-and-ariadne#!)  
+    
+    ### Query Definition
+    
+      
+    Currently we have already prepared two queries to realize our API. Let's start with the blog queries. We create a new file and update our query.py , then:
+-   `get_blogs`Create resolution.  
+    
+
+```
+# as you know here i use Database[PostgreSQL] to connect to the database
+# Install psycopg2 & databases[postgresql] & asyncpg
+
+async def get_blogs(
+    skip: Optional[int] = 0, limit: Optional[int] = 100
+) -> Optional[Dict]:
+    query = blog.select(offset=skip, limit=limit)
+    result = await database.fetch_all(query=query)
+    return [dict(blog) for blog in result] if result else None
+
+async def get_blog(blog_id: int) -> Optional[Dict]:
+    query = blog.select().where(blog.c.id == int(blog_id))
+    result = await database.fetch_one(query=query)
+    return dict(result) if result else None
+
+```
+
+-   can be used in the following modes:  
+    
+
+```
+from typing import Optional
+
+from ariadne import QueryType, convert_kwargs_to_snake_case
+
+from crud import get_blogs, get_blog # Create a file called crud.py and add the get_blogs function
+from schemas.error import MyGraphQLError
+
+
+@convert_kwargs_to_snake_case
+async def resolve_blogs(obj, info, skip: Optional[int] = 0, limit: Optional[int] = 100):
+    blogs = await get_blogs(skip=skip, limit=limit)
+
+    return {"blogs": blogs}
+
+
+@convert_kwargs_to_snake_case
+async def resolve_blog(obj, info, blog_id):
+    blog = await get_blog(blog_id=blog_id)
+
+    if not blog:
+        raise MyGraphQLError(code=404, message=f"blog id {blog_id} not found")
+
+    return {"success": True, "blog": blog}
+
+
+query = QueryType()
+query.set_field("blogs", resolve_blogs)
+query.set_field("blog", resolve_blog)
+
+```
+
+[![](https://s1.md5.ltd/image/f9f6619ea637e18a6a6df89c575bd4b2.gif)](https://intrepidgeeks.com/tutorial/start-pythons-graphql-using-fastapi-and-ariadne#!)  
+
+### Subscribe to a new blog
+
+  
+A new blog has been added to the subscription queue, but we don't have any queues yet. The rest is to realize the GraphQL subscription, create a queue and add it to the queue list to read the blog and send the appropriate blog to the GraphQL client.  
+Ariadne requires that you describe two functions for each subscription defined in the mode.  
+
+#### subscribe to the feed
+
+  
+Create a new file and subscribe.py defines the subscription source as follows:  
+
+```
+from ariadne import SubscriptionType, convert_kwargs_to_snake_case
+from graphql.type import GraphQLResolveInfo
+
+subscription = SubscriptionType()
+
+
+@convert_kwargs_to_snake_case
+@subscription.field("reviewblog")
+async def review_blog_resolver(review_blog, info: GraphQLResolveInfo, token: str):
+    return {"id": review_blog}
+
+```
+
+Note: I use RabbitMQ to create dynamic source code descriptions for my blog.  
+
+> Rabbit MQ is a messaging broker that allows you to publish and subscribe to messages.  
+
+  
+
+```
+# This is Example from My Project FastQL
+@convert_kwargs_to_snake_case
+@subscription.source("reviewblog")
+async def review_blog_source(obj, info: GraphQLResolveInfo, token: str):
+    user = await security.get_current_user_by_auth_header(token)
+    if not user:
+        raise MyGraphQLError(code=401, message="User not authenticated")
+
+    while True:
+        blog_id = await rabbit.consumeblog()
+        if blog_id:
+            yield blog_id
+        else:
+            return
+
+```
+
+[![](https://s1.md5.ltd/image/92e3e99ce7ac603b7ec9581f73026725.gif)](https://intrepidgeeks.com/tutorial/start-pythons-graphql-using-fastapi-and-ariadne#!)  
+You've done all the hard work! Now for the simplest part. The API will show up as running. [Visit http://localhost:8000](http://localhost:8000/) to open the GraphQL playground.  
+First `user_one`, `user_two`we'll create two users: and . Paste the content below and hit play.  
+
+```
+mutation {
+  createUser(
+      email:"admin@graphql.com"
+      password:"admin"
+  ) {
+    success
+    user {
+      userId
+      email
+      password
+    }
+  }
+}
+
+```
+
+After creating the first user, change the username from `user_one`to `user_two`, then click play again to create the second user.  
+Currently we have two users who can blog. Our `createBlog`mutant expects us to provide `senderId`and . Given the mutation responses of`recipientId``createUser``userId`  
+
+```
+query {
+  userId(
+      // User One
+      email: "admin@graphql.com"
+      password: "admin"
+  )
+}
+
+```
+
+-   to `createBlog`post a blog to a second user.  
+    
+
+```
+mutation {
+  createBlog(
+    senderId: "1",
+    recipientId: "2",
+    title:"Blog number1"
+    description:"This is the first blog"
+    ownerId: "1"
+  ) {
+    success
+    blog {
+        title
+        description
+        ownerId
+        recipientId
+        senderId
+    }
+  }
+}
+
+```
+
+## conclusion
+
+  
+Congratulations. You've learned about ASGI, you've learned how to add a subscription to a GraphQL server built with Ariadne, and how `asyncio.Queue`to use it.  
+If you have any questions, please feel free to post them in the comments.  
+This is just a simple API that demonstrates how to add real-time functionality to the GraphQL API using subscriptions. You can improve the API by adding a database, authenticating users, allowing file attachments to blogs, deleting blogs, and adding user profiles.  
+If you want to know how to merge a database into an asynchronous API, you have two options:-     
+    [aiosqlite](https://github.com/omnilib/aiosqlite) : Friendly asynchronous interface to the sqlite database.
+I want to see what you have built without delay. You can also get inspiration from this project [FastQL .](https://github.com/obytes/fastql) Frankly, this has been around for a long time. If you have enough patience to read the full text and find it interesting, please share it and share it in the next post.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE2NzU5ODk2NTQsMTMyODg5OTc5NCwtND
+M5Njg2ODYsNzMwOTk4MTE2XX0=
+-->

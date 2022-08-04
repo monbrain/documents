@@ -1,0 +1,3072 @@
+# [GraphQL 소개](https://graphql-kr.github.io/learn/)
+
+> 이 문서는 GraphQL의 작동 방식과 사용법을 다룹니다. GraphQL 서비스를 만드는 방법에 대한 문서를 찾으신다면, GraphQL을  [다양한 언어](https://graphql-kr.github.io/code/)로 구현하는데 도움이 되는 라이브러리를 확인해보세요. 튜토리얼을 통한 깊이 있는 학습을 하시려면  [How to GraphQL](https://www.howtographql.com/)  풀스택 튜토리얼 사이트를 살펴보세요.
+
+GraphQL 은 API를 위한 쿼리 언어이며 타입 시스템을 사용하여 쿼리를 실행하는 서버사이드 런타임입니다. GraphQL은 특정한 데이터베이스나 특정한 스토리지 엔진과 관계되어 있지 않으며 기존 코드와 데이터에 의해 대체됩니다.
+
+GraphQL 서비스는 타입과 필드를 정의하고, 각 타입의 필드에 대한 함수로 구현됩니다. 예를 들어, 로그인한 사용자가 누구인지(`me`)와 해당 사용자의 이름(`name`)을 가져오는 GraphQL 서비스는 다음과 같습니다.
+
+```graphql
+type Query {
+  me: User
+}
+
+type User {
+  id: ID
+  name: String
+}
+```
+
+각 타입의 필드에 대한 함수를 작성하면 다음과 같이 작성할 수 있습니다.
+
+```graphql
+function Query_me(request) {
+  return request.auth.user;
+}
+
+function User_name(user) {
+  return user.getName();
+}
+```
+
+GraphQL 서비스가 실행되면 (일반적으로는 웹 서비스의 URL) GraphQL 쿼리를 전송하여 유효성을 검사하고 실행할 수 있습니다. 수신된 쿼리는 먼저 정의된 타입과 필드만 참조하도록 검사한 다음, 함수를 실행하여 결과를 생성합니다.
+
+아래는 쿼리 예제입니다.
+
+```graphql
+{
+  me {
+    name
+  }
+}
+```
+
+다음과 같은 JSON을 얻게됩니다.
+
+```graphql
+{
+  "me": {
+    "name": "Luke Skywalker"
+  }
+}
+```
+
+아래에서 쿼리 언어, 타입 시스템, GraphQL 서비스의 작동방식과 일반적인 문제를 해결하기 위해 GraphQL을 사용하는 좋은 예제들에 대해 더 살펴보세요.
+
+----
+
+# [쿼리 & 뮤테이션](https://graphql-kr.github.io/learn/queries/)
+
+이 글에서는 GraphQL 서버에 쿼리하는 방법에 대해 자세히 배웁니다.
+
+## 필드[](https://graphql-kr.github.io/learn/queries/#)
+
+GraphQL은 객체에 대한 특정 필드를 요청하는 것이 무척 간단합니다. 아주 간단한 쿼리를 실행하여 얻는 결과를 살펴 봅시다.
+
+```graphql
+{
+	hero  {
+		name
+	}
+}
+```
+
+```graphql
+{
+	"data":  {
+		"hero":  {
+			"name":  "R2-D2"
+		}
+	}
+}
+```
+
+쿼리와 결과가 정확히 동일한 형태인 것을 볼 수 있습니다. 이것이 GraphQL의 핵심입니다. 항상 기대 한 결과를 얻을 수 있습니다. 서버에서 클라이언트가 요청하는 필드를 정확히 알고있기 때문입니다.
+
+`name`  필드는  `String`  타입을 반환합니다. 여기서는 스타워즈의 영웅이름인  `"R2-D2"`  를 반환했습니다.
+
+> 팁 - 위의 코드는  _실제로 실행_  됩니다. 원하는대로 변경하고 새로운 결과를 볼 수 있습니다. 쿼리의  `hero`  객체에  `appearIn`  필드를 추가하고 새로운 결과를 확인해보세요.
+
+앞의 예제에서는  `String`  타입인 영웅의 이름만 요청했지만 필드는 객체를 참조할 수도 있습니다. 이 경우 해당 객체에 대한 필드를  _하위 선택_할 수 있습니다. GraphQL 쿼리는 연관된 객체와 필드를 탐색 할 수 있으므로 클라이언트는 기존 REST 구조처럼 여러번 요청을 수행하는 대신 한번의 요청으로 많은 데이터를 가져올 수 있습니다.
+
+```graphql
+{
+
+ hero  {
+
+ name
+
+ # 쿼리에 주석을 쓸 수도 있습니다!
+
+ friends  {
+
+ name
+
+ }
+
+ }
+
+}
+```
+
+```graphql
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2",
+
+ "friends":  [
+
+ {
+
+ "name":  "Luke Skywalker"
+
+ },
+
+ {
+
+ "name":  "Han Solo"
+
+ },
+
+ {
+
+ "name":  "Leia Organa"
+
+ }
+
+ ]
+
+ }
+
+ }
+
+}
+```
+
+위 예제에서,  `friends`  필드는 배열을 반환합니다. GraphQL 쿼리는 단일 아이템이나 배열에 대해 모두 동일해 보이지만 스키마를 기반으로 예상되는 결과를 알 수 있습니다.
+
+## 인자[](https://graphql-kr.github.io/learn/queries/#)
+
+객체와 필드를 탐색할 수 있는 것만으로도 GraphQL은 이미 데이터를 가져오는데 굉장히 유용한 언어가 될 것입니다. 하지만 필드에 인자를 전달하는 기능을 추가하면, 훨씬 다양한 일을 할 수 있습니다.
+
+```graphql
+{
+
+ human(id:  "1000")  {
+
+ name
+
+ height
+
+ }
+
+}
+```
+
+```graphql
+{
+
+ "data":  {
+
+ "human":  {
+
+ "name":  "Luke Skywalker",
+
+ "height":  1.72
+
+ }
+
+ }
+
+}
+```
+
+REST와 같은 시스템에서는 요청에 쿼리 파라미터와 URL 세그먼트같은 단일 인자들만 전달할 수 있습니다. 하지만 GraphQL에서는 모든 필드와 중첩된 객체가 인자를 가질 수 있으므로 GraphQL은 여러번의 API fetch를 완벽하게 대체할 수 있습니다. 필드에 인자를 전달하면, 모든 클라이언트에서 개별적으로 처리하는 대신 서버에서 데이터 변환을 한 번만 구현할 수도 있습니다.
+
+{
+
+ human(id:  "1000")  {
+
+ name
+
+ height(unit:  FOOT)
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "human":  {
+
+ "name":  "Luke Skywalker",
+
+ "height":  5.6430448
+
+ }
+
+ }
+
+}
+
+인자는 다양한 타입이 될 수 있습니다. 위 예제에서는 열거형(`Enumeration`) 타입을 사용했습니다. 이 타입은 다양한 옵션들 (이 경우에는 길이 단위  `METER`,  `FOOT`) 중 하나를 나타냅니다. GraphQL은 기본 타입과 함께 제공되지만, GraphQL 서버는 데이터를 직렬화 할 수 있는 한 직접 커스텀 타입을 선언할 수도 있습니다.
+
+[GraphQL 타입 시스템에 대한 자세한 정보는 여기를 살펴보세요.](https://graphql-kr.github.io/learn/schema)
+
+## 별칭[](https://graphql-kr.github.io/learn/queries/#)
+
+눈썰미가 좋으신 분들은 알아차리셨겠지만, 결과 객체 필드가 ​​쿼리의 필드 이름과 일치하지만 인자는 그렇지 않으므로 다른 인자를 사용하여 같은 필드를 직접 쿼리 할 수는 없습니다. 그렇기 때문에 필드의 결과를 원하는 이름으로 바꿀 수 있습니다. 이 것이  _별칭_  이 필요한 이유입니다.
+
+{
+
+ empireHero:  hero(episode:  EMPIRE)  {
+
+ name
+
+ }
+
+ jediHero:  hero(episode:  JEDI)  {
+
+ name
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "empireHero":  {
+
+ "name":  "Luke Skywalker"
+
+ },
+
+ "jediHero":  {
+
+ "name":  "R2-D2"
+
+ }
+
+ }
+
+}
+
+위 예제에서 두  `hero`  필드는 서로 충돌하지만, 서로 다른 이름의 별칭을 지정할 수 있으므로 한 요청에서 두 결과를 모두 얻을 수 있습니다.
+
+## 프래그먼트[](https://graphql-kr.github.io/learn/queries/#)
+
+앱에서 상대적으로 복잡한 페이지가 있다고 가정해 봅시다. 친구(`friends`)를 가진 두 영웅(`hero`)을 순서대로 요청한다고 해봅시다. 그러면 쿼리가 복잡해질 수 있습니다. 이렇게되면 필드를 최소 두 번 반복해야합니다.
+
+이것이  _프래그먼트_  라는 재사용 가능한 단위가 GraphQL에 포함된 이유입니다. 프래그먼트를 사용하면 필드셋을 구성한 다음 필요한 쿼리에 포함시킬 수 있습니다. 다음은 프래그먼트을 사용하여 위 상황을 해결하는 방법의 예제입니다.
+
+{
+
+ leftComparison:  hero(episode:  EMPIRE)  {
+
+ ...comparisonFields
+
+ }
+
+ rightComparison:  hero(episode:  JEDI)  {
+
+ ...comparisonFields
+
+ }
+
+}
+
+​
+
+fragment  comparisonFields  on  Character  {
+
+ name
+
+ appearsIn
+
+ friends  {
+
+ name
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "leftComparison":  {
+
+ "name":  "Luke Skywalker",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ],
+
+ "friends":  [
+
+ {
+
+ "name":  "Han Solo"
+
+ },
+
+ {
+
+ "name":  "Leia Organa"
+
+ },
+
+ {
+
+ "name":  "C-3PO"
+
+ },
+
+ {
+
+ "name":  "R2-D2"
+
+ }
+
+ ]
+
+ },
+
+ "rightComparison":  {
+
+ "name":  "R2-D2",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ],
+
+ "friends":  [
+
+ {
+
+ "name":  "Luke Skywalker"
+
+ },
+
+ {
+
+ "name":  "Han Solo"
+
+ },
+
+ {
+
+ "name":  "Leia Organa"
+
+ }
+
+ ]
+
+ }
+
+ }
+
+}
+
+필드가 반복될 경우 위 쿼리가 꽤 반복될 것을 알 수 있습니다. 프래그먼트 개념은 복잡한 응용 프로그램의 데이터 요구사항을 작은 단위로 분할하는데 사용됩니다. 특히 청크가 다른 여러 UI 구성 요소를 하나의 초기 데이터 fetch로 통합해야하는 경우에 많이 사용됩니다.
+
+### 프래그먼트 안에서 변수 사용하기[](https://graphql-kr.github.io/learn/queries/#)
+
+쿼리나 뮤테이션에 선언된 변수는 프래그먼트에 접근할 수 있습니다.  [변수](https://graphql-kr.github.io/learn/queries/learn/queries/#variables)를 확인해보세요.
+
+query  HeroComparison($first:  Int  =  3)  {
+
+ leftComparison:  hero(episode:  EMPIRE)  {
+
+ ...comparisonFields
+
+ }
+
+ rightComparison:  hero(episode:  JEDI)  {
+
+ ...comparisonFields
+
+ }
+
+}
+
+​
+
+fragment  comparisonFields  on  Character  {
+
+ name
+
+ friendsConnection(first:  $first)  {
+
+ totalCount
+
+ edges  {
+
+ node  {
+
+ name
+
+ }
+
+ }
+
+ }
+
+}
+
+​
+
+{
+
+ "data":  {
+
+ "leftComparison":  {
+
+ "name":  "Luke Skywalker",
+
+ "friendsConnection":  {
+
+ "totalCount":  4,
+
+ "edges":  [
+
+ {
+
+ "node":  {
+
+ "name":  "Han Solo"
+
+ }
+
+ },
+
+ {
+
+ "node":  {
+
+ "name":  "Leia Organa"
+
+ }
+
+ },
+
+ {
+
+ "node":  {
+
+ "name":  "C-3PO"
+
+ }
+
+ }
+
+ ]
+
+ }
+
+ },
+
+ "rightComparison":  {
+
+ "name":  "R2-D2",
+
+ "friendsConnection":  {
+
+ "totalCount":  3,
+
+ "edges":  [
+
+ {
+
+ "node":  {
+
+ "name":  "Luke Skywalker"
+
+ }
+
+ },
+
+ {
+
+ "node":  {
+
+ "name":  "Han Solo"
+
+ }
+
+ },
+
+ {
+
+ "node":  {
+
+ "name":  "Leia Organa"
+
+ }
+
+ }
+
+ ]
+
+ }
+
+ }
+
+ }
+
+}
+
+## 작업 이름[](https://graphql-kr.github.io/learn/queries/#)
+
+지금까지는  `query`  키워드와  `query`  이름을 모두 생략 한 단축 문법을 사용했지만, 실제 애플리케이션에서는 코드를 덜 헷갈리게 작성하는 것이 좋습니다.
+
+다음은  `query`  를  _작업 타입_,  `HeroNameAndFriends`  를  _작업 이름_  으로한 예제입니다.
+
+query  HeroNameAndFriends  {
+
+ hero  {
+
+ name
+
+ friends  {
+
+ name
+
+ }
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2",
+
+ "friends":  [
+
+ {
+
+ "name":  "Luke Skywalker"
+
+ },
+
+ {
+
+ "name":  "Han Solo"
+
+ },
+
+ {
+
+ "name":  "Leia Organa"
+
+ }
+
+ ]
+
+ }
+
+ }
+
+}
+
+_작업 타입_  은  _쿼리(`query`)_,  _뮤테이션(`mutation`)_,  _구독(`subscription`)_  이 될 수 있으며, 어떤 작업의 타입인지를 기술합니다.
+
+_작업 이름_  은 의미있고 명시적인 작업의 이름입니다. 디버깅이나 서버 측에서 로깅하는데에 매우 유용 할 수 있습니다. 네트워크 로그나 GraphQL 서버에 문제가 발생하면 내용을 확인하는 대신 코드에서 쿼리 이름을 찾아내는 것이 더 쉽습니다.
+
+좋아하는 프로그래밍 언어의 함수명처럼 생각해보세요.
+
+예를 들어, JavaScript에서는 쉽게 익명 함수를 사용할 수 있지만, 함수에 이름을 부여하면 코드를 디버깅하고 호출되었을 때 로깅하는 것이 더 쉽습니다. 같은 방식으로, GraphQL 쿼리와 뮤테이션 이름과 프래그먼트 이름은 서버 측에서 Graph 요청을 식별하는데 유용한 디버깅 도구가 될 수 있습니다.
+
+## 변수[](https://graphql-kr.github.io/learn/queries/#)
+
+지금까지는 모든 인자를 쿼리 문자열 안에 작성했습니다. 그러나 대부분의 응용프로그램에서 필드에 대한 인자는 동적입니다. 예를 들어, 어떤 스타워즈 에피소드에 관심이 있는지를 선택할 수 있는 드롭다운, 검색필드, 필터 등이 있을 수도 있습니다.
+
+클라이언트 측 코드는 쿼리 문자열을 런타임에 동적으로 조작하고 이를 GraphQL의 특정한 포맷으로 직렬화해야하기 때문에 이러한 동적 인자를 쿼리 문자열에 직접 전달하는 것은 좋은 방법이 아닙니다. 대신 GraphQL은 동적 값을 쿼리에서 없애고, 이를 별도로 전달하는 방법을 제공합니다. 이러한 값을  _변수_  라고 합니다.
+
+변수를 사용하기 위해서는 다음 세 가지 작업을 해야 합니다.
+
+1.  쿼리안의 정적 값을  `$variableName`  으로 변경합니다.
+2.  `$variableName`  을 쿼리에서 받는 변수로 선언합니다.
+3.  별도의 전송규약(일반적으로는 JSON) 변수에  `variableName: value`  을 전달하세요.
+
+다음과 같은 형태를 띄게됩니다.
+
+query  HeroNameAndFriends($episode:  Episode)  {
+
+ hero(episode:  $episode)  {
+
+ name
+
+ friends  {
+
+ name
+
+ }
+
+ }
+
+}
+
+{
+
+ "episode":  "JEDI"
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2",
+
+ "friends":  [
+
+ {
+
+ "name":  "Luke Skywalker"
+
+ },
+
+ {
+
+ "name":  "Han Solo"
+
+ },
+
+ {
+
+ "name":  "Leia Organa"
+
+ }
+
+ ]
+
+ }
+
+ }
+
+}
+
+이제 클라이언트 코드에서 완전히 새로운 쿼리를 작성하지 않고 간단하게 다른 변수를 전달할 수 있습니다. 이는 일반적으로 쿼리의 어떤 인자가 동적인지를 나타내는 좋은 방법이기도합니다. 사용자가 제공한 값으로 문자열 보간을 사용해서는 안됩니다.
+
+### 변수 정의[](https://graphql-kr.github.io/learn/queries/#)
+
+변수 정의는 위 쿼리에서  `($episode: Episode)`  부분입니다. 정적타입 언어의 함수에 대한 인자 정의와 동일합니다.  `$`  접두사가 붙은 모든 변수를 나열하고 그 뒤에 타입(이 경우  `Episode`)이 옵니다.
+
+선언된 모든 변수는  `스칼라`,  `열거형`,  `input object type`이어야 합니다. 복잡한 객체를 필드에 전달하려면 서버에서 일치하는 입력 타입을 알아야합니다. 스키마 페이지에서  `input object type`  에 대해 자세히 알아보세요.
+
+변수 정의는 옵셔널이거나 필수일 수 있습니다. 위의 경우  `Episode`  타입 옆에  `!`  가 없으므로 옵셔널입니다. 그러나 변수를 전달할 필드에 null이 아닌 인자가 요구된다면 변수가 필요하게 됩니다.
+
+이러한 변수 정의 문법에 대한 자세한 내용을 보려면 GraphQL 스키마 언어를 익히는 것이 좋습니다. 스키마 언어는 스키마 페이지에서 자세히 설명합니다.
+
+### 변수 기본값[](https://graphql-kr.github.io/learn/queries/#)
+
+타입 선언 다음에 기본값을 명시하여 쿼리의 변수에 기본값을 할당할 수도 있습니다.
+
+query HeroNameAndFriends($episode: Episode = "JEDI") {
+  hero(episode: $episode) {
+    name
+    friends {
+      name
+    }
+  }
+}
+
+모든 변수에 기본값이 제공되면 변수를 전달하지 않고도 쿼리를 호출할 수 있습니다. 변수가 전달되면 변수는 기본값을 덮어씁니다.
+
+## 지시어[](https://graphql-kr.github.io/learn/queries/#)
+
+위에서는 동적 쿼리를 구현하기 위해 변수를 사용하여 문자열 보간 작업을 피하는 방법에 대해 알아보았습니다. 인자에 변수를 전달하면 이러한 문제를 상당히 해결할 수 있지만, 변수를 사용하여 쿼리의 구조와 형태을 동적으로 변경하는 방법이 필요할 수도 있습니다.
+
+이러한 구성 요소에 대한 쿼리를 작성해 보겠습니다.
+
+query  Hero($episode:  Episode, $withFriends:  Boolean!)  {
+
+ hero(episode:  $episode)  {
+
+ name
+
+ friends  @include(if:  $withFriends)  {
+
+ name
+
+ }
+
+ }
+
+}
+
+{
+
+ "episode":  "JEDI",
+
+ "withFriends":  false
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2"
+
+ }
+
+ }
+
+}
+
+위 변수를 수정하여  `withFriends`  에  `true`  로 변경하고 결과가 어떻게 변하는지 확인해보세요.
+
+이를 위해서는  _지시어_  라는 GraphQL의 새로운 기능을 사용해야 합니다. 지시어는 필드나 프래그먼트 안에 삽입될 수 있으며 서버가 원하는 방식으로 쿼리 실행에 영향을 줄 수 있습니다. 코어 GraphQL 사양에는 두 가지 지시어가 포함되어 있으며, 이는 GraphQL 서버에서 지원해야 합니다.
+
+-   `@include(if: Boolean)`: 인자가  `true`  인 경우에만 이 필드를 결과에 포함합니다.
+-   `@skip(if: Boolean)`  인자가  `true`  이면 이 필드를 건너뜁니다.
+
+지시어는 쿼리의 필드를 추가하고 제거하기 위해 문자열을 조작을 해야하는 상황을 피하는데 유용할 수 있습니다. 서버에서는 새로운 지시어를 정의하여 실험적인 기능을 추가할 수도 있습니다.
+
+## 뮤테이션[](https://graphql-kr.github.io/learn/queries/#)
+
+지금까지 GraphQL에 대한 대부분의 이야기는 데이터 가져오기(`fetch`)에 초점을 맞추었습니다. 하지만 완전한 데이터 플랫폼은 서버 측 데이터를 수정할 수도 있어야합니다.
+
+REST에서는 모든 요청이 서버에 몇 가지 사이드이펙트을 일으킬 수 있지만 규칙에 따라 데이터 수정을 위해  `GET`  요청을 사용하지 않습니다. GraphQL도 마찬가지입니다. 기술적으로는 어떠한 쿼리든 데이터를 수정할 수도 있습니다. 하지만 변경을 발생시키는 작업이 명시적으로 뮤테이션를 통해 전송되어야 한다는 규칙을 정하는 것이 좋습니다.
+
+쿼리와 마찬가지로 뮤테이션 필드가 객체 타입을 반환하면 중첩 필드를 요청할 수 있습니다. 이는 변경된 객체의 새로운 상태를 가져오는 데에 유용합니다. 간단한 뮤테이션 예제를 살펴 보겠습니다.
+
+mutation  CreateReviewForEpisode($ep:  Episode!, $review:  ReviewInput!)  {
+
+ createReview(episode:  $ep, review:  $review)  {
+
+ stars
+
+ commentary
+
+ }
+
+}
+
+{
+
+ "ep":  "JEDI",
+
+ "review":  {
+
+ "stars":  5,
+
+ "commentary":  "This is a great movie!"
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "createReview":  {
+
+ "stars":  5,
+
+ "commentary":  "This is a great movie!"
+
+ }
+
+ }
+
+}
+
+`createReview`  필드가 새로 생성된 리뷰의  `stars`  와  `commentary`  필드를 반환합니다. 이는 하나의 요청으로 필드의 새 값을 변경하고 쿼리할 수 ​​있기 때문에 기존 데이터를 변경하는 경우(예: 필드를 증가시킬 때) 특히 유용합니다.
+
+이 예제에서 전달한  `review`  변수는 스칼라값이 아닙니다. 인자로 전달될 수 있는 특별한 종류의 객체 타입인  _input object type_  입니다. 스키마 페이지의 입력 타입에 대해 자세히 알아보세요.
+
+### 뮤테이션의 다중 필드[](https://graphql-kr.github.io/learn/queries/#)
+
+뮤테이션은 쿼리와 마찬가지로 여러 필드를 포함할 수 있습니다. 쿼리와 뮤테이션 사이에 중요한 차이점이 있습니다.
+
+**쿼리 필드는 병렬로 실행되지만 뮤테이션 필드는 하나씩 차례대로 실행됩니다.**
+
+즉, 하나의 요청에서 두 개의  `incrementCredits`  뮤테이션를 보내면 첫 번째는 두 번째 요청 전에 완료되는 것이 보장됩니다.
+
+## 인라인 프래그먼트[](https://graphql-kr.github.io/learn/queries/#)
+
+다른 여러 타입 시스템과 마찬가지로 GraphQL 스키마에는 인터페이스와 유니온 타입을 정의하는 기능이 포함되어 있습니다.  [스키마 가이드에서 대해 자세히 알아보세요.](https://graphql-kr.github.io/learn/schema/#interfaces)
+
+인터페이스나 유니언 타입을 반환하는 필드를 쿼리하는 경우,  _인라인 프래그먼트_  을 사용해야합니다. 예제를 통해 확인하는 것이 가장 쉽습니다.
+
+query  HeroForEpisode($ep:  Episode!)  {
+
+ hero(episode:  $ep)  {
+
+ name
+
+ ...  on  Droid  {
+
+ primaryFunction
+
+ }
+
+ ...  on  Human  {
+
+ height
+
+ }
+
+ }
+
+}
+
+{
+
+ "ep":  "JEDI"
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2",
+
+ "primaryFunction":  "Astromech"
+
+ }
+
+ }
+
+}
+
+이 쿼리에서  `hero`  필드는  `Character`  를 반환하는데,  `episode`  인자에 따라서  `Human`이나  `Droid`  중 하나일 수 있습니다. 필드를 직접 선택할 때에는  `name`  과 같이  `Character`  인터페이스에 존재하는 필드만 요청할 수 있습니다.
+
+특정한 타입의 필드를 요청하려면 타입 조건과 함께  _인라인 프래그먼트_  을 사용해야합니다. 첫 번째 프래그먼트는  `... on Droid`  라는 레이블이 붙어있기 때문에  `primaryFunction`  필드는  `hero`  에서 반환된  `Character`  가  `Droid`  타입인 경우에만 실행됩니다.  `Human`  타입의  `height`  필드도 마찬가지입니다.
+
+### 메타 필드[](https://graphql-kr.github.io/learn/queries/#)
+
+GraphQL 서비스에서 리턴될 타입을 모르는 상황이 발생하면 클라이언트에서 해당 데이터를 처리하는 방법을 결정할 방법이 필요합니다. GraphQL을 사용하면 쿼리의 어느 지점에서나 메타 필드인  `__typename`  을 요청하여 그 시점에서 객체 타입의 이름을 얻을 수 있습니다.
+
+{
+
+ search(text:  "an")  {
+
+ __typename
+
+ ...  on  Human  {
+
+ name
+
+ }
+
+ ...  on  Droid  {
+
+ name
+
+ }
+
+ ...  on  Starship  {
+
+ name
+
+ }
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "search":  [
+
+ {
+
+ "__typename":  "Human",
+
+ "name":  "Han Solo"
+
+ },
+
+ {
+
+ "__typename":  "Human",
+
+ "name":  "Leia Organa"
+
+ },
+
+ {
+
+ "__typename":  "Starship",
+
+ "name":  "TIE Advanced x1"
+
+ }
+
+ ]
+
+ }
+
+}
+
+위 쿼리에서  `search`  는 3 가지 중 하나인 유니언 타입을 반환합니다.  `__typename`  필드가 없으면 클라이언트가 다른 타입을 구별하는 것은 불가능할 것입니다.
+
+GraphQL 서비스는 몇 가지 메타 필드를 제공하며, 나머지는  [Introspection](https://graphql-kr.github.io/learn/Introspection/)  시스템을 노출하는 데 사용됩니다.
+
+
+----
+
+# [스키마 & 타입](https://graphql-kr.github.io/learn/schema/)
+
+이 글에서는 GraphQL 타입 시스템과 데이터를 표현하는 방법을 배우게됩니다. GraphQL은 어떠한 백엔드 프레임워크나 프로그래밍 언어든 함께 사용할 수 있기 때문에 세부적인 구현에서 벗어나 개념에 대해서만 이야기하도록 하겠습니다.
+
+### 타입 시스템[](https://graphql-kr.github.io/learn/schema/#)
+
+전에 GraphQL 쿼리를 본 적이 있다면 GraphQL 쿼리 언어는 기본적으로 객체의 필드를 선택하는 것을 알 수 있습니다. 다음 쿼리 예제를 봅시다.
+
+{
+
+ hero  {
+
+ name
+
+ appearsIn
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ }
+
+ }
+
+}
+
+1.  `root`  객체로 시작합니다.
+2.  `hero`  필드를 선택합니다.
+3.  `hero`  에 의해 반환된 객체에 대해  `name`  과  `appearIn`  필드를 선택합니다.
+
+GraphQL 쿼리의 형태가 결과와 거의 일치하기 때문에 서버에 대해 모르는 상태에서 쿼리가 반환할 결과를 예측할 수 있습니다. 하지만 서버에 요청할 수 있는 데이터에 대한 정확한 표현을 갖는 것이 좋습니다. 어떤 필드를 선택할 수 있는지, 어떤 종류의 객체를 반환할 수 있는지, 하위 객체에서 사용할 수 있는 필드는 무엇인지, 이것이 바로 스키마가 필요한 이유입니다.
+
+모든 GraphQL 서비스는 해당 서비스에서 쿼리 가능한 데이터들을 완벽하게 설명하는 타입들을 정의하고, 쿼리가 들어오면 해당 스키마에 대해 유효성이 검사된 후 실행됩니다.
+
+### 타입 언어[](https://graphql-kr.github.io/learn/schema/#)
+
+GraphQL 서비스는 어떤 언어로든 작성할 수 있습니다. GraphQL 스키마에 대해 이야기하기 전에 JavaScript와 같은 특정 언어 문법에 의존 할 수 없기 때문에 간단한 언어를 정의할 것입니다. 여기서는  `GraphQL 스키마 언어(GraphQL schema language)`  를 사용할 것입니다. 이것은 쿼리 언어와 비슷하며, GraphQL 스키마를 언어에 의존적이지 않은 방식으로 표현할 수 있게 해줍니다.
+
+### 객체 타입과 필드[](https://graphql-kr.github.io/learn/schema/#)
+
+GraphQL 스키마의 가장 기본적인 구성 요소는 객체 타입입니다. 객체 타입은 서비스에서 가져올 수 있는 객체의 종류와 그 객체의 필드를 나타냅니다. GraphQL 스키마 언어에서는 다음과 같이 표현할 수 있습니다.
+
+type Character {
+  name: String!
+  appearsIn: [Episode]!
+}
+
+위 언어는 꽤 읽을만하지만, 이해가 쉽도록 이 언어를 살펴 보겠습니다.
+
+-   `Character`  는  _GraphQL 객체 타입_  입니다. 즉, 필드가 있는 타입입니다. 스키마의 대부분의 타입은 객체 타입입니다.
+-   `name`  과  `appearIn`  은  `Character`  타입의  _필드_  입니다. 즉  `name`  과  `appearIn`  은 GraphQL 쿼리의  `Character`  타입 어디서든 사용할 수 있는 필드입니다.
+-   `String`  은 내장된  _스칼라_  타입 중 하나입니다. 이는 스칼라 객체로 해석되는 타입이며 쿼리에서 하위 선택을 할 수 없습니다. 스칼라 타입은 나중에 자세히 다룰 것입니다.
+-   `String!`  은 필드가  _non-nullable_  임을 의미합니다. 즉, 이 필드를 쿼리할 때 GraphQL 서비스가 항상 값을 반환한다는 것을 의미합니다. 타입 언어에서는 이것을 느낌표로 나타냅니다.
+-   `[Episode]!`  는  `Episode`  객체의  _배열(array)_  을 나타냅니다. 또한  _non-nullable_  이기 때문에  `appearIn`  필드를 쿼리할 때 항상(0개 이상의 아이템을 가진) 배열을 기대할 수 있습니다.
+
+이제 GraphQL 객체 타입이 무엇인지 배웠으며, 기본적인 GraphQL 타입 언어를 읽을 수 있을 것입니다.
+
+### 인자[](https://graphql-kr.github.io/learn/schema/#)
+
+GraphQL 객체 타입의 모든 필드는 0개 이상의 인수를 가질 수 있습니다(예: 아래  `length`  필드).
+
+type Starship {
+  id: ID!
+  name: String!
+  length(unit: LengthUnit = METER): Float
+}
+
+모든 인수에는 이름이 있습니다. 함수가 순서있는 인자를 가져오는 JavaScript나 Python과 같은 언어와 달리 GraphQL의 모든 인자는 특별한 이름으로 전달됩니다. 이 경우,  `length`  필드는 하나의 인자  `unit`  을 가집니다.
+
+인자는 필수거나 옵셔널일 수 있습니다. 인자가 옵셔널인 경우  _기본값_  을 정의할 수 있습니다.  `unit`  인자가 전달되지 않으면 기본적으로  `METER`  로 설정됩니다.
+
+### 쿼리 타입 & 뮤테이션 타입[](https://graphql-kr.github.io/learn/schema/#)
+
+스키마 대부분의 타입은 일반 객체 타입이지만 스키마 내에는 특수한 두 가지 타입이 있습니다.
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+모든 GraphQL 서비스는  `query`  타입을 가지며  `mutation`  타입은 가질 수도 있고 가지지 않을 수도 있습니다. 이러한 타입은 일반 객체 타입과 동일하지만 모든 GraphQL 쿼리의  _진입점(entry point)_  을 정의하므로 특별합니다. 따라서 다음과 같은 쿼리를 볼 수 있습니다.
+
+query  {
+
+ hero  {
+
+ name
+
+ }
+
+ droid(id:  "2000")  {
+
+ name
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2"
+
+ },
+
+ "droid":  {
+
+ "name":  "C-3PO"
+
+ }
+
+ }
+
+}
+
+즉, GraphQL 서비스는  `hero`  및  `droid`  필드가 있는  `Query`  타입이 있어야합니다.
+
+type Query {
+  hero(episode: Episode): Character
+  droid(id: ID!): Droid
+}
+
+뮤테이션도 비슷한 방식으로 작동합니다. 즉,  `Mutation`  타입의 필드를 정의하면 쿼리에서 호출할 수 있는 루트 뮤테이션 필드로 사용할 수 있습니다.
+
+스키마에 대한  `진입점`  이라는 특수한 점 이외의 쿼리 타입과 뮤테이션 타입은 다른 GraphQL 객체 타입과 동일하며 해당 필드는 정확히 동일한 방식으로 작동한다는 점을 기억하세요.
+
+### 스칼라 타입[](https://graphql-kr.github.io/learn/schema/#)
+
+GraphQL 객체 타입은 이름과 필드를 가지지만, 어떤 시점에서 이 필드는 구체적인 데이터로 해석되어야합니다. 이것이 스칼라 타입이 필요한 이유입니다. 즉, 쿼리의 끝을 나타냅니다.
+
+다음 쿼리에서  `name`  과  `appearIn`  은 스칼라 타입으로 해석될 것입니다.
+
+{
+
+ hero  {
+
+ name
+
+ appearsIn
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ }
+
+ }
+
+}
+
+해당 필드에 하위 필드가 없기 때문에 이를 알 수 있습니다. 이 필드는 쿼리의 끝부분입니다.
+
+GraphQL 에서는 스칼라 타입들이 기본 제공됩니다.
+
+-   `Int`: 부호가 있는 32비트 정수.
+-   `Float`: 부호가 있는 부동소수점 값.
+-   `String`: UTF-8 문자열.
+-   `Boolean`:  `true`  또는  `false`.
+-   `ID`: ID 스칼라 타입은 객체를 다시 요청하거나 캐시의 키로써 자주 사용되는 고유 식별자를 나타냅니다. ID 타입은 String 과 같은 방법으로 직렬화되지만,  `ID`  로 정의하는 것은 사람이 읽을 수 있도록 하는 의도가 아니라는 것을 의미합니다.
+
+대부분의 GraphQL 구현에는 커스텀 스칼라 타입을 지정하는 방법이 있습니다. 예를 들면,  `Date`  타입을 정의할 수 있습니다.
+
+scalar Date
+
+해당 타입을 직렬화, 역 직렬화, 유효성 검사하는 방법을 구현할 수 있습니다. 예를 들어,  `Date`  타입을 항상 정수형 타임스탬프로 직렬화해야 한다는 것을 지정할 수 있습니다. 그리고 클라이언트는 모든 날짜 필드에 대해 해당 타입을 기대할 수 있을 것입니다.
+
+### 열거형 타입[](https://graphql-kr.github.io/learn/schema/#)
+
+_Enums_  라고도 하는 열거형 타입은 특정 값들로 제한되는 특별한 종류의 스칼라입니다. 이를 통해 다음과 같은 작업을 할 수 있습니다.
+
+1.  타입의 인자가 허용된 값 중 하나임을 검증합니다.
+2.  필드가 항상 값의 열거형 집합 중 하나가 될 것임을 타입 시스템을 통해 의사소통합니다.
+
+GraphQL 스키마 언어에서 열거형 타입 정의가 어떻게 생겼는지 봅시다.
+
+enum Episode {
+  NEWHOPE
+  EMPIRE
+  JEDI
+}
+
+즉, 스키마에서  `Episode`  타입을 사용할 때마다 정확히  `NEWHOPE`,  `EMPIRE`,  `JEDI`  중 하나일 것입니다.
+
+다양한 언어로 작성된 GraphQL 서비스 구현은 열거형 타입을 처리 할 수 있는 언어별 고유한 방법을 갖습니다.  `enum`  을 지원하는 언어에서는 구현시 이를 활용할 수 있습니다. 열거형 타입이 없는 JavaScript와 같은 언어에서 이러한 값은 내부적으로 정수 집합에 매핑될 수 있습니다. 하지만 이러한 세부 정보는 클라이언트에 노출되지 않으며, 열거형 값의 문자열로만 작동합니다.
+
+### 리스트와 Non-Null[](https://graphql-kr.github.io/learn/schema/#non-null)
+
+객체 타입, 스칼라 타입, 열거형 타입은 GraphQL 에서 정의할 수 있는 유일한 타입입니다. 하지만 스키마의 다른 부분이나 쿼리 변수 선언에서 타입을 사용하면 해당 값의 유효성 검사를 할 수 있는  _타입 수정자(type modifiers)_  를 적용할 수 있습니다. 예제를 살펴봅시다.
+
+type Character {
+  name: String!
+  appearsIn: [Episode]!
+}
+
+`String`  타입을 사용하고 타입 뒤에 느낌표  `!`  를 추가하여  _Non-Null_  로 표시했습니다. 즉, 서버는 항상 이 필드에 대해 null이 아닌 값을 반환할 것을 기대하며, null값이 발생되면 GraphQL 실행 오류가 발생하고, 클라이언트에게 무언가 잘못되었음을 알립니다.
+
+Non-Null 타입 수정자는 필드에 대한 인자를 정의할 때도 사용할 수 있습니다. 이는 GraphQL 서버가 문자열이나 변수 상관없이 null 값이 해당 인자로 전달되는 경우, 유효성 검사 오류를 반환하게 합니다.
+
+query  DroidById($id:  ID!)  {
+
+ droid(id:  $id)  {
+
+ name
+
+ }
+
+}
+
+{
+
+ "id":  null
+
+}
+
+{
+
+ "errors":  [
+
+ {
+
+ "message":  "Variable \"$id\" of required type \"ID!\" was not provided.",
+
+ "locations":  [
+
+ {
+
+ "line":  1,
+
+ "column":  17
+
+ }
+
+ ]
+
+ }
+
+ ]
+
+}
+
+리스트도 비슷한 방식으로 동작합니다. 타입 수정자를 사용하여 타입을  `List`  로 표시할 수 있습니다. 이 필드는 해당 타입의 배열을 반환합니다. 스키마 언어에서, 타입을 대괄호  `[]`  로 묶는 것으로 표현됩니다. 유효성 검사 단계에서 해당 값에 대한 배열이 필요한 인자에 대해서도 동일하게 작동합니다.
+
+Non-Null 및 List 수정자를 결합할 수도 있습니다. 예를 들면, Null이 아닌 문자열 리스트를 가질 수 있습니다.
+
+myField: [String!]
+
+즉,  _list_  자체는 null 일 수 있지만, null 을 가질 수 없습니다. 예를 들면,
+
+myField: null // valid
+myField: [] // valid
+myField: ['a', 'b'] // valid
+myField: ['a', null, 'b'] // error
+
+null 이 아닌 문자열 리스트를 정의했다고 가정해봅시다.
+
+myField: [String]!
+
+목록 자체는 null 일 수 없지만, null 값을 포함할 수 있습니다.
+
+myField: null // error
+myField: [] // valid
+myField: ['a', 'b'] // valid
+myField: ['a', null, 'b'] // valid
+
+필요에 따라 여러개의 Null, List 수정자를 중첩할 수 있습니다.
+
+### 인터페이스[](https://graphql-kr.github.io/learn/schema/#)
+
+여러 타입 시스템과 마찬가지로 GraphQL도 인터페이스를 지원합니다.  _인터페이스_  는 이를 구현하기 위해 타입이 포함해야하는 특정 필드들을 포함하는 추상 타입입니다.
+
+예를 들면, Star Wars 3부작의 모든 캐릭터들을 표현하는  `Character`  인터페이스를 가질 수 있습니다.
+
+interface Character {
+  id: ID!
+  name: String!
+  friends: [Character]
+  appearsIn: [Episode]!
+}
+
+이것은  `Character`  를  _구현한(implements)_  모든 타입은 이러한 인자와 리턴 타입을 가진 정확한 필드를 가져야한다는 것을 의미합니다.
+
+다음은  `Character`  를 구현한 몇 가지 타입 예제입니다.
+
+type Human implements Character {
+  id: ID!
+  name: String!
+  friends: [Character]
+  appearsIn: [Episode]!
+  starships: [Starship]
+  totalCredits: Int
+}
+
+type Droid implements Character {
+  id: ID!
+  name: String!
+  friends: [Character]
+  appearsIn: [Episode]!
+  primaryFunction: String
+}
+
+두 타입 모두  `Character`  인터페이스의 모든 필드를 가지고 있습니다. 또한 특정 캐릭터에 추가 필드  `totalCredits`,`starships`,  `primaryFunction`  을 가질 수도 있습니다.
+
+인터페이스는 객체나 객체리스트를 반환하려는 경우에 유용하지만, 다양한 다른 타입이 있을 수도 있습니다.
+
+예를 들면, 다음 쿼리는 오류를 반환합니다.
+
+query  HeroForEpisode($ep:  Episode!)  {
+
+ hero(episode:  $ep)  {
+
+ name
+
+ primaryFunction
+
+ }
+
+}
+
+{
+
+ "ep":  "JEDI"
+
+}
+
+{
+
+ "errors":  [
+
+ {
+
+ "message":  "Cannot query field \"primaryFunction\" on type \"Character\". Did you mean to use an inline fragment on \"Droid\"?",
+
+ "locations":  [
+
+ {
+
+ "line":  4,
+
+ "column":  5
+
+ }
+
+ ]
+
+ }
+
+ ]
+
+}
+
+`hero`  필드는  `Character`  타입을 반환하는데,  `episode`  인자에 따라  `Human`,  `Droid`  중 하나일 수 있습니다. 위 쿼리는  `primaryFunction`  을 포함하지 않는  `Character`  인터페이스에 존재하는 필드만 요청할 수 있습니다.
+
+특정 객체 타입의 필드를 요청하려면 인라인 프래그먼트을 사용해야합니다.
+
+query  HeroForEpisode($ep:  Episode!)  {
+
+ hero(episode:  $ep)  {
+
+ name
+
+ ...  on  Droid  {
+
+ primaryFunction
+
+ }
+
+ }
+
+}
+
+{
+
+ "ep":  "JEDI"
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2",
+
+ "primaryFunction":  "Astromech"
+
+ }
+
+ }
+
+}
+
+이에 대한 자세한 내용은 쿼리 가이드의  [인라인 프래그먼트](https://graphql-kr.github.io/learn/queries/#inline-fragments)  장을 참조하세요.
+
+### 유니온 타입[](https://graphql-kr.github.io/learn/schema/#)
+
+유니온 타입은 인터페이스와 매우 유사하지만, 타입 간에 공통 필드를 특정하지 않습니다.
+
+union SearchResult = Human | Droid | Starship
+
+스키마에서  `SearchResult`  타입을 반환 할 때마다,  `Human`,  `Droid`,  `Starship`  을 얻을 수 있습니다. 유니온 타입의 멤버는 구체적인 객체 타입이어야 합니다. 인터페이스나 유니온 타입에서 다른 유니온 타입을 사용할 수 없습니다.
+
+이 경우,  `SearchResult`  유니언 타입을 반환하는 필드를 쿼리하면, 어떤 필드라도 쿼리할 수 있는 조건부 프래그먼트를 사용해야합니다.
+
+{
+
+ search(text:  "an")  {
+
+ ...  on  Human  {
+
+ name
+
+ height
+
+ }
+
+ ...  on  Droid  {
+
+ name
+
+ primaryFunction
+
+ }
+
+ ...  on  Starship  {
+
+ name
+
+ length
+
+ }
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "search":  [
+
+ {
+
+ "name":  "Han Solo",
+
+ "height":  1.8
+
+ },
+
+ {
+
+ "name":  "Leia Organa",
+
+ "height":  1.5
+
+ },
+
+ {
+
+ "name":  "TIE Advanced x1",
+
+ "length":  9.2
+
+ }
+
+ ]
+
+ }
+
+}
+
+### 입력 타입[](https://graphql-kr.github.io/learn/schema/#)
+
+지금까지는 열거형 타입이나 문자열과 같은 스칼라 값을 인자로 필드에 전달하는 방법에 대해서만 설명했습니다. 하지만 복잡한 객체도 쉽게 전달할 수 있습니다. 이는 뮤테이션에서 특히 유용합니다. 뮤테이션은 생성될 전체 객체를 전달하고자 할 수 있습니다. GraphQL 스키마 언어에서 입력 타입은 일반 객체 타입과 정확히 같지만,  `type`  대신  `input`  을 사용합니다.
+
+input ReviewInput {
+  stars: Int!
+  commentary: String
+}
+
+다음은 뮤테이션에서 입력 객체 타입을 사용하는 방법입니다.
+
+mutation  CreateReviewForEpisode($ep:  Episode!, $review:  ReviewInput!)  {
+
+ createReview(episode:  $ep, review:  $review)  {
+
+ stars
+
+ commentary
+
+ }
+
+}
+
+{
+
+ "ep":  "JEDI",
+
+ "review":  {
+
+ "stars":  5,
+
+ "commentary":  "This is a great movie!"
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "createReview":  {
+
+ "stars":  5,
+
+ "commentary":  "This is a great movie!"
+
+ }
+
+ }
+
+}
+
+입력 객체 타입의 입력란은 입력 객체 타입을 참조할 수 있지만, 입력 및 출력 타입을 스키마에 혼합할 수는 없습니다. 또한 필드에 인자를 가질 수 없습니다.
+
+----
+
+# [검증](https://graphql-kr.github.io/learn/validation/)
+
+타입 시스템을 사용하면 GraphQL 쿼리가 유효한지 여부를 미리 알 수 있습니다. 이를 통해 런타임 검사에 의존하지 않고도 유효하지 않은 쿼리가 생성되었을 때 서버와 클라이언트가 효과적으로 개발자에게 알릴 수 있습니다.
+
+Star Wars  [starWarsValidation-test.js](https://github.com/graphql/graphql-js/blob/master/src/__tests__/starWarsValidation-test.js)  예제 파일에는 여러가지 유효하지 않은 쿼리가 구현되어 있으며, 참조 구현의 검사기를 실행할 수있는 테스트 파일입니다.
+
+먼저 복잡한 중첩 쿼리를 작성해 보겠습니다. 이전 섹션의 예제와 비슷하지만, 이는 중복된 필드를 프래그먼트로 묶은 쿼리입니다.
+
+{
+
+ hero  {
+
+ ...NameAndAppearances
+
+ friends  {
+
+ ...NameAndAppearances
+
+ friends  {
+
+ ...NameAndAppearances
+
+ }
+
+ }
+
+ }
+
+}
+
+​
+
+fragment  NameAndAppearances  on  Character  {
+
+ name
+
+ appearsIn
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ],
+
+ "friends":  [
+
+ {
+
+ "name":  "Luke Skywalker",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ],
+
+ "friends":  [
+
+ {
+
+ "name":  "Han Solo",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ },
+
+ {
+
+ "name":  "Leia Organa",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ },
+
+ {
+
+ "name":  "C-3PO",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ },
+
+ {
+
+ "name":  "R2-D2",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ }
+
+ ]
+
+ },
+
+ {
+
+ "name":  "Han Solo",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ],
+
+ "friends":  [
+
+ {
+
+ "name":  "Luke Skywalker",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ },
+
+ {
+
+ "name":  "Leia Organa",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ },
+
+ {
+
+ "name":  "R2-D2",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ }
+
+ ]
+
+ },
+
+ {
+
+ "name":  "Leia Organa",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ],
+
+ "friends":  [
+
+ {
+
+ "name":  "Luke Skywalker",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ },
+
+ {
+
+ "name":  "Han Solo",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ },
+
+ {
+
+ "name":  "C-3PO",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ },
+
+ {
+
+ "name":  "R2-D2",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ]
+
+ }
+
+ ]
+
+ }
+
+ ]
+
+ }
+
+ }
+
+}
+
+이 쿼리는 유효합니다. 잘못된 쿼리 몇 가지를 살펴보겠습니다.
+
+아래의 경우 무한한 결과를 초래할 수 있으므로 프래그먼트가 자기자신을 참조하거나 싸이클을 만들 수 없습니다! 아래는 명시적으로 세단계 중첩은 없지만 위와 동일한 쿼리입니다.
+
+{
+
+ hero  {
+
+ ...NameAndAppearancesAndFriends
+
+ }
+
+}
+
+​
+
+fragment  NameAndAppearancesAndFriends  on  Character  {
+
+ name
+
+ appearsIn
+
+ friends  {
+
+ ...NameAndAppearancesAndFriends
+
+ }
+
+}
+
+{
+
+ "errors":  [
+
+ {
+
+ "message":  "Cannot spread fragment \"NameAndAppearancesAndFriends\" within itself.",
+
+ "locations":  [
+
+ {
+
+ "line":  11,
+
+ "column":  5
+
+ }
+
+ ]
+
+ }
+
+ ]
+
+}
+
+필드를 쿼리 할 때, 주어진 타입에 존재하는 필드를 쿼리해야합니다.  `hero`  는  `Character`  를 반환합니다. 그렇기 때문에  `Character`  에 존재하는 필드를 쿼리해야합니다. 아래 타입은  `favoriteSpaceship`  필드를 가지고 있지 않으므로 이 쿼리는 유효하지 않습니다.
+
+# INVALID: favoriteSpaceship does not exist on Character
+
+{
+
+ hero  {
+
+ favoriteSpaceship
+
+ }
+
+}
+
+{
+
+ "errors":  [
+
+ {
+
+ "message":  "Cannot query field \"favoriteSpaceship\" on type \"Character\".",
+
+ "locations":  [
+
+ {
+
+ "line":  4,
+
+ "column":  5
+
+ }
+
+ ]
+
+ }
+
+ ]
+
+}
+
+필드를 쿼리 할 때마다 스칼라나 열거형이 아닌 타입을 반환한다면 필드에서 어떤 데이터를 얻고자 하는지를 명시해야합니다.  `Hero`  는  `Character`  를 반환하기 때문에,  `name`  과  `appearIn`  과 같은 필드를 요청했었습니다. 하지만 이를 생략하면 쿼리가 유효하지 않습니다.
+
+# INVALID: hero is not a scalar, so fields are needed
+
+{
+
+ hero
+
+}
+
+{
+
+ "errors":  [
+
+ {
+
+ "message":  "Field \"hero\" of type \"Character\" must have a selection of subfields. Did you mean \"hero { ... }\"?",
+
+ "locations":  [
+
+ {
+
+ "line":  3,
+
+ "column":  3
+
+ }
+
+ ]
+
+ }
+
+ ]
+
+}
+
+마찬가지로 필드가 스칼라인 경우에는 추가적인 필드를 요청하는 것은 의미가 없기 때문에 쿼리가 유효하지 않게됩니다.
+
+# INVALID: name is a scalar, so fields are not permitted
+
+{
+
+ hero  {
+
+ name  {
+
+ firstCharacterOfName
+
+ }
+
+ }
+
+}
+
+{
+
+ "errors":  [
+
+ {
+
+ "message":  "Field \"name\" must not have a selection since type \"String!\" has no subfields.",
+
+ "locations":  [
+
+ {
+
+ "line":  4,
+
+ "column":  10
+
+ }
+
+ ]
+
+ }
+
+ ]
+
+}
+
+위에서, 쿼리는 해당 타입의 필드만 쿼리 할 수 ​​있다는 점을 배웠습니다.  `Character`  를 반환하는  `hero`  를 쿼리 할 때  `Character`  에 있는 필드만 쿼리 할 수 ​​있습니다. 만약  `R2-D2`  의  `primaryFunction`  을 쿼리하고자 한다면, 어떤일이 일어날까요?
+
+# INVALID: primaryFunction does not exist on Character
+
+{
+
+ hero  {
+
+ name
+
+ primaryFunction
+
+ }
+
+}
+
+{
+
+ "errors":  [
+
+ {
+
+ "message":  "Cannot query field \"primaryFunction\" on type \"Character\". Did you mean to use an inline fragment on \"Droid\"?",
+
+ "locations":  [
+
+ {
+
+ "line":  5,
+
+ "column":  5
+
+ }
+
+ ]
+
+ }
+
+ ]
+
+}
+
+`primaryFunction`  이  `Character`  의 필드가 아니기 때문에 이 쿼리는 유효하지 않습니다.  `Character`  가  `Droid`  인 경우에만  `primaryFunction`  을 가져오고 그 외엔 그 필드를 무시하는 방법이 있어야합니다. 이전에 소개한 프래그먼트을 사용하여 이를 수행할 수 있습니다.  `Droid`  에 정의된 프래그먼트를 선언하여, 정의된 곳에서만  `primaryFunction`  을 쿼리합니다.
+
+{
+
+ hero  {
+
+ name
+
+ ...DroidFields
+
+ }
+
+}
+
+​
+
+fragment  DroidFields  on  Droid  {
+
+ primaryFunction
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2",
+
+ "primaryFunction":  "Astromech"
+
+ }
+
+ }
+
+}
+
+이 쿼리는 유효하지만, 조금 과하다고 생각할 수 있습니다. 이름이 있는(named) 프래그먼트는 재사용할 때 비로소 가치가 있지만, 여기서는 단 한 번만 사용했기 때문입니다. 이경우에는 이름이 있는 프래그먼트를 사용하는 대신 인라인 프래그먼트을 사용할 수 있습니다. 이는 ​​별도의 프래그먼트를 분리하지 않고 쿼리하는 타입을 표현할 수 있도록 도와줍니다.
+
+{
+
+ hero  {
+
+ name
+
+ ...  on  Droid  {
+
+ primaryFunction
+
+ }
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "hero":  {
+
+ "name":  "R2-D2",
+
+ "primaryFunction":  "Astromech"
+
+ }
+
+ }
+
+}
+
+이것은 검증 시스템의 극히 일부입니다. GraphQL 쿼리는 의미있음을 보장하기 위한 다양한 유효성 검사 규칙이 있습니다. 명세의 "검증(Validation)" 섹션에서 이 주제에 대하여 좀 더 상세히 설명하며, GraphQL.js의  [검증](https://github.com/graphql/graphql-js/blob/master/src/validation)  디렉토리에는 사양을 준수하는 GraphQL 검사 코드가 있습니다.
+
+----
+
+# [실행](https://graphql-kr.github.io/learn/execution/)
+
+유효성검사를 한 후, GraphQL 쿼리는 GraphQL 서버에서 실행되어, 요청된 쿼리와 똑같은 형태의 결과를 반환합니다. 일반적으로 JSON 형태입니다.
+
+GraphQL은 타입시스템 없이 쿼리를 실행할 수 없습니다. 예제를 통해 쿼리 실행에 대하여 설명하겠습니다. 아래는 이전 예제와 동일한 일부 타입 시스템입니다.
+
+type Query {
+  human(id: ID!): Human
+}
+
+type Human {
+  name: String
+  appearsIn: [Episode]
+  starships: [Starship]
+}
+
+enum Episode {
+  NEWHOPE
+  EMPIRE
+  JEDI
+}
+
+type Starship {
+  name: String
+}
+
+쿼리가 실행될 때 어떤 일이 발생하는지 예제로 살펴 보겠습니다.
+
+{
+
+ human(id:  1002)  {
+
+ name
+
+ appearsIn
+
+ starships  {
+
+ name
+
+ }
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "human":  {
+
+ "name":  "Han Solo",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ],
+
+ "starships":  [
+
+ {
+
+ "name":  "Millenium Falcon"
+
+ },
+
+ {
+
+ "name":  "Imperial shuttle"
+
+ }
+
+ ]
+
+ }
+
+ }
+
+}
+
+GraphQL 쿼리의 각 필드는 다음 타입을 반환하는 타입의 함수로 생각할 수 있습니다. 사실 이것이 GraphQL의 작동방식입니다. 타입의 각 필드는 GraphQL 서버개발자가 만든  `resolver`  함수에 의해 실행됩니다. 필드가 실행되면 해당  `resolver`  가 호출되어 다음 값을 생성합니다.
+
+필드가 문자열이나 숫자 같은 스칼라 값을 반환하면 실행이 완료됩니다. 하지만 필드가 객체를 반환하면 쿼리는 해당 객체에 적용되는 다른 필드들을 포함하게됩니다. 이는 스칼라 값에 도달할 때까지 반복됩니다. GraphQL 쿼리의 끝은 항상 스칼라 값입니다.
+
+## 루트 필드 & resolvers[](https://graphql-kr.github.io/learn/execution/#resolvers)
+
+모든 GraphQL 서버의 최상위 레벨은 GraphQL API에서 사용 가능한 모든 진입점을 나타내는 타입으로,  `Root`  타입 또는  `Query`  타입이라고도 합니다.
+
+아래 예제에서  `Query`  타입은 인자  `id`  를 받아  `human`  필드를 반환합니다. 이 필드의  `resolver`  함수는 데이터베이스에 접근한 다음  `Human`  객체를 생성하고 반환합니다.
+
+Query: {
+  human(obj, args, context) {
+    return context.db.loadHumanByID(args.id).then(
+      userData => new Human(userData)
+    )
+  }
+}
+
+이 예제는 자바스크립트로 작성되었지만 GraphQL 서버는  [다양한 언어](https://graphql-kr.github.io/code/)로 만들 수 있습니다.  `resolver`  함수는 네 개의 인수를 받습니다.
+
+-   `obj`: 대부분 사용되지 않는 루트  `Query`  타입의 이전 객체.
+-   `args`: GraphQL 쿼리의 필드에 제공된 인수.
+-   `context`: 모든  `resolver`  함수에 전달되며, 현재 로그인한 사용자, 데이터베이스 액세스와 같은 중요한 문맥 정보를 보유하는 값.
+-   `info`: 현재 쿼리, 스키마 정보와 관련된 필드별 정보를 보유하는 값. 자세한 내용은  [type GraphQLResolveInfo](https://graphql-kr.github.io/graphql-js/type/#graphqlobjecttype)  참조.
+
+## 비동기 resolvers[](https://graphql-kr.github.io/learn/execution/#resolvers-1)
+
+아래  `resolver`  함수에서 어떤 일이 일어나는지 자세히 살펴보겠습니다.
+
+human(obj, args, context) {
+  return context.db.loadHumanByID(args.id).then(
+    userData => new Human(userData)
+  )
+}
+
+`context`  는 GraphQL 쿼리 인자로 제공된  `id`  로 사용자 데이터를 로드하는데 사용되는 데이터베이스 액세스를 위해 사용됩니다. 데이터베이스 로딩은 비동기 작업이기 때문에  [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)를 반환합니다. JavaScript에서는  `Promise`  를 사용하여 비동기 값을 처리하지만, 동일한 개념이  `Futures`  ,  `Tasks`  ,  `Deferred`  등 여러가지 언어로 존재합니다. 데이터베이스가 반환되면 새로운  `Human`  객체를 생성하고 반환할 수 있습니다.
+
+`resolver`  함수는  `Promise`  를 인식해야하지만 GraphQL 쿼리는  `Promise`  를 인식할 필요가 없습니다.  `human`  필드는  `name`  을 요청할 수 있는 무언가를 반환할 것입니다. 실행할 때, GraphQL은  `Promises`,  `Futures`,  `Tasks`  가 완료될 때까지 기다렸다가 효율적으로 동시에 처리합니다.
+
+## 기본 resolvers[](https://graphql-kr.github.io/learn/execution/#resolvers-2)
+
+이제  `Human`  객체를 사용할 수 있게 되었으므로, GraphQL 은 요청된 필드를 사용할 수 있습니다.
+
+Human: {
+  name(obj, args, context) {
+    return obj.name
+  }
+}
+
+GraphQL 서버는 타입 시스템을 통해 작동하며, 이는 다음에 어떤 작업을 수행해야할지 결정해줍니다.  `human`  필드가 무언가를 반환하기 전에, GraphQL은 타입 시스템 덕분에  `human`  필드가  `Human`  을 반환할 것을 이미 알고 있습니다.
+
+이 경우  `name`  을  `resolve`  하는 것은 매우 간단합니다.  `name resolver`  함수가 호출되며,  `obj`  인자는 이전 필드에서 반환된  `new Human`  객체입니다.  `Human`  객체는 바로 반환할 수 있는  `name`  속성을 가질 것을 알 수 있습니다.
+
+사실, 많은 GraphQL 라이브러리는  `resolver`  를 생략할 수 있게 해주며,  `resolver`  가 필드에 제공되지 않으면 같은 이름의 속성을 읽고 반환한다고 가정합니다.
+
+## 스칼라 강제[](https://graphql-kr.github.io/learn/execution/#)
+
+`name`  필드가  `resolve`  되는 동안  `appearIn`  과  `starships`  필드는 동시에  `resolve`  될 수 있습니다.  `appearIn`  필드는 간단한  `resolver`  를 가질 수도 있지만, 좀 더 자세히 살펴보도록 하겠습니다.
+
+Human: {
+  appearsIn(obj) {
+    return obj.appearsIn // returns [ 4, 5, 6 ]
+  }
+}
+
+타입 시스템이  `appearIn`  이 열거형 값을 반환한다고 알려주지만, 이 함수는 숫자를 반환합니다. 실제로 결과를 살펴보면 적절한 열거형 값이 반환되는 것을 볼 수 있습니다. 어떻게된 일일까요?
+
+이것은 스칼라 강제의 예시입니다. 타입 시스템은 어떤 값이 반환될지 알고 있어서  `resolver`  함수에 의해 리턴된 값을 API 규약을 유지할 수 있는 형태로 변환할 것입니다. 이 경우 내부적으로  `4`,`5`,`6`  과 같은 숫자를 사용하는 열거형이 서버에 정의되어 있을 수 있지만, GraphQL 타입 시스템에서는 이를 열거형 값으로 나타냅니다.
+
+## 리스트 resolvers[](https://graphql-kr.github.io/learn/execution/#resolvers-3)
+
+필드가 위의  `appearIn`  필드 리스트를 반환할 때 어떤 일이 벌어지는지 살펴 보았습니다. 이것은 열거형 값의  _리스트_  를 반환했으며, 타입 시스템에서 예상한대로 리스트의 각 항목이 적절한 열거형 값으로 강제 변환되었습니다.  `starships`  필드가  `resolve`  되면 어떻게 될까요?
+
+Human: {
+  starships(obj, args, context) {
+    return obj.starshipIDs.map(
+      id => context.db.loadStarshipByID(id).then(
+        shipData => new Starship(shipData)
+      )
+    )
+  }
+}
+
+이 필드의  `resolver`  는  `Promise`  를 반환하는 것이 아니라  `Promise`의  _리스트_  를 반환합니다.  `Human`  객체는 이것이 처리한  `Starships`  의  `id`  리스트를 가지고 있지만, 실제  `Starship`  객체를 얻으려면 모든  `id`  를 로드해야 합니다.
+
+GraphQL 은 모든  `Promise`  들을 기다릴 것이고, 객체 리스트로 남을 때, 동시에 이 아이템들의 각각에  `name`  필드를 다시 로드할 것입니다.
+
+## 결과 생성하기[](https://graphql-kr.github.io/learn/execution/#)
+
+각 필드가  `resolve`  될 때, 결과 값은 필드 이름(또는 별칭)을  `key`  로 사용하고  `resolve`  된 값을  `value`  로 사용하여  `key`-`value`  맵에 들어갑니다. 이 방법은 쿼리의 맨 하단 끝 필드에서부터 루트 쿼리 타입의 처음 필드까지 반복됩니다. 최종적으로 기존 쿼리를 미러링하는 구조를 만들어서 요청한 클라이언트에 (일반적으로 JSON) 보낼 수 있습니다.
+
+마지막으로 기존 쿼리를 살펴보고 이러한 모든  `resolver`  함수가 결과를 어떻게 생성하는지 살펴보겠습니다.
+
+{
+
+ human(id:  1002)  {
+
+ name
+
+ appearsIn
+
+ starships  {
+
+ name
+
+ }
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "human":  {
+
+ "name":  "Han Solo",
+
+ "appearsIn":  [
+
+ "NEWHOPE",
+
+ "EMPIRE",
+
+ "JEDI"
+
+ ],
+
+ "starships":  [
+
+ {
+
+ "name":  "Millenium Falcon"
+
+ },
+
+ {
+
+ "name":  "Imperial shuttle"
+
+ }
+
+ ]
+
+ }
+
+ }
+
+}
+
+----
+
+# [스키마 확인](https://graphql-kr.github.io/learn/introspection/)
+
+GraphQL 스키마가 어떤 쿼리를 지원하는지에 대한 정보를 요청하는 것은 유용합니다. GraphQL은  `introspection`(이하  `스키마 확인`) 시스템을 사용하여 이를 가능하게 합니다!
+
+Star Wars 예제에서,  [starWarsIntrospection-test.js](https://github.com/graphql/graphql-js/blob/master/src/__tests__/starWarsIntrospection-test.js)  파일에는  `스키마 확인`  시스템을 보여주는 몇가지 쿼리가 포함되어 있으며,  `스키마 확인`  시스템을 실행할 수 있는 테스트 파일입니다.
+
+타입 시스템을 사용하기 때문에 우리는 유효한 타입이 무엇인지 알고있지만, 그렇지 않은 경우에는 Query의 루트 타입에서 항상 사용할 수 있는  `__schema`  필드를 쿼리하여 GraphQL에 요청할 수 있습니다. 사용 가능한 타입을 요청해봅시다.
+
+{
+
+ __schema  {
+
+ types  {
+
+ name
+
+ }
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "__schema":  {
+
+ "types":  [
+
+ {
+
+ "name":  "Query"
+
+ },
+
+ {
+
+ "name":  "Episode"
+
+ },
+
+ {
+
+ "name":  "Character"
+
+ },
+
+ {
+
+ "name":  "ID"
+
+ },
+
+ {
+
+ "name":  "String"
+
+ },
+
+ {
+
+ "name":  "Int"
+
+ },
+
+ {
+
+ "name":  "FriendsConnection"
+
+ },
+
+ {
+
+ "name":  "FriendsEdge"
+
+ },
+
+ {
+
+ "name":  "PageInfo"
+
+ },
+
+ {
+
+ "name":  "Boolean"
+
+ },
+
+ {
+
+ "name":  "Review"
+
+ },
+
+ {
+
+ "name":  "SearchResult"
+
+ },
+
+ {
+
+ "name":  "Human"
+
+ },
+
+ {
+
+ "name":  "LengthUnit"
+
+ },
+
+ {
+
+ "name":  "Float"
+
+ },
+
+ {
+
+ "name":  "Starship"
+
+ },
+
+ {
+
+ "name":  "Droid"
+
+ },
+
+ {
+
+ "name":  "Mutation"
+
+ },
+
+ {
+
+ "name":  "ReviewInput"
+
+ },
+
+ {
+
+ "name":  "__Schema"
+
+ },
+
+ {
+
+ "name":  "__Type"
+
+ },
+
+ {
+
+ "name":  "__TypeKind"
+
+ },
+
+ {
+
+ "name":  "__Field"
+
+ },
+
+ {
+
+ "name":  "__InputValue"
+
+ },
+
+ {
+
+ "name":  "__EnumValue"
+
+ },
+
+ {
+
+ "name":  "__Directive"
+
+ },
+
+ {
+
+ "name":  "__DirectiveLocation"
+
+ }
+
+ ]
+
+ }
+
+ }
+
+}
+
+타입이 정말 많네요! 이게 다 뭘까요? 그룹화해봅시다.
+
+-   **Query, Character, Human, Episode, Droid**  - 타입 시스템에서 정의한 것들 입니다.
+-   **String, Boolean**  - 이것은 타입 시스템이 제공하는 내장 스칼라입니다.
+-   **__Schema, __Type, __TypeKind, __Field, __InputValue, __EnumValue, __Directive**  - 모두 앞에는 두 개의 밑줄이 붙어있는데, 이것은  `스키마 확인`  시스템의 일부임을 나타냅니다.
+
+이제 어떤 쿼리를 사용할 수 있는지 알아봅시다. 우리는 타입 시스템을 설계할 때 모든 타입의 쿼리가 시작될 타입을 지정했습니다. 이를  `스키마 확인`  시스템에 요청해 봅시다!
+
+{
+
+ __schema  {
+
+ queryType  {
+
+ name
+
+ }
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "__schema":  {
+
+ "queryType":  {
+
+ "name":  "Query"
+
+ }
+
+ }
+
+ }
+
+}
+
+이는 타입 시스템 섹션에서 배운 것과 일치합니다.  `Query`  타입이 시작할 곳입니다! 여기서 이름은 단지 관습인 것을 유의하세요.  `Query`  타입에 다른 이름을 쓸 수도 있고, 쿼리의 시작 타입으로 지정했다면, 똑같이 반환되었을 것입니다. 하지만,  `Query`  라는 이름은 일반적인 관습입니다.
+
+특정 타입을 검사하는 것이 유용한 경우가 많습니다.  `Droid`  타입을 살펴 보겠습니다.
+
+{
+
+ __type(name:  "Droid")  {
+
+ name
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "__type":  {
+
+ "name":  "Droid"
+
+ }
+
+ }
+
+}
+
+`Droid`  에 대해 더 많이 알고 싶다면 어떻게해야 할까요? 예를 들어, 인터페이스인지 객체인지 알고싶다면?
+
+{
+
+ __type(name:  "Droid")  {
+
+ name
+
+ kind
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "__type":  {
+
+ "name":  "Droid",
+
+ "kind":  "OBJECT"
+
+ }
+
+ }
+
+}
+
+`kind`  는  `__TypeKind`  열거형을 반환했는데, 그 값은  `OBJECT`  입니다. 대신  `Character`  에 대해 요청하면 인터페이스라는 것을 알 수 있습니다.
+
+{
+
+ __type(name:  "Character")  {
+
+ name
+
+ kind
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "__type":  {
+
+ "name":  "Character",
+
+ "kind":  "INTERFACE"
+
+ }
+
+ }
+
+}
+
+어떤 객체가 어떤 필드를 사용할 수 있는지 아는 것이 유용하기 때문에,  `Droid`  를  `스키마 확인`  시스템에 요청해 봅시다.
+
+{
+
+ __type(name:  "Droid")  {
+
+ name
+
+ fields  {
+
+ name
+
+ type  {
+
+ name
+
+ kind
+
+ }
+
+ }
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "__type":  {
+
+ "name":  "Droid",
+
+ "fields":  [
+
+ {
+
+ "name":  "id",
+
+ "type":  {
+
+ "name":  null,
+
+ "kind":  "NON_NULL"
+
+ }
+
+ },
+
+ {
+
+ "name":  "name",
+
+ "type":  {
+
+ "name":  null,
+
+ "kind":  "NON_NULL"
+
+ }
+
+ },
+
+ {
+
+ "name":  "friends",
+
+ "type":  {
+
+ "name":  null,
+
+ "kind":  "LIST"
+
+ }
+
+ },
+
+ {
+
+ "name":  "friendsConnection",
+
+ "type":  {
+
+ "name":  null,
+
+ "kind":  "NON_NULL"
+
+ }
+
+ },
+
+ {
+
+ "name":  "appearsIn",
+
+ "type":  {
+
+ "name":  null,
+
+ "kind":  "NON_NULL"
+
+ }
+
+ },
+
+ {
+
+ "name":  "primaryFunction",
+
+ "type":  {
+
+ "name":  "String",
+
+ "kind":  "SCALAR"
+
+ }
+
+ }
+
+ ]
+
+ }
+
+ }
+
+}
+
+이값들이  `Droid`  에서 정의한 필드들입니다!
+
+`id`  는 약간 이상해 보입니다. 타입에 대한 이름이 없습니다. 종류가  `NON_NULL`  인  `wrapper`  타입이기 때문입니다. 필드의 타입에서  `ofType`  를 쿼리하면, 이  `ID`  가  `non-null`  임을 알려주는  `ID`  타입을 반환할 것입니다.
+
+비슷하게,  `friends`  와  `appearIn`  둘 다  `LIST`  `wrapper`  타입이기 때문에 이름이 없습니다. 이 타입에 대해  `ofType`  을 쿼리 할 수 있습니다. 그러면 이  `list`  가 어떤  `list`  인지 알 수 있습니다.
+
+{
+
+ __type(name:  "Droid")  {
+
+ name
+
+ fields  {
+
+ name
+
+ type  {
+
+ name
+
+ kind
+
+ ofType  {
+
+ name
+
+ kind
+
+ }
+
+ }
+
+ }
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "__type":  {
+
+ "name":  "Droid",
+
+ "fields":  [
+
+ {
+
+ "name":  "id",
+
+ "type":  {
+
+ "name":  null,
+
+ "kind":  "NON_NULL",
+
+ "ofType":  {
+
+ "name":  "ID",
+
+ "kind":  "SCALAR"
+
+ }
+
+ }
+
+ },
+
+ {
+
+ "name":  "name",
+
+ "type":  {
+
+ "name":  null,
+
+ "kind":  "NON_NULL",
+
+ "ofType":  {
+
+ "name":  "String",
+
+ "kind":  "SCALAR"
+
+ }
+
+ }
+
+ },
+
+ {
+
+ "name":  "friends",
+
+ "type":  {
+
+ "name":  null,
+
+ "kind":  "LIST",
+
+ "ofType":  {
+
+ "name":  "Character",
+
+ "kind":  "INTERFACE"
+
+ }
+
+ }
+
+ },
+
+ {
+
+ "name":  "friendsConnection",
+
+ "type":  {
+
+ "name":  null,
+
+ "kind":  "NON_NULL",
+
+ "ofType":  {
+
+ "name":  "FriendsConnection",
+
+ "kind":  "OBJECT"
+
+ }
+
+ }
+
+ },
+
+ {
+
+ "name":  "appearsIn",
+
+ "type":  {
+
+ "name":  null,
+
+ "kind":  "NON_NULL",
+
+ "ofType":  {
+
+ "name":  null,
+
+ "kind":  "LIST"
+
+ }
+
+ }
+
+ },
+
+ {
+
+ "name":  "primaryFunction",
+
+ "type":  {
+
+ "name":  "String",
+
+ "kind":  "SCALAR",
+
+ "ofType":  null
+
+ }
+
+ }
+
+ ]
+
+ }
+
+ }
+
+}
+
+이제 마지막으로 툴을 만들때에 특히 유용한  `스키마 확인`  시스템의 기능을 봅시다. 시스템에 문서를 요청해 봅시다!
+
+{
+
+ __type(name:  "Droid")  {
+
+ name
+
+ description
+
+ }
+
+}
+
+{
+
+ "data":  {
+
+ "__type":  {
+
+ "name":  "Droid",
+
+ "description":  "An autonomous mechanical character in the Star Wars universe"
+
+ }
+
+ }
+
+}
+
+이렇게  `스키마 확인`  기능을 사용하여 타입 시스템에 대한 문서에 접근 할 수 있고 문서탐색기나 풍부한 IDE 환경을 만들 수도 있습니다.
+
+이것은 그저  `스키마 확인`  시스템의 극히 일부입니다. 열거형 값, 타입이 구현하는 인터페이스 등을 쿼리 할 수도 ​​있습니다. 심지어  `스키마 확인`  시스템 자체에도 이 시스템을 사용 할 수 있습니다. 이 명세에 대한 자세한 내용은  `introspection`  섹션을 참조하세요. GraphQL.js에  [Introspection](https://github.com/graphql/graphql-js/blob/master/src/type/introspection.js)  파일에는 이 사양을 준수하는 GraphQL 쿼리  `스키마 확인`  시스템을 구현하는 코드가 있습니다.
+
+[계속 읽기 →GraphQL 모범 사례](https://graphql-kr.github.io/learn/best-practices)
+
+### 배우기
+
+-   [소개](https://graphql-kr.github.io/learn/)
+-   [쿼리 & 뮤테이션](https://graphql-kr.github.io/learn/queries/)
+    -   [필드](https://graphql-kr.github.io/learn/queries/#)
+    -   [인자](https://graphql-kr.github.io/learn/queries/#)
+    -   [별칭](https://graphql-kr.github.io/learn/queries/#)
+    -   [프래그먼트](https://graphql-kr.github.io/learn/queries/#)
+    -   [작업 이름](https://graphql-kr.github.io/learn/queries/#)
+    -   [변수](https://graphql-kr.github.io/learn/queries/#)
+    -   [지시어](https://graphql-kr.github.io/learn/queries/#)
+    -   [뮤테이션](https://graphql-kr.github.io/learn/queries/#)
+    -   [인라인 프래그먼트](https://graphql-kr.github.io/learn/queries/#)
+-   [스키마 & 타입](https://graphql-kr.github.io/learn/schema/)
+    -   [타입 시스템](https://graphql-kr.github.io/learn/schema/#)
+    -   [타입 언어](https://graphql-kr.github.io/learn/schema/#)
+    -   [객체 타입과 필드](https://graphql-kr.github.io/learn/schema/#)
+    -   [인자](https://graphql-kr.github.io/learn/schema/#)
+    -   [쿼리 타입 & 뮤테이션 타입](https://graphql-kr.github.io/learn/schema/#)
+    -   [스칼라 타입](https://graphql-kr.github.io/learn/schema/#)
+    -   [열거형 타입](https://graphql-kr.github.io/learn/schema/#)
+    -   [리스트와 Non-Null](https://graphql-kr.github.io/learn/schema/#non-null)
+    -   [인터페이스](https://graphql-kr.github.io/learn/schema/#)
+    -   [유니온 타입](https://graphql-kr.github.io/learn/schema/#)
+    -   [입력 타입](https://graphql-kr.github.io/learn/schema/#)
+-   [검증](https://graphql-kr.github.io/learn/validation/)
+-   [실행](https://graphql-kr.github.io/learn/execution/)
+-   [스키마 확인](https://graphql-kr.github.io/learn/introspection/)
+
+### 모범 사례
+
+-   [소개](https://graphql-kr.github.io/learn/best-practices/)
+-   [그래프로 생각하기](https://graphql-kr.github.io/learn/thinking-in-graphs/)
+-   [HTTP를 통한 서빙](https://graphql-kr.github.io/learn/serving-over-http/)
+-   [인증](https://graphql-kr.github.io/learn/authorization/)
+-   [페이지네이션](https://graphql-kr.github.io/learn/pagination/)
+-   [캐싱](https://graphql-kr.github.io/learn/caching/)
+
+[](https://graphql-kr.github.io/)
+
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTYzOTEyMjUxMSwyOTIxNjAyOTMsNzMwOT
+k4MTE2XX0=
+-->

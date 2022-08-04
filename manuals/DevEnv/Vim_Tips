@@ -1,0 +1,449 @@
+# vi(vim)편집기 명령어 정리 (추가중)
+
+Trevit  2020. 3. 8. 11:13
+
+vi 편집기의 내가 아는 모든 기능
+
+편집기고 뭐고 들어오긴 했는데 못 빠져나가겠다면  ESC 2번 --> :q!를 입력하면 된다. 수정 한 내용은 적용 안 되니 참고
+
+편집기를 조작은 어렵고 편집은 하고 싶다면 그냥 일반 메모장을 쓰면 된다. (터미널에서  gedit [file]  입력하면 된다)
+
+----------
+
+사람마다 모드를 부르는 이름이 다르더라.
+
+Normal Mode : 편집 명령어를 사용할 수 있으며, 다른 모드로 전환 가능한 모드 (vi 편집기를 열면 이 모드로 실행)
+Insert Mode : 파일 내용을 편집할 수 있음
+Command Mode : 명령어를 입력할 수 있음
+Visual Block : 블럭 단위로 수정
+Recording : 수정 내용 저장
+Search : 파일 내 문자 검색
+
+Normal Mode에서만 다른 모드로 전환할 수 있다.
+
+- 즉, Insert Mode에서 Command Mode로 가려고 하면 Normal Mode를 거쳐 가야 한다.
+
+Insert/Command Mode에서 ESC를 누르면 Normal 모드로 전환된다.
+
+- Insert에서는 한 번, Command에서는 두 번을 눌러야 한다.
+
+* (N) = 숫자, 생략 가능 (생략 시 1로 간주)
+* 커서 위치 : 커서가 감싸는 문자의 왼쪽
+* 커서 다음 : 커서가 감싸는 문자의 오른쪽
+* 커서 앞 문자 : 커서가 감싸는 문자의 왼쪽 문자
+* 커서 뒤 문자 : 커서가 감싸는 문자
+* 커서 다음 문자 : 커서가 감싸는 문자의 오른쪽 문자
+
+Normal Mode에서 /입력 시 검색할 수 있음.
+
+Normal Mode에서 사용 가능한 명령어
+
+
+| 명령어 | 기능 | 명령어 | 기능 |
+| --- | --- | --- | --- |
+| (N)k | 위로 N줄 이동 | (N)j | 밑으로 N줄 이동 |
+| (N)h | 왼쪽으로 N칸 이동 | (N)l (엘) | 오른쪽으로 N칸 이동 |
+| ^, 0 | 현재 줄의 제일 앞으로 이동 | (N)$ | N-1'줄 아래 제일 뒤로 이동 |
+| Home | ^, 0와 같음 (= "Shift+<" 2번 입력) | (N)End | $와 같음 |
+| gg | 첫 번째 줄의 첫 글자로 이동 | G | 마지막 줄의 첫 글자로 이동 |
+| (N)x | 커서 다음 글자 부터 N글자만큼 잘라내기 | (N)X | 커서 앞에 있는 (또는 N글자) 잘라내기 |
+| (N)dd | 아래로 N줄 잘라내기 (현재 줄 포함) (= (N)D) | D | 커서 위치부터 해당 줄 끝까지 모두 잘라내기 |
+| (N)dj | 현재 줄 ~ N줄 아래 모두 잘라내기 | (N)dk | 현재 줄 ~ N줄 위 모두 잘라내기 |
+| (N)dl (엘) | (N)x와 같음 | (N)dh | (N)X와 같음 |
+| (N)p | 커서 다음부터 N만큼 붙여넣기 | (N)P | 커서 위치부터 N만큼 붙여넣기 |
+| (N)rw | 커서 뒤 N글자가 w로 바뀜 | @ | Recording으로 저장한 내용 붙여넣기 (ex. @a) |
+
+| Recording 기능 - 편집 |  | 검색 기능 (대/소문자 구분) |  | 
+| --- | --- | --- | --- |
+| qa | Rec작동 중 편집된 내용을 a로 저장 | /test | 파일 내 test라는 문자를 순서대로 찾아줌 |
+| @a | Rec기록 중 a를 현재 위치로 불러옴 | ?test | 파일 내 test라는 문자를 역순으로 찾아줌 |
+|  |  | n | 다음 순서를 찾아줌 |
+|  |  | N | 이전 순서를 찾아줌 |
+
+Normal Mode에서 입력 시 Insert Mode로 전환되는 명령어
+
+| 명령어 | 기능 | 명령어 | 기능 |
+| --- | --- | --- | --- |
+| i | 현재 커서 위치 그대로 (= insert키) | I (아이) | 현재 줄의 맨 앞으로 이동 |
+| a | 현재 커서 다음 글자 | A | 현재 줄의 맨 뒤로 이동 |
+| o | 현재 커서가 위치한 줄 아래에 한 줄 생성 | O | 현재 커서가 위치한 줄 위에 한 줄 생성 |
+| (N)o | o기능 + 입력 후 ESC를 누르면 (N)줄만큼 복사 | (N)O | O기능 + 입력 후 ESC를 누르면 (N)줄만큼 복사 |
+| R | 덮어쓰기 (연속 r기능= Insert Mode에서 Insert키) | Delete | x기능 + Insert Mode로 전환, (N)x는 안됨 |
+| (N)cc | (N)dd + Insert Mode (= (N)C) | C | D + Insert Mode |
+| (N)cj | (N)dj + Insert Mode | (N)ck | (N)dk + Insert Mode |
+| (N)cl (엘) | (N)dl + Insert Mode | (N)ch | (N)dh + Insert Mode |
+
+Command Mode에서 사용 가능한 명령어 (Normal Mode에서 ":(콜론)"입력 시 Command Mode로 전환)
+
+| 명령어 | 기능 | 명령어 | 기능 |
+| --- | --- | --- | --- |
+| w | 수정 내용 저장 | q | 편집기 종료 (수정 시 불가능) |
+| wq | 수정 내용 저장 후 종료 | ! | 강제 (ex. q! : 강제종료(수정 내용 저장 안 함)) |
+| 3, 7y | 3번째 줄부터 7번째 줄까지 복사 (커서기준 아님) | 5pu | 5번째 줄 아래에 붙여넣기 (커서기준 아님) |
+| s/A/B | A를 B로 변경 |
+
+이제 남은 건 Visual Block, Recording
+
+- Visual Block 명령어를 실행할 때마다 Normal Mode로 자동 전환된다.
+- Recording : 편집 진행상황을 기록한다.
+
+이 두 모드는 모드의 기능만 있으며 모드가 가지고 있는 명령어는 없다. 다른 모드의 명령어를 가져다 쓸 뿐.
+
+Visual Block Mode의 기능 (Normal Mode에서 'Ctrl+v' 입력 시 Visual Block Mode로 전환)
+
+- Normal Mode에서 사용할 수 있는 모든 명령어를 사용할 수 있다.
+- kjhl(또는 방향키)를 이용하여 글자들을 블럭으로 선택한다
+- p를 눌러 선택한 블럭을 잘라낸 내용으로 바꿀 수 있다. (이때, 원래 있던 내용은 그냥 지우는 게 아닌 잘라내기)
+- 선택한 블럭을 x, d를 입력하여 잘라낼 수 있다.
+
+
+
+# [Search and replace](https://vim.fandom.com/wiki/Search_and_replace)
+
+
+**created** 2001 ·  **complexity** basic ·  **version** 6.0
+
+----------
+
+Vim provides the  `:s`  (substitute) command for search and replace; this tip shows examples of how to substitute. On some systems, gvim has  _Find and Replace_  on the Edit menu ([:help :promptrepl](http://vimdoc.sourceforge.net/cgi-bin/help?tag=%3Apromptrepl)), however it is easier to use the  `:s`  command due to its  [command line history](https://vim.fandom.com/wiki/VimTip45 "VimTip45")  and ability to insert text (for example, the word under the cursor) into the search or replace fields.
+
+## Contents
+
+-   [1Basic search and replace](https://vim.fandom.com/wiki/Search_and_replace#Basic_search_and_replace)
+-   [2Details](https://vim.fandom.com/wiki/Search_and_replace#Details)
+-   [3Using the current word or registers](https://vim.fandom.com/wiki/Search_and_replace#Using_the_current_word_or_registers)
+-   [4Additional examples](https://vim.fandom.com/wiki/Search_and_replace#Additional_examples)
+-   [5Special cases](https://vim.fandom.com/wiki/Search_and_replace#Special_cases)
+-   [6Change and repeat](https://vim.fandom.com/wiki/Search_and_replace#Change_and_repeat)
+-   [7See also: using substitute](https://vim.fandom.com/wiki/Search_and_replace#See_also:_using_substitute)
+-   [8See also: substitute in buffers/files](https://vim.fandom.com/wiki/Search_and_replace#See_also:_substitute_in_buffers/files)
+-   [9References](https://vim.fandom.com/wiki/Search_and_replace#References)
+-   [10Comments](https://vim.fandom.com/wiki/Search_and_replace#Comments)
+
+## Basic search and replace
+
+The  `:substitute`  command searches for a  [text pattern](https://vim.fandom.com/wiki/VimTip188 "VimTip188"), and replaces it with a text string. There are many options, but these are what you probably want:
+
+`:s/foo/bar/g`
+
+Find each occurrence of 'foo' (in the current line only), and replace it with 'bar'.
+
+`:%s/foo/bar/g`
+
+Find each occurrence of 'foo' (in all lines), and replace it with 'bar'.
+
+`:%s/foo/bar/gc`
+
+Change each 'foo' to 'bar', but ask for confirmation first.
+
+`:%s/\<foo\>/bar/gc`
+
+Change only whole words exactly matching 'foo' to 'bar'; ask for confirmation.
+
+`:%s/foo/bar/gci`
+
+Change each 'foo' (case insensitive due to the  `i`  flag) to 'bar'; ask for confirmation.
+
+`:%s/foo\c/bar/gc`  is the same because  `\c`  makes the search case insensitive.
+
+This may be wanted after using  `:set noignorecase`  to make searches case sensitive (the default).
+
+`:%s/foo/bar/gcI`
+
+Change each 'foo' (case sensitive due to the  `I`  flag) to 'bar'; ask for confirmation.
+
+`:%s/foo\C/bar/gc`  is the same because  `\C`  makes the search case sensitive.
+
+This may be wanted after using  `:set ignorecase`  to make searches case insensitive.
+
+The  `g`  flag means  _global_  – each occurrence in the line is changed, rather than just the first. This tip assumes the default setting for the  `'gdefault'`  and  `'edcompatible'`  option (off), which requires that the  `g`  flag be included in  `%s///g`  to perform a global substitute. Using  `:set gdefault`  creates confusion because then  `%s///`  is global, whereas  `%s///g`  is not (that is,  `g`  reverses its meaning).
+
+When using the  `c`  flag, you need to confirm for each match what to do. Vim will output something like:  `replace with foobar (y/n/a/q/l/^E/^Y)?`  (where foobar is the replacement part of the  `:s/.../.../`  command). You can type  `y`  which means to substitute this match,  `n`  to skip this match,  `a`  to substitute this and all remaining matches ("all" remaining matches),  `q`  to quit the command,  `l`  to substitute this match and quit (think of "last"),  `^E`  to scroll the screen up by holding the Ctrl key and pressing E and  `^Y`  to scroll the screen down by holding the Ctrl key and pressing Y. However, the last two choices are only available, if your Vim is a normal, big or huge built or the insert_expand feature was enabled at compile time (look for  `+insert_expand`  in the output of  `:version`).
+
+Also when using the  `c`  flag, Vim will jump to the first match it finds starting from the top of the buffer and prompt you for confirmation to perform replacement on that match. Vim applies the  `IncSearch`  highlight group to the matched text to give you a visual cue as to which match it is operating on (set to  `reverse`  by default for all three term types as of Vim 7.3). Additionally, if more than one match is found and you have search highlighting enabled with  `:set hlsearch`, Vim highlights the remaining matches with the  `Search`  highlight group. If you do use search highlighting, you should make sure that these two highlight groups are visually distinct or you won't be able to easily tell which match Vim is prompting you to substitute.
+
+## Details
+
+**Search range**:
+
+`:s/foo/bar/g`
+
+Change each 'foo' to 'bar' in the current line.
+
+`:%s/foo/bar/g`
+
+Change each 'foo' to 'bar' in all the lines.
+
+`:5,12s/foo/bar/g`
+
+Change each 'foo' to 'bar' for all lines from line 5 to line 12 (inclusive).
+
+`:'a,'bs/foo/bar/g`
+
+Change each 'foo' to 'bar' for all lines from mark a to mark b inclusive (see  **Note**  below).
+
+`:'<,'>s/foo/bar/g`
+
+When compiled with  `+visual`, change each 'foo' to 'bar' for all lines within a visual selection. Vim automatically appends the visual selection range ('<,'>) for any ex command when you select an area and enter  `:`. Also, see  **Note**  below.
+
+`:.,$s/foo/bar/g`
+
+Change each 'foo' to 'bar' for all lines from the current line (.) to the last line ($) inclusive.
+
+`:.,+2s/foo/bar/g`
+
+Change each 'foo' to 'bar' for the current line (.) and the two next lines (+2).
+
+`:g/^baz/s/foo/bar/g`
+
+Change each 'foo' to 'bar' in each line starting with 'baz'.
+
+**Note**: As of Vim 7.3, substitutions applied to a range defined by marks or a visual selection (which uses a special type of marks '< and '>) are not bounded by the column position of the marks by default. Instead, Vim applies the substitution to the entire line on which each mark appears unless the  `\%V`  atom is used in the pattern like:  `:'<,'>s/\%Vfoo/bar/g`.
+
+  
+**When searching**:
+
+`.`,  `*`,  `\`,  `[`,  `^`, and  `$`  are metacharacters.
+
+`+`,  `?`,  `|`,  `&`,  `{`,  `(`, and  `)`  must be escaped to use their special function.
+
+`\/`  is / (use backslash + forward slash to search for forward slash)
+
+`\t`  is tab,  `\s`  is whitespace (space or tab)
+
+`\n`  is newline,  `\r`  is CR (carriage return = Ctrl-M = ^M)
+
+After an opening  `[`, everything until the next closing  `]`  specifies a  [/collection](http://vimdoc.sourceforge.net/cgi-bin/help?tag=%2Fcollection). Character ranges can be represented with a  `-`; for example a letter a, b, c, or the number 1 can be matched with  `[1a-c]`. Negate the collection with  `[^`  instead of  `[`; for example  `[^1a-c]`  matches any character except a, b, c, or 1.
+
+`\{#\}`  is used for repetition.  `/foo.\{2\}`  will match foo and the two following characters. The  `\`  is not required on the closing  `}`  so  `/foo.\{2}`  will do the same thing.
+
+`\(foo\)`  makes a backreference to foo. Parenthesis without escapes are literally matched. Here the  `\`  is required for the closing  `\)`.
+
+**When replacing**:
+
+`\r`  is newline,  `\n`  is a null byte (0x00).
+
+`\&`  is ampersand (& is the text that matches the search pattern).
+
+`\0`  inserts the text matched by the entire pattern
+
+`\1`  inserts the text of the first backreference.  `\2`  inserts the second backreference, and so on.
+
+You can use  **other delimiters**  with substitute:
+
+`:s#http://www.example.com/index.html#http://example.com/#`
+
+Save typing by using  `\zs`  and  `\ze`  to set the  **start and end of a pattern**. For example, instead of:
+
+`:s/Copyright 2007 All Rights Reserved/Copyright 2008 All Rights Reserved/`
+
+Use:
+
+`:s/Copyright \zs2007\ze All Rights Reserved/2008/`
+
+## Using the current word or registers
+
+`:%s//bar/g`
+
+Replace each match of the last search pattern with 'bar'.
+
+For example, you might first place the cursor on the word  `foo`  then press  `*`  to search for that word.
+
+The above substitute would then change all words exactly matching 'foo' to 'bar'.
+
+`:%s/foo/<c-r><c-w>/g`
+
+Replace each occurrence of 'foo' with the word under the cursor.
+
+`<c-r><c-w>`  means that you press Ctrl-R then Ctrl-W.
+
+The word under the cursor will be inserted as though you typed it.
+
+`:%s/foo/<c-r><c-a>/g`
+
+Replace each occurrence of 'foo' with the WORD under the cursor (delimited by whitespace).
+
+`<c-r><c-a>`  means that you press Ctrl-R then Ctrl-A.
+
+The WORD under the cursor will be inserted as though you typed it.
+
+`:%s/foo/<c-r>a/g`
+
+Replace each occurrence of 'foo' with the contents of register 'a'.
+
+`<c-r>a`  means that you press Ctrl-R then  `a`.
+
+The contents of register 'a' will be inserted as though you typed it.
+
+`:%s/foo/<c-r>0/g`
+
+Same as above, using register 0 which contains the text from the most recent yank command. Examples of yank (copy) commands are  `yi(`  which copies the text inside parentheses around the cursor, and  `y$`  which copies the text from the cursor to the end of the line. After a yank command which did not specify a destination register, the copied text can be entered by pressing Ctrl-R then  `0`.
+
+`:%s/foo/\=@a/g`
+
+Replace each occurrence of 'foo' with the contents of register 'a'.
+
+`\=@a`  is a reference to register 'a'.
+
+The contents of register 'a' is not shown in the command. This is useful if the register contains many lines of text.
+
+`:%s//<c-r>//g`
+
+Replace each match of the last search pattern with the  `/`  register (the last search pattern).
+
+After pressing Ctrl-R then  `/`  to insert the last search pattern (and before pressing Enter to perform the command), you could edit the text to make any required change.
+
+`:%s/<c-r>*/bar/g`
+
+Replace all occurrences of the text in the system clipboard (in the  `*`  register) with 'bar' (see next example if multiline).
+
+On some systems, selecting text (in Vim or another application) is all that is required to place that text in the  `*`  register.
+
+`:%s/<c-r>a/bar/g`
+
+Replace all occurrences of the text in register 'a' with 'bar'.
+
+`<c-r>a`  means that you press Ctrl-R then  `a`. The contents of register 'a' will be inserted as though you typed it.
+
+Any newlines in register 'a' are inserted as  `^M`  and are not found.
+
+The search works if each  `^M`  is manually replaced with '\n' (two characters: backslash, 'n').
+
+This replacement can be performed while you type the command:
+
+`:%s/<c-r>=substitute(@a,"\n",'\\n','g')<CR>/bar/g`
+
+The  `"\n"`  (double quotes) represents the single character newline; the  `'\\n'`  (single quotes) represents two backslashes followed by '`n`'.
+
+The  `substitute()`  function is evaluated by the  `<c-r>=`  (Ctrl-R  `=`) expression register; it replaces each newline with a single backslash followed by '`n`'.
+
+The  `<CR>`  indicates that you press Enter to finish the  `=`  expression.
+
+`:%s/<c-r>0/bar/g`
+
+Same as above, using register 0 which contains the text from the most recent yank command.
+
+See  [Paste registers in search or colon commands instead of using the clipboard](https://vim.fandom.com/wiki/VimTip490 "VimTip490").
+
+## Additional examples
+
+`:%s/foo/bar/`
+
+On each line, replace the first occurrence of "foo" with "bar".
+
+`:%s/.*\zsfoo/bar/`
+
+On each line, replace the last occurrence of "foo" with "bar".
+
+`:%s/\<foo\>//g`
+
+On each line, delete all occurrences of the whole word "foo".
+
+`:%s/\<foo\>.*//`
+
+On each line, delete the whole word "foo" and all following text (to end of line).
+
+`:%s/\<foo\>.\{5}//`
+
+On each line, delete the first occurrence of the whole word "foo" and the following five characters.
+
+`:%s/\<foo\>\zs.*//`
+
+On each line, delete all text following the whole word "foo" (to end of line).
+
+`:%s/.*\<foo\>//`
+
+On each line, delete the whole word "foo" and all preceding text (from beginning of line).
+
+`:%s/.*\ze\<foo\>//`
+
+On each line, delete all the text preceding the whole word "foo" (from beginning of line).
+
+`:%s/.*\(\<foo\>\).*/\1/`
+
+On each line, delete all the text preceding and following the whole word "foo".
+
+`:%s/\<foo\(bar\)\@!/toto/g`
+
+On each line, replace each occurrence of "foo" (which starts a word and is not followed by "bar") by "toto".
+
+`:s/^\(\w\)/\u\1/`
+
+If the first character at the beginning of the  _current line only_  is lowercase, switch it to uppercase using  `\u`  (see  [switching case of characters](https://vim.fandom.com/wiki/Switching_case_of_characters "Switching case of characters")).
+
+`:%s/\(.*\n\)\{5\}/&\r/`
+
+Insert a blank line every 5 lines.
+
+The pattern searches for  `\(.*\n\)`  (any line including its line ending) repeated five times (`\{5\}`).
+
+The replacement is  `&`  (the text that was found), followed by  `\r`  (newline).
+
+`:%s/\<foo\(\a*\)\>/\=len(add(list, submatch(1)))?submatch(0):submatch(0)/g`
+
+Get a list of search results. (the list must exist)
+
+Sets the  `modified`  flag, because of the replacement, but the content is unchanged.
+
+**Note**: With a recent enough Vim (version 7.3.627 or higher), you can simplify this to:
+
+`:%s/\<foo\(\a*\)\>/\=add(list, submatch(1))/gn`
+
+This has the advantage, that the buffer won't be marked modified and no extra undo state is created. The expression in the replacement part is executed in the sandbox and not allowed to modify the buffer.
+
+## Special cases
+
+For substituting patterns with corresponding case-sensitive text, Michael Geddes's  [keepcase](https://www.vim.org/scripts/script.php?script_id=6)  plugin can be used, e.g.:
+
+`:%SubstituteCase/\cHello/goodBye/g`
+
+Substitute 'Hello hello helLo HELLO' by 'Goodbye goodbye goodBye GOODBYE'
+
+For changing the offsets in a patch file (line number of a block), this little snippet can be used:
+
+`s/^@@ -\(\d\+\),\(\d\+\) +\(\d\+\),\(\d\+\) @@$/\="@@ -".eval(submatch(1)+_offsetdiff_).",".submatch(2)." +".eval(submatch(3)+_offsetdiff_).",".submatch(4)." @@"/g`
+
+Useful when we want to strip some blocks from a patch, without patch having to complain about offset differences.
+
+**Note**  Should try to make the expression more compact, but don't know how without having the possibility of modifying unwanted lines.
+
+## Change and repeat
+
+1.  Search for text using  `/`  or for a word using  `*`.
+2.  In normal mode, type  `cgn`  (change the next search hit) then immediately type the replacement. Press Esc to finish.
+3.  From normal mode, search for the next occurrence that you want to replace (`n`) and press  `.`  to repeat the last change.
+
+## See also: using substitute
+
+-   [63 Applying substitutes to a visual block](https://vim.fandom.com/wiki/VimTip63 "VimTip63")
+-   [81 Substitute characters and lines easily](https://vim.fandom.com/wiki/VimTip81 "VimTip81")
+-   [159 Keystroke Saving Substituting and Searching](https://vim.fandom.com/wiki/VimTip159 "VimTip159")
+-   [406 Alternate delimiters for the replace command](https://vim.fandom.com/wiki/VimTip406 "VimTip406")
+-   [438 Search and replace in a visual selection](https://vim.fandom.com/wiki/VimTip438 "VimTip438")
+-   [464 Search and replace the word under the cursor](https://vim.fandom.com/wiki/VimTip464 "VimTip464")
+-   [479 Replace with no typing](https://vim.fandom.com/wiki/VimTip479 "VimTip479")
+-   [573 Repeating a substitute from current cursor position](https://vim.fandom.com/wiki/VimTip573 "VimTip573")
+-   [605 Replace a word with the yanked text](https://vim.fandom.com/wiki/VimTip605 "VimTip605")
+-   [654 Special characters in the substitute command](https://vim.fandom.com/wiki/VimTip654 "VimTip654")
+-   [755 Using an expression in substitute command](https://vim.fandom.com/wiki/VimTip755 "VimTip755")
+-   [808 Replace a visual-block of text with another such block](https://vim.fandom.com/wiki/VimTip808 "VimTip808")
+-   [915 Using g instead of substitute](https://vim.fandom.com/wiki/VimTip915 "VimTip915")
+-   [971 Substitute with incrementing numbers](https://vim.fandom.com/wiki/VimTip971 "VimTip971")
+-   [1114 Step increment and replace](https://vim.fandom.com/wiki/VimTip1114 "VimTip1114")
+-   [1501 Substitute last search](https://vim.fandom.com/wiki/VimTip1501 "VimTip1501")
+
+## See also: substitute in buffers/files
+
+-   [382 Search and replace in multiple buffers](https://vim.fandom.com/wiki/VimTip382 "VimTip382")
+
+## References
+
+-   [:help :substitute](http://vimdoc.sourceforge.net/cgi-bin/help?tag=%3Asubstitute)
+-   [:help cmdline-ranges](http://vimdoc.sourceforge.net/cgi-bin/help?tag=cmdline-ranges)
+-   [:help pattern](http://vimdoc.sourceforge.net/cgi-bin/help?tag=pattern)
+-   [:help 'gdefault'](http://vimdoc.sourceforge.net/cgi-bin/help?tag=%27gdefault%27)
+-   [:help registers](http://vimdoc.sourceforge.net/cgi-bin/help?tag=registers)
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjAyNDY5MDU3MiwxNjUxNDM2OTQzLDczMD
+k5ODExNl19
+-->
